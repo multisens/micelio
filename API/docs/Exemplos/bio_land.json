@@ -1,0 +1,139 @@
+{
+	"game_id": "Bio Land",
+	"token": "JG-000001",
+	"name": "DJDJK87S8DS758SF",
+	"version": "1.0",
+	"devices":[
+		{	
+			"device_id": "D-00001",
+			"system_name": "android",
+			"model": "SG-90110",
+			"screen_width": "1080",
+			"screen_height": "720",
+			"sessions":[
+				{
+					"session_id": "654321324",
+					"name": "Anderson",
+					"language": "pt-br",
+					"game_stage": 1,
+					"date": "16-03-2021",
+					"start_time": "11:00",
+					"end_time": null,
+					"activities":[
+					    {
+					    	"activity_id": "ID-00001",
+							"name": null,
+							"position_x": null,
+							"position_y": null,
+							"time": 5,
+						    "influenced_by": null,
+							"attributes":[
+					    		{
+			    					"name": "ActionSelected", 
+			    					"value": "Bioaumentation"
+			    				},
+			    				{
+			    					"name": "LastResult(score)", 
+			    					"value": "0"
+			    				},
+			    				{
+			    					"name": "LastResult(%removed)", 
+			    					"value": "0"
+			    				}
+					    	],
+					    	"entities": [
+					    		{
+					    			"entity_id": 1,
+									"position_x": null,
+									"position_x": null,
+									"name": "Micrococcus sp.",
+									"attributes": [
+					    				{
+					    					"nome": "qtd", 
+					    					"valor": 466.099976
+					    				},
+					    				{
+					    					"nome": "toxic_list", 
+					    					"valor": [0]
+					    				},
+					    				{
+					    					"nome": "deg_list", 
+					    					"valor": [0]
+					    				},
+					    				{
+					    					"nome": "deg_rate", 
+					    					"valor": 0.000000001333333333333
+					    				},
+					    			],
+					    		},
+					    		{
+					    			"entity_id": 1,
+									"position_x": null,
+									"position_x": null,
+									"name": "disel",
+									"attributes": [
+					    				{
+					    					"name": "type", 
+					    					"value": "contaminante"
+					    				},
+					    				{
+					    					"name": "qtd", 
+					    					"value": 299.226
+					    				},
+					    				{
+					    					"name": "qtd_max", 
+					    					"value": 300
+					    				},
+					    				{
+					    					"name": "percentage", 
+					    					"value": 0.764086664
+					    				}
+					    			],
+					    		},
+					    		{
+					    			"entity_id": "ambiente",
+									"position_x": null,
+									"position_x": null,
+									"name": "variaveis ambiente",
+									"attributes": [
+					    				{
+					    					"name": "ph", 
+					    					"value": 5.7
+					    				},
+					    				{
+					    					"name": "temperature", 
+					    					"value": 25
+					    				},
+					    				{
+					    					"name": "moisture", 
+					    					"value": 1
+					    				}
+					    			],
+					    		}
+					    	],
+					    	"agents":[
+					    		{	
+					    			"agent_id": "A-00001",
+									"name": "Jogador",
+									"type": "player",
+									"position_x": null,
+									"position_x": null,
+									"attributes":[
+					    				{
+					    					"name": "score",
+					    					"value": 179
+					    				},
+					    				{
+					    					"name": "actionEffect",
+					    					"value": 0
+					    				}
+					    			]
+					    		}
+					    	]
+					    }
+					]
+				}
+			]
+		}
+	]
+}

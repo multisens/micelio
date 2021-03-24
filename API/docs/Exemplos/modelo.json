@@ -1,0 +1,72 @@
+{
+	"game_id": "id0019293",
+	"token": "HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD",
+	"name": "nome_do_jogo",
+	"version": "versao_do_jogo",
+	"devices":[
+		{
+			"device_id": "D-456",
+			"system_name": "android",
+			"model": "SG-90110",
+			"screen_width": "1080",
+			"screen_height": "720",
+			"sessions":[
+				{
+					"session_id": "654321324",
+					"name": "name",
+					"language": "language",
+					"game_stage": 1,
+					"date": "10-10-2020",
+					"start_time": "11:00",
+					"end_time": null,
+					"activities":[
+					    {
+					    	"activity_id": "AC-45186727",
+							"name": "plantar",
+							"position_x": 6549,
+							"position_y": 7564,
+							"time": "4",
+						    "influenced_by": "AC-45186790",
+							"attributes":[
+								{
+									"name": "hora",
+									"value": "11:00"
+								}
+							],
+							"entities": [
+								{
+									"entity_id": "P-01",
+									"position_x": 12354,
+									"position_x": 65498,
+									"name": "Plant",
+									"attributes": [
+										{
+											"name": "health",
+											"value": "50"
+										}
+									],
+								}
+							],
+							"agents":[
+								{
+									"agent_id": "A-57865",
+									"name": "Sargeiro",
+									"type": "NPC",
+									"position_x": 12354,
+									"position_x": 65498,
+									"attributes":[
+										{
+											"name": "energia",
+											"value": "100"
+										}
+									]
+								}
+							]
+					    }
+					]
+				}
+			]
+		}
+	]
+}
+

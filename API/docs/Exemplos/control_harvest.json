@@ -1,0 +1,103 @@
+{
+	"game_id": "JG-0000002",
+	"token": "DJDJK87S8DS758SF",
+	"name": "Control Harvest",
+	"version": "2.0",
+	"dispositivos":[
+		{
+			"device_id": "D-456",
+			"system_name": "android",
+			"model": "SG-90110",
+			"screen_width": "1080",
+			"screen_height": "720",
+			"sessions":[
+				{
+					"session_id": "654321324",
+					"name": "Flavio",
+					"language": "pt-br",
+					"game_stage": 1,
+					"date": "16-03-2021",
+					"start_time": "11:00",
+					"end_time": "12:00",
+					"activities":[
+					    {
+					    	"activity_id": "ID-00009",
+							"name": "plantar",
+							"position_x": null,
+							"position_y": null,
+							"time": "11:00",
+						    "influenced_by": null,
+							"attributes":[],
+					    	"entities": [
+					    		{
+					    			"entity_id": 1,
+									"position_x": 10,
+									"position_x": 100,
+									"name": "Tomate",
+									"attributes": [
+					    				{
+					    					"name": "id_panta", 
+					    					"value": 2
+					    				},
+					    				{
+					    					"name": "tipo", 
+					    					"value": "planta"
+					    				}
+					    			],
+					    		}
+					    	],
+					    	"agents":[
+					    		{
+					    			"agent_id": "A-00001",
+									"name": "Jogador",
+									"type": "player",
+									"position_x": null,
+									"position_x": null,
+									"attributes":[]
+					    		}
+					    	]
+					    },
+					    {
+					    	"activity_id": "ID-00015",
+							"name": "predação",
+							"position_x": null,
+							"position_y": null,
+							"time": "11:02",
+						    "influenced_by": null,
+							"attributes":[],
+					    	"entidades": [],
+					    	"agentes":[
+					    		{
+					    			"agent_id": "A-00002",
+									"name": "predador",
+									"type": "npc",
+									"position_x": 30,
+									"position_x": 27,
+					    			"attributes":[
+					    				{
+							    			"name": "id_predador",
+							    			"value": 2
+							    		}
+					    			]
+					    		},
+					    		{
+					    			"agent_id": "A-00003",
+									"name": "predado",
+									"type": "npc",
+									"position_x": 30,
+									"position_x": 27,
+					    			"attributes":[
+					    				{
+					    					"name": "id_predado",
+					    					"value": 2
+					    				}
+					    			]
+					    		}
+					    	]
+					    }
+					]
+				}
+			]
+		}
+	]
+}

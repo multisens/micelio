@@ -24,7 +24,7 @@ O modelo de dados do Micélio foi pensado para que pudesse armazenar dados qualq
 
 
 
-![diagrama de classes](/home/lucas/Documents/CEFET/TCC/Documentos/Diagramas/API/modelo-sem-fundo.png)
+![diagrama de classes](./Diagramas/modelo-sem-fundo.png)
 
 <center><b>Imagem 1:</b> Diagrama de Classes utilizado pelo Micélio para armazenamento dos dados.</center>
 
@@ -34,7 +34,7 @@ O Micélio foi projetado com o objetivo de ser uma via de mão única com os jog
 
 
 
-![arquitetura](/home/lucas/Documents/CEFET/TCC/Documentos/Diagramas/API/arquitetura.png)
+![arquitetura](./Diagramas/conexao.png)
 
 <center><b>Imagem 2:</b> Comunicação do Micélio entre os componentes</center>
 
