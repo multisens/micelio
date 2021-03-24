@@ -213,7 +213,7 @@ Descrição:
     "date": "10-10-2020",
     "game_stage": 1,
     "start_time": "11:00",
-    "end_time": undefined   
+    "end_time": null 
 }
 ```
 
@@ -294,24 +294,24 @@ Descrição:
 -  `time` : ;
 -  `influenced_by` : ;
 -  `attributes` : ;
-  -        `name` : ;
-  -        `value` : ;
+  - `name` : ;
+  - `value` : ;
 -  `entities` : ;
-  -        `entity_id` : ;
-  -        `name` : ;
-  -        `position_x` : ;
-  -        `position_x` : ;
-  -        `attributes` : ;
-    -              `name` : ;
-    -              `value` : ;
+  - `entity_id` : ;
+  - `name` : ;
+  - `position_x` : ;
+  - `position_x` : ;
+  - `attributes` : ;
+    - `name` : ;
+    - `value` : ;
 -  `agents` : ;
-  -        `name` : ;
-  -        `type` : ;
-  -        `position_x` : ;
-  -        `position_x` : ;
-  -        `attributes` : ;
-    -             `name` : ;
-    -             `value` : ;
+  - `name` : ;
+  - `type` : ;
+  - `position_x` : ;
+  - `position_x` : ;
+  - `attributes` : ;
+    - `name` : ;
+    - `value` : ;
 
 **Objetos gerado para banco:**
 
