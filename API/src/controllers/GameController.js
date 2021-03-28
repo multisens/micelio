@@ -16,17 +16,25 @@ class GameController{
         const token = sign({}, process.env.JWT_SECRET, {subject: gameId});
         
         try{
-            const game = await knex('game').insert({
+
+            const data = {
                 game_id: gameId,
                 token,
                 name,
                 version
-            });
+            }
 
-            return response.status(200).json({ok: true});
+            const game = await knex('game').insert(data);
+
+            if(game){
+                return response.status(200).json({ok: true});
+            }
+            else{
+                return response.status(400).json({error: game});
+            }
         }
         catch(err){
-            return response.status(400).json({error: err, data: {name, version}});
+            return response.status(400).json({error: err});
         }
         
     }
