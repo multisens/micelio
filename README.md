@@ -46,7 +46,7 @@ Uma vez que um jogo é instalado em um dispositivo e é iniciado ele precisa env
 
 
 
-## Rotas API dos Logs
+## Rotas API Web
 
 O Micélio foi dividido em 5 rotas principais, considerando o modelo de dados criado para API. Cada uma das rotas é acessada em uma determinada fase do jogo, desde seu cadastro até a inserção de informações geradas nas sessões. Cada fase de acesso da API pode ser definida pelos nomes abaixo:
 
@@ -288,19 +288,21 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
 
 Descrição:
 
-- `name` : ;
--  `position_x` : ;
--  `position_y` : ;
--  `time` : ;
--  `influenced_by` : ;
--  `attributes` : ;
-  - `name` : ;
-  - `value` : ;
--  `entities` : ;
-    - `entity_id` : ;
-    - `name` : ;
-    - `position_x` : ;
-    - `position_x` : ;
+- `activity_id` : identificador único daquela atividade;
+
+- `name` : nome da atividade, utilizado para encontrar atividades iguais;
+-  `position_x` : posição no eixo X em que a atividade foi realizada (opcional);
+-  `position_y` : posição no eixo Y em que a atividade foi realizada (opcional);
+-  `time` : tempo em que a atividade foi realizada, o tempo não possui um unidade definida, pode ser um horário ou um número que represente a ordem em que as atividades aconteceram;
+-  `influenced_by` : identificador da atividade que tenha gerado essa atividade (opcional);
+-  `attributes` : array de atributos associados à atividade, essas informações podem ser custos relacionados aquela atividade ou até mesmo alguma informação que ela gere como quanto tempo ela durou (opcional). Cada objeto de atributo têm:
+  - `name` : nome do atributo;
+  - `value` : valor do atributo;
+-  `entities` : array de entidades associados aquela atividade (opcional). Cada entidade têm:
+    - `entity_id` : identificador único da entidade;
+    - `name` : nome da entidade, pode definir qual o tipo de objeto dele pertence;
+    - `position_x` : posição no eixo X do objeto no momento da atividade (opcional);
+    - `position_x` : posição no eixo Y do objeto no momento da atividade (opcional);
     - `attributes` : ;
         - `name` : ;
         - `value` : ;
@@ -398,3 +400,17 @@ Descrição:
   
 
 > Obs.: Ao receber essa requisição o sistema identifica qual a última sessão aberta por aquele dispositivo naquele jogo e atualiza seu horário de término.
+
+
+
+## Códigos de Erro
+
+Com o objetivo de facilitar o entendimento de uma requisição mal sucessida alguns códigos de erro foram criados. A descrição de cada um e uma solução para o problema podem ser encontrados abaixo:
+
+| Código | Descrição                                                    | Solução                                                      |
+| ------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| D-001  | The device information is missing.                           | Verifique se a informação de identificação do dispositivo `device_id` está sendo passada no cabeçalho da requisição. |
+| D-002  | The device information is wrong. Make sure you have resgistered the device before send any information. | Verifique se o dispositivo foi cadastrado corretamente, pois a informação não está sendo encontrada no banco. |
+| T-001  | You dont have game permissions to send a request.            | Verifique se a chave da API `token` está sendo passada no cabeçalho da requisição. |
+| T-002  | You dont have a valid key to send a request.                 | Verifique se a chave passada na requisição está correta, pois a mesma não está sendo encontrada no banco. |
+
