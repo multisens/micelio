@@ -1,6 +1,6 @@
-# API Unity
+# UnityAPI
 
-O módulo de API Unity é um conjunto de scripts C# que podem ser importados no seu jogo e te auxiliam a enviar as informações à API Web tornando alguns passos transparentes ao desenvolvedor.
+O módulo de UnityAPI é um conjunto de scripts C# que podem ser importados no seu jogo e te auxiliam a enviar as informações à WebAPI tornando alguns passos transparentes ao desenvolvedor.
 
 
 
