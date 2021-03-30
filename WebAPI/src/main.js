@@ -2,8 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const Routes = require('./routes/routes');
 
-if(   !process.env.HTTP_PORT 
-  ||  !process.env.JWT_SECRET 
+if(   !process.env.HTTP_PORT
+  ||  !process.env.JWT_SECRET
   ||  !process.env.DATABASE_HOST
   ||  !process.env.DATABASE_PASSWORD
   ||  !process.env.DATABASE_USER
