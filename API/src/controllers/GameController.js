@@ -1,5 +1,5 @@
 const {sign}  = require('jsonwebtoken');
-const {v4: uuid}  = require('uuid');
+const idGenerator = require('../utils/generators/idGenerator');
 const knex = require('../database/connection');
 
 class GameController{
@@ -12,7 +12,7 @@ class GameController{
             return response.status(400).json({error: "Missing name or version"});
         }
 
-        const gameId = uuid();
+        const gameId = await idGenerator('game');
         const token = sign({}, process.env.JWT_SECRET, {subject: gameId});
         
         try{
@@ -27,7 +27,7 @@ class GameController{
             const game = await knex('game').insert(data);
 
             if(game){
-                return response.status(200).json({ok: true});
+                return response.status(201).json({ok: true});
             }
             else{
                 return response.status(400).json({error: game});

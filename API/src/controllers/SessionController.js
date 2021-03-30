@@ -1,5 +1,5 @@
 const knex = require('../database/connection');
-const {v4: uuid} = require('uuid');
+const idGenerator = require('../utils/generators/idGenerator');
 
 class SessionController{
     
@@ -7,7 +7,7 @@ class SessionController{
 
         let {name, language, date, game_stage, start_time} = request.body;
 
-        let {token, device_id} = request.headers;
+        let {game_id, device_id} = request.headers;
 
         if(!name) name = null;
 
@@ -27,23 +27,16 @@ class SessionController{
             return response.status(400).json({error: "Invalid session start time"});
         }
 
-        const session_id = uuid();
+        const sessionId = await idGenerator('session');
         
         const trx = await knex.transaction();
 
         try{
 
-
-            const { game_id } = await trx('game')
-            .select('game_id')
-            .where('token', token)
-            .first();
-
-
             const data = {
                 game_id,
                 device_id,
-                session_id,
+                session_id: sessionId,
                 name,
                 language,
                 date,
@@ -56,7 +49,7 @@ class SessionController{
             
             if(session){
                 await trx.commit();
-                return response.status(200).json({ok: true});
+                return response.status(201).json({ok: true});
             }
             else{
                 await trx.rollback();
@@ -76,7 +69,7 @@ class SessionController{
 
         let {end_time} = request.body;
 
-        let {token, device_id} = request.headers;
+        let {game_id, device_id} = request.headers;
 
         if (!end_time) {
             return response.status(400).json({error: "Invalid session end time"});
@@ -86,12 +79,6 @@ class SessionController{
         
         try{
             
-            
-            const { game_id } = await trx('game')
-            .select('game_id')
-            .where('token', token)
-            .first();
-
             const { session_id } = await trx('session')
             .where('device_id', device_id)
             .andWhere('game_id', game_id)
@@ -105,7 +92,7 @@ class SessionController{
 
             if(sessionUpdated){
                 await trx.commit();
-                return response.status(200).json({ok: true});
+                return response.status(201).json({ok: true});
             }
             else{
                 await trx.rollback();

@@ -39,7 +39,7 @@ class DeviceController{
             const device = await knex('device').insert(data);
             
             if(device){
-                return response.status(200).json({ok: true});
+                return response.status(201).json({ok: true});
             }
             else{
                 return response.status(400).json({error: device});
