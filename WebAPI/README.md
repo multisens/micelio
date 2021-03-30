@@ -1,6 +1,6 @@
 # WebAPI
 
-O módulo WebAPI do Micélio é responsável por filtrar os dados enviados, relacionado ao jogos, e armazená-los no banco de dados. Para persistir os dados foi utilizado o modelo de dados criado para o projeto, a documentação do modelo pode ser encontrada clicando [aqui](https://github.com/GPMM/micelio/blob/main/README.md).
+O módulo WebAPI do Micélio é responsável por filtrar os dados enviados, relacionado ao jogos, e armazená-los no banco de dados. Para persistir os dados foi utilizado o modelo de dados criado para o projeto, a documentação do modelo pode ser encontrada clicando [aqui](https://github.com/GPMM/micelio).
 
 
 
