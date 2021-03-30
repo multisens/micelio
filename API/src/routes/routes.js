@@ -10,18 +10,20 @@ const DeviceIDMiddleware = require('../middleware/DeviceIDMiddleware');
 
 const Router = express.Router();
 
-function log(request, response, next) {
+function APIlog(request, response, next) {
 
-    console.log(request.headers);
-    console.log(request.body);
+    const marker = ' :: ';
+    const data = request.method + marker + request.originalUrl + marker + request.headers['host'] + marker + request.headers['user-agent'] + marker +  request.headers.token
+
+    console.log(data);
 
     next();
 
 }
 
-Router.use('/game', log, GameRoutes);
-Router.use('/device', TokenMiddleware, DeviceRoutes);
-Router.use('/session', TokenMiddleware, DeviceIDMiddleware, SessionRoutes);
-Router.use('/activity', TokenMiddleware, DeviceIDMiddleware, ActivityRoutes);
+Router.use('/game', APIlog, GameRoutes);
+Router.use('/device', APIlog, TokenMiddleware, DeviceRoutes);
+Router.use('/session', APIlog, TokenMiddleware, DeviceIDMiddleware, SessionRoutes);
+Router.use('/activity', APIlog, TokenMiddleware, DeviceIDMiddleware, ActivityRoutes);
 
 module.exports = Router;
