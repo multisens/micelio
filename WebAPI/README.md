@@ -390,4 +390,4 @@ Com o objetivo de facilitar o entendimento de uma requisição mal sucessida alg
 | D-001  |     401     | The device information is missing.                           | Verifique se a informação de identificação do dispositivo `device_id` está sendo passada no cabeçalho da requisição. |
 | D-002  |     404     | The device information is wrong. Make sure you have resgistered the device before send any information. | Verifique se o dispositivo foi cadastrado corretamente, pois a informação não está sendo encontrada no banco. |
 | T-001  |     401     | You dont have game permissions to send a request.            | Verifique se a chave da API `token` está sendo passada no cabeçalho da requisição. |
-| T-002  |     404     | You dont have a valid key to send a request.                 | Verifique se a chave passada na requisição está correta, pois a mesma não está sendo encontrada no banco. |
+| T-002  |     401     | You dont have a valid key to send a request.                 | Verifique se a chave passada na requisição está correta, pois a mesma não está sendo encontrada no banco. |

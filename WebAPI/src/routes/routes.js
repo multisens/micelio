@@ -11,8 +11,6 @@ const LogMiddleware = require('../middleware/LogMiddleware');
 
 const Router = express.Router();
 
-
-
 Router.use('/game', LogMiddleware, GameRoutes);
 Router.use('/device', LogMiddleware, TokenMiddleware, DeviceRoutes);
 Router.use('/session', LogMiddleware, TokenMiddleware, DeviceIDMiddleware, SessionRoutes);
