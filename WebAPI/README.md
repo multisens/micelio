@@ -1,12 +1,14 @@
 # WebAPI
 
-O módulo WebAPI do Micélio é responsável por filtrar os dados enviados, relacionado ao jogos, e armazená-los no banco de dados. Para persistir os dados foi utilizado o modelo de dados criado para o projeto, a documentação do modelo pode ser encontrada clicando [aqui](https://github.com/GPMM/micelio).
+O módulo WebAPI do Micélio é responsável por gerenciar os dados da plataforma. Ele recebe dados relacionados a usuários, dispositivos, e jogos e armazena eles no banco de dados. No caso dos jogos, as informações das atividades são filtradas e armazenadas em suas respectivas tabelas. Para persistir os dados foi utilizado o modelo de dados criado para o projeto, a documentação do modelo pode ser encontrada clicando [aqui](https://github.com/GPMM/micelio).
 
 
 
 ## Rotas
 
-O Micélio foi dividido em 5 rotas principais, considerando o modelo de dados criado para API. Cada uma das rotas é acessada em uma determinada fase do jogo, desde seu cadastro até a inserção de informações geradas nas sessões. Cada fase de acesso da API pode ser definida pelos nomes abaixo:
+O Micélio foi dividido em 6 rotas principais, considerando o modelo de dados criado para API. Cada uma das rotas é acessada em uma determinada fase, desde o cadastro de um usuário, passando pelo cadastro de um jogo na plataforma até a inserção de informações geradas nas sessões de um jogo. Cada fase de acesso da API pode ser definida pelos nomes abaixo:
+
+- Cadastro do Usuário;
 
 - Cadastro do Jogo;
 - Cadastro do Dispositivos;
@@ -15,6 +17,48 @@ O Micélio foi dividido em 5 rotas principais, considerando o modelo de dados cr
 - Término da Sessão.
 
 
+
+As rotas de cadastro de usuários e jogos são rotas ecxclusivas da plataforma, ou seja, o desenvolvedor de um jogo não consegue acessar. Já as outras rotas estão disponíveis para o desenvolvedor desde que tenha as credenciais de acesso (token do jogo) . 
+
+
+
+### Cadastro do Usuário
+
+Essa rota é acessada apenas uma vez para cada usuário criado. Ela serve para cadastrar um usuário na plataforma que terá direito de registrar seus jogos.
+
+**Rota:** `/user`
+
+**Método:** POST
+
+**Corpo:**
+
+```json
+{
+    user: 'lucassargeiro',
+    password: 'my_password'
+}
+```
+
+Descrição:
+
+- `user` : nome que o usuário utilizará para entrar no sistema;
+- `password` : senha que o usuário utilizará para entrar no sistema.
+
+
+
+**Objeto gerado para banco:**
+
+```json
+{
+    user_id: 'us-8u937827'
+    user: 'lucassargeiro',
+    password: 'my_password'
+}
+```
+
+
+
+------
 
 ### Cadastro do Jogo
 
@@ -28,12 +72,15 @@ Essa rota é acessada apenas uma vez para cada jogo criado. Ela serve para cadas
 
 ```json
 {
-	"name": "nome_do_jogo",
-	"version": "versao_do_jogo"
+    user_id: 'us-8u937827';
+	name: 'nome_do_jogo',
+	version: 'versao_do_jogo'
 }
 ```
 
 Descrição:
+
+- `user_id`: identificador do usuário que criou o jogo
 
 - `name` : nome do jogo;
 
@@ -45,10 +92,11 @@ Descrição:
 
 ```json
 {
-	"game_id": "id0019293",
-    "token": "HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD",
-    "name": "nome_do_jogo",
-	"version": "versao_do_jogo"
+	game_id: 'id0019293',
+    token: 'HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD',
+    name: 'nome_do_jogo',
+	version: 'versao_do_jogo',
+    owner_id: 'us-8u937827'
 }
 ```
 
@@ -70,7 +118,7 @@ Essa rota é acessada toda vez que um novo dispositivo quer enviar informações
 
 ```json
 {
-    "token":"HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD",
+    token:'HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD',
 }
 ```
 
@@ -78,11 +126,11 @@ Essa rota é acessada toda vez que um novo dispositivo quer enviar informações
 
 ```json
 {
-    	"device_id": "D-456",
-    	"system_name": "android",
-    	"model": "SG-90110",
-    	"screen_width": "1080",
-	    "screen_height": "720",
+    	device_id: 'D-456',
+    	system_name: 'android',
+    	model: 'SG-90110',
+    	screen_width: '1080',
+	    screen_height: '720',
 }
 ```
 
@@ -104,13 +152,15 @@ Descrição:
 
 ```json
 {
-    "device_id": "D-456",
-    "system": "android",
-    "model": "SG-90110",
-    "screen_width": "1080",
-    "screen_height": "720",
+    device_id: 'D-456',
+    system: 'android',
+    model: 'SG-90110',
+    screen_width: '1080',
+    screen_height: '720',
 }
 ```
+
+> Obs.: Embora a informação não seja utilizada no cadastro, nesta rota, o token é passado para garantir que apenas jogos cadastrados possam enviar requisições a API.
 
 
 
@@ -128,8 +178,8 @@ Essa rota é acessada toda vez que um jogador inicia um jogo em um dispoisitivo 
 
 ```json
 {
-    "token":"HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD",
-    "device_id": "D-456",
+    token: 'HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD',
+    device_id: 'D-456',
 }
 ```
 
@@ -137,41 +187,43 @@ Essa rota é acessada toda vez que um jogador inicia um jogo em um dispoisitivo 
 
 ```json
 {
-    "name": "name",
-    "language": "language",
-    "date": "10-10-2020",
-    "game_stage": 1,
-    "start_time": "11:00"
+    name: 'name',
+    language: 'language',
+    date: '10-10-2020',
+    game_stage: us-8u9378271,
+    room: 0,
+    start_time: '11:00'
 }
 ```
 
 Descrição:
 
 - `name` : nome da sessão, identificador específico criado pelo desenvolvedor do jogo (opcional);
-
 - `language` : idioma em que a sessão está sendo executada;
-
 - `date` : dia em que a sessão foi iniciada;
-
 - `game_stage` : fase do jogo em que aquela sessão está sendo jogada, se o jogo possuir apenas uma fase basta passar sempre 1 como parâmetro;
-
+- `room` : sala a qual a sessão pertence (opcional).
 - `start_time` : horário em que a sessão foi iniciada.
 
-  
+
+> Obs.: Os códigos das salas são gerados pelo portal de visualização, se essa informação não for passada ou for uma sala inválida será utilizado um valor _default_ para respresentar sessões sem sala.
+
+
 
 **Objeto gerado para banco:**
 
 ```json
 {
-    "game_id": "id0019293",
-    "device_id": "D-456",
-    "session_id": "654321324",
-    "name": "name",
-    "language": "language",
-    "date": "10-10-2020",
-    "game_stage": 1,
-    "start_time": "11:00",
-    "end_time": null 
+    game_id: 'id0019293',
+    device_id: 'D-456',
+    session_id: '654321324',
+    name: 'name',
+    language: 'language',
+    date: '10-10-2020',
+    game_stage: '1',
+    room: 0,
+    start_time: '11:00',
+    end_time: null 
 }
 ```
 
@@ -191,8 +243,8 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
 
 ```json
 {
-    "token":"HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD",
-    "device_id": "D-456",
+    token: 'HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD',
+    device_id: 'D-456',
 }
 ```
 
@@ -200,46 +252,31 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
 
 ```json
 {
-    "activity_id": "AC-45186727",
-    "name": "plantar",
-    "position_x": 6549,
-    "position_y": 7564,
-    "time": "4",
-    "influenced_by": "AC-45186790",
-    "attributes":[
+    activity_id: 'AC-45186727',
+    name: 'plantar',
+    position_x: 6549,
+    position_y: 7564,
+    time: '4',
+    influenced_by: 'AC-45186790',
+    attributes: '{"time_moment": "night"}',
+    entities: [
         {
-            "name": "time_moment", 
-            "value": "night"
+            entity_id: 'P-01',
+            name: 'Plant',
+            position_x: 12354,
+            position_x: 65498,
+            attributes: '{"health": "50"}',
         }
     ],
-    "entities": [
+    agents:[
         {
-            "entity_id": "P-01",
-            "name": "Plant",
-            "position_x": 12354,
-            "position_x": 65498,
-            "attributes": [
-                {
-                    "name": "health", 
-                    "value": "50"
-                }
-            ],
+            agent_id: 'A-01',
+            name: 'Sargeiro',
+            type: 'NPC',
+            position_x: 12354,
+            position_x: 65498,
+            attributes:'{"energia": "100"}'
         }
-    ],
-    "agents":[
-        {
-            "agent_id": "A-01",
-            "name": "Sargeiro",
-            "type": "NPC",
-            "position_x": 12354,
-            "position_x": 65498,
-            "attributes":[
-               {
-                   "name": "energia",
-                   "value": "100"
-               }
-            ]
-       }
     ]
 }
 ```
@@ -256,12 +293,9 @@ Descrição:
 
 - `time` : tempo em que a atividade foi realizada, o tempo não possui um unidade definida, pode ser um horário ou um número que represente a ordem em que as atividades aconteceram;
 
-- `influenced_by` : identificador da atividade que tenha gerado essa atividade (opcional);
+- `influenced_by` : identificador de outra atividade que tenha influenciado no acontecimento dessa atividade (opcional);
 
-- `attributes` : array de atributos associados à atividade, essas informações podem ser custos relacionados aquela atividade ou até mesmo alguma informação que ela gere como quanto tempo ela durou (opcional). Cada objeto de atributo têm:
-
-  - `name` : nome do atributo;
-  - `value` : valor do atributo;
+- `attributes` : JSON convertido em string de atributos associados à atividade. Essas informações podem ser custos relacionados aquela atividade ou até mesmo alguma informação que ela gere como quanto tempo ela durou (opcional).
 
 - `entities` : array de entidades associados aquela atividade (opcional). Cada objeto de entidade têm:
 
@@ -269,13 +303,13 @@ Descrição:
   - `name` : nome da entidade, pode definir qual o tipo de objeto dele pertence;
   - `position_x` : posição no eixo X do objeto no momento da atividade (opcional);
   - `position_x` : posição no eixo Y do objeto no momento da atividade (opcional);
-  - `attributes` : array de atributos associados à entidade, essas informações são informações relacionadas ao objeto, é mantido o histórico de mudança ocorrido em cada atividade (opcional). Cada objeto de atributo têm:
-    - `name` : nome do atributo;
-    - `value` : valor do atributo;
-
+  - `attributes` : JSON convertido em string de atributos associados à entidade. Essas informações são informações relacionadas ao objeto, e é mantido o histórico de mudança ocorrido em cada atividade (opcional).
+  
 - `agents` : array de agentes associados aquela atividade (opcional). Cada objeto de agente têm:
 
-  - `name` : nome do agente, serve como identificador único do objeto no jogo;
+  - `agent_id` : identificador único daquele agente;
+
+  - `name` : nome do agente;
 
   - `type` : tipo de agente, pode ser player, npc, gameManager ou qualquer outro tipo específico relacionado a um jogo;
 
@@ -283,58 +317,39 @@ Descrição:
 
   - `position_x` : posição no eixo Y do agente no momento da atividade (opicional);
 
-  - `attributes` : array de atributos associados ao agente, essas informações são informações relacionadas ao agente, é mantido os históricos de mudança ocorridos em cada atividade (opcional). Cada objeto atributo têm:
+  - `attributes` :  JSON convertido em string de atributos associados ao agente. Essas informações são informações relacionadas ao agente, e é mantido os históricos de mudança ocorridos em cada atividade (opcional).
 
-    - `name` : nome do atributo;
-
-    - `value` : valor do atributo;
-
-      
+    
 
 **Objetos gerado para banco:**
 
 ```json
 {
-    "session_id": "654321324",
-    "activity_id": "AC-45186727",
-    "name": "plantar",
-    "position_x": 6549,
-    "position_y": 7564,
-    "time": "4",
-    "attributes":[
+    session_id: '654321324',
+    activity_id: 'AC-45186727',
+    name: 'plantar',
+    position_x: 6549,
+    position_y: 7564,
+    time: '4',
+    influenced_by: 'AC-45186790',
+    attributes: '{"time_moment": "night"}',
+    entities: [
         {
-            "name": "vida", 
-            "value": "50"
+            entity_id: 'P-01',
+            name: 'Plant',
+            position_x: 12354,
+            position_x: 65498,
+            attributes: '{"health": 50}',
         }
     ],
-    "entities": [
+    agents:[
         {
-            "entity_id": "P-01",
-            "position_x": 12354,
-            "position_x": 65498,
-            "name": "Plant",
-            "belong" :"A-57865",
-            "attributes": [
-                {
-                    "name": "health", 
-                    "value": "50"
-                }
-            ],
-        }
-    ],
-    "agents":[
-        {
-            "agent_id": "A-57865",
-            "name": "Sargeiro",
-            "type": "NPC",
-            "position_x": 12354,
-            "position_x": 65498,
-            "attributes":[
-                {
-                    "name": "energia",
-                    "value": "100"
-                }
-            ]
+            agent_id: 'A-01',
+            name: 'Sargeiro',
+            type: 'NPC',
+            position_x: 12354,
+            position_x: 65498,
+            attributes: '{"energia": 100}'
         }
     ]
 }
@@ -356,8 +371,8 @@ Essa rota é acessada no final de cada sessão. Ela serve para encerrar determin
 
 ```json
 {
-    "token":"HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD",
-    "device_id": "D-456",
+    token: 'HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD',
+    device_id: 'D-456',
 }
 ```
 
@@ -365,7 +380,7 @@ Essa rota é acessada no final de cada sessão. Ela serve para encerrar determin
 
 ```json
 {
-     "end_time": "11:00"
+     'end_time': '11:00'
 }
 ```
 
@@ -379,11 +394,11 @@ Descrição:
 
 
 
-
-
 ## Códigos de Erro
 
 Com o objetivo de facilitar o entendimento de uma requisição mal sucessida alguns códigos de erro foram criados. A descrição de cada um deles e uma breve solução podem ser encontrados abaixo:
+
+
 
 | Código | Status Code | Descrição                                                    | Solução                                                      |
 | ------ | :---------: | ------------------------------------------------------------ | ------------------------------------------------------------ |
