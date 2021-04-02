@@ -2,7 +2,7 @@ const knex = require('../database/connection');
 
 const {generatePassword} = require('../utils/generators/passwordGenerator');
 
-class SessionController{
+class UserController{
 
   create(request, response){
     const {user, password} = request.body;
@@ -25,4 +25,4 @@ class SessionController{
 
 }
 
-module.exports = SessionController;
+module.exports = UserController;

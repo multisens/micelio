@@ -2,7 +2,7 @@ const knex = require('../database/connection');
 const idGenerator = require('../utils/generators/idGenerator');
 
 class SessionController{
-    
+
 	async create(request, response){
 
         let {name, language, date, game_stage, start_time} = request.body;
@@ -28,7 +28,7 @@ class SessionController{
         }
 
         const sessionId = await idGenerator('session');
-        
+
         const trx = await knex.transaction();
 
         try{
@@ -44,9 +44,9 @@ class SessionController{
                 start_time,
                 end_time: null
             }
-            
+
             const session = await trx('session').insert(data);
-            
+
             if(session){
                 await trx.commit();
                 return response.status(201).json({ok: true});
@@ -55,14 +55,14 @@ class SessionController{
                 await trx.rollback();
                 return response.status(400).json({error: session});
             }
-     
+
         }
         catch(err){
             console.error(err);
             await trx.rollback();
             return response.status(400).json({error: err});
         }
-        
+
     }
 
     async update(request, response){
@@ -76,15 +76,15 @@ class SessionController{
         }
 
         const trx = await knex.transaction();
-        
+
         try{
-            
+
             const { session_id } = await trx('session')
             .where('device_id', device_id)
             .andWhere('game_id', game_id)
             .orderBy([{ column: 'date', order: 'desc'}, { column: 'start_time', order: 'desc' }])
             .select('session_id')
-            .first();  
+            .first();
 
             const sessionUpdated = await trx('session')
             .update('end_time', end_time)
@@ -98,8 +98,8 @@ class SessionController{
                 await trx.rollback();
                 return response.status(400).json({error: session});
             }
-            
-            
+
+
         }
         catch(err){
             await trx.rollback();
