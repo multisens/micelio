@@ -52,9 +52,9 @@ class DeviceController {
       }
 
       return response.status(400).json({error: device});
+
     } catch (err) {
       return response.status(400).json({error: err});
-
     }
 
   }

@@ -5,7 +5,7 @@ class SessionController{
 
 	async create(request, response){
 
-        let {name, language, date, game_stage, start_time} = request.body;
+        let {name, language, date, game_stage, room, start_time} = request.body;
 
         let {game_id, device_id} = request.headers;
 
@@ -23,13 +23,15 @@ class SessionController{
             return response.status(400).json({error: "Invalid session game stage"});
         }
 
+        if (!room) {
+            room = "0";
+        }
+
         if (!start_time) {
             return response.status(400).json({error: "Invalid session start time"});
         }
 
         const sessionId = await idGenerator('session');
-
-        const trx = await knex.transaction();
 
         try{
 
@@ -41,25 +43,22 @@ class SessionController{
                 language,
                 date,
                 game_stage,
+                room,
                 start_time,
                 end_time: null
             }
 
-            const session = await trx('session').insert(data);
+            const session = await knex('session').insert(data);
 
             if(session){
-                await trx.commit();
                 return response.status(201).json({ok: true});
             }
             else{
-                await trx.rollback();
                 return response.status(400).json({error: session});
             }
 
         }
         catch(err){
-            console.error(err);
-            await trx.rollback();
             return response.status(400).json({error: err});
         }
 
@@ -67,9 +66,9 @@ class SessionController{
 
     async update(request, response){
 
-        let {end_time} = request.body;
+        const {end_time} = request.body;
 
-        let {game_id, device_id} = request.headers;
+        const {game_id, device_id} = request.headers;
 
         if (!end_time) {
             return response.status(400).json({error: "Invalid session end time"});
@@ -96,14 +95,14 @@ class SessionController{
             }
             else{
                 await trx.rollback();
-                return response.status(400).json({error: session});
+                return response.status(400).json({error: "Canot end session, check the information sent"});
             }
 
 
         }
         catch(err){
             await trx.rollback();
-            return response.status(400).json({error: err});
+            return response.status(400).json({error: "Canot end session, check the information sent."});
         }
 
     }

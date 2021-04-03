@@ -34,7 +34,7 @@ Essa rota é acessada apenas uma vez para cada usuário criado. Ela serve para c
 
 ```json
 {
-    user: 'lucassargeiro',
+    username: 'lucassargeiro',
     password: 'my_password'
 }
 ```
@@ -72,7 +72,7 @@ Essa rota é acessada apenas uma vez para cada jogo criado. Ela serve para cadas
 
 ```json
 {
-    user_id: 'us-8u937827';
+    user_id: 'us-8u937827',
 	name: 'nome_do_jogo',
 	version: 'versao_do_jogo'
 }
@@ -88,15 +88,22 @@ Descrição:
 
   
 
-**Objeto gerado para banco:**
+**Objetos gerado para banco:**
 
 ```json
+# TABELA Game ----------------------------------------------------------------------------------------------------------------------
 {
 	game_id: 'id0019293',
     token: 'HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD',
     name: 'nome_do_jogo',
 	version: 'versao_do_jogo',
-    owner_id: 'us-8u937827'
+}
+
+# TABELA HasPermission -------------------------------------------------------------------------------------------------------------
+{
+	user_id: 'us-8u937827',
+    game_id: 'id0019293',
+    owner: true
 }
 ```
 
@@ -258,14 +265,14 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
     position_y: 7564,
     time: '4',
     influenced_by: 'AC-45186790',
-    attributes: '{"time_moment": "night"}',
+    attributes: {"time_moment": "night"},
     entities: [
         {
             entity_id: 'P-01',
             name: 'Plant',
             position_x: 12354,
             position_x: 65498,
-            attributes: '{"health": "50"}',
+            attributes: {"health": 50}
         }
     ],
     agents:[
@@ -275,7 +282,7 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
             type: 'NPC',
             position_x: 12354,
             position_x: 65498,
-            attributes:'{"energia": "100"}'
+            attributes:{"energia": 100}
         }
     ]
 }
@@ -324,34 +331,60 @@ Descrição:
 **Objetos gerado para banco:**
 
 ```json
+# TABELA Activity -------------------------------------------------------------------------------------------------------------------
 {
     session_id: '654321324',
     activity_id: 'AC-45186727',
     name: 'plantar',
+    time: '4',
+    attributes: '{"time_moment": "night"}',
+}
+
+# TABELA Action ---------------------------------------------------------------------------------------------------------------------
+{
+    activity_id: 'AC-45186727',
     position_x: 6549,
     position_y: 7564,
-    time: '4',
-    influenced_by: 'AC-45186790',
-    attributes: '{"time_moment": "night"}',
-    entities: [
-        {
-            entity_id: 'P-01',
-            name: 'Plant',
-            position_x: 12354,
-            position_x: 65498,
-            attributes: '{"health": 50}',
-        }
-    ],
-    agents:[
-        {
-            agent_id: 'A-01',
-            name: 'Sargeiro',
-            type: 'NPC',
-            position_x: 12354,
-            position_x: 65498,
-            attributes: '{"energia": 100}'
-        }
-    ]
+}
+
+# TABELA InfluencedBy ---------------------------------------------------------------------------------------------------------------
+{
+    influencedBy_id: 'if-sdjljsld',
+    influence: 'AC-45186790',
+    influenced: 'AC-45186727',
+}    
+
+# TABELA Entity ---------------------------------------------------------------------------------------------------------------------
+{
+    entity_id: 'P-01',
+    name: 'Plant',
+    position_x: 12354,
+    position_x: 65498,
+    attributes: '{"health": 50}',
+}
+
+# TABELA GameObject -----------------------------------------------------------------------------------------------------------------
+{
+    entity_id: 'P-01',
+    position_x: 12354,
+    position_x: 65498,
+}        
+
+# TABELA Agent ----------------------------------------------------------------------------------------------------------------------
+{
+    agent_id: 'A-01',
+    name: 'Sargeiro',
+    type: 'NPC',
+    position_x: 12354,
+    position_x: 65498,
+    attributes: '{"energia": 100}'
+}
+
+# TABELA GameCharacter --------------------------------------------------------------------------------------------------------------
+{
+    agent_id: 'A-01',
+    position_x: 12354,
+    position_x: 65498,
 }
 ```
 
@@ -406,3 +439,4 @@ Com o objetivo de facilitar o entendimento de uma requisição mal sucessida alg
 | D-002  |     404     | The device information is wrong. Make sure you have resgistered the device before send any information. | Verifique se o dispositivo foi cadastrado corretamente, pois a informação não está sendo encontrada no banco. |
 | T-001  |     401     | You dont have game permissions to send a request.            | Verifique se a chave da API `token` está sendo passada no cabeçalho da requisição. |
 | T-002  |     401     | You dont have a valid key to send a request.                 | Verifique se a chave passada na requisição está correta, pois a mesma não está sendo encontrada no banco. |
+| T-003  |     400     | Canot validate your token.                                   | Verifique se o token enviado está correto.                   |

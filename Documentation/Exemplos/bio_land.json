@@ -16,6 +16,7 @@
 					"name": "Anderson",
 					"language": "pt-br",
 					"game_stage": 1,
+					"room": "0",
 					"date": "16-03-2021",
 					"start_time": "11:00",
 					"end_time": null,
@@ -27,88 +28,28 @@
 							"position_y": null,
 							"time": 5,
 						    "influenced_by": null,
-							"attributes":[
-					    		{
-			    					"name": "ActionSelected", 
-			    					"value": "Bioaumentation"
-			    				},
-			    				{
-			    					"name": "LastResult(score)", 
-			    					"value": "0"
-			    				},
-			    				{
-			    					"name": "LastResult(%removed)", 
-			    					"value": "0"
-			    				}
-					    	],
+							"attributes": "{'ActionSelected': 'Bioaumentation','LastResult(score)': 0,'LastResult(%removed)': 0}",
 					    	"entities": [
 					    		{
 					    			"entity_id": 1,
 									"position_x": null,
 									"position_x": null,
 									"name": "Micrococcus sp.",
-									"attributes": [
-					    				{
-					    					"nome": "qtd", 
-					    					"valor": 466.099976
-					    				},
-					    				{
-					    					"nome": "toxic_list", 
-					    					"valor": [0]
-					    				},
-					    				{
-					    					"nome": "deg_list", 
-					    					"valor": [0]
-					    				},
-					    				{
-					    					"nome": "deg_rate", 
-					    					"valor": 0.000000001333333333333
-					    				},
-					    			],
+									"attributes": "{'qtd': 466.099976, 'toxic_list': [0], 'deg_list': [0], 'deg_rate': 0.000000001333333333333}"
 					    		},
 					    		{
 					    			"entity_id": 1,
 									"position_x": null,
 									"position_x": null,
 									"name": "disel",
-									"attributes": [
-					    				{
-					    					"name": "type", 
-					    					"value": "contaminante"
-					    				},
-					    				{
-					    					"name": "qtd", 
-					    					"value": 299.226
-					    				},
-					    				{
-					    					"name": "qtd_max", 
-					    					"value": 300
-					    				},
-					    				{
-					    					"name": "percentage", 
-					    					"value": 0.764086664
-					    				}
-					    			],
+									"attributes": "{'type': 'contaminante', 'qtd': 299.226,'qtd_max': 300,'percentage': 0.764086664}"
 					    		},
 					    		{
 					    			"entity_id": "ambiente",
 									"position_x": null,
 									"position_x": null,
 									"name": "variaveis ambiente",
-									"attributes": [
-					    				{
-					    					"name": "ph", 
-					    					"value": 5.7
-					    				},
-					    				{
-					    					"name": "temperature", 
-					    					"value": 25
-					    				},
-					    				{
-					    					"name": "moisture", 
-					    					"value": 1
-					    				}
-					    			],
+									"attributes": "{'ph': 5.7, 'temperature': 25, 'moisture': 1}"
 					    		}
 					    	],
 					    	"agents":[
@@ -118,16 +59,7 @@
 									"type": "player",
 									"position_x": null,
 									"position_x": null,
-									"attributes":[
-					    				{
-					    					"name": "score",
-					    					"value": 179
-					    				},
-					    				{
-					    					"name": "actionEffect",
-					    					"value": 0
-					    				}
-					    			]
+									"attributes": "{ 'score': 179, 'actionEffect': 0}"
 					    		}
 					    	]
 					    }

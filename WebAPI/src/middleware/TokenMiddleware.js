@@ -8,14 +8,20 @@ const TokenMiddleware = async (request, response, next) => {
 		return response.status(401).json({ error: "You dont have game permissions to send a request.", code: "T-001"});
 	}
 
-	const isTokenValid = await verify(token, process.env.JWT_SECRET);
-	if(!isTokenValid){
-		return response.status(401).json({ error: "You dont have a valid key to send a request.", code: "T-002" });
+	try{
+		const isTokenValid = await verify(token, process.env.JWT_SECRET);
+		if(!isTokenValid){
+			return response.status(401).json({ error: "You dont have a valid key to send a request.", code: "T-002" });
+		}
+	
+		request.headers.game_id = isTokenValid.sub;
+	
+		next();
+
 	}
-
-	request.headers.game_id = isTokenValid.sub;
-
-	next();
+	catch(err){
+		return response.status(400).json({ error: "Canot validate your token.", code: "T-003"});
+	}	
 }
 
 module.exports = TokenMiddleware;

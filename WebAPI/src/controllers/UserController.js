@@ -1,27 +1,57 @@
 const knex = require('../database/connection');
+const idGenerator = require('../utils/generators/idGenerator');
+const { generatePassword } = require('../utils/generators/passwordGenerator');
 
-const {generatePassword} = require('../utils/generators/passwordGenerator');
+class UserController {
 
-class UserController{
+	async create(request, response) {
+		const { username, password } = request.body;
 
-  create(request, response){
-    const {user, password} = request.body;
+		if (!username) {
+			return response.status(400).json({ error: "Invalid username" });
+		}
 
-    if(!user) {
-      return response.status(400).json({error: "Invalid user"});
-    }
+		if (!password) {
+			return response.status(400).json({ error: "Invalid password" });
+		}
 
-    if(!password) {
-      return response.status(400).json({error: "Invalid password"});
-    }
+		const hashedPassword = generatePassword(password);
 
-    const hashedPassword = generatePassword(password);
+		try {
 
-    // todo: Register in database when table is ready
+			const registeredUser = await knex('miceliouser')
+			.select('username')
+			.where('username', username)
+			.first();
 
+			if(registeredUser){
+				return response.status(400).json({error: 'User already exists.'});
+			}
 
-    response.json({user});
-  }
+			const user_id =  await idGenerator('miceliouser', 'user');
+
+			const data = {
+				user_id,
+				username,
+				password: hashedPassword
+			}
+
+			const insertedUser = await knex('miceliouser')
+			.insert(data);			
+
+			if(insertedUser){
+				return response.status(201).json({ok: 'true'});
+			}
+			else{
+				return response.status(400).json(insertedUser);
+			}
+
+		}
+		catch(err){
+		    return response.status(400).json({error: err});
+		}
+
+	}
 
 }
 

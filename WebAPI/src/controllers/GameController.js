@@ -6,34 +6,66 @@ class GameController{
     
 	async create(request, response){
 
-        const {name, version} = request.body;
+        const {user_id, name, version} = request.body;
         
-        if(!name || !version){
-            return response.status(400).json({error: "Missing name or version"});
+        if(!version){
+            return response.status(400).json({error: "Missing game version"});
         }
+        if(!name){
+            return response.status(400).json({error: "Missing game name"});
+        }
+        if(!user_id){
+            return response.status(400).json({error: "Missing game user id"});
+        }
+
+        //TODO: receber o id do usuário e setar a permissão do usuario
 
         const gameId = await idGenerator('game');
         const token = sign({}, process.env.JWT_SECRET, {subject: gameId});
+
+        const trx = await knex.transaction();
         
         try{
 
-            const data = {
+            
+            const user = await trx('miceliouser')
+            .where('user_id', user_id)
+            .select('user_id')
+            .first();
+            
+            
+            if(!user){
+                return response.status(400).json({error: "Invalid user id"});
+            }
+            
+            const gameData = {
                 game_id: gameId,
                 token,
                 name,
                 version
             }
 
-            const game = await knex('game').insert(data);
+            const game = await trx('game').insert(gameData);
 
-            if(game){
+            const permissionData = {
+                user_id,
+                game_id: gameId,
+                owner: true
+            }
+
+            const gamePermission = await trx('haspermission').insert(permissionData);
+
+            if(game && gamePermission){
+                await trx.commit();
                 return response.status(201).json({ok: true});
             }
             else{
-                return response.status(400).json({error: game});
+                await trx.rollback();
+                return response.status(400).json({error: 'Canot insert the game, check the information sent'});
             }
         }
         catch(err){
+            await trx.rollback();
             return response.status(400).json({error: err});
         }
         

@@ -1,8 +1,13 @@
 const {v4: uuid} = require('uuid');
 const knex = require('../../database/connection');
 
-const idGenerator = async (table) => {
-    const columnName = `${table}_id`;
+const idGenerator = async (table, identifier) => {
+
+    if(! identifier){
+        identifier = table;
+    }
+
+    const columnName = `${identifier}_id`;
 
     const ids = await knex(table)
     .select(columnName);

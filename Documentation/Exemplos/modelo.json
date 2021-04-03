@@ -16,53 +16,39 @@
 					"name": "name",
 					"language": "language",
 					"game_stage": 1,
+					"room": "1235435120",
 					"date": "10-10-2020",
 					"start_time": "11:00",
 					"end_time": null,
 					"activities":[
 					    {
-					    	"activity_id": "AC-45186727",
-							"name": "plantar",
-							"position_x": 6549,
-							"position_y": 7564,
-							"time": "4",
+						    "activity_id": "AC-45186727",
+						    "name": "plantar",
+						    "position_x": 6549,
+						    "position_y": 7564,
+						    "time": "4",
 						    "influenced_by": "AC-45186790",
-							"attributes":[
-								{
-									"name": "hora",
-									"value": "11:00"
-								}
-							],
-							"entities": [
-								{
-									"entity_id": "P-01",
-									"position_x": 12354,
-									"position_x": 65498,
-									"name": "Plant",
-									"attributes": [
-										{
-											"name": "health",
-											"value": "50"
-										}
-									],
-								}
-							],
-							"agents":[
-								{
-									"agent_id": "A-57865",
-									"name": "Sargeiro",
-									"type": "NPC",
-									"position_x": 12354,
-									"position_x": 65498,
-									"attributes":[
-										{
-											"name": "energia",
-											"value": "100"
-										}
-									]
-								}
-							]
-					    }
+						    "attributes": "{'time_moment': 'night'}",
+						    "entities": [
+						        {
+						            "entity_id": "P-01",
+						            "name": "Plant",
+						            "position_x": 12354,
+						            "position_x": 65498,
+						            "attributes": "{'health': 50}",
+						        }
+						    ],
+						    "agents":[
+						        {
+						            "agent_id": "A-01",
+						            "name": "Sargeiro",
+						            "type": "NPC",
+						            "position_x": 12354,
+						            "position_x": 65498,
+						            "attributes":"{'energia': '100'}"
+						        }
+						    ]
+						}
 					]
 				}
 			]
