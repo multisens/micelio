@@ -8,8 +8,20 @@
     font-family: Ubuntu, sans-serif;
 }
 
-body {
+body{
     background-color: #F6F6F6;
+    flex-direction: column;
+    display: flex;
+    flex: 1;
+    height: 100%;
+}
+
+div.content-body{
+    flex-direction: column;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    height: 100vh;
 }
 
 input[type="text"].primary,

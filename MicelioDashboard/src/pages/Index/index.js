@@ -4,7 +4,7 @@ import './style.css';
 
 function Index() {
   return (
-    <>
+    <div className={'content-body'}>
       <header className={'main'}>
         <h1>Micelio</h1>
       </header>
@@ -12,7 +12,7 @@ function Index() {
       <div className={'container'}>
         <div className={'login-card'}>
           <div>
-            <h1>Faça login</h1>
+            <h1 className={'card-title'}>Faça login</h1>
           </div>
           <div className={'form'}>
             <input className={'primary'} type="text" name={'username'} placeholder={'Username'} />
@@ -28,7 +28,7 @@ function Index() {
         <AiFillGithub size={32} />
         <span>Igor, Lucas e Marcelo</span>
       </footer>
-    </>
+    </div>
   )
 }
 
