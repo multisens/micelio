@@ -1,0 +1,28 @@
+
+footer.main {
+    height: 100px;
+    background-color: #2A9D8F ;
+}
+
+footer.main span{
+    display: block;
+}
+
+footer.main {
+	display: flex;
+    color: #f6f6f6;
+    align-items: center;
+    justify-content: space-around;
+    padding: 12px 40px;
+}
+
+@media (max-width: 500px) {
+    footer.main {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    footer.main span:last-child {
+        display: none;
+    }
+}

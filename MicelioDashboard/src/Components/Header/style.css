@@ -1,0 +1,16 @@
+
+header.main{
+    height: 100px;
+    background-color: #2A9D8F ;
+}
+
+header.main {
+    padding-left: 50px;
+    display: flex;
+    align-items: center
+}
+
+header.main h1 {
+    color: white;
+    font-size: 42px;
+}

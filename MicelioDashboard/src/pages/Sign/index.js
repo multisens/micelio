@@ -6,17 +6,18 @@ import Footer from '../../Components/Footer';
 import FormCard from '../../Components/FormCard';
 import FormFooter from '../../Components/FormFooter';
 
-function Index() {
+function Sign() {
 	return (
 		<div className={'content-body'}>
 			<Header title="Micelio"/>
 
 			<div className={'container'}>
-				<FormCard title="Faça Login">
+				<FormCard title="Cadastre-se">
 					<input className={'primary'} type="text" name={'username'} placeholder={'Username'} />
 					<input className={'primary'} type="password" name={'password'} placeholder={'Password'} />
-					<button className={'primary'}>Entrar</button>
-					<FormFooter beginingText='Não possui conta?' linkText='Cadastre-se' url='/sign'/>
+					<input className={'primary'} type="password" name={'confirm-password'} placeholder={'Confirm your password'} />
+					<button className={'primary'}>Cadastrar</button>
+					<FormFooter beginingText='Ja possui conta?' linkText='Entrar' url='/'/>
 				</FormCard>
 			</div>
 
@@ -25,4 +26,4 @@ function Index() {
 	)
 }
 
-export default Index;
+export default Sign;
