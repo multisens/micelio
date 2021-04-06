@@ -1,0 +1,64 @@
+* {
+    padding: 0;
+    margin: 0;
+
+    border: 0;
+    box-sizing: border-box;
+
+    font-family: Ubuntu, sans-serif;
+}
+
+body {
+    background-color: #F6F6F6;
+}
+
+input[type="text"].primary,
+input[type="password"].primary {
+    border: 2px solid #bfbfbf;
+    border-radius: 8px;
+    min-height: 40px;
+
+    padding: 8px;
+
+    transition: all .5s;
+    outline: none;
+
+    width: 100%;
+}
+
+input.primary:focus {
+    border: 2px solid #2A9D8F;
+    transform: scale(1.03, 1.03);
+}
+
+input.primary + input.primary {
+    margin-top: 5px;
+}
+
+button.primary {
+    background-color: #264653;
+    min-height: 45px;
+
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+
+    border-radius: 8px;
+    padding: 10px 50px;
+
+    width: 100%;
+    transition: all .2s;
+    outline: none;
+}
+
+button.primary:hover {
+    background-color: #1a313a;
+    color: #e5e5e5;
+
+    transform: scale(1.02, 1.02);
+}
+
+input + button.primary {
+    margin-top: 10px;
+}
