@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
 	public string URL = "https://albali.eic.cefet-rj.br/micelio/api";
 	public string port = "80";
-	public string token = "toki";
+	public string token = "token-user62636264";
 	public string rota = "/user";
 	public string method = "POST";
 	public string payload = "{\"username\": \"Lucas\",\"password\":\"minha-senha\"}";
@@ -17,12 +17,12 @@ public class GameManager : MonoBehaviour
     {
      
         Micelio micelio = new Micelio(URL,port,token);
-        micelio.SendAPIRequest(rota,method,payload);
+        //micelio.SendAPIRequest(rota,method,payload);
 
     }
 
     void Update()
     {
-        
+
     }
 }
