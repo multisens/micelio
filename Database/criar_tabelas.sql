@@ -2,6 +2,7 @@ CREATE TABLE MicelioUser(
 	user_id varchar(40) NOT NULL,
 	username varchar(40) NOT NULL,
 	password varchar(60) NOT NULL,
+	email varchar(60) NOT NULL,
 
 	PRIMARY KEY(user_id),
 	UNIQUE(username)
@@ -17,13 +18,23 @@ CREATE TABLE Game(
 );
 
 CREATE TABLE HasPermission(
+	has_permission_id varchar(40) NOT NULL,
 	user_id varchar(40) NOT NULL,
 	game_id varchar(40) NOT NULL,
 	owner boolean NOT NULL,
 
-	PRIMARY KEY(user_id, game_id),
+	PRIMARY KEY(has_permission_id),
 	FOREIGN KEY(user_id) REFERENCES MicelioUser(user_id),
 	FOREIGN KEY(game_id) REFERENCES Game(game_id)
+);
+
+CREATE TABLE Experiment(
+	room varchar(40) NOT NULL,
+	has_permission_id varchar(40) NOT NULL,
+	it_ends boolean NOT NULL,
+
+	PRIMARY KEY(room),
+	FOREIGN KEY(has_permission_id) REFERENCES HasPermission(has_permission_id),	
 );
 
 CREATE TABLE Device(
@@ -31,7 +42,8 @@ CREATE TABLE Device(
 	model varchar(50) NOT NULL,
 	screen_width int NOT NULL,
 	screen_height int NOT NULL,
-	system_name varchar(20) NOT NULL,
+	system_name varchar(50) NOT NULL,
+	
 	PRIMARY KEY(device_id)
 );
 
@@ -42,7 +54,6 @@ CREATE TABLE Session(
 	name varchar(100),
 	language varchar(20) NOT NULL,
 	game_stage varchar(20) NOT NULL,
-	room varchar(40),
 	date date NOT NULL,
 	start_time time NOT NULL,
 	end_time time,
@@ -50,6 +61,15 @@ CREATE TABLE Session(
 	PRIMARY KEY(session_id),
 	FOREIGN KEY(game_id) REFERENCES Game(game_id),
 	FOREIGN KEY(device_id) REFERENCES Device(device_id)
+);
+
+CREATE TABLE SessionExperiment(
+	session_id varchar(40) NOT NULL,
+	room varchar(40) NOT NULL,
+
+	PRIMARY KEY(session_id, room),
+	FOREIGN KEY(session_id) REFERENCES Session(session_id),
+	FOREIGN KEY(room) REFERENCES Experiment(room)
 );
 
 CREATE TABLE Activity(
@@ -76,6 +96,7 @@ CREATE TABLE InfluencedBy(
 	influencedBy_id int NOT NULL,
 	influence_id varchar(150) NOT NULL,
 	influenced_id varchar(150) NOT NULL,
+	attributes text,
 
 	PRIMARY KEY(influencedBy_id),
 	FOREIGN KEY(influence_id) REFERENCES Activity(activity_id),
@@ -103,19 +124,12 @@ CREATE TABLE GameCharacter(
 CREATE TABLE ActivityAgents(
 	agent_id varchar(150) NOT NULL,
 	activity_id varchar(150) NOT NULL,
+	attributes text NOT NULL,
+	role varchar(20) NOT NULL,
 
 	PRIMARY KEY(agent_id, activity_id),
 	FOREIGN KEY(agent_id) REFERENCES Agent(agent_id),
 	FOREIGN KEY(activity_id) REFERENCES Activity(activity_id)
-);
-
-CREATE TABLE AgentAttributesUpdate(
-	agent_id varchar(150) NOT NULL,
-	time_updated time NOT NULL,
-	attributes text NOT NULL,
-	
-	PRIMARY KEY(agent_id, time_updated),
-	FOREIGN KEY(agent_id) REFERENCES Agent(agent_id)
 );
 
 CREATE TABLE Entity(
@@ -138,18 +152,11 @@ CREATE TABLE GameObject(
 CREATE TABLE ActivityEntities(
 	entity_id varchar(150) NOT NULL,
 	activity_id varchar(150) NOT NULL,
+	attributes text NOT NULL,
+	role varchar(20) NOT NULL,
+
 
 	PRIMARY KEY(entity_id, activity_id),
 	FOREIGN KEY(entity_id) REFERENCES Entity(entity_id),
 	FOREIGN KEY(activity_id) REFERENCES Activity(activity_id)
-);
-
-
-CREATE TABLE EntityAttributesUpdate(
-	entity_id varchar(150) NOT NULL,
-	time_updated time NOT NULL,
-	attributes text NOT NULL,
-	
-	PRIMARY KEY(entity_id, time_updated),
-	FOREIGN KEY(entity_id) REFERENCES Entity(entity_id)
 );
