@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Device
 {
    
-	private string device_id;
-	private string model;
-	private int screen_width;
-	private int screen_height;
-	private string system_name; 
+	public string device_id;
+	public string model;
+	public int screen_width;
+	public int screen_height;
+	public string system_name; 
 
 	//construtor da classe Device
 	public Device(string device_id, string model,int screen_width,int screen_height,string system_name)
@@ -23,6 +24,6 @@ public class Device
 
 	public string toJSON()
 	{
-		return "";
+		return JsonUtility.ToJson(this);
 	}
 }
