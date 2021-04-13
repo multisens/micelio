@@ -1,0 +1,42 @@
+.aside-menu {
+    background-color: white;
+    border-radius: 0 10px 10px 0;
+
+    box-shadow: 4px 0 0 #dfdfdf;
+    min-height: 600px;
+
+    z-index: 2;
+}
+
+.aside-menu ul {
+    text-decoration: none;
+    list-style: none;
+}
+
+.aside-menu ul li {
+    min-height: 60px;
+    font-size: 18px;
+    border-bottom: 1px solid #dfdfdf;
+    display: flex;
+    align-items: center;
+
+    padding: 0 20px;
+
+    transition: all .2s;
+
+    cursor: pointer;
+}
+
+.aside-menu ul li.selected {
+    font-weight: 700;
+    color: #2a9d8f;
+}
+
+.aside-menu ul li:hover {
+    font-weight: 700;
+    color: #2a9d8f;
+}
+
+.aside-menu ul li:last-child {
+    border: 0;
+}

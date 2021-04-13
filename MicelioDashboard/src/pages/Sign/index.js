@@ -1,10 +1,10 @@
 import React from 'react';
 import './style.css';
 
-import Header from '../../Components/Header';
-import Footer from '../../Components/Footer';
-import FormCard from '../../Components/FormCard';
-import FormFooter from '../../Components/FormFooter';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import FormCard from '../../components/FormCard';
+import FormFooter from '../../components/FormFooter';
 
 function Sign() {
 	return (
