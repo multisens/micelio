@@ -14,10 +14,35 @@
 /* Menu */
 
 /* Gamelist */
-.gamelist {
+.gamelist-container {
     width: 100%;
     padding: 20px;
     background-color: #f6f6f6;
+}
+
+.gamecards {
+    margin-bottom: 20px;
+}
+
+.gamecards ul {
+    list-style: none;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+}
+
+.gamecards ul li {
+    min-height: 200px;
+    background-color: white;
+    box-shadow: 0 0 6px #dfdfdf;
+
+    border-radius: 12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .gamelist h2 {
