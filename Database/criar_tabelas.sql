@@ -34,7 +34,7 @@ CREATE TABLE Experiment(
 	it_ends boolean NOT NULL,
 
 	PRIMARY KEY(room),
-	FOREIGN KEY(has_permission_id) REFERENCES HasPermission(has_permission_id),	
+	FOREIGN KEY(has_permission_id) REFERENCES HasPermission(has_permission_id)
 );
 
 CREATE TABLE Device(
@@ -43,7 +43,7 @@ CREATE TABLE Device(
 	screen_width int NOT NULL,
 	screen_height int NOT NULL,
 	system_name varchar(50) NOT NULL,
-	
+
 	PRIMARY KEY(device_id)
 );
 

@@ -10,7 +10,7 @@ DROP TABLE Activity;
 DROP TABLE SessionExperiment;
 DROP TABLE Session;
 DROP TABLE Device;
-DROP TABLE Experiment
+DROP TABLE Experiment;
 DROP TABLE HasPermission;
 DROP TABLE Game;
 DROP TABLE MicelioUser;
