@@ -23,10 +23,6 @@ class SessionController{
             return response.status(400).json({error: "Invalid session game stage"});
         }
 
-        if (!room) {
-            room = "0";
-        }
-
         if (!start_time) {
             return response.status(400).json({error: "Invalid session start time"});
         }
