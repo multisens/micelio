@@ -2,20 +2,12 @@ import React from 'react';
 
 import './style.css';
 
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import MainMenu from "../../components/MainMenu";
+import PageFormat from '../../components/PageFormat';
 
 function Home() {
 
   return (
-    <>
-      <Header title="Micelio"/>
-
-      <div className="home-container">
-
-        <MainMenu selected={'start'} />
-
+    <PageFormat menuSelected={'home'}>
         <main className={'gamelist-container'}>
 
           <div className={'gamecards'}>
@@ -47,9 +39,7 @@ function Home() {
 
         </main>
 
-      </div>
-      <Footer />
-    </>
+    </PageFormat>
   )
 }
 

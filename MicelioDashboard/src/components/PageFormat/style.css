@@ -1,0 +1,8 @@
+.content-container {
+    display: flex;
+    flex: 1;
+}
+
+.content-container aside {
+    min-width: 20%;
+}

@@ -7,7 +7,8 @@ const idGenerator = async (table, identifier) => {
         identifier = table;
     }
 
-    const columnName = `${identifier}_id`;
+    const columnName = `${identifier.toLowerCase()}_id`;
+
 
     const ids = await knex(table)
     .select(columnName);

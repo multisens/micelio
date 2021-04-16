@@ -4,7 +4,7 @@
 
     box-shadow: 4px 0 0 #dfdfdf;
     min-height: 600px;
-
+    
     z-index: 2;
 }
 
@@ -15,7 +15,7 @@
 
 .aside-menu ul li {
     min-height: 60px;
-    font-size: 18px;
+    font-size: 16px;
     border-bottom: 1px solid #dfdfdf;
     display: flex;
     align-items: center;

@@ -5,7 +5,7 @@ const knex = require('../database/connection');
 class GameController{
     
 	async create(request, response){
-
+     
         const {user_id, name, version} = request.body;
         
         if(!version){
@@ -19,16 +19,14 @@ class GameController{
         }
 
         //TODO: receber o id do usuário e setar a permissão do usuario
-
-        const gameId = await idGenerator('game');
+        const gameId = await idGenerator('Game');
         const token = sign({}, process.env.JWT_SECRET, {subject: gameId});
 
         const trx = await knex.transaction();
         
         try{
 
-            
-            const user = await trx('miceliouser')
+            const user = await trx('MicelioUser')
             .where('user_id', user_id)
             .select('user_id')
             .first();
@@ -38,6 +36,16 @@ class GameController{
                 return response.status(400).json({error: "Invalid user id"});
             }
             
+            const gameVersion = await trx('Game')
+            .where('name', name)
+            .andWhere('version', version)
+            .select('game_id')
+            .first();
+
+            if(gameVersion){
+                return response.status(400).json({error: "This version of the game is already resgistered"});
+            }
+
             const gameData = {
                 game_id: gameId,
                 token,
@@ -45,15 +53,18 @@ class GameController{
                 version
             }
 
-            const game = await trx('game').insert(gameData);
+            const game = await trx('Game').insert(gameData);
+
+            const has_permission_id = await idGenerator('HasPermission', 'has_permission');
 
             const permissionData = {
+                has_permission_id,
                 user_id,
                 game_id: gameId,
                 owner: true
             }
 
-            const gamePermission = await trx('haspermission').insert(permissionData);
+            const gamePermission = await trx('HasPermission').insert(permissionData);
 
             if(game && gamePermission){
                 await trx.commit();

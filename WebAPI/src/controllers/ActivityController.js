@@ -33,7 +33,7 @@ class ActivityController {
 
         try{
 
-			const { session_id } = await trx('session')
+			const { session_id } = await trx('Session')
             .where('device_id', device_id)
             .andWhere('game_id', game_id)
             .orderBy([{ column: 'date', order: 'desc'}, { column: 'start_time', order: 'desc' }])
@@ -54,15 +54,6 @@ class ActivityController {
 			}
 			
             return response.status(201).json(data);
-
-            if(sessionUpdated){
-                await trx.commit();
-                return response.status(201).json({ok: true});
-            }
-            else{
-                await trx.rollback();
-                return response.status(400).json({error: session});
-            }
 
 
         }

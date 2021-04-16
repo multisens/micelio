@@ -8,6 +8,16 @@ footer.main span{
     display: block;
 }
 
+footer.main a{
+    display: block;
+    color: #f6f6f6;
+    text-decoration: none;
+}
+
+footer.main a:hover{
+    text-decoration: underline;
+}
+
 footer.main {
 	display: flex;
     color: #f6f6f6;

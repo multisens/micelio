@@ -12,8 +12,8 @@ const Routes = () => (
     <Route path={'/'} component={Index} exact />
     <Route path={'/sign'} component={Sign} />
     <Route path={'/home'} component={Home} exact />
-    <Route path={'/home/start'} component={Home} />
-    <Route path={'/home/dashboard'} component={Dashboard} />
+    <Route path={'/home'} component={Home} />
+    <Route path={'/dashboard'} component={Dashboard} />
   </BrowserRouter>
 )
 

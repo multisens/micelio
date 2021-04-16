@@ -27,7 +27,9 @@ class SessionController{
             return response.status(400).json({error: "Invalid session start time"});
         }
 
-        const sessionId = await idGenerator('session');
+        const sessionId = await idGenerator('Session');
+
+        const trx = await knex.transaction();
 
         try{
 
@@ -39,14 +41,25 @@ class SessionController{
                 language,
                 date,
                 game_stage,
-                room,
                 start_time,
                 end_time: null
             }
 
-            const session = await knex('session').insert(data);
+            const session = await trx('Session').insert(data);
+
+            if(room){
+                const experiment = await trx('Experiment')
+                .where('room', room)
+                .select('room')
+                .first()
+
+                if(experiment){
+                    await trx('SessionExperiment').insert({session_id: sessionId, room});
+                }
+            }
 
             if(session){
+                trx.commit();
                 return response.status(201).json({ok: true});
             }
             else{
@@ -55,7 +68,8 @@ class SessionController{
 
         }
         catch(err){
-            return response.status(400).json({error: err});
+            trx.rollback();
+            return response.status(400).json({error: "Cannot insert, please check the acess token."});
         }
 
     }
@@ -74,14 +88,14 @@ class SessionController{
 
         try{
 
-            const { session_id } = await trx('session')
+            const { session_id } = await trx('Session')
             .where('device_id', device_id)
             .andWhere('game_id', game_id)
             .orderBy([{ column: 'date', order: 'desc'}, { column: 'start_time', order: 'desc' }])
             .select('session_id')
             .first();
 
-            const sessionUpdated = await trx('session')
+            const sessionUpdated = await trx('Session')
             .update('end_time', end_time)
             .where('session_id', session_id);
 

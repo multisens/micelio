@@ -23,25 +23,33 @@ class UserController {
 
 		try {
 
-			const registeredUser = await knex('miceliouser')
-			.select('username')
-			.where('username', username)
-			.first();
+			const lowerUsername = username.toLowerCase();
 
+			const registeredUser = await knex('MicelioUser')
+			.select('username', 'email')
+			.where('username', lowerUsername)
+			.orWhere('email', email)
+			.first();
+			
 			if(registeredUser){
-				return response.status(400).json({error: 'User already exists.'});
+				if(registeredUser.username === lowerUsername) {
+					return response.status(400).json({error: 'User already exists.'});
+				}
+				if(registeredUser.email === email) {
+					return response.status(400).json({error: 'Email already used.'});
+				}
 			}
 
-			const user_id =  await idGenerator('miceliouser', 'user');
+			const user_id =  await idGenerator('MicelioUser', 'user');
 
 			const data = {
 				user_id,
-				username,
-				email,
+				username: lowerUsername,
+				email: email,
 				password: hashedPassword
 			}
 
-			const insertedUser = await knex('miceliouser')
+			const insertedUser = await knex('MicelioUser')
 			.insert(data);
 
 			if(insertedUser){

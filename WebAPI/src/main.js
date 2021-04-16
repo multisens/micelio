@@ -18,7 +18,12 @@ if(   !process.env.HTTP_PORT
 
 const app = express();
 app.use(express.json());
-app.use('/', express.static(path.resolve(__dirname, '..', '..', 'MicelioDashboard', 'build')));
+// app.use('/', express.static(path.resolve(__dirname, '..', '..', 'MicelioDashboard', 'build')));
+
+const baseDir = path.join(__dirname, '..', '..', 'MicelioDashboard', 'build')
+app.use(express.static(`${baseDir}`))
+app.get('*', (req,res) => res.sendFile('index.html' , { root : baseDir }))
+
 app.use('/api', Routes);
 
 app.listen(process.env.HTTP_PORT);

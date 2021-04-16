@@ -36,7 +36,7 @@ class DeviceController {
         screen_height
       }
 
-      const registeredDevice = await knex('device')
+      const registeredDevice = await knex('Device')
         .select('device_id')
         .where('device_id', device_id)
         .first();
@@ -45,7 +45,7 @@ class DeviceController {
         return response.status(200).json({ok: true});
       }
 
-      const device = await knex('device').insert(data);
+      const device = await knex('Device').insert(data);
 
       if (device) {
         return response.status(201).json({ok: true});

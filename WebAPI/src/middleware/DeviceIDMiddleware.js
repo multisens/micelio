@@ -7,7 +7,7 @@ const DeviceIDMiddleware = async (request, response, next) => {
 		return response.status(401).json({ error: "The device information is missing.", code: "D-001"});
 	}
 	
-	const bd_response = await knex('device')
+	const bd_response = await knex('Device')
 	.where('device_id', device_id)
 	.select('device_id')
 	.first();
