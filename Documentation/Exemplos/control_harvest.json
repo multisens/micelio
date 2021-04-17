@@ -16,7 +16,7 @@
 					"name": "Flavio",
 					"language": "pt-br",
 					"game_stage": 1,
-					"room": "0",
+					"observation_environment_id": "0",
 					"date": "16-03-2021",
 					"start_time": "11:00",
 					"end_time": "12:00",
@@ -28,6 +28,7 @@
 							"position_y": null,
 							"time": "11:00",
 						    "influenced_by": null,
+						    "influenced_by_attributes": "{}",
 							"attributes":[],
 					    	"entities": [
 					    		{
@@ -35,7 +36,8 @@
 									"position_x": 10,
 									"position_x": 100,
 									"name": "Tomate",
-									"attributes": "{'id_panta': 2, 'tipo': 'planta'}"
+									"attributes": "{'id_panta': 2, 'tipo': 'planta'}",
+									"role": "planta"
 					    		}
 					    	],
 					    	"agents":[
@@ -45,7 +47,8 @@
 									"type": "player",
 									"position_x": null,
 									"position_x": null,
-									"attributes": "{}"
+									"attributes": "{}",
+									"role": "plantador"
 					    		}
 					    	]
 					    },
@@ -56,6 +59,7 @@
 							"position_y": null,
 							"time": "11:02",
 						    "influenced_by": null,
+						    "influenced_by_attributes": "{}",
 							"attributes":[],
 					    	"entidades": [],
 					    	"agentes":[
@@ -65,15 +69,17 @@
 									"type": "npc",
 									"position_x": 30,
 									"position_x": 27,
-					    			"attributes":"{'id_predador': 2}"
+					    			"attributes":"{'id_predador': 2}",
+					    			"role": "predador"
 					    		},
 					    		{
 					    			"agent_id": "A-00003",
-									"name": "predado",
+									"name": "inseto",
 									"type": "npc",
 									"position_x": 30,
 									"position_x": 27,
-					    			"attributes": "{'id_predado': 2}"
+					    			"attributes": "{'id_predado': 2}",
+					    			"role": "predado"
 					    		}
 					    	]
 					    }

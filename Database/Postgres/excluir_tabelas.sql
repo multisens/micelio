@@ -1,0 +1,16 @@
+DROP TABLE "ActivityEntities";
+DROP TABLE "GameObject";
+DROP TABLE "Entity";
+DROP TABLE "ActivityAgents";
+DROP TABLE "GameCharacter";
+DROP TABLE "Agent";
+DROP TABLE "InfluencedBy";
+DROP TABLE "Action";
+DROP TABLE "Activity";
+DROP TABLE "SessionObservationEnvironment";
+DROP TABLE "Session";
+DROP TABLE "Device";
+DROP TABLE "ObservationEnvironment";
+DROP TABLE "HasPermission";
+DROP TABLE "Game";
+DROP TABLE "MicelioUser";

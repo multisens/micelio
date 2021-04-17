@@ -26,7 +26,7 @@ A plataforma do Micélio conta com alguns módulos, são eles:
 
   [Saiba mais](https://github.com/GPMM/micelio/tree/main/WebAPI).
 
-- UnityAPI:
+- MicelioUnity:
 
   [Saiba mais](https://github.com/GPMM/micelio/tree/main/UnityAPI).
 
@@ -34,23 +34,23 @@ A plataforma do Micélio conta com alguns módulos, são eles:
 
 ## Modelo de Dados
 
-O modelo de dados do Micélio foi pensado para que pudesse armazenar dados qualquer jogo. Além disso, as principais entidades foram basedas no modelo PROV, com o objetivo de conseguirmos montar grafos de proveniência para os dados armazenados. A Imagem 1 representa o diagrama de classes do modelo de dados utilizado pelo Micélio.
+O modelo de dados do Micélio foi pensado para que pudesse armazenar dados qualquer jogo. Além disso, as principais entidades foram basedas no modelo PROV, com o objetivo de conseguirmos montar grafos de proveniência para os dados armazenados. A **Imagem 1** representa o diagrama de classes do modelo de dados utilizado pelo Micélio.
 
 
 
-![diagrama de classes](./Documentation/Diagramas/modelo-de-dados.png)
+![Imagem 1](./Documentation/Diagramas/modelo-de-dados.png)
 
-<center><b>Imagem 1:</b> Diagrama de Classes utilizado pelo Micélio para armazenamento dos dados.</center>
+<center><b>Imagem 1</b> - Diagrama de Classes utilizado pelo Micélio para armazenamento dos dados.</center>
 
 O modelo de dados foi definido com 3 tipos de entidades, Objetos do Jogo, Objetos de Proveniênica e Objetos do sistema. Objetos do Jogo são objetos derivados de Objetos de proveniênicia, ou informações associativas. Essas informações não são de extrema importância para montar os grafos, são informações opcionais que ajudam a detalhar mais as informações de cada objeto. Os Objetos de Proveniência são os objetos que guardam as informações essenciais para montarmos os grafos de proveniência seguindo o modelo base (PROV). Já os Objetos do Sistema são objetos que nos ajuda a diferencias as informações enviadas, com eles podemos saber de que jogo, em qual dispotiviso e em qual sessão a informação foi gerada, e além disso, se o usuário ainda está logado naquela sessão.
 
-O Micélio foi projetado com o objetivo de ser uma via de mão única com os jogos, ou seja, a API Web recebe as informações mas não devolve nenhum dado. Isso foi pensado para que o jogo não dependa de uma resposta da API para seguir na sua história, tornando ele completamente independente da API Web. A Imagem 2 mostra como é feita a comunicação entre cada parte que interage com o sistema.
+O Micélio foi projetado com o objetivo de ser uma via de mão única com os jogos, ou seja, a API Web recebe as informações mas não devolve nenhum dado. Isso foi pensado para que o jogo não dependa de uma resposta da API para seguir na sua história, tornando ele completamente independente da API Web. A **Imagem 2** mostra como é feita a comunicação entre cada parte que interage com o sistema.
 
 
 
-![arquitetura](./Documentation/Diagramas/conexao.png)
+![Imagem 2](./Documentation/Diagramas/conexao.png)
 
-<center><b>Imagem 2:</b> Comunicação do Micélio entre os componentes</center>
+<center><b>Imagem 2</b> - Comunicação do Micélio entre os componentes</center>
 
 
 

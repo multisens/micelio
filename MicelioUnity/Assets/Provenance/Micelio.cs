@@ -11,19 +11,18 @@ using System.Text;
 
 public class Micelio
 {
-    private string defaultURL;
-    private string port;
+    private string defaultURL = "https://achernar.eic.cefet-rj.br/micelio/api";
     private string token;
     private string device_id;
 
     // + ":" + this.port 
 
     //construtor classe Micelio
-    public Micelio(string defaultURL, string port, string token)
+    public Micelio(/*string defaultURL, string port, */string token)
     {
         this.token = token;
-        this.defaultURL = defaultURL;
-        this.port = port;
+        // this.defaultURL = defaultURL;
+        // this.port = port;
         this.device_id = getDeviceInformation();
     }
 
@@ -44,15 +43,15 @@ public class Micelio
         else
         {
             //cria uma instancia de Device para salvar
-            string device_id = SystemInfo.deviceUniqueIdentifier;
-            string model = SystemInfo.deviceModel;
-            int screen_width = Screen.width;
-            int screen_height = Screen.height;
-            string system_name = SystemInfo.operatingSystem;
-            device = new Device(device_id, model, screen_width, screen_height, system_name);
+            // string device_id = SystemInfo.deviceUniqueIdentifier;
+            // string model = SystemInfo.deviceModel;
+            // int screen_width = Screen.width;
+            // int screen_height = Screen.height;
+            // string system_name = SystemInfo.operatingSystem;
+            device = new Device(/*device_id, model, screen_width, screen_height, system_name*/);
 
             //teste se todos os campos de Device estão completos
-            if (device_id != null && model != null && screen_height != 0 && screen_width != 0 && system_name != null)
+            if(device.VerifyDataIntegrity())
             {
                 //salvos os dados no storageLocal e no banco
                 BinaryFormatter formatter = new BinaryFormatter();
@@ -61,7 +60,9 @@ public class Micelio
                 fs.Close();
                 SendDevice(device);
             }
+
         }
+
         return device.device_id;
     }
 

@@ -1,4 +1,4 @@
-CREATE TABLE MicelioUser(
+CREATE TABLE "MicelioUser"(
 	user_id varchar(40) NOT NULL,
 	username varchar(40) NOT NULL,
 	password varchar(60) NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE MicelioUser(
 	UNIQUE(username)
 );
 
-CREATE TABLE Game(
+CREATE TABLE "Game"(
 	game_id varchar(40) NOT NULL,
 	name varchar(100) NOT NULL,
 	token varchar(200) NOT NULL,
@@ -17,27 +17,28 @@ CREATE TABLE Game(
 	PRIMARY KEY(game_id)
 );
 
-CREATE TABLE HasPermission(
+CREATE TABLE "HasPermission"(
 	has_permission_id varchar(40) NOT NULL,
 	user_id varchar(40) NOT NULL,
 	game_id varchar(40) NOT NULL,
 	owner boolean NOT NULL,
 
 	PRIMARY KEY(has_permission_id),
-	FOREIGN KEY(user_id) REFERENCES MicelioUser(user_id),
-	FOREIGN KEY(game_id) REFERENCES Game(game_id)
+	FOREIGN KEY(user_id) REFERENCES "MicelioUser"(user_id),
+	FOREIGN KEY(game_id) REFERENCES "Game"(game_id)
 );
 
-CREATE TABLE Experiment(
-	room varchar(40) NOT NULL,
+CREATE TABLE "ObservationEnvironment"(
+	observation_environment_id varchar(40) NOT NULL,
 	has_permission_id varchar(40) NOT NULL,
 	it_ends boolean NOT NULL,
+	parameters text,
 
-	PRIMARY KEY(room),
-	FOREIGN KEY(has_permission_id) REFERENCES HasPermission(has_permission_id)
+	PRIMARY KEY(observation_environment_id ),
+	FOREIGN KEY(has_permission_id) REFERENCES "HasPermission"(has_permission_id)
 );
 
-CREATE TABLE Device(
+CREATE TABLE "Device"(
 	device_id varchar(50) NOT NULL,
 	model varchar(50) NOT NULL,
 	screen_width int NOT NULL,
@@ -47,7 +48,7 @@ CREATE TABLE Device(
 	PRIMARY KEY(device_id)
 );
 
-CREATE TABLE Session(
+CREATE TABLE "Session"(
 	session_id varchar(40) NOT NULL,
 	device_id varchar(50) NOT NULL,
 	game_id varchar(40) NOT NULL,
@@ -59,20 +60,20 @@ CREATE TABLE Session(
 	end_time time,
 
 	PRIMARY KEY(session_id),
-	FOREIGN KEY(game_id) REFERENCES Game(game_id),
-	FOREIGN KEY(device_id) REFERENCES Device(device_id)
+	FOREIGN KEY(game_id) REFERENCES "Game"(game_id),
+	FOREIGN KEY(device_id) REFERENCES "Device"(device_id)
 );
 
-CREATE TABLE SessionExperiment(
+CREATE TABLE "SessionObservationEnvironment"(
 	session_id varchar(40) NOT NULL,
-	room varchar(40) NOT NULL,
+	observation_environment_id  varchar(40) NOT NULL,
 
-	PRIMARY KEY(session_id, room),
-	FOREIGN KEY(session_id) REFERENCES Session(session_id),
-	FOREIGN KEY(room) REFERENCES Experiment(room)
+	PRIMARY KEY(session_id, observation_environment_id ),
+	FOREIGN KEY(session_id) REFERENCES "Session"(session_id),
+	FOREIGN KEY(observation_environment_id ) REFERENCES "ObservationEnvironment"(observation_environment_id)
 );
 
-CREATE TABLE Activity(
+CREATE TABLE "Activity"(
 	activity_id varchar(150) NOT NULL,
 	session_id varchar(40) NOT NULL,
 	time varchar(20) NOT NULL,
@@ -80,30 +81,30 @@ CREATE TABLE Activity(
 	attributes text,
 
 	PRIMARY KEY(activity_id),
-	FOREIGN KEY(session_id) REFERENCES Session(session_id)
+	FOREIGN KEY(session_id) REFERENCES "Session"(session_id)
 );
 
-CREATE TABLE Action(
+CREATE TABLE "Action"(
 	activity_id varchar(150) NOT NULL,
 	position_x decimal(9, 6) NOT NULL,
 	position_y decimal(9, 6) NOT NULL,
 
 	PRIMARY KEY(activity_id),
-	FOREIGN KEY(activity_id) REFERENCES Activity(activity_id)
+	FOREIGN KEY(activity_id) REFERENCES "Activity"(activity_id)
 );
 
-CREATE TABLE InfluencedBy(
-	influencedBy_id int NOT NULL,
+CREATE TABLE "InfluencedBy"(
+	influenced_by_id int NOT NULL,
 	influence_id varchar(150) NOT NULL,
 	influenced_id varchar(150) NOT NULL,
 	attributes text,
 
-	PRIMARY KEY(influencedBy_id),
-	FOREIGN KEY(influence_id) REFERENCES Activity(activity_id),
-	FOREIGN KEY(influenced_id) REFERENCES Activity(activity_id)
+	PRIMARY KEY(influenced_by_id),
+	FOREIGN KEY(influence_id) REFERENCES "Activity"(activity_id),
+	FOREIGN KEY(influenced_id) REFERENCES "Activity"(activity_id)
 );
 
-CREATE TABLE Agent(
+CREATE TABLE "Agent"(
 	agent_id varchar(150) NOT NULL,
 	name varchar(100) NOT NULL,
 	type varchar(20) NOT NULL,
@@ -112,27 +113,27 @@ CREATE TABLE Agent(
 	PRIMARY KEY(agent_id)
 );
 
-CREATE TABLE GameCharacter(
+CREATE TABLE "GameCharacter"(
 	agent_id varchar(150) NOT NULL,
 	position_x decimal(9, 6),
 	position_y decimal(9, 6),
 
 	PRIMARY KEY(agent_id),
-	FOREIGN KEY(agent_id) REFERENCES Agent(agent_id)
+	FOREIGN KEY(agent_id) REFERENCES "Agent"(agent_id)
 );
 
-CREATE TABLE ActivityAgents(
+CREATE TABLE "ActivityAgents"(
 	agent_id varchar(150) NOT NULL,
 	activity_id varchar(150) NOT NULL,
 	attributes text NOT NULL,
 	role varchar(20) NOT NULL,
 
 	PRIMARY KEY(agent_id, activity_id),
-	FOREIGN KEY(agent_id) REFERENCES Agent(agent_id),
-	FOREIGN KEY(activity_id) REFERENCES Activity(activity_id)
+	FOREIGN KEY(agent_id) REFERENCES "Agent"(agent_id),
+	FOREIGN KEY(activity_id) REFERENCES "Activity"(activity_id)
 );
 
-CREATE TABLE Entity(
+CREATE TABLE "Entity"(
 	entity_id varchar(150) NOT NULL,
 	name varchar(100) NOT NULL,
 	attributes text,
@@ -140,16 +141,16 @@ CREATE TABLE Entity(
 	PRIMARY KEY(entity_id)
 );
 
-CREATE TABLE GameObject(
+CREATE TABLE "GameObject"(
 	entity_id varchar(150) NOT NULL,
 	position_x decimal(9, 6) NOT NULL,
 	position_y decimal(9, 6) NOT NULL,
 
 	PRIMARY KEY(entity_id),
-	FOREIGN KEY(entity_id) REFERENCES Entity(entity_id)
+	FOREIGN KEY(entity_id) REFERENCES "Entity"(entity_id)
 );
 
-CREATE TABLE ActivityEntities(
+CREATE TABLE "ActivityEntities"(
 	entity_id varchar(150) NOT NULL,
 	activity_id varchar(150) NOT NULL,
 	attributes text NOT NULL,
@@ -157,6 +158,6 @@ CREATE TABLE ActivityEntities(
 
 
 	PRIMARY KEY(entity_id, activity_id),
-	FOREIGN KEY(entity_id) REFERENCES Entity(entity_id),
-	FOREIGN KEY(activity_id) REFERENCES Activity(activity_id)
+	FOREIGN KEY(entity_id) REFERENCES "Entity"(entity_id),
+	FOREIGN KEY(activity_id) REFERENCES "Activity"(activity_id)
 );
