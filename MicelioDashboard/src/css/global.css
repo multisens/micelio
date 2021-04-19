@@ -24,8 +24,7 @@ div.content-body{
     height: 100vh;
 }
 
-input[type="text"].primary,
-input[type="password"].primary {
+input {
     border: 2px solid #bfbfbf;
     border-radius: 8px;
     min-height: 40px;

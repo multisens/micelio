@@ -2,6 +2,7 @@ const path = require('path');
 require('dotenv').config();
 const express = require('express');
 const Routes = require('./routes/routes');
+const cors = require('cors');
 
 if(   !process.env.HTTP_PORT
   ||  !process.env.JWT_SECRET
@@ -18,6 +19,7 @@ if(   !process.env.HTTP_PORT
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 // app.use('/', express.static(path.resolve(__dirname, '..', '..', 'MicelioDashboard', 'build')));
 
 const baseDir = path.join(__dirname, '..', '..', 'MicelioDashboard', 'build')

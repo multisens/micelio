@@ -5,7 +5,7 @@ const { generatePassword } = require('../utils/generators/passwordGenerator');
 class UserController {
 
 	async create(request, response) {
-		const { username, password, email } = request.body;
+		let { username, password, email } = request.body;
 
 		if (!username) {
 			return response.status(400).json({ error: "Invalid username" });
@@ -23,16 +23,17 @@ class UserController {
 
 		try {
 
-			const lowerUsername = username.toLowerCase();
+			username = username.toLowerCase();
+			email = email.toLowerCase();
 
 			const registeredUser = await knex('MicelioUser')
 			.select('username', 'email')
-			.where('username', lowerUsername)
+			.where('username', username)
 			.orWhere('email', email)
 			.first();
-			
+
 			if(registeredUser){
-				if(registeredUser.username === lowerUsername) {
+				if(registeredUser.username === username) {
 					return response.status(400).json({error: 'User already exists.'});
 				}
 				if(registeredUser.email === email) {
@@ -44,8 +45,8 @@ class UserController {
 
 			const data = {
 				user_id,
-				username: lowerUsername,
-				email: email,
+				username,
+				email,
 				password: hashedPassword
 			}
 

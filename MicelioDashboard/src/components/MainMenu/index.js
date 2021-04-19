@@ -21,8 +21,8 @@ const MainMenu = ({selected}) => {
 
   const MenuOption = ({topic, text}) =>{
     return (
-      <li onClick={()=>{doNavigation(topic)}} 
-          className={(selected === topic) && 'selected'}
+      <li onClick={()=>{doNavigation(topic)}}
+          className={(selected === topic) ? 'selected' : ''}
           /*data-menu-option={topic}*/>{text}</li>
     );
   }
