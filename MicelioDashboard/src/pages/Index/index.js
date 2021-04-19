@@ -43,7 +43,6 @@ function Index() {
           <FormFooter beginingText='Não possui conta?' linkText='Cadastre-se' url='/sign'/>
         </FormCard>
       </div>
-
       <Footer/>
     </div>
   )
