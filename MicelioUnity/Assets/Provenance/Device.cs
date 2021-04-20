@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Device
 {
-   
 	public string device_id;
 	public string model;
 	public int screen_width;

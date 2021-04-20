@@ -20,6 +20,7 @@ public class Micelio
     {
         this.token = token;
         this.device_id = getDeviceInformation();
+
     }
 
     //retorna o device_id do aparelho utilizado
@@ -35,6 +36,7 @@ public class Micelio
             FileStream fs = new FileStream(filePath, FileMode.Open);
             device = (Device)formatter.Deserialize(fs);
             fs.Close();
+            SendDevice(device);
         }
         else
         {
