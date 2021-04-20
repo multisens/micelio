@@ -11,14 +11,17 @@ public class Activity
     public float position_x;
     public float position_y;
     public string influenced_by;
-	public var influenced_by_attributes;
-	public var attributes;
+	public string influenced_by_attributes;
+	public string attributes;
+	public Agent []agents;
+	public Entity []entities;
 
 	private Activity(){
 
 	}
 
 	public string CreateActivity(){
+		return "bala";
 		// retornar o id da atividade criada
 	}
 
@@ -26,11 +29,11 @@ public class Activity
 
 	}
 
-	public void SetInfluence(string activity_id, var attributes){
+	public void SetInfluence(string activity_id, string attributes){
 
 	}  
 
-	public void SetAttributes(var attributes){
+	public void SetAttributes(string attributes){
 
 	}  
 

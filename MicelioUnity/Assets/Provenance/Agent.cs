@@ -11,7 +11,7 @@ public class Agent
     public string type;
     public float position_x;
     public float position_y;
-	public var attributes;
+	public string attributes;
 
 	public Agent(){
 

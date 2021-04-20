@@ -1,23 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
 
-
-	// public string URL = "https://albali.eic.cefet-rj.br/micelio/api";
-	// public string port = "80";
 	public string token = "token-user62636264";
-	//public string rota = "/user";
-	//public string method = "POST";
-	//public string payload = "{\"username\": \"Lucas\",\"password\":\"minha-senha\"}";
 
     void Start()
     {
      
-        Micelio micelio = new Micelio(/*URL,port,*/token);
-        //micelio.SendAPIRequest(rota,method,payload);
+        Micelio micelio = new Micelio(token);
+        Session session = new Session("pt-BR","1");
+        session.setName("começar jogo");
+        //micelio.SendSession(session);
+        Debug.Log(Application.persistentDataPath);
 
     }
 

@@ -15,14 +15,10 @@ public class Micelio
     private string token;
     private string device_id;
 
-    // + ":" + this.port 
-
     //construtor classe Micelio
-    public Micelio(/*string defaultURL, string port, */string token)
+    public Micelio(string token)
     {
         this.token = token;
-        // this.defaultURL = defaultURL;
-        // this.port = port;
         this.device_id = getDeviceInformation();
     }
 
@@ -42,13 +38,7 @@ public class Micelio
         }
         else
         {
-            //cria uma instancia de Device para salvar
-            // string device_id = SystemInfo.deviceUniqueIdentifier;
-            // string model = SystemInfo.deviceModel;
-            // int screen_width = Screen.width;
-            // int screen_height = Screen.height;
-            // string system_name = SystemInfo.operatingSystem;
-            device = new Device(/*device_id, model, screen_width, screen_height, system_name*/);
+            device = new Device();
 
             //teste se todos os campos de Device estão completos
             if(device.VerifyDataIntegrity())
@@ -70,11 +60,19 @@ public class Micelio
     private void SendDevice(Device device)
     {
         string payload = device.toJSON();
+        Debug.Log(payload);
         SendAPIRequest("/device", "POST", payload);
     }
 
+    // envia as informações de seção para o banco
+    public void SendSession(Session session)
+    {
+        string payload = session.toJSON();
+        SendAPIRequest("/session", "POST", payload);
+    }
+
     //função para envio de dados a API
-    public void SendAPIRequest(string endPoint, string method, string payload)
+    private void SendAPIRequest(string endPoint, string method, string payload)
     {
 
         //criação da requisição e configuração dos parametros

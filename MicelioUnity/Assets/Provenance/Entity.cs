@@ -10,7 +10,7 @@ public class Entity
     public string role;
     public float position_x;
     public float position_y;
-	public var attributes;
+	public string attributes;
 
 	public Entity(){
 
