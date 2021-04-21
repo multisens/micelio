@@ -78,7 +78,7 @@ CREATE TABLE Activity(
 	session_id varchar(40) NOT NULL,
 	time varchar(20) NOT NULL,
 	name varchar(100) NOT NULL,
-	attributes text,
+	properties text,
 
 	PRIMARY KEY(activity_id),
 	FOREIGN KEY(session_id) REFERENCES Session(session_id)
@@ -97,7 +97,7 @@ CREATE TABLE InfluencedBy(
 	influenced_by_id int NOT NULL,
 	influence_id varchar(150) NOT NULL,
 	influenced_id varchar(150) NOT NULL,
-	attributes text,
+	properties text,
 
 	PRIMARY KEY(influenced_by_id),
 	FOREIGN KEY(influence_id) REFERENCES Activity(activity_id),
@@ -108,7 +108,7 @@ CREATE TABLE Agent(
 	agent_id varchar(150) NOT NULL,
 	name varchar(100) NOT NULL,
 	type varchar(20) NOT NULL,
-	attributes text,
+	properties text,
 
 	PRIMARY KEY(agent_id)
 );
@@ -125,7 +125,7 @@ CREATE TABLE GameCharacter(
 CREATE TABLE ActivityAgents(
 	agent_id varchar(150) NOT NULL,
 	activity_id varchar(150) NOT NULL,
-	attributes text NOT NULL,
+	properties text NOT NULL,
 	role varchar(20) NOT NULL,
 
 	PRIMARY KEY(agent_id, activity_id),
@@ -136,7 +136,7 @@ CREATE TABLE ActivityAgents(
 CREATE TABLE Entity(
 	entity_id varchar(150) NOT NULL,
 	name varchar(100) NOT NULL,
-	attributes text,
+	properties text,
 
 	PRIMARY KEY(entity_id)
 );
@@ -153,7 +153,7 @@ CREATE TABLE GameObject(
 CREATE TABLE ActivityEntities(
 	entity_id varchar(150) NOT NULL,
 	activity_id varchar(150) NOT NULL,
-	attributes text NOT NULL,
+	properties text NOT NULL,
 	role varchar(20) NOT NULL,
 
 
