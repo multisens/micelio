@@ -16,7 +16,7 @@
 					"name": "Anderson",
 					"language": "pt-br",
 					"game_stage": 1,
-					"observation_environment_id": "0",
+					"session_group_id": "0",
 					"date": "16-03-2021",
 					"start_time": "11:00",
 					"end_time": null,
@@ -28,15 +28,15 @@
 							"position_y": null,
 							"time": 5,
 						    "influenced_by": null,
-						    "influenced_by_attributes": "{}",
-							"attributes": "{'ActionSelected': 'Bioaumentation','LastResult(score)': 0,'LastResult(%removed)': 0}",
+						    "influenced_by_properties": "{}",
+							"properties": "{'ActionSelected': 'Bioaumentation','LastResult(score)': 0,'LastResult(%removed)': 0}",
 					    	"entities": [
 					    		{
 					    			"entity_id": 1,
 									"position_x": null,
 									"position_x": null,
 									"name": "Micrococcus sp.",
-									"attributes": "{'qtd': 466.099976, 'toxic_list': [0], 'deg_list': [0], 'deg_rate': 0.000000001333333333333}",
+									"properties": "{'qtd': 466.099976, 'toxic_list': [0], 'deg_list': [0], 'deg_rate': 0.000000001333333333333}",
 									"role": "bacteria"
 					    		},
 					    		{
@@ -44,7 +44,7 @@
 									"position_x": null,
 									"position_x": null,
 									"name": "disel",
-									"attributes": "{'type': 'contaminante', 'qtd': 299.226,'qtd_max': 300,'percentage': 0.764086664}",
+									"properties": "{'type': 'contaminante', 'qtd': 299.226,'qtd_max': 300,'percentage': 0.764086664}",
 									"role": "contaminante"
 					    		},
 					    		{
@@ -52,7 +52,7 @@
 									"position_x": null,
 									"position_x": null,
 									"name": "variaveis ambiente",
-									"attributes": "{'ph': 5.7, 'temperature': 25, 'moisture': 1}",
+									"properties": "{'ph': 5.7, 'temperature': 25, 'moisture': 1}",
 									"role": "ambiente"
 					    		}
 					    	],
@@ -63,7 +63,7 @@
 									"type": "player",
 									"position_x": null,
 									"position_x": null,
-									"attributes": "{ 'score': 179, 'actionEffect': 0}",
+									"properties": "{ 'score': 179, 'actionEffect': 0}",
 									"role": "jogagor"
 					    		}
 					    	]

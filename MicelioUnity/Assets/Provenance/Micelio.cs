@@ -11,6 +11,7 @@ using System.Text;
 
 public class Micelio
 {
+    //private string defaultURL = "http://127.0.0.1:7777/api";
     private string defaultURL = "https://achernar.eic.cefet-rj.br/micelio/api";
     private string token;
     private string device_id;
@@ -36,7 +37,6 @@ public class Micelio
             FileStream fs = new FileStream(filePath, FileMode.Open);
             device = (Device)formatter.Deserialize(fs);
             fs.Close();
-            SendDevice(device);
         }
         else
         {
@@ -70,6 +70,8 @@ public class Micelio
     public void SendSession(Session session)
     {
         string payload = session.toJSON();
+        Debug.Log(payload);
+        Debug.Log(device_id);
         SendAPIRequest("/session", "POST", payload);
     }
 

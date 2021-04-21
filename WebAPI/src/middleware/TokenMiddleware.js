@@ -15,12 +15,12 @@ const TokenMiddleware = async (request, response, next) => {
 		}
 	
 		request.headers.game_id = isTokenValid.sub;
-	
+
 		next();
 
 	}
 	catch(err){
-		return response.status(400).json({ error: "Canot validate your token.", code: "T-003"});
+		return response.status(400).json({ error: "Cannot validate your token.", code: "T-003"});
 	}	
 }
 

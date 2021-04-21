@@ -2,62 +2,62 @@ const knex = require('../database/connection');
 
 class DeviceController {
 
-  async create(request, response) {
+	async create(request, response) {
 
-    const {device_id, system_name, model, screen_width, screen_height} = request.body;
+		const { device_id, system_name, model, screen_width, screen_height } = request.body;
 
-    if (!device_id) {
-      return response.status(400).json({error: "Invalid device id"});
-    }
+		if (!device_id) {
+			return response.status(400).json({ error: "Invalid device id" });
+		}
 
-    if (!system_name) {
-      return response.status(400).json({error: "Invalid system information"});
-    }
+		if (!system_name) {
+			return response.status(400).json({ error: "Invalid system information" });
+		}
 
-    if (!model) {
-      return response.status(400).json({error: "Invalid device model"});
-    }
+		if (!model) {
+			return response.status(400).json({ error: "Invalid device model" });
+		}
 
-    if (!screen_width) {
-      return response.status(400).json({error: "Invalid screen width"});
-    }
+		if (!screen_width) {
+			return response.status(400).json({ error: "Invalid screen width" });
+		}
 
-    if (!screen_height) {
-      return response.status(400).json({error: "Invalid screen height"});
-    }
+		if (!screen_height) {
+			return response.status(400).json({ error: "Invalid screen height" });
+		}
 
-    try {
+		try {
 
-      const data = {
-        device_id,
-        system_name,
-        model,
-        screen_width,
-        screen_height
-      }
+			const data = {
+				device_id,
+				system_name,
+				model,
+				screen_width,
+				screen_height
+			}
 
-      const registeredDevice = await knex('Device')
-        .select('device_id')
-        .where('device_id', device_id)
-        .first();
+			const registeredDevice = await knex('Device')
+				.select('device_id')
+				.where('device_id', device_id)
+				.first();
 
-      if(registeredDevice) {
-        return response.status(200).json({ok: true});
-      }
+			if (registeredDevice) {
+				return response.status(200).json({ ok: true });
+			}
 
-      const device = await knex('Device').insert(data);
+			const device = await knex('Device').insert(data);
 
-      if (device) {
-        return response.status(201).json({ok: true});
-      }
+			if (device) {
+				return response.status(201).json({ ok: true });
+			}
 
-      return response.status(400).json({error: device});
+			return response.status(400).json({ error: 'Cannot insert this device, try again later' });
 
-    } catch (err) {
-      return response.status(400).json({error: err});
-    }
+		} catch (err) {
+			return response.status(400).json({ error: err });
+		}
 
-  }
+	}
 
 }
 

@@ -28,13 +28,13 @@ CREATE TABLE "HasPermission"(
 	FOREIGN KEY(game_id) REFERENCES "Game"(game_id)
 );
 
-CREATE TABLE "ObservationEnvironment"(
-	observation_environment_id varchar(40) NOT NULL,
+CREATE TABLE "SessionGroup"(
+	session_group_id varchar(40) NOT NULL,
 	has_permission_id varchar(40) NOT NULL,
 	it_ends boolean NOT NULL,
 	parameters text,
 
-	PRIMARY KEY(observation_environment_id ),
+	PRIMARY KEY(session_group_id ),
 	FOREIGN KEY(has_permission_id) REFERENCES "HasPermission"(has_permission_id)
 );
 
@@ -64,13 +64,13 @@ CREATE TABLE "Session"(
 	FOREIGN KEY(device_id) REFERENCES "Device"(device_id)
 );
 
-CREATE TABLE "SessionObservationEnvironment"(
+CREATE TABLE "SessionInGroup"(
 	session_id varchar(40) NOT NULL,
-	observation_environment_id  varchar(40) NOT NULL,
+	session_group_id  varchar(40) NOT NULL,
 
-	PRIMARY KEY(session_id, observation_environment_id ),
+	PRIMARY KEY(session_id, session_group_id ),
 	FOREIGN KEY(session_id) REFERENCES "Session"(session_id),
-	FOREIGN KEY(observation_environment_id ) REFERENCES "ObservationEnvironment"(observation_environment_id)
+	FOREIGN KEY(session_group_id ) REFERENCES "SessionGroup"(session_group_id)
 );
 
 CREATE TABLE "Activity"(

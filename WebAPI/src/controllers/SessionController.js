@@ -5,9 +5,11 @@ class SessionController{
 
 	async create(request, response){
 
-        let {name, language, date, game_stage, room, start_time} = request.body;
+        let {name, language, date, game_stage, session_group, start_time} = request.body;
 
         let {game_id, device_id} = request.headers;
+
+        const end_time = null;
 
         if(!name) name = null;
 
@@ -42,19 +44,19 @@ class SessionController{
                 date,
                 game_stage,
                 start_time,
-                end_time: null
+                end_time
             }
 
             const session = await trx('Session').insert(data);
 
-            if(room){
-                const experiment = await trx('Experiment')
-                .where('room', room)
-                .select('room')
+            if(session_group){
+                const group = await trx('SessionGroup')
+                .where('session_group_id', session_group)
+                .select('session_group_id')
                 .first()
 
-                if(experiment){
-                    await trx('SessionExperiment').insert({session_id: sessionId, room});
+                if(group){
+                    await trx('SessionInGroup').insert({session_id: sessionId, session_group_id: session_group});
                 }
             }
 
@@ -63,13 +65,13 @@ class SessionController{
                 return response.status(201).json({ok: true});
             }
             else{
-                return response.status(400).json({error: session});
+                return response.status(400).json({error: 'Cannot insert session, try again later'});
             }
 
         }
         catch(err){
             trx.rollback();
-            return response.status(400).json({error: "Cannot insert, please check the acess token."});
+            return response.status(400).json({error: "Cannot insert, please check the acess token and the device id."});
         }
 
     }
@@ -91,28 +93,34 @@ class SessionController{
             const { session_id } = await trx('Session')
             .where('device_id', device_id)
             .andWhere('game_id', game_id)
+            .andWhere('end_time', null)
             .orderBy([{ column: 'date', order: 'desc'}, { column: 'start_time', order: 'desc' }])
             .select('session_id')
             .first();
 
-            const sessionUpdated = await trx('Session')
-            .update('end_time', end_time)
-            .where('session_id', session_id);
-
-            if(sessionUpdated){
-                await trx.commit();
-                return response.status(201).json({ok: true});
+            if(session_id){
+                const sessionUpdated = await trx('Session')
+                .update('end_time', end_time)
+                .where('session_id', session_id);
+                
+                if(sessionUpdated){
+                    await trx.commit();
+                    return response.status(201).json({ok: true});
+                }
+                else{
+                    await trx.rollback();
+                    return response.status(400).json({error: "Cannot end session, check the information sent"});
+                }
             }
             else{
                 await trx.rollback();
-                return response.status(400).json({error: "Canot end session, check the information sent"});
+                return response.status(400).json({error: "You dont have any opened session"});
             }
-
-
+            
         }
         catch(err){
             await trx.rollback();
-            return response.status(400).json({error: "Canot end session, check the information sent."});
+            return response.status(400).json({error: "Cannot end session, check the information sent."});
         }
 
     }

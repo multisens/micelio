@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const PASSWORD_ROUNDS = 10;
 
 const generatePassword = (password) => {
-
   return bcrypt.hashSync(password, PASSWORD_ROUNDS);
 }
 

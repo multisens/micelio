@@ -35,7 +35,9 @@ Essa rota é acessada apenas uma vez para cada usuário criado. Ela serve para c
 ```json
 {
     username: 'lucassargeiro',
-    password: 'my_password'
+    email: 'meu@email.com'
+    password: 'my_password',
+    confirmation_password: 'my_password'
 }
 ```
 
@@ -101,13 +103,14 @@ Descrição:
 
 # TABELA HasPermission -------------------------------------------------------------------------------------------------------------
 {
+    has_permission_id: "hp-89379473847",
 	user_id: 'us-8u937827',
     game_id: 'id0019293',
     owner: true
 }
 ```
 
-> Obs.: O `game_id` servirá para refenciar o jogo no banco de dados, enquanto o `token` servirá como chave para API, permitindo a mesma, identificar para qual jogo o log está sendo enviado.
+> Obs.: O `game_id` servirá para refenciar o jogo no banco de dados, enquanto o `token` servirá como chave para API, permitindo a mesma, identificar para qual jogo os dados estão sendo enviados.
 
 
 
@@ -121,7 +124,7 @@ Essa rota é acessada toda vez que um novo dispositivo quer enviar informações
 
 **Método:** POST
 
-**Cabeçalho:**
+**Cabeçalho:log**
 
 ```json
 {
@@ -136,8 +139,8 @@ Essa rota é acessada toda vez que um novo dispositivo quer enviar informações
     	device_id: 'D-456',
     	system_name: 'android',
     	model: 'SG-90110',
-    	screen_width: '1080',
-	    screen_height: '720',
+    	screen_width: 1080,
+	    screen_height: 720,
 }
 ```
 
@@ -196,9 +199,9 @@ Essa rota é acessada toda vez que um jogador inicia um jogo em um dispoisitivo 
 {
     name: 'name',
     language: 'language',
-    date: '10-10-2020',
-    game_stage: us-8u9378271,
-    room: 0,
+    date: '2020-10-10',
+    game_stage: '1',
+    session_group: '1bskaoi23nspsd',
     start_time: '11:00'
 }
 ```
@@ -207,30 +210,33 @@ Descrição:
 
 - `name` : nome da sessão, identificador específico criado pelo desenvolvedor do jogo (opcional);
 - `language` : idioma em que a sessão está sendo executada;
-- `date` : dia em que a sessão foi iniciada;
+- `date` : dia em que a sessão foi iniciada, no formato AAAA-MM-DD;
 - `game_stage` : fase do jogo em que aquela sessão está sendo jogada, se o jogo possuir apenas uma fase basta passar sempre 1 como parâmetro;
-- `room` : sala a qual a sessão pertence (opcional).
+- `session_group` : identificador do grupo de sessões criado para análise (opcional).
 - `start_time` : horário em que a sessão foi iniciada.
-
-
-> Obs.: Os códigos das salas são gerados pelo portal de visualização, se essa informação não for passada ou for uma sala inválida será utilizado um valor _default_ para respresentar sessões sem sala.
 
 
 
 **Objeto gerado para banco:**
 
 ```json
+# TABELA Session --------------------------------------------------------------------------------------------------------------------
 {
     game_id: 'id0019293',
     device_id: 'D-456',
     session_id: '654321324',
     name: 'name',
     language: 'language',
-    date: '10-10-2020',
+    date: '2020-10-10',
     game_stage: '1',
-    room: 0,
     start_time: '11:00',
     end_time: null 
+}
+
+# TABELA SessionInGroup -------------------------------------------------------------------------------------------------------------
+{
+    session_id: '654321324',
+    session_group_id: '1bskaoi23nspsd'
 }
 ```
 
@@ -265,14 +271,16 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
     position_y: 7564,
     time: '4',
     influenced_by: 'AC-45186790',
-    attributes: {"time_moment": "night"},
+    influenced_by_porperties: {},
+    properties: {time_moment: "night"},
     entities: [
         {
             entity_id: 'P-01',
             name: 'Plant',
             position_x: 12354,
             position_x: 65498,
-            attributes: {"health": 50}
+            properties: {health: 50},
+            role: 'item plantado'
         }
     ],
     agents:[
@@ -282,7 +290,8 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
             type: 'NPC',
             position_x: 12354,
             position_x: 65498,
-            attributes:{"energia": 100}
+            properties:{energia: 100},
+            role: 'quem plantou'
         }
     ]
 }
@@ -302,7 +311,9 @@ Descrição:
 
 - `influenced_by` : identificador de outra atividade que tenha influenciado no acontecimento dessa atividade (opcional);
 
-- `attributes` : JSON convertido em string de atributos associados à atividade. Essas informações podem ser custos relacionados aquela atividade ou até mesmo alguma informação que ela gere como quanto tempo ela durou (opcional).
+- `influenced_by_properties`: JSON contendo as propriedades que causaram a influencia de outra atividade.
+
+- `properties` : JSON convertido em string de atributos associados à atividade. Essas informações podem ser custos relacionados aquela atividade ou até mesmo alguma informação que ela gere como quanto tempo ela durou (opcional).
 
 - `entities` : array de entidades associados aquela atividade (opcional). Cada objeto de entidade têm:
 
@@ -310,7 +321,8 @@ Descrição:
   - `name` : nome da entidade, pode definir qual o tipo de objeto dele pertence;
   - `position_x` : posição no eixo X do objeto no momento da atividade (opcional);
   - `position_x` : posição no eixo Y do objeto no momento da atividade (opcional);
-  - `attributes` : JSON convertido em string de atributos associados à entidade. Essas informações são informações relacionadas ao objeto, e é mantido o histórico de mudança ocorrido em cada atividade (opcional).
+  - `properties` : JSON convertido em string de atributos associados à entidade. Essas informações são informações relacionadas ao objeto, e é mantido o histórico de mudança ocorrido em cada atividade (opcional).
+  - `role`: papel daquela entidade naquela atividade, define qual a participação do objeto naquele evento.
   
 - `agents` : array de agentes associados aquela atividade (opcional). Cada objeto de agente têm:
 
@@ -324,8 +336,10 @@ Descrição:
 
   - `position_x` : posição no eixo Y do agente no momento da atividade (opicional);
 
-  - `attributes` :  JSON convertido em string de atributos associados ao agente. Essas informações são informações relacionadas ao agente, e é mantido os históricos de mudança ocorridos em cada atividade (opcional).
+  - `properties` :  JSON convertido em string de atributos associados ao agente. Essas informações são informações relacionadas ao agente, e é mantido os históricos de mudança ocorridos em cada atividade (opcional).
 
+  - `role`: papel daquele agente naquela atividade, define qual a participação do objeto naquele evento.
+  
     
 
 **Objetos gerado para banco:**
@@ -337,47 +351,59 @@ Descrição:
     activity_id: 'AC-45186727',
     name: 'plantar',
     time: '4',
-    attributes: '{"time_moment": "night"}',
+    properties: '{"time_moment": "night"}'
 }
 
 # TABELA Action ---------------------------------------------------------------------------------------------------------------------
 {
     activity_id: 'AC-45186727',
     position_x: 6549,
-    position_y: 7564,
+    position_y: 7564
 }
 
 # TABELA InfluencedBy ---------------------------------------------------------------------------------------------------------------
 {
     influencedBy_id: 'if-sdjljsld',
-    influence: 'AC-45186790',
-    influenced: 'AC-45186727',
+    influence_id: 'AC-45186790',
+    influenced_id: 'AC-45186727',
+    properties: '{}'
 }    
 
 # TABELA Entity ---------------------------------------------------------------------------------------------------------------------
 {
     entity_id: 'P-01',
     name: 'Plant',
-    position_x: 12354,
-    position_x: 65498,
-    attributes: '{"health": 50}',
+    properties: '{"health": 50}'
 }
 
 # TABELA GameObject -----------------------------------------------------------------------------------------------------------------
 {
     entity_id: 'P-01',
     position_x: 12354,
-    position_x: 65498,
+    position_x: 65498
 }        
+# TABELA ActivityEntities -----------------------------------------------------------------------------------------------------------
+{
+    entity_id: 'P-01',
+    activity_id: 'AC-45186727',
+    properties:  '{"health": 50}',
+    role: 'item plantado'
+}
 
 # TABELA Agent ----------------------------------------------------------------------------------------------------------------------
 {
     agent_id: 'A-01',
     name: 'Sargeiro',
     type: 'NPC',
-    position_x: 12354,
-    position_x: 65498,
-    attributes: '{"energia": 100}'
+    properties: '{"energia": 100}'
+}
+
+# TABELA ActivityAgents -------------------------------------------------------------------------------------------------------------
+{
+    agent_id: 'A-01',
+    activity_id: 'AC-45186727',
+    properties: '{"energia": 100}',
+    role: 'quem plantou'
 }
 
 # TABELA GameCharacter --------------------------------------------------------------------------------------------------------------
@@ -439,4 +465,4 @@ Com o objetivo de facilitar o entendimento de uma requisição mal sucessida alg
 | D-002  |     404     | The device information is wrong. Make sure you have resgistered the device before send any information. | Verifique se o dispositivo foi cadastrado corretamente, pois a informação não está sendo encontrada no banco. |
 | T-001  |     401     | You dont have game permissions to send a request.            | Verifique se a chave da API `token` está sendo passada no cabeçalho da requisição. |
 | T-002  |     401     | You dont have a valid key to send a request.                 | Verifique se a chave passada na requisição está correta, pois a mesma não está sendo encontrada no banco. |
-| T-003  |     400     | Canot validate your token.                                   | Verifique se o token enviado está correto.                   |
+| T-003  |     400     | Cannot validate your token.                                   | Verifique se o token enviado está correto.                   |

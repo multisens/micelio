@@ -3,9 +3,9 @@ const knex = require('../database/connection');
 class ActivityController {
 
 	async create(request, response) {
-		const {
-			activity_id, name, position_x, position_y,
-			time, influenced_by, attributes, entities, agents } = request.body;
+		let {activity_id,name, position_x, position_y,
+				time, influenced_by, influenced_by_properties, properties
+				, entities, agents } = request.body;
 
 		const {game_id, device_id} = request.headers;
 
@@ -24,9 +24,40 @@ class ActivityController {
 		if (!agents) {
 			return response.status(400).json("Invalid agents");
 		}
+		else{
+			if(agents instanceof Array){
+				const agentsHasProps = agents.map((agent)=>{
+					if(agent.agent_id && agent.name && agent.type && agent.role){
+						return true;
+					}
+					else{
+						return false;
+					}
+				});
+				if(agentsHasProps.indexOf(false) != -1){
+					return response.status(400).json("Invalid agents attributes");
+				}								
+			}
+			else{
+				return response.status(400).json("Invalid agents");
+			}
+		}
 
 		if (!entities) {
 			return response.status(400).json("Invalid entities");
+		}
+		else{
+			const entitesHasProps = entities.map((entity)=>{
+				if(entity.entity_id && entity.name && entity.role){
+					return true;
+				}
+				else{
+					return false;
+				}
+			});
+			if(entitesHasProps.indexOf(false) != -1){
+				return response.status(400).json("Invalid entities attributes");
+			}	
 		}
 
 		const trx = await knex.transaction();
@@ -48,7 +79,8 @@ class ActivityController {
 				position_y,
 				time,
 				influenced_by,
-				attributes: JSON.stringify(attributes),
+				influenced_by_properties,
+				properties: JSON.stringify(properties),
 				entities,
 				agents,
 			}

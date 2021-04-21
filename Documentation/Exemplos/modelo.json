@@ -17,7 +17,7 @@
 					"language": "language",
 					"game_stage": 1,
 					"date": "10-10-2020",
-					"observation_environment_id": "1235435120",
+					"session_group_id": "1235435120",
 					"start_time": "11:00",
 					"end_time": null,
 					"activities":[
@@ -28,15 +28,15 @@
 						    "position_y": 7564,
 						    "time": "4",
 						    "influenced_by": "AC-45186790",
-						    "influenced_by_attributes": "{}",
-						    "attributes": "{'time_moment': 'night'}",
+						    "influenced_by_properties": "{}",
+						    "properties": "{'time_moment': 'night'}",
 						    "entities": [
 						        {
 						            "entity_id": "P-01",
 						            "name": "Plant",
 						            "position_x": 12354,
 						            "position_x": 65498,
-						            "attributes": "{'health': 50}",
+						            "properties": "{'health': 50}",
 						            "role": "obejeto plantado"
 						        }
 						    ],
@@ -47,7 +47,7 @@
 						            "type": "NPC",
 						            "position_x": 12354,
 						            "position_x": 65498,
-						            "attributes":"{'energia': '100'}",
+						            "properties":"{'energia': '100'}",
 					            	"role": "quem plantou"
 						        }
 						    ]

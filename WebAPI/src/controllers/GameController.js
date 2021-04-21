@@ -36,14 +36,14 @@ class GameController{
                 return response.status(400).json({error: "Invalid user id"});
             }
             
-            const gameVersion = await trx('Game')
+            const insetedGame = await trx('Game')
             .where('name', name)
             .andWhere('version', version)
             .select('game_id')
             .first();
 
-            if(gameVersion){
-                return response.status(400).json({error: "This version of the game is already resgistered"});
+            if(insetedGame){
+                return response.status(400).json({error: "This game already exists"});
             }
 
             const gameData = {
@@ -72,12 +72,12 @@ class GameController{
             }
             else{
                 await trx.rollback();
-                return response.status(400).json({error: 'Canot insert the game, check the information sent'});
+                return response.status(400).json({error: 'Cannot insert the game, check the information sent'});
             }
         }
         catch(err){
             await trx.rollback();
-            return response.status(400).json({error: err});
+            return response.status(400).json({error: 'Cannot insert the game, try again later'});
         }
         
     }
