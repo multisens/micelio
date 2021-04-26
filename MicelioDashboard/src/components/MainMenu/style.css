@@ -1,10 +1,8 @@
 .aside-menu {
     background-color: white;
-    border-radius: 0 10px 10px 0;
-
-    box-shadow: 4px 0 0 #dfdfdf;
+    /* border-radius: 0 10px 10px 0; */
+    /* box-shadow: 4px 0 0 #dfdfdf; */
     min-height: 600px;
-    
     z-index: 2;
 }
 

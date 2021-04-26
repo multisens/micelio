@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {useHistory} from 'react-router-dom';
 
 import './style.css';
@@ -7,23 +7,11 @@ const MainMenu = ({selected}) => {
 
   const history = useHistory();
 
-  // useEffect(() => {
-  //   document.querySelectorAll(`.aside-menu ul li`).forEach($el => {
-  //     $el.className = '';
-  //     $el.addEventListener('click', doNavigation)
-  //   })
-
-  //   const $option = document.querySelector(`.aside-menu ul li[data-menu-option="${selected}"]`);
-  //   if($option){
-  //     $option.className = 'selected';
-  //   }
-  // }, []);
-
   const MenuOption = ({topic, text}) =>{
     return (
       <li onClick={()=>{doNavigation(topic)}}
           className={(selected === topic) ? 'selected' : ''}
-          /*data-menu-option={topic}*/>{text}</li>
+          >{text}</li>
     );
   }
 

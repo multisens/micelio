@@ -9,13 +9,23 @@
     margin-bottom: 20px;
 }
 
+.gamecards-header{
+    display: flex;
+    flex-direction: row;
+}
+
+.gamecards-header h2{
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
 .gamecards ul {
     list-style: none;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-column-gap: 5px;
-    grid-row-gap: 5px;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
 }
 
 .gamecards ul li {
@@ -23,18 +33,41 @@
     background-color: white;
     box-shadow: 0 0 6px #dfdfdf;
 
-    border-radius: 12px;
+    border-radius: 5px;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+
+
+    border-left: 6px solid #264653;
+}
+
+.gamecards ul li h2{
+    padding-bottom: 5px;
+    color: #264653;
+}
+
+.gamecards ul li hr{
+    margin-bottom: 20px;
 }
 
 .gamelist h2 {
     margin-bottom: 20px;
 }
+
 .gamelist ul {
     list-style: none;
+}
+
+.information-line{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 100px;
+}
+
+.information-line b{
+    color: #2A9D8F;
 }
 
 .gamelist ul li {
