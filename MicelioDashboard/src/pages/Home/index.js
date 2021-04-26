@@ -1,9 +1,10 @@
 import React from 'react';
-import { AiOutlinePlusCircle } from 'react-icons/ai'
-
 import './style.css';
 
 import PageFormat from '../../components/PageFormat';
+import GameCardsContainer from '../../components/GameCardsContainer';
+import Card from '../../components/Card';
+import SessionGroupList from '../../components/SessionGroupList';
 
 const Hr = () => {
 	return (
@@ -22,46 +23,13 @@ function Home() {
 		<PageFormat menuSelected={'home'}>
 			<main className={'gamelist-container'}>
 
-				<div className={'gamecards'}>
-					<div className={'gamecards-header'}>
-						<h2>Meus Jogos</h2>
-						<AiOutlinePlusCircle size={25} />
-					</div>
-					<ul>
-						<li>
-							<h2>Control Harvest</h2>
-							<Hr/>
-							<div className={'information-line'}><b>Salas criadas:</b><p> 3</p></div>
-							<div className={'information-line'}><b>Sessões Ativas:</b><p> 50</p></div>
-							<div className={'information-line'}><b>Status:</b><p> shared</p></div>
-						</li>
-						<li>
-							<h2>Bio Land</h2>
-							<Hr/>
-							<p>Salas criadas: 3</p>
-						</li>
-						<li>
-							<h2>Micelio</h2>
-							<Hr/>
-							<p>Salas criadas: 3</p>
-						</li>
-						<li>
-							<h2>Sargeiro</h2>
-							<Hr/>
-							<p>Salas criadas: 3</p>
-						</li>
-					</ul>
-				</div>
+				<GameCardsContainer title="Meu Jogos">
+					<Card name={'Control Harvest'} created={3} active={'50'} shared={true}/>
+					<Card name={'Bio Land'} created={3} active={'50'} shared={true}/>
+					<Card name={'Animal Crossing'} created={3} active={'50'} shared={true}/>
+				</GameCardsContainer>
 
-				<div className={'gamelist'}>
-					<h2>Lista de salas</h2>
-					<ul>
-						<li>Jogo 1</li>
-						<li>Jogo 2</li>
-						<li>Jogo 3</li>
-						<li>Jogo 4</li>
-					</ul>
-				</div>
+				<SessionGroupList/>
 
 			</main>
 

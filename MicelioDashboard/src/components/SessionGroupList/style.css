@@ -1,0 +1,44 @@
+.grouplist-header {
+    margin-bottom: 20px;
+}
+.grouplist-header p{
+    color: #7c7c7c;
+    font-size: 15px;
+}
+.grouplist ul {
+    list-style: none;
+}
+.grouplist li {
+    padding: 10px 10px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 2px #dfdfdf;
+
+    border-left: 5px solid #2A9D8F;
+
+    cursor: pointer;
+    transition: all .2s;
+}
+.grouplist li hr{
+    margin-top: 8px;
+    margin-bottom: 15px;
+
+}
+.grouplist li h3{
+    color: #264653;
+}
+.grouplist li b{
+    color: #2A9D8F;
+}
+.grouplist li p{
+    font-size: 15px;
+    padding: 1px 0px;
+}
+.grouplist ul li + li {
+    margin-top: 10px;
+}
+.grouplist ul li:hover {
+    transform: scale(1.01, 1.01);
+    box-shadow: 0 0 4px #6f6f6f;
+    background-color: #efefef;
+}

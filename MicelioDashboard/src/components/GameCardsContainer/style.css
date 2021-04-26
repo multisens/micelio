@@ -1,0 +1,66 @@
+.gamecards {
+    margin-bottom: 20px;
+}
+
+.gamecards-header{
+    display: flex;
+    flex-direction: row;
+}
+
+.gamecards-header h2{
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.gamecards ul {
+    list-style: none;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+
+.gamecards ul li {
+    min-height: 200px;
+    background-color: white;
+    box-shadow: 0 0 6px #dfdfdf;
+
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 10px;
+
+    border-left: 6px solid #264653;
+}
+
+.card-header h2{
+    padding-bottom: 5px;
+    color: #264653;
+}
+
+.card-content b{
+    color: #2A9D8F;
+}
+
+.card-options{
+    display: flex;
+    justify-content: flex-end;
+    color: #264653;
+}
+
+.card-option{
+    padding: 5px;
+}
+
+.card-header :hover {
+    transform: scale(1.015, 1.015);
+    text-decoration: underline;
+}
+
+.card-option :hover{
+    transform: scale(1.1, 1.1);
+}
