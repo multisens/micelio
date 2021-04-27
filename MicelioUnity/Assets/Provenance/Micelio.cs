@@ -37,6 +37,7 @@ public class Micelio
             FileStream fs = new FileStream(filePath, FileMode.Open);
             device = (Device)formatter.Deserialize(fs);
             fs.Close();
+        
         }
         else
         {
@@ -50,7 +51,12 @@ public class Micelio
                 FileStream fs = new FileStream(filePath, FileMode.Create);
                 formatter.Serialize(fs, device);
                 fs.Close();
-                SendDevice(device);
+
+                try{
+                    SendDevice(device);
+                }catch(Exception e){
+                    Debug.Log(e);
+                }
             }
 
         }
