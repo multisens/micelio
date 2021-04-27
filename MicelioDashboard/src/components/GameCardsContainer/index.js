@@ -3,16 +3,16 @@ import { AiOutlinePlusCircle } from 'react-icons/ai'
 
 import './style.css';
 
-function GameCards(props) {
+function GameCards({title, children, onClickAdd}) {
 
 	return (
         <div className={'gamecards'}>
             <div className={'gamecards-header'}>
-                <h2>{props.title}</h2>
-                <AiOutlinePlusCircle size={25} />
+                <h2>{title}</h2>
+                <AiOutlinePlusCircle size={25} onClick={onClickAdd} />
             </div>
             <ul>
-                {props?.children}
+                {children}
             </ul>
         </div>
 	)
