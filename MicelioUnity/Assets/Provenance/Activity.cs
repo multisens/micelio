@@ -11,8 +11,7 @@ public class Activity
     public float position_x;
     public float position_y;
     public string influenced_by;
-	public string influenced_by_attributes;
-	public string attributes;
+	public Dictionary<string, object> attributes;
 	public Agent []agents;
 	public Entity []entities;
 
@@ -27,15 +26,20 @@ public class Activity
 
 	public void SetPosition(float x, float y){
 
+		this.position_x = x;
+		this.position_y = y;
 	}
 
-	public void SetInfluence(string activity_id, string attributes){
+	public void SetInfluence(string activity_id){
 
+		this.influenced_by = activity_id;
 	}  
 
-	public void SetAttributes(string attributes){
-
-	}  
+	public void AddAttributes(string key,object value)
+	{
+		
+		this.attributes.Add(key,value);
+	} 
 
 	public void AddEntity(){
 

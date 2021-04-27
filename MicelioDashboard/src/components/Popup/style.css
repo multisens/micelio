@@ -18,7 +18,11 @@
 
     background-color: white;
     border-radius: 8px;
-    padding: 20px;
+    padding: 35px 20px;
+}
+
+.popup .popup-content h2 {
+    text-align: center;
 }
 
 .popup-close {
@@ -26,6 +30,7 @@
     right: 20px;
     font-size: 18px;
     font-weight: 700;
+    top: 10px;
     cursor: pointer;
 }
 
@@ -37,7 +42,10 @@
 
 .popup .popup-content form {
     height: 100%;
-    margin-top: 30px;
+    max-width: 350px;
+    text-align: center;
+    justify-content: center;
+    margin: 34px auto 0;
 }
 
 .popup .popup-content form button {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
 public class GameManager : MonoBehaviour
 {
 
@@ -11,13 +12,17 @@ public class GameManager : MonoBehaviour
     void Start()
     {
      
-        Debug.Log(Application.persistentDataPath);
+        //Debug.Log(Application.persistentDataPath);
         Micelio micelio = new Micelio(token);
         
         Session session = new Session("pt-BR","1");
         session.setName("começar jogo");
-        micelio.SendSession(session);
+        //micelio.SendSession(session);
 
+        AgentTest jogador = new AgentTest();
+        Agent jog = jogador.CreateAgent();
+        //Debug.Log(JsonUtility.ToJson(jog));
+        
     }
 
     void Update()

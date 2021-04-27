@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {ToastContainer, toast} from 'react-toastify';
 import './style.css';
 
 import Api from '../../services/Api'
@@ -8,6 +9,8 @@ import GameCardsContainer from '../../components/GameCardsContainer';
 import Card from '../../components/Card';
 import SessionGroupList from '../../components/SessionGroupList';
 import Popup from '../../components/Popup'
+
+import 'react-toastify/dist/ReactToastify.min.css';
 
 function Home() {
 
@@ -33,18 +36,22 @@ function Home() {
 
       setNewGame('')
       setNewGameVersion('')
-      alert('Cadastrado com sucesso')
+      setIsPopupOpen(false)
+
+      toast.success('Cadastrado com sucesso', {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
 
     }catch (e) {
       console.log(e.response.data)
-      return alert('Não foi possível efetuar cadastro. Por favor, tente novamente')
-    }
+      const errorMessage = e.response.data.error;
 
+      toast.error(`Não foi possível efetuar cadastro. Por favor, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+    }
   }
 
 
   return (
     <>
+      <ToastContainer />
       <Popup isOpen={isPopupOpen} onClose={() => {
         setIsPopupOpen(false)
       }}>
