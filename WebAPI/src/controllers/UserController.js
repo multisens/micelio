@@ -83,6 +83,9 @@ class UserController {
 			const insertedUser = await knex('MicelioUser')
 			.insert(data);
 
+			const token = generateUserSession(user_id);
+			response.cookie('miceliotoken', token);
+
 			if(insertedUser){
 				return response.status(201).json({ok: true});
 			}
@@ -110,7 +113,7 @@ class UserController {
 
 		const user_db = await knex('miceliouser').select().where({ username }).first()
 		if(!user_db) {
-			return response.status(404)
+			return response.status(404).json({error: "User not found"})
 		}
 
 		if(!isPasswordValid(user_db.password, password)){

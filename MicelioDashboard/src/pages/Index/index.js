@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {ToastContainer, toast} from 'react-toastify';
 import {useHistory} from 'react-router-dom';
 import './style.css';
 
@@ -29,34 +30,38 @@ function Index() {
       setAuth(true)
       history.push('/home')
     }catch (e) {
-      console.log(e.response.data)
+      
+      toast.error(e.response.data.error)
     }
   }
 
   return (
-    <div className={'content-body'}>
-      <Header title="Micelio"/>
+    <>
+      <ToastContainer />
+      <div className={'content-body'}>
+        <Header title="Micelio"/>
 
-      <div className={'container'}>
-        <FormCard title="Faça Login">
-          <form onSubmit={doLogin}>
-            <input className={'primary'} type="text" name={'username'} placeholder={'Username'}
-                   value={username}
-                   onChange={e => {
-                     setUsername(e.target.value)
-                   }}/>
-            <input className={'primary'} type="password" name={'password'} placeholder={'Senha'}
-                   value={password}
-                   onChange={e => {
-                     setPassword(e.target.value)
-                   }}/>
-            <button className={'primary'}>Entrar</button>
-          </form>
-          <FormFooter beginingText='Não possui conta?' linkText='Cadastre-se' url='/sign'/>
-        </FormCard>
+        <div className={'container'}>
+          <FormCard title="Faça Login">
+            <form onSubmit={doLogin}>
+              <input className={'primary'} type="text" name={'username'} placeholder={'Username'}
+                     value={username}
+                     onChange={e => {
+                       setUsername(e.target.value)
+                     }}/>
+              <input className={'primary'} type="password" name={'password'} placeholder={'Senha'}
+                     value={password}
+                     onChange={e => {
+                       setPassword(e.target.value)
+                     }}/>
+              <button className={'primary'}>Entrar</button>
+            </form>
+            <FormFooter beginingText='Não possui conta?' linkText='Cadastre-se' url='/sign'/>
+          </FormCard>
+        </div>
+        <Footer/>
       </div>
-      <Footer/>
-    </div>
+    </>
   )
 }
 

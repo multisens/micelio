@@ -8,10 +8,12 @@ import FormCard from '../../components/FormCard';
 import FormFooter from '../../components/FormFooter';
 
 import Api from '../../services/Api';
+import {useAuth} from "../../context/AuthContext";
 
 function Sign() {
 
   const history = useHistory();
+  const {setAuth} = useAuth()
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -27,12 +29,13 @@ function Sign() {
     }*/
 
     try{
-      const userResponse = await Api.post('/user', {username, email, password});
+      const userResponse = await Api.post('/user', {username, email, password, confirmation_password: passwordConfirm});
       if(userResponse.status !== 201) {
         alert('Erro ao criar usuário');
         return;
       }
 
+      setAuth(true);
       history.push('/home');
 
     }catch (e) {

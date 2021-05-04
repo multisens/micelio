@@ -79,13 +79,13 @@ function Home() {
             setIsPopupOpen(true);
           }}>
             {
-              gameList.map((game) => {
+              gameList.length > 0 ? gameList.map((game) => {
                 const created = Math.round(Math.random() * 20) + 1;
                 const active = Math.round(Math.random() * 20) + 1;
                 const isShared = (Math.round((Math.random() * 100)) % 2 === 0);
 
                 return (<Card name={game.name} created={created} active={active} shared={isShared}/>);
-              })
+              }) : (<span>Não há jogos cadastrados</span>)
             }
           </GameCardsContainer>
 
