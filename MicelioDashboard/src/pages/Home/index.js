@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useMemo} from 'react';
 import {ToastContainer, toast} from 'react-toastify';
 import './style.css';
 
 import Api from '../../services/Api'
+import { useAuth } from '../../context/AuthContext'
 
 import PageFormat from '../../components/PageFormat';
 import GameCardsContainer from '../../components/GameCardsContainer';
@@ -47,7 +48,6 @@ function Home() {
       toast.error(`Não foi possível efetuar cadastro. Por favor, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
     }
   }
-
 
   return (
     <>

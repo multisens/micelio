@@ -1,11 +1,13 @@
 import React from "react";
 import {useHistory} from 'react-router-dom';
-
 import './style.css';
+import Api from "../../services/Api";
+import {useAuth} from "../../context/AuthContext";
 
 const MainMenu = ({selected}) => {
 
   const history = useHistory();
+  const { setAuth, setIsLoading, isAuth } = useAuth()
 
   const MenuOption = ({topic, text}) =>{
     return (
@@ -19,8 +21,15 @@ const MainMenu = ({selected}) => {
     history.push(`/${menuOption}`);
   }
 
-  const doExit = () => {
-    history.push(`/`);
+  const doExit = async () => {
+    try{
+      await Api.delete('/user/login')
+      setAuth(false)
+      history.replace(`/`);
+
+    }catch (e) {
+
+    }
   }
 
   return (
