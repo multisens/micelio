@@ -4,6 +4,7 @@ const GameController = require('../controllers/GameController.js');
 const Router = express.Router();
 const gameController = new GameController;
 
+Router.get('/', gameController.get)
 Router.post('/', gameController.create);
 
 module.exports = Router;

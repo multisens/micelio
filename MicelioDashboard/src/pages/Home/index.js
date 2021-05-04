@@ -1,9 +1,8 @@
-import React, {useState, useMemo} from 'react';
+import React, {useState, useEffect} from 'react';
 import {ToastContainer, toast} from 'react-toastify';
 import './style.css';
 
 import Api from '../../services/Api'
-import { useAuth } from '../../context/AuthContext'
 
 import PageFormat from '../../components/PageFormat';
 import GameCardsContainer from '../../components/GameCardsContainer';
@@ -19,6 +18,14 @@ function Home() {
 
   const [newGame, setNewGame] = useState('')
   const [newGameVersion, setNewGameVersion] = useState('')
+
+  const [gameList, setGameList] = useState([])
+
+  useEffect(() => {
+    Api.get('/game').then(response => {
+      setGameList(response.data.data)
+    })
+  }, [])
 
   const doCreateGame = async event => {
     event.preventDefault()
@@ -69,11 +76,17 @@ function Home() {
         <main className={'gamelist-container'}>
 
           <GameCardsContainer title="Meu Jogos" onClickAdd={() => {
-            setIsPopupOpen(true)
+            setIsPopupOpen(true);
           }}>
-            <Card name={'Control Harvest'} created={3} active={'50'} shared={true}/>
-            <Card name={'Bio Land'} created={3} active={'50'} shared={true}/>
-            <Card name={'Animal Crossing'} created={3} active={'50'} shared={true}/>
+            {
+              gameList.map((game) => {
+                const created = Math.round(Math.random() * 20) + 1;
+                const active = Math.round(Math.random() * 20) + 1;
+                const isShared = (Math.round((Math.random() * 100)) % 2 === 0);
+
+                return (<Card name={game.name} created={created} active={active} shared={isShared}/>);
+              })
+            }
           </GameCardsContainer>
 
           <SessionGroupList/>

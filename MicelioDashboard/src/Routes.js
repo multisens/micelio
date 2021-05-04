@@ -31,8 +31,6 @@ const Routes = () => {
     )
   }
 
-  console.log('123123')
-
   return(
     <BrowserRouter basename="/micelio">
       <Switch>

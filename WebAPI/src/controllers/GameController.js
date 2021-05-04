@@ -1,13 +1,27 @@
 const {sign}  = require('jsonwebtoken');
 const idGenerator = require('../utils/generators/idGenerator');
+const { decodeUserSession } = require('../utils/generators/userSessionGenerator')
 const knex = require('../database/connection');
 
 class GameController{
-    
+
+  async get(request, response) {
+    const {miceliotoken: userToken} = request.cookies
+    const decodedToken = decodeUserSession(userToken)
+
+    const user_id = decodedToken.sub;
+
+    const userGames = await knex('haspermission').innerJoin('game', 'haspermission.game_id', 'game.game_id')
+      .select('name', 'version').where('haspermission.user_id', user_id)
+
+
+    response.json({ok: true, data: userGames})
+  }
+
 	async create(request, response){
-     
+
         const {user_id, name, version} = request.body;
-        
+
         if(!version){
             return response.status(400).json({error: "Missing game version"});
         }
@@ -23,19 +37,19 @@ class GameController{
         const token = sign({}, process.env.JWT_SECRET, {subject: gameId});
 
         const trx = await knex.transaction();
-        
+
         try{
 
             const user = await trx('MicelioUser')
             .where('user_id', user_id)
             .select('user_id')
             .first();
-            
-            
+
+
             if(!user){
                 return response.status(400).json({error: "Invalid user id"});
             }
-            
+
             const insetedGame = await trx('Game')
             .where('name', name)
             .andWhere('version', version)
@@ -79,7 +93,7 @@ class GameController{
             await trx.rollback();
             return response.status(400).json({error: 'Cannot insert the game, try again later'});
         }
-        
+
     }
 
 }
