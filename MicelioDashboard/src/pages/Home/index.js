@@ -22,10 +22,14 @@ function Home() {
   const [gameList, setGameList] = useState([])
 
   useEffect(() => {
+    updateGameList()
+  }, [])
+
+  const updateGameList = () => {
     Api.get('/game').then(response => {
       setGameList(response.data.data)
     })
-  }, [])
+  }
 
   const doCreateGame = async event => {
     event.preventDefault()
@@ -41,12 +45,13 @@ function Home() {
         return alert('Não foi possível efetuar cadastro. Por favor, tente novamente')
       }
 
-
       setNewGame('')
       setNewGameVersion('')
       setIsPopupOpen(false)
 
       toast.success('Cadastrado com sucesso', {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+
+      updateGameList()
 
     }catch (e) {
       console.log(e.response.data)
