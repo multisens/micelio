@@ -20,14 +20,23 @@ class GameController{
 
 	async create(request, response){
 
-        const {user_id, name, version} = request.body;
+        const {name, version} = request.body;
+        const { miceliotoken } = request.cookies
+
+        if(!miceliotoken) {
+          return response.status(401).send()
+        }
 
         if(!version){
             return response.status(400).json({error: "Missing game version"});
         }
+
         if(!name){
             return response.status(400).json({error: "Missing game name"});
         }
+
+        const { sub: user_id } = decodeUserSession(miceliotoken)
+
         if(!user_id){
             return response.status(400).json({error: "Missing game user id"});
         }
