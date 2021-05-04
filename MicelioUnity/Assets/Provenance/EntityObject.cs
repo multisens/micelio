@@ -5,6 +5,6 @@ using UnityEngine;
 interface EntityObject
 {
 
-	Entity CreateEntity();
+	Entity GetEntity();
 
 }

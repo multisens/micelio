@@ -20,8 +20,15 @@ public class Activity
 	}
 
 	public string CreateActivity(){
-		return "bala";
-		// retornar o id da atividade criada
+
+		return GenerateActivityID();
+	}
+
+	private string GenerateActivityID()
+	{
+
+		System.DateTime currentTime = System.DateTime.Now;
+		return "activity-"+currentTime.Day+currentTime.Hour+currentTime.Minute+currentTime.Second+currentTime.Millisecond;		
 	}
 
 	public void SetPosition(float x, float y){

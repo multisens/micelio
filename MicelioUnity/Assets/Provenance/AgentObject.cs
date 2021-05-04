@@ -5,6 +5,6 @@ using UnityEngine;
 interface AgentObject
 {
 
-	Agent CreateAgent();
+	Agent GetAgent();
 
 }

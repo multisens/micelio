@@ -12,13 +12,23 @@ public class Entity
     public float position_y;
 	public Dictionary<string,object> attributes;
 
-	public Entity(string name){
+	public Entity(string id, string name)
+	{
 
+		this.entity_id = id;
 		this.name = name;
 		this.attributes = new Dictionary<string, object>();
 	}
 
-	public void SetPosition(float x, float y){
+	public static string GenerateEntityID()
+	{
+
+		System.DateTime currentTime = System.DateTime.Now;
+		return "entity-"+currentTime.Day+currentTime.Hour+currentTime.Minute+currentTime.Second+currentTime.Millisecond;		
+	}
+
+	public void SetPosition(float x, float y)
+	{
 
 		this.position_x = x;
 		this.position_y = y;
