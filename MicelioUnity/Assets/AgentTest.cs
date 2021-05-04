@@ -10,13 +10,16 @@ public class AgentTest : MonoBehaviour,AgentObject
     public string type = "player";
     public float posx = 25;
     public float posy = 15;
+    public string patente;
     public int municao;
-    public int hp;
+    public double hp;
+    public string [] armas = { "pistola","shotgun","m4","bazuca"};
 
-    public AgentTest(int municao, int hp){
+    public AgentTest(int municao, double hp, string patente){
         
         this.municao = municao;
         this.hp = hp;
+        this.patente = patente;
     }
 
     // Start is called before the first frame update
@@ -37,6 +40,8 @@ public class AgentTest : MonoBehaviour,AgentObject
         temp.SetPosition(posx,posy);
         temp.AddAttributes("municao",municao);
         temp.AddAttributes("hp",hp);
+        temp.AddAttributes("patente",patente);
+        temp.AddAttributes("armas",armas);
         return temp;
 
     }

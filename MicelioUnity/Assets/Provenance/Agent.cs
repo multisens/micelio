@@ -12,20 +12,16 @@ public class Agent
     public string type;
     public float position_x;
     public float position_y;
-	public SerializableDictionary<string, object> attributes;
+	private Dictionary<string, object> dict_attributes;
+	public string attributes;
 
 	public Agent(string id,string name,string type)
 	{		
 		this.name = name;
 		this.type = type;
 		this.agent_id = id;
-		this.attributes = new Dictionary<string, object>();
-		Debug.Log(agent_id);
-	}
+		this.dict_attributes = new Dictionary<string, object>();
 
-	public void CreateJSONAttributes()
-	{
-		
 	}
 
 	public static string GenerateAgentID()
@@ -44,8 +40,8 @@ public class Agent
 
 	public void AddAttributes(string key,object value)
 	{
-		this.attributes.Add(key,value);
-
+		this.dict_attributes.Add(key,value);
+		this.attributes = dictUtils.CreateJSONAttributes(dict_attributes);
 	}
 
 	public void SetRole(string role){

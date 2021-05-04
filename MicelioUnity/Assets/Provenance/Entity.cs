@@ -10,14 +10,15 @@ public class Entity
     public string role;
     public float position_x;
     public float position_y;
-	public Dictionary<string,object> attributes;
+	private Dictionary<string, object> dict_attributes;
+	public string attributes;
 
 	public Entity(string id, string name)
 	{
 
 		this.entity_id = id;
 		this.name = name;
-		this.attributes = new Dictionary<string, object>();
+		this.dict_attributes = new Dictionary<string, object>();
 	}
 
 	public static string GenerateEntityID()
@@ -36,7 +37,8 @@ public class Entity
 
 	public void AddAttributes(string key,object value)
 	{
-		this.attributes.Add(key,value);
+		this.dict_attributes.Add(key,value);
+		this.attributes = dictUtils.CreateJSONAttributes(dict_attributes);
 
 	}
 

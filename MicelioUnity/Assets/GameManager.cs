@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         session.setName("começar jogo");
         //micelio.SendSession(session);
 
-        AgentTest jogador = new AgentTest(50,10);
+        AgentTest jogador = new AgentTest(50,125.3,"sargento");
         Agent jog = jogador.GetAgent();    
            
         Debug.Log(JsonUtility.ToJson(jog));
