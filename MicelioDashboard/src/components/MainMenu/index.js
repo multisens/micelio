@@ -36,7 +36,7 @@ const MainMenu = ({selected}) => {
     <aside className={'aside-menu'}>
       <ul>
         <MenuOption topic="home" text="Inicio"/>
-        <MenuOption topic="dashboard" text="Dashboard"/>
+        <MenuOption topic="sobre" text="Sobre"/>
         <MenuOption topic="profile" text="Perfil"/>
         <li onClick={doExit}>Sair</li>
       </ul>

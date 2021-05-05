@@ -15,7 +15,7 @@ class UserController {
 		try{
 			const { sub: userId } = decodeUserSession(miceliotoken)
 
-			const user_db = await knex('miceliouser').select().where({ user_id: userId }).first()
+			const user_db = await knex('MicelioUser').select().where({ user_id: userId }).first()
 			delete user_db.password
 
 			response.json({ok: true, data: user_db})

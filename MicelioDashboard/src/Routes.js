@@ -24,7 +24,7 @@ const Routes = () => {
       <BrowserRouter basename="/micelio">
         <Switch>
           <Route path={'/home'} component={Home} exact/>
-          <Route path={'/dashboard'} component={Dashboard}/>
+          <Route path={'/sobre'} component={Dashboard}/>
           <Redirect to={'/home'} />
         </Switch>
       </BrowserRouter>
