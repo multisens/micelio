@@ -111,7 +111,7 @@ class UserController {
 			return response.status(400).json({error: "Invalid password"})
 		}
 
-		const user_db = await knex('miceliouser').select().where({ username }).first()
+		const user_db = await knex('MicelioUser').select().where({ username }).first()
 		if(!user_db) {
 			return response.status(404).json({error: "User not found"})
 		}
