@@ -2,7 +2,6 @@ import React from 'react';
 import './style.css';
 
 import {AiFillGithub} from 'react-icons/ai'
-
 // colocar link no primeiro span: eic.cefet-rj.br/gpmm
 
 const Footer = () => {
