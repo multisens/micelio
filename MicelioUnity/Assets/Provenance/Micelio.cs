@@ -91,9 +91,11 @@ public class Micelio
         SendAPIRequest("/session", "POST", payload);
     }
 
+    //envia as informações da atividade para o banco
     public string SendActivity(Activity activity)
     {
-        
+
+        return "";
     }
 
     // envia as informações para fechar uma seção para o banco

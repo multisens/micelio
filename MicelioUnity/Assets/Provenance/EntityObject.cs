@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-interface EntityObject
+public interface EntityObject
 {
 
 	Entity GetEntity();
