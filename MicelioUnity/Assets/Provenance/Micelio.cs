@@ -29,7 +29,7 @@ public class Micelio
 
     }
 
-    public static string toJSON(object o)
+    public static string ToJSON(object o)
     {
         string json = LitJson.JsonMapper.ToJson(o);
         Debug.Log(json);
@@ -69,6 +69,7 @@ public class Micelio
                     fs.Close();
                     SendDevice(device);
                     Debug.Log("device information successfully registered");
+
                 }catch(Exception e){
                     Debug.Log(e);
                 }
@@ -80,14 +81,14 @@ public class Micelio
     //envia as informações de device para o banco
     private void SendDevice(Device device)
     {
-        string payload = toJSON(device);
+        string payload = ToJSON(device);
         SendAPIRequest("/device", "POST", payload);
     }
 
     // envia as informações de seção para o banco
     public void StartSession(Session session)
     {
-        string payload = toJSON(session);
+        string payload = ToJSON(session);
         SendAPIRequest("/session", "POST", payload);
     }
 

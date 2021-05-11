@@ -30,7 +30,7 @@ function Card(props) {
         <div className={"card-option"}>
           <AiOutlineShareAlt size={25}/>
         </div>
-        <div className={"card-option"}>
+        <div className={"card-option"} onClick={props.onCreateGroup}>
           <AiOutlinePlusCircle size={25}/>
         </div>
       </div>

@@ -8,7 +8,7 @@ const cors = require('cors');
 if(   !process.env.HTTP_PORT
   ||  !process.env.JWT_SECRET
   ||  !process.env.DATABASE_HOST
-  /*||  !process.env.DATABASE_PASSWORD*/
+  ||  !process.env.DATABASE_PASSWORD
   ||  !process.env.DATABASE_USER
   ||  !process.env.DATABASE_CLIENT
   ||  !process.env.DATABASE
