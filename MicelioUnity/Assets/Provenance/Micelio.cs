@@ -47,13 +47,15 @@ public class Micelio
             if(device.VerifyDataIntegrity())
             {
                 //salvos os dados no storageLocal e no banco
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream fs = new FileStream(filePath, FileMode.Create);
-                formatter.Serialize(fs, device);
-                fs.Close();
 
                 try{
                     SendDevice(device);
+                   
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    FileStream fs = new FileStream(filePath, FileMode.Create);
+                    formatter.Serialize(fs, device);
+                    fs.Close();
+                
                 }catch(Exception e){
                     Debug.Log(e);
                 }
