@@ -12,7 +12,7 @@ class GameController{
     const user_id = decodedToken.sub;
 
     const userGames = await knex('HasPermission').innerJoin('Game', 'HasPermission.game_id', 'Game.game_id')
-      .select('name', 'version').where('HasPermission.user_id', user_id)
+      .select('name', 'version', 'Game.game_id').where('HasPermission.user_id', user_id)
 
 
     response.json({ok: true, data: userGames})

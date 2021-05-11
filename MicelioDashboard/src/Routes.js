@@ -12,14 +12,11 @@ require('dotenv').config();
 const Routes = () => {
   const { isAuth, isLoading } = useAuth();
 
-  console.log(isAuth, isLoading)
-
   if(isLoading) {
     return <div />
   }
 
   if(isAuth){
-    console.log('asdasd')
     return(
       <BrowserRouter basename="/micelio">
         <Switch>

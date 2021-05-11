@@ -7,23 +7,23 @@ using System;
 public class GameManager : MonoBehaviour
 {
 
-	private string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTcxNDQ5OTcsInN1YiI6IjJmNTZkY2Q2LWM4ODMtNGZlMC1hOWE1LWMxNGI1ZDE5ZmYyNiJ9.OaPPQEP5yJbHMauOTz0drKYPczTV479Ajc-gs1zNvEc";
+	private string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjAzMDkyOTIsInN1YiI6IjFhYTdhMTZhLTBjYzYtNDUwOS05MWI2LTU1ZTdkNzhhOGE3NiJ9.tAkpFXTtXvEn8uasJl_xgBLVZuclqFR-DSRv_ZjD4Ws";
 
     void Start()
     {
-     
         //Debug.Log(Application.persistentDataPath);
         Micelio micelio = new Micelio(token);
         
         Session session = new Session("pt-BR","1");
-        session.setName("começar jogo");
-        //micelio.SendSession(session);
+        session.setName("game start");
+        micelio.StartSession(session);
 
-        AgentTest jogador = new AgentTest(50,125.3,"sargento");
-        Agent jog = jogador.GetAgent();    
-           
-        Debug.Log(JsonUtility.ToJson(jog));
-        
+        //string activityid = Activity.CreateActivity();
+
+        //AgentTest jogador = new AgentTest(50,125,"sargento");
+        //AgentTest jogador2 = new AgentTest(75,100,"coronel");
+
+        micelio.CloseSession();        
     }
 
     void Update()

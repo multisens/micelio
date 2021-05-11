@@ -14,11 +14,13 @@ public class Device
 	//construtor da classe Device
 	public Device()
 	{
+
 		this.device_id = SystemInfo.deviceUniqueIdentifier;
         this.model = SystemInfo.deviceModel;
         this.screen_width = Screen.width;
         this.screen_height = Screen.height;
         this.system_name = SystemInfo.operatingSystem;
+		
 	}
 
 	//verifica se algum dos dados não foi reconhecido
@@ -31,10 +33,5 @@ public class Device
 			return false;
 		}
 		return true;
-	}
-
-	public string toJSON()
-	{
-		return JsonUtility.ToJson(this);
 	}
 }

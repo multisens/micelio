@@ -5,8 +5,15 @@
     color: #7c7c7c;
     font-size: 15px;
 }
+.grouplist {
+    margin-top: 60px;
+}
 .grouplist ul {
     list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
 }
 .grouplist li {
     padding: 10px 10px;
@@ -34,11 +41,20 @@
     font-size: 15px;
     padding: 1px 0px;
 }
-.grouplist ul li + li {
-    margin-top: 10px;
+.grouplist li span{
+    font-size: 12px;
 }
 .grouplist ul li:hover {
     transform: scale(1.01, 1.01);
     box-shadow: 0 0 4px #6f6f6f;
     background-color: #efefef;
+}
+
+.more-groups {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.more-groups button {
+    max-width: 200px;
 }

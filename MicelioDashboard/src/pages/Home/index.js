@@ -15,19 +15,41 @@ import 'react-toastify/dist/ReactToastify.min.css';
 function Home() {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const [isGroupPopupOpen, setIsGroupPopupOpen] = useState(false)
+  const [isGamesExpanded, setIsGamesExpanded] = useState(false)
+  const [gameCards, setGameCards] = useState(4)
 
   const [newGame, setNewGame] = useState('')
   const [newGameVersion, setNewGameVersion] = useState('')
+  const [newGroupId, setNewGroupId] = useState('')
 
   const [gameList, setGameList] = useState([])
+  const [groupList, setGroupList] = useState([])
+
 
   useEffect(() => {
-    updateGameList()
+    updateGameList();
+    updateGroupList();
   }, [])
+
+  useEffect(() => {
+    if(isGamesExpanded) {
+      setGameCards(Infinity);
+      return;
+    }
+    setGameCards(4);
+
+  }, [isGamesExpanded])
 
   const updateGameList = () => {
     Api.get('/game').then(response => {
       setGameList(response.data.data)
+    })
+  }
+
+  const updateGroupList = () => {
+    Api.get('/group').then(response => {
+      setGroupList(response.data.data)
     })
   }
 
@@ -37,8 +59,7 @@ function Home() {
     try {
       const response = await Api.post('/game', {
         name: newGame,
-        version: newGameVersion,
-        user_id: 'd85ffd89-fb75-4b72-9606-82d151b220d8'
+        version: newGameVersion
       })
 
       if(!response.data.ok) {
@@ -61,6 +82,17 @@ function Home() {
     }
   }
 
+  const doCreateGroup = async (game_id) => {
+    console.log(game_id);
+    const response = await Api.post('/group', {game_id});
+    const group_id = response.data.group_id;
+
+    setNewGroupId(group_id);
+    setIsGroupPopupOpen(true);
+
+    updateGroupList();
+  }
+
   return (
     <>
       <ToastContainer />
@@ -76,6 +108,14 @@ function Home() {
           <button className="primary">Cadastrar</button>
         </form>
       </Popup>
+      <Popup isOpen={isGroupPopupOpen} onClose={() => {
+        setIsGroupPopupOpen(false)
+      }}>
+        <h2>Grupo cadastrado</h2>
+        <div className={'group-id'}>
+          {newGroupId}
+        </div>
+      </Popup>
 
       <PageFormat menuSelected={'home'}>
         <main className={'gamelist-container'}>
@@ -84,17 +124,25 @@ function Home() {
             setIsPopupOpen(true);
           }}>
             {
-              gameList.length > 0 ? gameList.map((game) => {
+              gameList.length > 0 ? gameList.slice(0, gameCards).map((game) => {
                 const created = Math.round(Math.random() * 20) + 1;
                 const active = Math.round(Math.random() * 20) + 1;
                 const isShared = (Math.round((Math.random() * 100)) % 2 === 0);
 
-                return (<Card name={game.name} created={created} active={active} shared={isShared}/>);
+                return (<Card key={game.game_id} name={game.name} created={created} active={active} shared={isShared} onCreateGroup={() => {doCreateGroup(game.game_id)}}/>);
               }) : (<span>Não há jogos cadastrados</span>)
             }
           </GameCardsContainer>
 
-          <SessionGroupList/>
+          {
+            gameList.length > 4 ? (
+              <div className={'more-games'}>
+                <button className={'primary'} onClick={() => {setIsGamesExpanded(!isGamesExpanded)}}>{isGamesExpanded ? 'Ver menos' : 'Ver mais'}</button>
+              </div>
+            ) : ''
+          }
+
+          <SessionGroupList groups={groupList}/>
 
         </main>
       </PageFormat>
