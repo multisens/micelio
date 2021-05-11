@@ -10,31 +10,28 @@ public class Session
 	public string language;
 	public string game_stage;
 	public string date;
-	public string observation_environment;
+	public string session_group;
 	public string start_time;
 	public string end_time;	
    
    	public Session(string language, string game_stage)
    	{
 
+		System.DateTime currentTime = System.DateTime.Now;
 	   	this.language = language;
 	   	this.game_stage = game_stage;
-	   	this.date = System.DateTime.Now.Date.ToString();
-		this.start_time = System.DateTime.Now.ToString();
+	   	this.date = currentTime.Year+"-"+currentTime.Month+"-"+currentTime.Day;
+		this.start_time = currentTime.Hour+":"+currentTime.Minute+":"+currentTime.Second;
+		
   	}
 
-  	public void setObservationEnvironment(string observation_environment)
+  	public void setSesssionGroup(string session_group)
 	{
-		this.observation_environment = observation_environment;
+		this.session_group = session_group;
 	}
 
 	public void setName(string name)
 	{
 		this.name = name;
-	}
-
-	public string toJSON()
-	{
-		return JsonUtility.ToJson(this);
 	}
 }

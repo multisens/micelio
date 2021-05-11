@@ -6,14 +6,14 @@ using System;
 public class AgentTest : MonoBehaviour,AgentObject
 {
     private string id = Agent.GenerateAgentID();
-    public string nome = "jilbert";
-    public string type = "player";
-    public float posx = 25;
-    public float posy = 15;
-    public string patente;
-    public int municao;
-    public double hp;
-    public string [] armas = { "pistola","shotgun","m4","bazuca"};
+    private string nome = "jilbert";
+    private string type = "player";
+    private double posx = 25;
+    private double posy = 15;
+    private string patente;
+    private int municao;
+    private double hp;
+    private string [] armas = { "pistola","shotgun","m4","bazuca"};
 
     public AgentTest(int municao, double hp, string patente){
         
@@ -38,10 +38,10 @@ public class AgentTest : MonoBehaviour,AgentObject
     {   
         Agent temp = new Agent(id,nome,type);
         temp.SetPosition(posx,posy);
-        temp.AddAttributes("municao",municao);
-        temp.AddAttributes("hp",hp);
-        temp.AddAttributes("patente",patente);
-        temp.AddAttributes("armas",armas);
+        temp.AddProperty("municao",municao);
+        temp.AddProperty("hp",hp);
+        temp.AddProperty("patente",patente);
+        temp.AddProperty("armas",armas);
         return temp;
 
     }
