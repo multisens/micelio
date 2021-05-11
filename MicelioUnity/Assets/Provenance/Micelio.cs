@@ -95,8 +95,9 @@ public class Micelio
     //envia as informações da atividade para o banco
     public string SendActivity(Activity activity)
     {
-
-        return "";
+        string payload = ToJSON(activity);
+        SendAPIRequest("/activity", "POST", payload);
+        return activity.activity_id;
     }
 
     // envia as informações para fechar uma seção para o banco
