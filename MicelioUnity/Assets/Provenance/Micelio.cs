@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using System;
+using System.Reflection;
 using System.Net;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -15,13 +16,24 @@ public class Micelio
     private string defaultURL = "https://achernar.eic.cefet-rj.br/micelio/api";
     private string token;
     private string device_id;
+    private Assembly dll;
 
     //construtor classe Micelio
     public Micelio(string token)
     {
+
         this.token = token;
         this.device_id = getDeviceInformation();
+        string path = Directory.GetCurrentDirectory();
+        this.dll = Assembly.LoadFrom(path+"/Assets/Provenance/LitJson.dll");
 
+    }
+
+    public static string toJSON(object o)
+    {
+        string json = LitJson.JsonMapper.ToJson(o);
+        Debug.Log(json);
+        return json;
     }
 
     //retorna o device_id do aparelho utilizado
@@ -37,53 +49,66 @@ public class Micelio
             FileStream fs = new FileStream(filePath, FileMode.Open);
             device = (Device)formatter.Deserialize(fs);
             fs.Close();
-        
+            Debug.Log("device information successfully found");
         }
         else
         {
+            Debug.Log("device information not found");
+            Debug.Log("loading device information ...");
             device = new Device();
 
             //teste se todos os campos de Device estão completos
             if(device.VerifyDataIntegrity())
             {
                 //salvos os dados no storageLocal e no banco
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream fs = new FileStream(filePath, FileMode.Create);
-                formatter.Serialize(fs, device);
-                fs.Close();
-
-                try{
+                try
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    FileStream fs = new FileStream(filePath, FileMode.Create);
+                    formatter.Serialize(fs, device);
+                    fs.Close();
                     SendDevice(device);
+                    Debug.Log("device information successfully registered");
                 }catch(Exception e){
                     Debug.Log(e);
                 }
             }
-
         }
-
         return device.device_id;
     }
 
     //envia as informações de device para o banco
     private void SendDevice(Device device)
     {
-        string payload = device.toJSON();
-        Debug.Log(payload);
+        string payload = toJSON(device);
         SendAPIRequest("/device", "POST", payload);
     }
 
     // envia as informações de seção para o banco
-    public void SendSession(Session session)
+    public void StartSession(Session session)
     {
-        string payload = session.toJSON();
-        Debug.Log(payload);
-        Debug.Log(device_id);
+        string payload = toJSON(session);
         SendAPIRequest("/session", "POST", payload);
+    }
+
+    public string SendActivity(Activity activity)
+    {
+        
+    }
+
+    // envia as informações para fechar uma seção para o banco
+    public void CloseSession()
+    {
+        System.DateTime currentTime = System.DateTime.Now;
+        string payload  = "{\"end_time\" : \""+currentTime.Hour+":"+currentTime.Minute+":"+currentTime.Second+"\"}";
+        SendAPIRequest("/session", "PUT", payload);
     }
 
     //função para envio de dados a API
     private void SendAPIRequest(string endPoint, string method, string payload)
     {
+        Debug.Log("request to -> "+method+" : "+endPoint);
+        Debug.Log(payload);
 
         //criação da requisição e configuração dos parametros
         var requisicaoWeb = (HttpWebRequest)WebRequest.CreateHttp(this.defaultURL + endPoint);
