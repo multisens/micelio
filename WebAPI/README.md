@@ -52,7 +52,7 @@ Descrição:
 
 ```json
 {
-    "user_id": "us-8u937827"
+    "user_id": "us-8u937827",
     "user": "lucassargeiro",
     "password": "my_password"
 }
