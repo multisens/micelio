@@ -4,3 +4,23 @@
     padding: 20px;
     background-color: #f6f6f6;
 }
+
+.gamelist-container .more-games {
+    text-align: center;
+}
+
+.gamelist-container .more-games button {
+    max-width: 200px;
+}
+
+.group-id {
+    background-color: #dfdfdf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 24px;
+    margin-top: 20px;
+    border-radius: 8px;
+    padding: 20px;
+}
