@@ -84,7 +84,7 @@ public class Arma : MonoBehaviour, EntityObject
 {
     private string id_entity = Entity.GenerateEntityID();
     public string nome = "Arma";
-    public float peso;
+    public double peso;
     public int poder ;
 
     public Soldado(int poder, float peso)
@@ -153,8 +153,8 @@ public class Soldado : MonoBehaviour, AgentObject
     private string id_agent = Agent.GenerateAgentID();
     public string nome = "Soldado";
     public string type = "player";
-    public float posx;
-    public float posy;
+    public double posx;
+    public double posy;
     public string patente;
     public int municao;
     public double hp;
