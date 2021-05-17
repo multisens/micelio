@@ -363,7 +363,7 @@ Descrição:
 
 # TABELA InfluencedBy ---------------------------------------------------------------------------------------------------------------
 {
-    "influencedBy_id": "if-sdjljsld",
+    "influenced_by_id": "if-sdjljsld",
     "influence_id": "AC-45186790",
     "influenced_id": "AC-45186727",
     "properties": {}
