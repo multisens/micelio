@@ -103,7 +103,7 @@ public class Arma : MonoBehaviour, EntityObject
         
     }
 
-    public Agent GetAgent()
+    public Entity GetEntity()
     {   
         Entity e = new Entity(id_entity, nome);
 		e.AddProperty("poder", poder);
