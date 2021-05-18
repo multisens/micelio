@@ -18,10 +18,10 @@ public class GameManager : MonoBehaviour
         session.setName("game start");
         micelio.StartSession(session);
 
-        //string activityid = Activity.CreateActivity();
+        Soldado player = new Soldado(10,25,"soldier",150,130);
+        Arma gun = new Arma(5,1.5);
 
-        //AgentTest jogador = new AgentTest(50,125,"sargento");
-        //AgentTest jogador2 = new AgentTest(75,100,"coronel");
+        player.Fire(gun,"wave 1");
 
         micelio.CloseSession();        
     }

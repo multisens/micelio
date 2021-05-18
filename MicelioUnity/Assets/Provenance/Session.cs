@@ -25,12 +25,12 @@ public class Session
 		
   	}
 
-  	public void setSesssionGroup(string session_group)
+  	public void SetSesssionGroup(string session_group)
 	{
 		this.session_group = session_group;
 	}
 
-	public void setName(string name)
+	public void SetName(string name)
 	{
 		this.name = name;
 	}

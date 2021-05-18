@@ -23,7 +23,7 @@ public class Micelio
     {
 
         this.token = token;
-        this.device_id = getDeviceInformation();
+        this.device_id = GetDeviceInformation();
         string path = Directory.GetCurrentDirectory();
         this.dll = Assembly.LoadFrom(path+"/Assets/Provenance/LitJson.dll");
 
@@ -37,7 +37,7 @@ public class Micelio
     }
 
     //retorna o device_id do aparelho utilizado
-    private string getDeviceInformation()
+    private string GetDeviceInformation()
     {
         string filePath = Application.persistentDataPath + "/micelioDeviceSettings.bin";
         Device device;
