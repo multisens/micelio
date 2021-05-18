@@ -5,17 +5,92 @@ const knex = require('../database/connection');
 
 class GameController{
 
+  async index(request, response){
+    const {game_id} = request.params;
+    const {miceliotoken: userToken} = request.cookies
+    const decodedToken = decodeUserSession(userToken)
+
+    const user_id = decodedToken.sub;
+
+    const game = await knex('Game as g')
+      .select('g.token', 'g.name', 'g.version', 'hp.user_id', 'hp.owner', 'mu.username', 'hp.has_permission_id')
+      .innerJoin('HasPermission as hp', 'hp.game_id', 'g.game_id')
+      .innerJoin("MicelioUser as mu", 'mu.user_id', 'hp.user_id')
+      .where('g.game_id', game_id)
+      .andWhere('hp.user_id', user_id).first();
+    //todo: desculpa, precisa ajustar a tabela de haspermission
+    // remover coluna "owner", adicionar "user_id" na tabela de game (criador do jogo)
+    // paz
+
+    if(!game){
+      return response.status(400).json({error: "Game not found"});
+    }
+
+    const gameOwner = await knex('Game as g')
+      .select('user.username')
+      .innerJoin('HasPermission as hp', 'hp.game_id', 'g.game_id')
+      .innerJoin('MicelioUser as user', 'user.user_id', 'hp.user_id')
+      .where("hp.owner", '1')
+      .andWhere('g.game_id', game_id).first();
+
+    if(!game.owner) {
+      delete game.token;
+    }
+
+    game.username = gameOwner.username; //todo:4 perdão, carreira
+    //todo: please help
+
+    const game_groups = await knex('SessionGroup as sg')
+      .select('sg.session_group_id', 'sg.it_ends')
+      .where('sg.has_permission_id', game.has_permission_id);
+
+    return response.json({game, groups: game_groups})
+  }
+
   async get(request, response) {
     const {miceliotoken: userToken} = request.cookies
     const decodedToken = decodeUserSession(userToken)
 
     const user_id = decodedToken.sub;
 
-    const userGames = await knex('HasPermission').innerJoin('Game', 'HasPermission.game_id', 'Game.game_id')
-      .select('name', 'version', 'Game.game_id').where('HasPermission.user_id', user_id)
+    /*const userGames = await knex('HasPermission').innerJoin('Game', 'HasPermission.game_id', 'Game.game_id')
+      .select('name', 'version', 'Game.game_id').where('HasPermission.user_id', user_id)*/
 
+    const userGames = await knex.raw(`SELECT    Game.game_id,
+          Game.name,
+          Game.version,
+          HasPermission.owner as is_owner,
+          COUNT(B.session_id) AS active_sessions,
+          COUNT(SessionGroup.session_group_id) AS groups_created,
+          COUNT(C.has_permission_id) AS is_shared
+FROM Game
+         JOIN HasPermission
+              ON Game.game_id = HasPermission.game_id
+         LEFT JOIN
+     (
+         SELECT *
+         FROM HasPermission
+         WHERE HasPermission.owner = false
+     )
+         AS C
+     ON Game.game_id = C.game_id
+         LEFT JOIN
+     SessionGroup
+     ON HasPermission.has_permission_id = SessionGroup.has_permission_id
+         LEFT JOIN
+     (
+         SELECT Session.session_id, Session.game_id
+         FROM Session
+         WHERE Session.end_time IS NULL
+           AND Session.date = '${new Date().getFullYear()}-0${new Date().getMonth() + 1}-${new Date().getDate()}'
+     )
+         AS B
+     ON Game.game_id = B.game_id
+WHERE HasPermission.user_id = '${user_id}'
+GROUP BY Game.game_id`);
+    // desculpa por isso ^
 
-    response.json({ok: true, data: userGames})
+    response.json({ok: true, data: userGames[0]})
   }
 
 	async create(request, response){

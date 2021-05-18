@@ -19,9 +19,13 @@ class GroupController {
   }
 
   async create(request, response) {
-    const {game_id} = request.body;
+    const {game_id, name} = request.body;
     if(!game_id){
       return response.status(400).json({error: "Jogo inválido"});
+    }
+
+    if(!name) {
+      return response.status(400).json({error: "Nome do grupo inválido"});
     }
 
     const {miceliotoken: userToken} = request.cookies
@@ -42,7 +46,8 @@ class GroupController {
     await knex('sessiongroup').insert({
       session_group_id: new_group_id,
       has_permission_id: permission_db.has_permission_id,
-      it_ends: 0
+      it_ends: 0,
+      name
     })
 
     response.json({ok: true, group_id: new_group_id});

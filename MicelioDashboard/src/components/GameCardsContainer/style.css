@@ -22,7 +22,7 @@
 }
 
 .gamecards ul li {
-    min-height: 200px;
+    min-height: 170px;
     background-color: white;
     box-shadow: 0 0 6px #dfdfdf;
 
@@ -35,6 +35,11 @@
     padding: 10px;
 
     border-left: 6px solid #264653;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
 }
 
 .card-header h2{

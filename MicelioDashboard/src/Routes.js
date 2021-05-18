@@ -1,10 +1,12 @@
-import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 
 import Index from './pages/Index';
 import Sign from './pages/Sign';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
+import Game from './pages/Game';
+
 import {useAuth} from "./context/AuthContext";
 
 require('dotenv').config();
@@ -22,6 +24,7 @@ const Routes = () => {
         <Switch>
           <Route path={'/home'} component={Home} exact/>
           <Route path={'/sobre'} component={Dashboard}/>
+          <Route path={'/game/:id'} component={Game}/>
           <Redirect to={'/home'} />
         </Switch>
       </BrowserRouter>

@@ -1,0 +1,48 @@
+.dashboard-container {
+    padding: 20px;
+    width: 100%;
+}
+
+.gameinfo-container {
+    display: flex;
+}
+
+.gameinfo-container .gameinfo-avatar {
+    width: 250px;
+    height: 250px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #bfbfbf;
+
+    margin-right: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 64px;
+    font-weight: 700;
+}
+
+.gameinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: flex-end;
+
+}
+.gameinfo strong {
+    color: #264653;
+}
+.gameinfo span {
+    max-width: 600px;
+    display: block;
+    word-break: break-all;
+    margin-top: 8px;
+}
+
+/*
+.gameinfo span + .gameinfo span {
+    margin-top: 5px;
+}
+*/
