@@ -1,5 +1,6 @@
 import React from 'react';
-import {AiOutlineShareAlt, AiOutlinePlusCircle} from 'react-icons/ai'
+import { useHistory } from 'react-router-dom';
+import {AiOutlineShareAlt, AiOutlinePlusCircle, AiOutlineCrown} from 'react-icons/ai'
 
 
 const Hr = () => {
@@ -15,16 +16,21 @@ const Hr = () => {
 
 function Card(props) {
 
+  const history = useHistory();
+
   return (
     <li>
-      <div className={'card-header'}>
+      <div className={'card-header'} onClick={() => {history.push(`/game/${props.id}`)}}>
         <h2>{props.name}</h2>
-        <Hr/>
+        {(props.isOwner === 1)
+          ? (<AiOutlineCrown size={24} color={'#E9C46A'}/>)
+          : (<AiOutlineCrown size={24} color={'#7c7c7c'}/>)}
       </div>
+      <Hr/>
       <div className={'card-content'}>
-        <p><b>Salas criadas: </b>{props.created}</p>
+        <p><b>Grupos criados: </b>{props.created}</p>
         <p><b>Sessões Ativas: </b>{props.active}</p>
-        <p><b>Status: </b>{(props.shared) ? 'compartilhado' : 'privado'}</p>
+        <p><b>Status: </b>{(props.shared) ? 'Compartilhado' : 'Privado'}</p>
       </div>
       <div className={'card-options'}>
         <div className={"card-option"}>

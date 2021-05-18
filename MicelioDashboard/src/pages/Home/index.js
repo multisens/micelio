@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useHistory } from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 import './style.css';
 
@@ -25,6 +26,8 @@ function Home() {
 
   const [gameList, setGameList] = useState([])
   const [groupList, setGroupList] = useState([])
+
+  const history = useHistory();
 
 
   useEffect(() => {
@@ -83,14 +86,16 @@ function Home() {
   }
 
   const doCreateGroup = async (game_id) => {
-    console.log(game_id);
-    const response = await Api.post('/group', {game_id});
+    const response = await Api.post('/group', {game_id, name: "Jogo novo"});
     const group_id = response.data.group_id;
 
     setNewGroupId(group_id);
     setIsGroupPopupOpen(true);
 
+    // desculpa v
     updateGroupList();
+    updateGameList();
+    // sério, perdão ^
   }
 
   return (
@@ -111,7 +116,8 @@ function Home() {
       <Popup isOpen={isGroupPopupOpen} onClose={() => {
         setIsGroupPopupOpen(false)
       }}>
-        <h2>Grupo cadastrado</h2>
+        <h2>Cadastre um grupo</h2>
+        <input className={'primary'} type="text" value={'Jogo teste'} placeholder={'Nome do grupo'}/>
         <div className={'group-id'}>
           {newGroupId}
         </div>
@@ -120,16 +126,19 @@ function Home() {
       <PageFormat menuSelected={'home'}>
         <main className={'gamelist-container'}>
 
-          <GameCardsContainer title="Meu Jogos" onClickAdd={() => {
+          <GameCardsContainer title="Meus Jogos" onClickAdd={() => {
             setIsPopupOpen(true);
           }}>
             {
               gameList.length > 0 ? gameList.slice(0, gameCards).map((game) => {
-                const created = Math.round(Math.random() * 20) + 1;
-                const active = Math.round(Math.random() * 20) + 1;
-                const isShared = (Math.round((Math.random() * 100)) % 2 === 0);
-
-                return (<Card key={game.game_id} name={game.name} created={created} active={active} shared={isShared} onCreateGroup={() => {doCreateGroup(game.game_id)}}/>);
+                return (<Card key={game.game_id}
+                              id={game.game_id}
+                              name={game.name}
+                              created={game.groups_created}
+                              active={game.active_sessions}
+                              shared={game.is_shared}
+                              isOwner={game.is_owner}
+                              onCreateGroup={() => {doCreateGroup(game.game_id)}}/>);
               }) : (<span>Não há jogos cadastrados</span>)
             }
           </GameCardsContainer>

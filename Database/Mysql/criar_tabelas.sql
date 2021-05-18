@@ -31,6 +31,7 @@ CREATE TABLE HasPermission(
 CREATE TABLE SessionGroup(
 	session_group_id varchar(40) NOT NULL,
 	has_permission_id varchar(40) NOT NULL,
+	name varchar(50) NOT NULL,
 	it_ends boolean NOT NULL,
 	parameters text,
 

@@ -30,7 +30,7 @@ A plataforma do Micélio conta com alguns módulos, são eles:
 
 - MicelioUnity:
 
-  [Saiba mais](https://github.com/GPMM/micelio/tree/main/UnityAPI).
+  [Saiba mais](https://github.com/GPMM/micelio/tree/main/MicelioUnity).
 
 - MicélioDashboard:
 
