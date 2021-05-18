@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-interface AgentObject
+public interface AgentObject
 {
 
 	Agent GetAgent();

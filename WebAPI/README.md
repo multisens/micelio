@@ -34,10 +34,10 @@ Essa rota é acessada apenas uma vez para cada usuário criado. Ela serve para c
 
 ```json
 {
-    username: 'lucassargeiro',
-    email: 'meu@email.com'
-    password: 'my_password',
-    confirmation_password: 'my_password'
+    "username": "lucassargeiro",
+    "email": "meu@email.com",
+    "password": "my_password",
+    "confirmation_password": "my_password"
 }
 ```
 
@@ -52,9 +52,9 @@ Descrição:
 
 ```json
 {
-    user_id: 'us-8u937827'
-    user: 'lucassargeiro',
-    password: 'my_password'
+    "user_id": "us-8u937827",
+    "user": "lucassargeiro",
+    "password": "my_password"
 }
 ```
 
@@ -74,9 +74,9 @@ Essa rota é acessada apenas uma vez para cada jogo criado. Ela serve para cadas
 
 ```json
 {
-    user_id: 'us-8u937827',
-	name: 'nome_do_jogo',
-	version: 'versao_do_jogo'
+    "user_id": "us-8u937827",
+    "name": "nome_do_jogo",
+    "version": "versao_do_jogo"
 }
 ```
 
@@ -95,18 +95,18 @@ Descrição:
 ```json
 # TABELA Game ----------------------------------------------------------------------------------------------------------------------
 {
-	game_id: 'id0019293',
-    token: 'HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD',
-    name: 'nome_do_jogo',
-	version: 'versao_do_jogo',
+    "game_id": "id0019293",
+    "token": "HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD",
+    "name": "nome_do_jogo",
+    "version": "versao_do_jogo",
 }
 
 # TABELA HasPermission -------------------------------------------------------------------------------------------------------------
 {
-    has_permission_id: "hp-89379473847",
-	user_id: 'us-8u937827',
-    game_id: 'id0019293',
-    owner: true
+    "has_permission_id": "hp-89379473847",
+    "user_id": "us-8u937827",
+    "game_id": "id0019293",
+    "owner": true
 }
 ```
 
@@ -128,7 +128,7 @@ Essa rota é acessada toda vez que um novo dispositivo quer enviar informações
 
 ```json
 {
-    token:'HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD',
+    "token": "HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD",
 }
 ```
 
@@ -136,11 +136,11 @@ Essa rota é acessada toda vez que um novo dispositivo quer enviar informações
 
 ```json
 {
-    	device_id: 'D-456',
-    	system_name: 'android',
-    	model: 'SG-90110',
-    	screen_width: 1080,
-	    screen_height: 720,
+    "device_id": "D-456",
+    "system_name": "android",
+    "model": "SG-90110",
+    "screen_width": 1080,
+    "screen_height": 720,
 }
 ```
 
@@ -162,11 +162,11 @@ Descrição:
 
 ```json
 {
-    device_id: 'D-456',
-    system: 'android',
-    model: 'SG-90110',
-    screen_width: '1080',
-    screen_height: '720',
+    "device_id": "D-456",
+    "system": "android",
+    "model": "SG-90110",
+    "screen_width": 1080,
+    "screen_height": 720,
 }
 ```
 
@@ -188,8 +188,8 @@ Essa rota é acessada toda vez que um jogador inicia um jogo em um dispoisitivo 
 
 ```json
 {
-    token: 'HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD',
-    device_id: 'D-456',
+    "token": "HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD",
+    "device_id": "D-456",
 }
 ```
 
@@ -197,12 +197,12 @@ Essa rota é acessada toda vez que um jogador inicia um jogo em um dispoisitivo 
 
 ```json
 {
-    name: 'name',
-    language: 'language',
-    date: '2020-10-10',
-    game_stage: '1',
-    session_group: '1bskaoi23nspsd',
-    start_time: '11:00'
+    "name": "name",
+    "language": "language",
+    "date": "2020-10-10",
+    "game_stage": "1",
+    "session_group": "1bskaoi23nspsd",
+    "start_time": "11:00"
 }
 ```
 
@@ -222,21 +222,21 @@ Descrição:
 ```json
 # TABELA Session --------------------------------------------------------------------------------------------------------------------
 {
-    game_id: 'id0019293',
-    device_id: 'D-456',
-    session_id: '654321324',
-    name: 'name',
-    language: 'language',
-    date: '2020-10-10',
-    game_stage: '1',
-    start_time: '11:00',
-    end_time: null 
+    "game_id": "id0019293",
+    "device_id": "D-456",
+    "session_id": "654321324",
+    "name": "name",
+    "language": "language",
+    "date": "2020-10-10",
+    "game_stage": "1",
+    "start_time": "11:00",
+    "end_time": null 
 }
 
 # TABELA SessionInGroup -------------------------------------------------------------------------------------------------------------
 {
-    session_id: '654321324',
-    session_group_id: '1bskaoi23nspsd'
+    "session_id": "654321324",
+    "session_group_id": "1bskaoi23nspsd"
 }
 ```
 
@@ -256,8 +256,8 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
 
 ```json
 {
-    token: 'HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD',
-    device_id: 'D-456',
+    "token": "HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD",
+    "device_id": "D-456",
 }
 ```
 
@@ -265,33 +265,33 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
 
 ```json
 {
-    activity_id: 'AC-45186727',
-    name: 'plantar',
-    position_x: 6549,
-    position_y: 7564,
-    time: '4',
-    influenced_by: 'AC-45186790',
-    influenced_by_porperties: {},
-    properties: {time_moment: "night"},
-    entities: [
+    "activity_id": "AC-45186727",
+    "name": "plantar",
+    "position_x": 6549,
+    "position_y": 7564,
+    "time": "4",
+    "influenced_by": "AC-45186790",
+    "influenced_by_porperties": {},
+    "properties": {"time_moment": "night"},
+    "entities": [
         {
-            entity_id: 'P-01',
-            name: 'Plant',
-            position_x: 12354,
-            position_x: 65498,
-            properties: {health: 50},
-            role: 'item plantado'
+            "entity_id": "P-01",
+            "name": "Plant",
+            "position_x": 12354,
+            "position_x": 65498,
+            "properties": {"health": 50},
+            "role": "item plantado"
         }
     ],
-    agents:[
+    "agents":[
         {
-            agent_id: 'A-01',
-            name: 'Sargeiro',
-            type: 'NPC',
-            position_x: 12354,
-            position_x: 65498,
-            properties:{energia: 100},
-            role: 'quem plantou'
+            "agent_id": "A-01",
+            "name": "Sargeiro",
+            "type": "NPC",
+            "position_x": 12354,
+            "position_x": 65498,
+            "properties":{"energia": 100},
+            "role": "quem plantou"
         }
     ]
 }
@@ -347,70 +347,70 @@ Descrição:
 ```json
 # TABELA Activity -------------------------------------------------------------------------------------------------------------------
 {
-    session_id: '654321324',
-    activity_id: 'AC-45186727',
-    name: 'plantar',
-    time: '4',
-    properties: '{"time_moment": "night"}'
+    "session_id": "654321324",
+    "activity_id": "AC-45186727",
+    "name": "plantar",
+    "time": "4",
+    "properties": {"time_moment": "night"}
 }
 
 # TABELA Action ---------------------------------------------------------------------------------------------------------------------
 {
-    activity_id: 'AC-45186727',
-    position_x: 6549,
-    position_y: 7564
+    "activity_id": "AC-45186727",
+    "position_x": 6549,
+    "position_y": 7564
 }
 
 # TABELA InfluencedBy ---------------------------------------------------------------------------------------------------------------
 {
-    influencedBy_id: 'if-sdjljsld',
-    influence_id: 'AC-45186790',
-    influenced_id: 'AC-45186727',
-    properties: '{}'
+    "influenced_by_id": "if-sdjljsld",
+    "influence_id": "AC-45186790",
+    "influenced_id": "AC-45186727",
+    "properties": {}
 }    
 
 # TABELA Entity ---------------------------------------------------------------------------------------------------------------------
 {
-    entity_id: 'P-01',
-    name: 'Plant',
-    properties: '{"health": 50}'
+    "entity_id": "P-01",
+    "name": "Plant",
+    "properties": {"health": 50}
 }
 
 # TABELA GameObject -----------------------------------------------------------------------------------------------------------------
 {
-    entity_id: 'P-01',
-    position_x: 12354,
-    position_x: 65498
+    "entity_id": "P-01",
+    "position_x": 12354,
+    "position_x": 65498
 }        
 # TABELA ActivityEntities -----------------------------------------------------------------------------------------------------------
 {
-    entity_id: 'P-01',
-    activity_id: 'AC-45186727',
-    properties:  '{"health": 50}',
-    role: 'item plantado'
+    "entity_id": "P-01",
+    "activity_id": "AC-45186727",
+    "properties":  {"health": 50},
+    "role": "item plantado"
 }
 
 # TABELA Agent ----------------------------------------------------------------------------------------------------------------------
 {
-    agent_id: 'A-01',
-    name: 'Sargeiro',
-    type: 'NPC',
-    properties: '{"energia": 100}'
+    "agent_id": "A-01",
+    "name": "Sargeiro",
+    "type": "NPC",
+    "properties": {"energia": 100}
 }
 
 # TABELA ActivityAgents -------------------------------------------------------------------------------------------------------------
 {
-    agent_id: 'A-01',
-    activity_id: 'AC-45186727',
-    properties: '{"energia": 100}',
-    role: 'quem plantou'
+    "agent_id": "A-01",
+    "activity_id": "AC-45186727",
+    "properties": {"energia": 100},
+    "role": "quem plantou"
 }
 
 # TABELA GameCharacter --------------------------------------------------------------------------------------------------------------
 {
-    agent_id: 'A-01',
-    position_x: 12354,
-    position_x: 65498,
+    "agent_id": "A-01",
+    "position_x": 12354,
+    "position_x": 65498,
 }
 ```
 
@@ -430,8 +430,8 @@ Essa rota é acessada no final de cada sessão. Ela serve para encerrar determin
 
 ```json
 {
-    token: 'HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD',
-    device_id: 'D-456',
+    "token": "HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD",
+    "device_id": "D-456",
 }
 ```
 
@@ -439,7 +439,7 @@ Essa rota é acessada no final de cada sessão. Ela serve para encerrar determin
 
 ```json
 {
-     'end_time': '11:00'
+     "end_time": "11:00"
 }
 ```
 

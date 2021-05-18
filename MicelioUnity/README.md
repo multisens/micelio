@@ -84,7 +84,7 @@ public class Arma : MonoBehaviour, EntityObject
 {
     private string id_entity = Entity.GenerateEntityID();
     public string nome = "Arma";
-    public float peso;
+    public double peso;
     public int poder ;
 
     public Soldado(int poder, float peso)
@@ -103,7 +103,7 @@ public class Arma : MonoBehaviour, EntityObject
         
     }
 
-    public Agent GetAgent()
+    public Entity GetEntity()
     {   
         Entity e = new Entity(id_entity, nome);
 		e.AddProperty("poder", poder);
@@ -153,8 +153,8 @@ public class Soldado : MonoBehaviour, AgentObject
     private string id_agent = Agent.GenerateAgentID();
     public string nome = "Soldado";
     public string type = "player";
-    public float posx;
-    public float posy;
+    public double posx;
+    public double posy;
     public string patente;
     public int municao;
     public double hp;
@@ -239,7 +239,7 @@ public class GameManager : MonoBehaviour
 
 Agora que temos um instancia do Micelio criada, nos temos acesso a alguns métodos importantes que nos permitirão cadastrar os logs de proveniência. Dois dos principais métodos são:
 
-- `micelio.SendSession(Session session);`
+- `micelio.StartSession(Session session);`
 
   Esse método será responsável por definir o início de uma sessão. Uma vez definida o início de uma sessão, seus dados não poderão mais ser alterados. 
 
@@ -251,7 +251,7 @@ Agora que temos um instancia do Micelio criada, nos temos acesso a alguns métod
 
 
 
-Para que seja possível enviar uma sessão, precisamos criar uma instância de `Session`, que será passada como parâmetro da requisição. Embora uma sessão tenha diversos atributos, a criação de uma instância é muito simples, necessitando apenas do idioma e da fase em que o jogador se encontra. Uma vez criada a sessão, podemos chamar o método `SendSession()` e a partir dai, começar a enviar as atividades. Veja o exemplo:
+Para que seja possível enviar uma sessão, precisamos criar uma instância de `Session`, que será passada como parâmetro da requisição. Embora uma sessão tenha diversos atributos, a criação de uma instância é muito simples, necessitando apenas do idioma e da fase em que o jogador se encontra. Uma vez criada a sessão, podemos chamar o método `StartSession()` e a partir dai, começar a enviar as atividades. Veja o exemplo:
 
 ```c#
 using System.Collections;
@@ -268,7 +268,7 @@ public class GameManager : MonoBehaviour
         micelio = new Micelio(token);
         
         Session s = new Session('pt-br','1');
-        micelio.SendSession(s);
+        micelio.StartSession(s);
     }
 
     void Update()
@@ -297,7 +297,7 @@ Session s = new Session('pt-br','bonus 2');
 s.SetName('Holiday Event');
 s.SetSessionGroup('0123-4567-8910');
 
-micelio.SendSession(s);
+micelio.StartSession(s);
 ```
 
 
