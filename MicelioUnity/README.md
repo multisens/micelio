@@ -66,7 +66,7 @@ Para instanciar um `Entity` precisamos de apenas dois parâmetros, são eles:
 
 - `role` : Papel da entidade atualmente. É utilizado quando uma atividade é enviada para saber qual a participação da entidade no evento. Para definir o papel de uma entidade utilize o método `SetRole(string role)`.
 
-- `position_x` e `position_y` : Posição atual da entidade. Define onde o objeto está apresentado na tela. Para definir a posição de uma entidade utilize o método `SetPosition(float x, float y)`.
+- `position_x` e `position_y` : Posição atual da entidade. Define onde o objeto está apresentado na tela. Para definir a posição de uma entidade utilize o método `SetPosition(double x, double y)`.
 
 - `properties` : Propriedades gerais da entidade. Valores específicos de cada jogo. Para adicionar propriedades à entidade utilize o método `AddProperty(string name, object value)`.
 
@@ -87,7 +87,7 @@ public class Arma : MonoBehaviour, EntityObject
     public double peso;
     public int poder ;
 
-    public Soldado(int poder, float peso)
+    public Soldado(int poder, double peso)
     {
         this.poder = poder;
         this.peso = peso;
@@ -134,7 +134,7 @@ Para instanciar um `Agent` precisamos de apenas três parâmetros, são eles:
 
 - `role` : Papel do agente atualmente. É utilizado quando uma atividade é enviada para saber qual a participação do agente no evento. Para definir o papel de um agente utilize o método `SetRole(string role)`.
 
-- `position_x` e `position_y` : Posição atual do agente. Define onde o objeto está apresentado na tela. Para definir a posição de um agente utilize o método `SetPosition(float x, float y)`.
+- `position_x` e `position_y` : Posição atual do agente. Define onde o objeto está apresentado na tela. Para definir a posição de um agente utilize o método `SetPosition(double x, double y)`.
 
 - `properties` : Propriedades gerais do agente. Valores específicos de cada jogo. Para adicionar propriedades ao agente utilize o método `AddProperty(string name, object value)`.
 
@@ -159,7 +159,7 @@ public class Soldado : MonoBehaviour, AgentObject
     public int municao;
     public double hp;
 
-    public Soldado(int municao, double hp, string patente, float x, float y)
+    public Soldado(int municao, double hp, string patente, double x, double y)
     {
         this.municao = municao;
         this.hp = hp;
@@ -237,7 +237,7 @@ public class GameManager : MonoBehaviour
 
 #### Envio de Sessões
 
-Agora que temos um instancia do Micelio criada, nos temos acesso a alguns métodos importantes que nos permitirão cadastrar os logs de proveniência. Dois dos principais métodos são:
+Agora que temos um instância do Micelio criada, nos temos acesso a alguns métodos importantes que nos permitirão cadastrar os logs de proveniência. Dois dos principais métodos são:
 
 - `micelio.StartSession(Session session);`
 
@@ -309,4 +309,88 @@ Uma sessão pode ser criada a cada vez que o jogador entra no jogo, mas isso nã
 
 
 #### Envio de Atividades
+
+As atividades no Micelio representam eventos que aconteceram dentro do seu jogo. Esses eventos podem ser disparados por agentes, entidades ou até mesmo outros eventos. A forma como isso foi implementado no módulo é muito simples, basta que você crie uma instância de `Activity` e envie essa para a API através do método `micelio.SendActivity(Activity activity)`.
+
+Para criar uma atividade devem ser passados os atributos:
+
+- `name` : Representa o nome de uma atividade, pode ser usado para identificar os eventos gerados no jogo.
+- `time` : Representa o tempo do jogo em que aquele evento aconteceu. Não existe uma regra para definição do tempo, ele pode ser definido de acordo com a necessidade do seu jogo, podem ser: o tempo real, o tempo de execução do jogo ou até mesmo algo mais específico do seu jogo, como uma rodada ou algo parecido.
+
+Veja o exemplo abaixo do evento de atirar, `Fire()`, contruido dentro da classe `Soldado`, criada anteriormente:
+
+```c#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+public class Soldado : MonoBehaviour, AgentObject
+{
+    private string id_agent = Agent.GenerateAgentID();
+    public string nome = "Soldado";
+    public string type = "player";
+    public double posx;
+    public double posy;
+    public string patente;
+    public int municao;
+    public double hp;
+
+    public Soldado(int municao, double hp, string patente, double x, double y)
+    {
+        this.municao = municao;
+        this.hp = hp;
+        this.patente = patente;
+        this.posx = x;
+        this.posy = y;
+        
+    }
+
+    void Start()
+    {    
+
+    }
+
+    void Update()
+    {
+        
+    }
+
+    public void Fire(Arma gun, string time)
+    {   
+        Debug.Log("pow");
+        this.municao--;
+
+        Activity fire = new Activity("fire", time);
+        fire.SetPosition(this.posx,this.posy);
+        fire.AddAgent(this);
+        fire.AddEntity(gun);
+        micelio.SendActivity(fire);
+    }
+
+    public Agent GetAgent()
+    {   
+        Agent a = new Agent(id_agent, nome, type);
+        a.SetPosition(posx,posy);
+        a.AddProperty("munição", municao);
+        a.AddProperty("pontos de vida", hp);
+        a.AddProperty("patente", patente);
+        return a;
+    }
+}
+```
+
+
+
+##### Parâmetros Opcionais
+
+- `influenced_by` : Define o identificador da atividade que gerou essa atividade. Esse parâmetro pode ser setado para ligar as atividades. Para definir o identificador utilize o método `SetInfluence(string activity_id)`.
+- `position_x` e `position_y` : Posição atual da atividade. Define onde o evento aconteceu. Para definir a posição de uma atividade utilize o método `SetPosition(double x, double y)`.
+- `properties` : Propriedades gerais do agente. Valores específicos de cada jogo. Para adicionar propriedades ao agente utilize o método `AddProperty(string name, object value)`.
+- `agents` : Array que define todos os agentes que participaram daquele evento. Para adicionar agentes a um evento utilize o método `AddAgent(AgentObject agent_object)`.
+- `entities` : Array que define todos entidades que participaram daquele evento. Para adicionar entidades a um evento utilize o método `AddEntity(EntintyObject entity_object)`.
+
+
+
+> Obs.: Para pegar o identificador único de uma atividade, que deve ser passado no método `influenced_by`, após instânciar uma atividade, você pode usar `activity.activity_id`.
 

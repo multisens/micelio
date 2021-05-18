@@ -36,8 +36,8 @@ public class Soldado : MonoBehaviour, AgentObject
 
     public void Fire(Arma gun, string time)
     {   
-        this.municao--;
         Debug.Log("pow");
+        this.municao--;
 
         Activity fire = new Activity("fire", time);
         fire.SetPosition(this.posx,this.posy);
