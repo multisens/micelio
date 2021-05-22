@@ -12,7 +12,7 @@ class GroupController {
     const groups = await knex('SessionGroup as sg')
       .select('sg.session_group_id', 'game.name')
       .innerJoin('HasPermission as hp', 'hp.has_permission_id', 'sg.has_permission_id')
-      .innerJoin('game', 'game.game_id', 'hp.game_id')
+      .innerJoin('Game', 'game.game_id', 'hp.game_id')
       .where('hp.user_id', user_id)
 
     response.json({ok: true, data: groups});
