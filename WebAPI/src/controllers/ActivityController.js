@@ -36,7 +36,7 @@ class ActivityController {
 					}
 				});
 				if(agentsHasProps.indexOf(false) != -1){
-					return response.status(400).json("Invalid agents attributes");
+					return response.status(400).json("Invalid agents attributes, please check the following information: agent_id, name, type and role.");
 				}								
 			}
 			else{
@@ -57,7 +57,7 @@ class ActivityController {
 				}
 			});
 			if(entitesHasProps.indexOf(false) != -1){
-				return response.status(400).json("Invalid entities attributes");
+				return response.status(400).json("Invalid entities attributes, please check the following information: entity_id, name and role.");
 			}	
 		}
 
