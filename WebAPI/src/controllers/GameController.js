@@ -12,7 +12,7 @@ class GameController{
 
     const user_id = decodedToken.sub;
 
-    
+
     const game = await knex('Game as g')
       .select('g.token', 'g.name', 'g.version', 'hp.user_id', 'hp.owner', 'mu.username', 'hp.has_permission_id')
       .innerJoin('HasPermission as hp', 'hp.game_id', 'g.game_id')
@@ -22,7 +22,7 @@ class GameController{
       //todo: desculpa, precisa ajustar a tabela de haspermission
       // remover coluna "owner", adicionar "user_id" na tabela de game (criador do jogo)
       // paz
-      
+
     if(!game){
       return response.status(400).json({error: "Game not found"});
     }
@@ -88,7 +88,7 @@ FROM Game
          AS B
      ON Game.game_id = B.game_id
 WHERE HasPermission.user_id = '${user_id}'
-GROUP BY Game.game_id`);
+GROUP BY Game.game_id, HasPermission.owner`);
     // desculpa por isso ^
 
     response.json({ok: true, data: userGames[0]})
