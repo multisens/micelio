@@ -2,7 +2,8 @@ const knex = require('../database/connection');
 
 class ActivityController {
 
-	async create(request, response) {
+	async create(request, response){
+
 		let {activity_id,name, position_x, position_y,
 				time, influenced_by, influenced_by_properties, properties
 				, entities, agents } = request.body;
@@ -58,6 +59,10 @@ class ActivityController {
 			if(entitesHasProps.indexOf(false) != -1){
 				return response.status(400).json("Invalid entities attributes");
 			}	
+		}
+
+		if(request.url === '/test'){
+			return response.status(202).json({ok: true});
 		}
 
 		const trx = await knex.transaction();

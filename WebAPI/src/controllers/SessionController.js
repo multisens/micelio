@@ -4,7 +4,7 @@ const idGenerator = require('../utils/generators/idGenerator');
 class SessionController{
 
 	async create(request, response){
-
+        
         let {name, language, date, game_stage, session_group, start_time} = request.body;
 
         let {game_id, device_id} = request.headers;
@@ -27,6 +27,10 @@ class SessionController{
 
         if (!start_time) {
             return response.status(400).json({error: "Invalid session start time"});
+        }
+
+        if(request.url === '/test'){
+            return response.status(202).json({ok: true});
         }
 
         const sessionId = await idGenerator('Session');
@@ -84,6 +88,10 @@ class SessionController{
 
         if (!end_time) {
             return response.status(400).json({error: "Invalid session end time"});
+        }
+
+        if(request.url === '/test'){
+            return response.status(202).json({ok: true});
         }
 
         const trx = await knex.transaction();

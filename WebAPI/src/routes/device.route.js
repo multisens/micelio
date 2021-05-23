@@ -5,5 +5,6 @@ const Router = express.Router();
 const deviceController = new DeviceController;
 
 Router.post('/', deviceController.create); 
+Router.post('/test', deviceController.create); 
 
 module.exports = Router;

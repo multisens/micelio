@@ -26,6 +26,10 @@ class DeviceController {
 			return response.status(400).json({ error: "Invalid screen height" });
 		}
 
+		if(request.url === '/test'){
+			return response.status(202).json({ok: true});
+		}
+
 		try {
 
 			const data = {

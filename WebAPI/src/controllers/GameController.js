@@ -7,21 +7,22 @@ class GameController{
 
   async index(request, response){
     const {game_id} = request.params;
-    const {miceliotoken: userToken} = request.cookies
-    const decodedToken = decodeUserSession(userToken)
+    const {miceliotoken: userToken} = request.cookies;
+    const decodedToken = decodeUserSession(userToken);
 
     const user_id = decodedToken.sub;
 
+    
     const game = await knex('Game as g')
       .select('g.token', 'g.name', 'g.version', 'hp.user_id', 'hp.owner', 'mu.username', 'hp.has_permission_id')
       .innerJoin('HasPermission as hp', 'hp.game_id', 'g.game_id')
       .innerJoin("MicelioUser as mu", 'mu.user_id', 'hp.user_id')
       .where('g.game_id', game_id)
       .andWhere('hp.user_id', user_id).first();
-    //todo: desculpa, precisa ajustar a tabela de haspermission
-    // remover coluna "owner", adicionar "user_id" na tabela de game (criador do jogo)
-    // paz
-
+      //todo: desculpa, precisa ajustar a tabela de haspermission
+      // remover coluna "owner", adicionar "user_id" na tabela de game (criador do jogo)
+      // paz
+      
     if(!game){
       return response.status(400).json({error: "Game not found"});
     }
@@ -44,7 +45,7 @@ class GameController{
       .select('sg.session_group_id', 'sg.it_ends')
       .where('sg.has_permission_id', game.has_permission_id);
 
-    return response.json({game, groups: game_groups})
+    return response.json({game, groups: game_groups});
   }
 
   async get(request, response) {
