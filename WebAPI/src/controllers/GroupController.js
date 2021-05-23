@@ -12,7 +12,7 @@ class GroupController {
     const groups = await knex('SessionGroup as sg')
       .select('sg.session_group_id', 'game.name')
       .innerJoin('HasPermission as hp', 'hp.has_permission_id', 'sg.has_permission_id')
-      .innerJoin('Game', 'game.game_id', 'hp.game_id')
+      .innerJoin('Game as game', 'game.game_id', 'hp.game_id')
       .where('hp.user_id', user_id)
 
     response.json({ok: true, data: groups});
@@ -28,8 +28,8 @@ class GroupController {
       return response.status(400).json({error: "Nome do grupo inválido"});
     }
 
-    const {miceliotoken: userToken} = request.cookies
-    const decodedToken = decodeUserSession(userToken)
+    const {miceliotoken: userToken} = request.cookies;
+    const decodedToken = decodeUserSession(userToken);
 
     const user_id = decodedToken.sub;
 
@@ -43,7 +43,7 @@ class GroupController {
       return response.status(400).json({error: 'Sem permissão'});
     }
 
-    await knex('sessiongroup').insert({
+    await knex('SessionGroup').insert({
       session_group_id: new_group_id,
       has_permission_id: permission_db.has_permission_id,
       it_ends: 0,
