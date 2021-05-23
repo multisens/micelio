@@ -19,26 +19,59 @@ function SessionGroupList({groups}) {
   const [isGroupsExpanded, setIsGroupsExpanded] = useState(false)
   const [groupsLimit, setGroupsLimit] = useState(4)
 
+  const [isSearchingGroup, setIsSearchingGroup] = useState(false);
+
   useEffect(() => {
-    if(isGroupsExpanded) {
+    if(isGroupsExpanded || isSearchingGroup) {
       setGroupsLimit(Infinity);
       return;
     }
 
     setGroupsLimit(4);
-  }, [isGroupsExpanded])
+  }, [isGroupsExpanded, isSearchingGroup])
+
+  const filterGroupList = (keyboardEvent) => {
+    const filterText = keyboardEvent.target.value.toLowerCase().replace(' ', '');
+
+    if(filterText) {
+      setIsSearchingGroup(true)
+    }else{
+      setIsSearchingGroup(false)
+    }
+
+    groups.forEach(group => {
+      const groupName = group.name.toLowerCase().replace(' ', '');
+      const $groupCard = document.getElementById(group.session_group_id);
+
+      if(!$groupCard) {
+        return;
+      }
+
+      if(groupName.indexOf(filterText) === -1) {
+        $groupCard.style.display = 'none';
+        return;
+      }
+
+      $groupCard.style.display = 'block';
+    })
+  }
 
   return (
     <>
       <div className={'grouplist'}>
         <div className={'grouplist-header'}>
-          <h2>Grupos Criados</h2>
-          <p>Grupos de sessão criados para os seus jogos.</p>
+          <div>
+            <h2>Grupos Criados</h2>
+            <p>Grupos de sessão criados para os seus jogos.</p>
+          </div>
+          <div>
+            <input type={'text'} className={'primary'} placeholder={'Busque grupos'} onKeyUp={filterGroupList}/>
+          </div>
         </div>
         <ul>
           {
             groups.slice(0, groupsLimit).map(group => (
-              <li>
+              <li key={group.session_group_id} id={group.session_group_id}>
                 <h3>{group.name}</h3>
                 <span><i>{group.session_group_id}</i></span>
                 <Hr/>
@@ -51,7 +84,7 @@ function SessionGroupList({groups}) {
         </ul>
       </div>
       {
-        groups.length > 4 ?
+        groups.length > 4 && !isSearchingGroup ?
           (
             <div className={'more-groups'}>
               <button className="primary" onClick={() => {setIsGroupsExpanded(!isGroupsExpanded)}}>{isGroupsExpanded ? 'Ver menos' : 'Ver mais'}</button>

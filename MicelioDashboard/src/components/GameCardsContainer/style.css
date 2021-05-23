@@ -2,15 +2,23 @@
     margin-bottom: 20px;
 }
 
+/* Header */
 .gamecards-header{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.gamecards-header div:first-child {
+    display: flex;
+    align-items: center;
 }
 
 .gamecards-header h2{
     padding-right: 10px;
-    margin-bottom: 20px;
 }
+/* Header end */
 
 .gamecards ul {
     list-style: none;

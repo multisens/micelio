@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { useHistory } from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 import './style.css';
 
@@ -13,12 +12,14 @@ import Popup from '../../components/Popup'
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
+const GAMELIST_MAX_CARDS = 4;
+
 function Home() {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [isGroupPopupOpen, setIsGroupPopupOpen] = useState(false)
   const [isGamesExpanded, setIsGamesExpanded] = useState(false)
-  const [gameCards, setGameCards] = useState(4)
+  const [gameCards, setGameCards] = useState(GAMELIST_MAX_CARDS)
 
   const [newGame, setNewGame] = useState('')
   const [newGameVersion, setNewGameVersion] = useState('')
@@ -27,7 +28,7 @@ function Home() {
   const [gameList, setGameList] = useState([])
   const [groupList, setGroupList] = useState([])
 
-  const history = useHistory();
+  const [isSearchingGame, setIsSearchingGame] = useState(false);
 
 
   useEffect(() => {
@@ -36,17 +37,17 @@ function Home() {
   }, [])
 
   useEffect(() => {
-    if(isGamesExpanded) {
+    if(isGamesExpanded || isSearchingGame) {
       setGameCards(Infinity);
       return;
     }
-    setGameCards(4);
+    setGameCards(GAMELIST_MAX_CARDS);
 
-  }, [isGamesExpanded])
+  }, [isGamesExpanded, isSearchingGame])
 
   const updateGameList = () => {
     Api.get('/game').then(response => {
-      setGameList(response.data.data)
+      setGameList(response.data.data);
     })
   }
 
@@ -79,8 +80,6 @@ function Home() {
 
     }catch (e) {
       console.log(e.response.data)
-      const errorMessage = e.response.data.error;
-
       toast.error(`Não foi possível efetuar cadastro. Por favor, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
     }
   }
@@ -96,6 +95,36 @@ function Home() {
     updateGroupList();
     updateGameList();
     // sério, perdão ^
+  }
+
+  const filterGameList = (keyboardEvent) => {
+    const filterText = keyboardEvent.target.value.toLowerCase().replace(' ', '');
+
+    if(filterText) {
+      setIsSearchingGame(true);
+    }else{
+      setIsSearchingGame(false);
+    }
+
+    gameList.forEach(game => {
+      const gameName = game.name.toLowerCase().replace(' ', '');
+      const $gameCard = document.getElementById(game.game_id);
+
+      if(!$gameCard) {
+        return;
+      }
+
+      if(gameName.indexOf(filterText) === -1) {
+        $gameCard.style.display = 'none';
+        return;
+      }
+
+      $gameCard.style.display = 'flex';
+    })
+  }
+
+  const filterGroupList = () => {
+
   }
 
   return (
@@ -126,7 +155,7 @@ function Home() {
       <PageFormat menuSelected={'home'}>
         <main className={'gamelist-container'}>
 
-          <GameCardsContainer title="Meus Jogos" onClickAdd={() => {
+          <GameCardsContainer title="Meus Jogos" onSearch={filterGameList} onClickAdd={() => {
             setIsPopupOpen(true);
           }}>
             {
@@ -144,7 +173,7 @@ function Home() {
           </GameCardsContainer>
 
           {
-            gameList.length > 4 ? (
+            gameList.length > 4 && !isSearchingGame ? (
               <div className={'more-games'}>
                 <button className={'primary'} onClick={() => {setIsGamesExpanded(!isGamesExpanded)}}>{isGamesExpanded ? 'Ver menos' : 'Ver mais'}</button>
               </div>

@@ -19,7 +19,7 @@ function Card(props) {
   const history = useHistory();
 
   return (
-    <li>
+    <li id={props.id}>
       <div className={'card-header'} onClick={() => {history.push(`/game/${props.id}`)}}>
         <h2>{props.name}</h2>
         {(props.isOwner === 1)
