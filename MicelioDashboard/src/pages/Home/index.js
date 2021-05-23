@@ -25,6 +25,8 @@ function Home() {
   const [newGameVersion, setNewGameVersion] = useState('')
   const [newGroupId, setNewGroupId] = useState('')
 
+  const [newGroupName, setNewGroupName] = useState('')
+  const [newGroupGame, setNewGroupGame] = useState('')
   const [gameList, setGameList] = useState([])
   const [groupList, setGroupList] = useState([])
 
@@ -84,12 +86,21 @@ function Home() {
     }
   }
 
-  const doCreateGroup = async (game_id) => {
-    const response = await Api.post('/group', {game_id, name: "Jogo novo"});
+  const openGroupPopup = game_id => {
+    setNewGroupGame(game_id);
+    setIsGroupPopupOpen(true);
+  }
+
+  const doCreateGroup = async () => {
+    const game_id = newGroupGame;
+
+    const response = await Api.post('/group', {game_id, name: newGroupName});
     const group_id = response.data.group_id;
 
     setNewGroupId(group_id);
-    setIsGroupPopupOpen(true);
+    setNewGroupName('');
+
+    toast.success('Grupo criado com sucesso');
 
     // desculpa v
     updateGroupList();
@@ -123,13 +134,10 @@ function Home() {
     })
   }
 
-  const filterGroupList = () => {
-
-  }
-
   return (
     <>
       <ToastContainer />
+
       <Popup isOpen={isPopupOpen} onClose={() => {
         setIsPopupOpen(false)
       }}>
@@ -142,14 +150,25 @@ function Home() {
           <button className="primary">Cadastrar</button>
         </form>
       </Popup>
+
       <Popup isOpen={isGroupPopupOpen} onClose={() => {
         setIsGroupPopupOpen(false)
+        setNewGroupName('')
+        setNewGroupGame('')
+        setNewGroupId('')
       }}>
         <h2>Cadastre um grupo</h2>
-        <input className={'primary'} type="text" value={'Jogo teste'} placeholder={'Nome do grupo'}/>
-        <div className={'group-id'}>
-          {newGroupId}
-        </div>
+        <input className={'primary'} type="text" value={newGroupName} placeholder={'Nome do grupo'} onChange={e => setNewGroupName(e.target.value)} />
+        <button className="primary" onClick={doCreateGroup}>Cadastrar</button>
+        {
+          newGroupId &&
+          (
+            <div className={'group-id'}>
+              {newGroupId}
+            </div>
+          )
+        }
+
       </Popup>
 
       <PageFormat menuSelected={'home'}>
@@ -167,7 +186,7 @@ function Home() {
                               active={game.active_sessions}
                               shared={game.is_shared}
                               isOwner={game.is_owner}
-                              onCreateGroup={() => {doCreateGroup(game.game_id)}}/>);
+                              onCreateGroup={() => {openGroupPopup(game.game_id)}}/>);
               }) : (<span>Não há jogos cadastrados</span>)
             }
           </GameCardsContainer>
