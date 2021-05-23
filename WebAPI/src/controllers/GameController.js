@@ -42,7 +42,7 @@ class GameController{
     //todo: please help
 
     const game_groups = await knex('SessionGroup as sg')
-      .select('sg.session_group_id', 'sg.it_ends')
+      .select('sg.session_group_id', 'sg.it_ends', 'sg.name')
       .where('sg.has_permission_id', game.has_permission_id);
 
     return response.json({game, groups: game_groups});

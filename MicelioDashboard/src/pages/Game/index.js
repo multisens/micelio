@@ -23,7 +23,7 @@ function Game() {
       const gameResponse = await Api.get(`/game/${params.id}`);
 
       const {game: gameData, groups: groupsData} = gameResponse.data;
-
+      console.log(groupsData)
       setGame(gameData);
       setGroups(groupsData);
     }catch (e) {
