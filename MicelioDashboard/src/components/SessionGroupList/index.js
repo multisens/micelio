@@ -40,7 +40,7 @@ function SessionGroupList({groups}) {
     }
 
     groups.forEach(group => {
-      const groupName = group.name.toLowerCase().replace(' ', '');
+      const groupName = group.group_name.toLowerCase().replace(' ', '');
       const $groupCard = document.getElementById(group.session_group_id);
 
       if(!$groupCard) {
@@ -72,7 +72,7 @@ function SessionGroupList({groups}) {
           {
             groups.slice(0, groupsLimit).map(group => (
               <li key={group.session_group_id} id={group.session_group_id}>
-                <h3>{group.name}</h3>
+                <h3>{group.group_name}</h3>
                 <span><i>{group.session_group_id}</i></span>
                 <Hr/>
                 <p><b>Status: </b>{group.status || 'Aberto'}</p>

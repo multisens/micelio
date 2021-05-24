@@ -10,7 +10,7 @@ class GroupController {
     const user_id = decodedToken.sub;
 
     const groups = await knex('SessionGroup as sg')
-      .select('sg.session_group_id', 'game.name')
+      .select('sg.session_group_id', 'game.name', 'sg.name as group_name')
       .innerJoin('HasPermission as hp', 'hp.has_permission_id', 'sg.has_permission_id')
       .innerJoin('Game as game', 'game.game_id', 'hp.game_id')
       .where('hp.user_id', user_id)
