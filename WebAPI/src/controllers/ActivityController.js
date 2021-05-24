@@ -1,10 +1,11 @@
 const knex = require('../database/connection');
+const idGenerator = require('../utils/generators/idGenerator');
 
 class ActivityController {
 
 	async create(request, response){
 
-		let {activity_id,name, position_x, position_y,
+		let {activity_id, name, position_x, position_y,
 				time, influenced_by, influenced_by_properties, properties
 				, entities, agents } = request.body;
 
@@ -76,22 +77,49 @@ class ActivityController {
             .select('session_id')
             .first();
 			
-			const data = {
+			const activity_data = {
 				session_id,
 				activity_id,
-				name,
-				position_x,
-				position_y,
+				name, 
 				time,
-				influenced_by,
-				influenced_by_properties,
-				properties: JSON.stringify(properties),
-				entities,
-				agents,
-			}
-			
-            return response.status(201).json(data);
+				properties
+			};
 
+			const inserted_activity = await trx('Activity').insert(activity_data);
+
+			if(position_x && position_y){
+
+				const action_data = {
+					activity_id,
+					position_x,
+					position_y		
+				};
+				const inserted_activity = await trx('Action').insert(action_data);
+
+			}
+
+			if(influenced_by){
+
+				const influenced_by_id = await idGenerator('InfluencedBy', 'influenced_by');
+				const influenced_by_data = {
+					influenced_by_id,
+					influence: influenced_by,
+					influenced: activity_id,
+					properties: influenced_by_properties
+				}
+				const inserted_activity = await trx('Action').insert(action_data);
+
+			}
+
+			
+
+           // ENTITY 
+		   // AGENT
+		   // GAME OBJECT
+		   // GAME CHARACTER
+		   // ACTIVITY AGENTS
+		   // ACTIVITY ENTITIES
+			
 
         }
         catch(err){
