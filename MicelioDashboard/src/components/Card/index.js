@@ -33,7 +33,7 @@ function Card(props) {
         <p><b>Status: </b>{(props.shared) ? 'Compartilhado' : 'Privado'}</p>
       </div>
       <div className={'card-options'}>
-        <div className={"card-option"}>
+        <div className={"card-option"} onClick={props.onShare}>
           <AiOutlineShareAlt size={25}/>
         </div>
         <div className={"card-option"} onClick={props.onCreateGroup}>

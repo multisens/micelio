@@ -32,6 +32,10 @@ function Home() {
 
   const [isSearchingGame, setIsSearchingGame] = useState(false);
 
+  const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
+  const [shareUser, setShareUser] = useState('');
+  const [shareGame, setShareGame] = useState('');
+
 
   useEffect(() => {
     updateGameList();
@@ -91,6 +95,11 @@ function Home() {
     setIsGroupPopupOpen(true);
   }
 
+  const openSharePopup = game_id => {
+    setShareGame(game_id);
+    setIsSharePopupOpen(true);
+  }
+
   const doCreateGroup = async () => {
     const game_id = newGroupGame;
 
@@ -106,6 +115,19 @@ function Home() {
     updateGroupList();
     updateGameList();
     // sério, perdão ^
+  }
+
+  const doShareGame = async (formEvent) => {
+    formEvent.preventDefault();
+
+    try{
+      await Api.post('/game/share', {game_id: shareGame, user_share: shareUser});
+      toast.success('Compartilhado com sucesso');
+
+      setShareUser('');
+    }catch (e) {
+      toast.error(e.response.data.error, );
+    }
   }
 
   const filterGameList = (keyboardEvent) => {
@@ -137,6 +159,14 @@ function Home() {
   return (
     <>
       <ToastContainer />
+
+      <Popup isOpen={isSharePopupOpen} onClose={() => {setIsSharePopupOpen(false)}}>
+        <h2>Compartilhe o jogo</h2>
+        <form onSubmit={doShareGame}>
+          <input required type={'text'} placeholder={'Nome de usuário'} value={shareUser} onChange={e => {setShareUser(e.target.value)}} />
+          <button className={'primary'}>Compartilhar</button>
+        </form>
+      </Popup>
 
       <Popup isOpen={isPopupOpen} onClose={() => {
         setIsPopupOpen(false)
@@ -186,7 +216,8 @@ function Home() {
                               active={game.active_sessions}
                               shared={game.is_shared}
                               isOwner={game.is_owner}
-                              onCreateGroup={() => {openGroupPopup(game.game_id)}}/>);
+                              onCreateGroup={() => {openGroupPopup(game.game_id)}}
+                              onShare={() => {openSharePopup(game.game_id)}} />);
               }) : (<span>Não há jogos cadastrados</span>)
             }
           </GameCardsContainer>
