@@ -23,7 +23,6 @@ function Game() {
       const gameResponse = await Api.get(`/game/${params.id}`);
 
       const {game: gameData, groups: groupsData} = gameResponse.data;
-      console.log(groupsData)
       setGame(gameData);
       setGroups(groupsData);
     }catch (e) {
@@ -35,7 +34,7 @@ function Game() {
   return (
       <PageFormat menuSelected={'dashboard'}>
         <div className="dashboard-container">
-          <button className={'primary'} style={{marginBottom: 20}}>Ver</button>
+          {/*<button className={'primary'} style={{marginBottom: 20}}>Ver</button>*/}
           {game && (
             <div className={'gameinfo-container'}>
               <div className={'gameinfo-avatar'}>
