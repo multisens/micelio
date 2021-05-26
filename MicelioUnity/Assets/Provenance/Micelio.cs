@@ -12,7 +12,7 @@ using System.Text;
 
 public class Micelio
 {
-    //private string defaultURL = "http://127.0.0.1:7777/api";
+ 
     private string defaultURL = "https://achernar.eic.cefet-rj.br/micelio/api";
     private string token;
     private string device_id;

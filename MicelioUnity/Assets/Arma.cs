@@ -10,7 +10,7 @@ public class Arma : MonoBehaviour, EntityObject
     public double peso;
     public int poder ;
 
-    public Soldado(int poder, double peso)
+    public Arma(int poder, double peso)
     {
         this.poder = poder;
         this.peso = peso;
@@ -26,11 +26,12 @@ public class Arma : MonoBehaviour, EntityObject
         
     }
 
-    public Agent GetAgent()
+    public Entity GetEntity()
     {   
         Entity e = new Entity(id_entity, nome);
 		e.AddProperty("poder", poder);
         e.AddProperty("peso", peso);
+        e.SetRole("objeto");
         return e;
 
     }

@@ -7,15 +7,16 @@ using System;
 public class GameManager : MonoBehaviour
 {
 
-	private string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjAzMDkyOTIsInN1YiI6IjFhYTdhMTZhLTBjYzYtNDUwOS05MWI2LTU1ZTdkNzhhOGE3NiJ9.tAkpFXTtXvEn8uasJl_xgBLVZuclqFR-DSRv_ZjD4Ws";
+	private string token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjE5ODg5MDYsInN1YiI6IjBmMDQzZTNhLTMxMmQtNDlkNi1hYTgwLTM0ODRhMDVmOTE1YiJ9.Byt1MJWuUBK0vp_gvEicjhsn70BfnrAhOtJcuhY9IkQ";
+    public static Micelio micelio;
 
     void Start()
     {
         //Debug.Log(Application.persistentDataPath);
-        Micelio micelio = new Micelio(token);
+        micelio = new Micelio(token);
         
         Session session = new Session("pt-BR","1");
-        session.setName("game start");
+        session.SetName("game start");
         micelio.StartSession(session);
 
         Soldado player = new Soldado(10,25,"soldier",150,130);

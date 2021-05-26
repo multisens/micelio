@@ -35,7 +35,7 @@ public class Soldado : MonoBehaviour, AgentObject
     }
 
     public void Fire(Arma gun, string time)
-    {   
+    {  
         Debug.Log("pow");
         this.municao--;
 
@@ -43,7 +43,7 @@ public class Soldado : MonoBehaviour, AgentObject
         fire.SetPosition(this.posx,this.posy);
         fire.AddAgent(this);
         fire.AddEntity(gun);
-        micelio.SendActivity(fire);
+        GameManager.micelio.SendActivity(fire);
     }
 
     public Agent GetAgent()
@@ -53,6 +53,7 @@ public class Soldado : MonoBehaviour, AgentObject
         a.AddProperty("munição", municao);
         a.AddProperty("pontos de vida", hp);
         a.AddProperty("patente", patente);
+        a.SetRole("atirador");
         return a;
     }
 }
