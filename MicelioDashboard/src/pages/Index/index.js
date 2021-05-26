@@ -13,7 +13,7 @@ import {useAuth} from "../../context/AuthContext";
 
 function Index() {
   const history = useHistory();
-  const {setAuth, setName} = useAuth()
+  const {setAuth} = useAuth()
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +25,6 @@ function Index() {
       await Api.post('/user/login', { username, password })
 
       setAuth(true)
-      setName(username);
 
       history.push('/home')
     }catch (e) {

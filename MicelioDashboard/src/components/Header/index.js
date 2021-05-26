@@ -4,7 +4,7 @@ import './style.css';
 import {useAuth} from "../../context/AuthContext";
 
 const Header = (props) => {
-  const {name, auth} = useAuth();
+  const {auth} = useAuth();
   console.log(auth);
 
   return (

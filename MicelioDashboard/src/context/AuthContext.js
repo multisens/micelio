@@ -7,7 +7,6 @@ export const AuthProvider = ({children}) => {
 
   const [auth, setAuth] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [name, setName] = useState('')
 
   useEffect(() => {
 
@@ -22,7 +21,7 @@ export const AuthProvider = ({children}) => {
 
 
   return (
-    <AuthContext.Provider value={{isAuth: auth, isLoading, name, setAuth, setIsLoading, setName}}>
+    <AuthContext.Provider value={{isAuth: auth, isLoading, setAuth, setIsLoading}}>
       {children}
     </AuthContext.Provider>
   )
