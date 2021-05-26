@@ -24,9 +24,9 @@ O modelo de dados foi criado baseando-se no modelo de proveniência PROV. O PROV
 
 A plataforma do Micélio conta com alguns módulos, são eles:
 
-- WebAPI:
+- MicelioAPI:
 
-  [Saiba mais](https://github.com/GPMM/micelio/tree/main/WebAPI).
+  [Saiba mais](https://github.com/GPMM/micelio/tree/main/MicelioAPI).
 
 - MicelioUnity:
 
