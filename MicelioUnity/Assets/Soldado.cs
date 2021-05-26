@@ -41,8 +41,8 @@ public class Soldado : MonoBehaviour, AgentObject
 
         Activity fire = new Activity("fire", time);
         fire.SetPosition(this.posx,this.posy);
-        fire.AddAgent(this);
-        fire.AddEntity(gun);
+        fire.AddAgent(this, "atirador");
+        fire.AddEntity(gun, "objeto utilizado");
         GameManager.micelio.SendActivity(fire);
     }
 
@@ -53,7 +53,6 @@ public class Soldado : MonoBehaviour, AgentObject
         a.AddProperty("munição", municao);
         a.AddProperty("pontos de vida", hp);
         a.AddProperty("patente", patente);
-        a.SetRole("atirador");
         return a;
     }
 }

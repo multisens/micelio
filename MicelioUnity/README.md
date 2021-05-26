@@ -44,7 +44,7 @@ Para definir as suas classes como Agentes e Entidades, o módulo MicelioUnity co
 
 
 
-Cada uma dessas interfaces possuem, respectivamente, os métodos `GetEntity` e `GetAgent`. Esses métodos servem para definir como uma classe pode se tornar uma entidade ou um agente. Esses métodos serão utilizados para inserir os objetos nas atividades que serão enviadas.
+Cada uma dessas interfaces possuem, respectivamente, os métodos `GetEntity` e `GetAgent`. Esses métodos servem para definir como uma classe pode se tornar uma entidade ou um agente, eles serão utilizados para inserir os objetos nas atividades que serão enviadas.
 
 Além da implementação das funções, é muito importante definir o identificador único da entidade ou agente. Esse identificador servirá para reconhecer aquela instância, dessa forma é possível identificar se aquela instância é nova ou está apenas sendo atualizada. Para criação desses identificadores as classes `Entity` e `Agent` oferecem os métodos staticos `GenerateEntityID()` e `GenerateAgentID()` que solucionam esse problema.
 
@@ -70,7 +70,7 @@ Para instanciar um `Entity` precisamos de apenas dois parâmetros, são eles:
 
 - `properties` : Propriedades gerais da entidade. Valores específicos de cada jogo. Para adicionar propriedades à entidade utilize o método `AddProperty(string name, object value)`.
 
-
+  
 
 O exemplo abaixo mostra como criar uma entidade `Arma` no Unity.
 
@@ -192,7 +192,7 @@ public class Soldado : MonoBehaviour, AgentObject
 
 ```
 
-
+> Obs.: Definir a role de um agente ou entidade dentro dos métodos `GetAgent` e `GetEntity` fará com que toda instância daquela classe tenha o mesmo papel em todas as atividades. Tenha cuidado ao fazer isso. A role também poderá ser definida ao inserir o objeto dentro da atividade.
 
 
 
@@ -216,7 +216,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	public string token = "token-12345678";
-    public Micelio micelio;
+    public static Micelio micelio;
     
     void Start()
     {
@@ -232,6 +232,8 @@ public class GameManager : MonoBehaviour
 }
 
 ```
+
+> Obs.: O atributo `micelio` foi declarado com estático para que possa ser acessado pelas outras classes, essa é uma boa prática para utilização, mas não é uma regra.
 
 
 
@@ -251,7 +253,7 @@ Agora que temos um instância do Micelio criada, nos temos acesso a alguns méto
 
 
 
-Para que seja possível enviar uma sessão, precisamos criar uma instância de `Session`, que será passada como parâmetro da requisição. Embora uma sessão tenha diversos atributos, a criação de uma instância é muito simples, necessitando apenas do idioma e da fase em que o jogador se encontra. Uma vez criada a sessão, podemos chamar o método `StartSession()` e a partir dai, começar a enviar as atividades. Veja o exemplo:
+Para que seja possível enviar uma sessão, precisamos criar uma instância de `Session`, que será passada como parâmetro da requisição. Embora uma sessão tenha diversos atributos, a criação de uma instância é muito simples, necessitando apenas do **idioma** e da **fase** em que o jogador se encontra. Uma vez criada a sessão, podemos chamar o método `StartSession()` e a partir dai, começar a enviar as atividades. Veja o exemplo:
 
 ```c#
 using System.Collections;
@@ -261,10 +263,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	public string token = "token-12345678";
-    public Micelio micelio;
+    public static Micelio micelio;
+    
     void Start()
     {
-     
         micelio = new Micelio(token);
         
         Session s = new Session('pt-br','1');
@@ -379,6 +381,8 @@ public class Soldado : MonoBehaviour, AgentObject
     }
 }
 ```
+
+> Obs.: Os métodos `AddAgent`  e `AddEntity` possuem um segundo parâmetro, opcional, que representa o papel (role) daquele objeto naquela atividade. Por exemplo: fire.AddEntity(gun, "objeto utilizado");
 
 
 

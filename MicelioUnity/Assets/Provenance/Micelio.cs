@@ -16,17 +16,23 @@ public class Micelio
     private string defaultURL = "https://achernar.eic.cefet-rj.br/micelio/api";
     private string token;
     private string device_id;
+    private bool is_dev;
     private Assembly dll;
 
     //construtor classe Micelio
-    public Micelio(string token)
+    public Micelio(string token, string is_dev = "")
     {
 
         this.token = token;
         this.device_id = GetDeviceInformation();
         string path = Directory.GetCurrentDirectory();
         this.dll = Assembly.LoadFrom(path+"/Assets/Provenance/LitJson.dll");
-
+        if(is_dev == "dev"){
+            this.is_dev = true;
+        }
+        else{
+            this.is_dev = false;   
+        }
     }
 
     public static string ToJSON(object o)
@@ -116,6 +122,11 @@ public class Micelio
 
         //criação da requisição e configuração dos parametros
         var requisicaoWeb = (HttpWebRequest)WebRequest.CreateHttp(this.defaultURL + endPoint);
+        
+        if(is_dev){
+            requisicaoWeb = (HttpWebRequest)WebRequest.CreateHttp(this.defaultURL + endPoint + "/test");
+        }
+    
         requisicaoWeb.ContentType = "application/json";
         requisicaoWeb.UserAgent = "MicelioUnityAgent";
         requisicaoWeb.Headers.Add("token", this.token);

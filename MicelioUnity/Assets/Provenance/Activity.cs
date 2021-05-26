@@ -47,14 +47,22 @@ public class Activity
 		this.properties.Add(key,value);
 	} 
 
-	public void AddEntity(EntityObject e)
+	public void AddEntity(EntityObject eo, string role = null)
 	{
-		this.entities.Add(e.GetEntity());
+		Entity e = eo.GetEntity();
+		if(role != null){
+			e.SetRole(role);
+		}
+		this.entities.Add(e);
 	}
 
-	public void AddAgent(AgentObject a)
+	public void AddAgent(AgentObject ao, string role = null)
 	{
-		this.agents.Add(a.GetAgent());	
+		Agent a = ao.GetAgent();
+		if(role != null){
+			a.SetRole(role);
+		}
+		this.agents.Add(a);	
 	}
 
 }

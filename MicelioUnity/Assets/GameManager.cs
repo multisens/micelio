@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //Debug.Log(Application.persistentDataPath);
-        micelio = new Micelio(token);
+        micelio = new Micelio(token, "dev");
         
         Session session = new Session("pt-BR","1");
         session.SetName("game start");

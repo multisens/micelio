@@ -31,7 +31,6 @@ public class Arma : MonoBehaviour, EntityObject
         Entity e = new Entity(id_entity, nome);
 		e.AddProperty("poder", poder);
         e.AddProperty("peso", peso);
-        e.SetRole("objeto");
         return e;
 
     }
