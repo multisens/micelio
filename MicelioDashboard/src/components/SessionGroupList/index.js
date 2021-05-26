@@ -75,9 +75,9 @@ function SessionGroupList({groups}) {
                 <h3>{group.group_name}</h3>
                 <span><i>{group.session_group_id}</i></span>
                 <Hr/>
-                <p><b>Status: </b>{group.status || 'Aberto'}</p>
-                <p><b>Criador: </b>{group.creator || 'Lucas'}</p>
-                <p><b>Sessões: </b>{group.sessions || '40'}</p>
+                <p><b>Status: </b>{group.it_ends ? 'Fechado' : 'Aberto'}</p>
+                <p><b>Jogo: </b>{group.name}</p>
+                <p><b>Sessões: </b>{group.qtdSession}</p>
               </li>
             ))
           }

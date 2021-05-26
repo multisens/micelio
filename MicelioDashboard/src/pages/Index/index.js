@@ -13,7 +13,7 @@ import {useAuth} from "../../context/AuthContext";
 
 function Index() {
   const history = useHistory();
-  const {setAuth} = useAuth()
+  const {setAuth, setName} = useAuth()
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -22,15 +22,14 @@ function Index() {
     formEvent.preventDefault()
 
     try{
-      const loginResponse = await Api.post('/user/login', { username, password })
-
-      const { user_id } = loginResponse.data
-      localStorage.setItem('@micelio/user', user_id)
+      await Api.post('/user/login', { username, password })
 
       setAuth(true)
+      setName(username);
+
       history.push('/home')
     }catch (e) {
-      
+
       toast.error(e.response.data.error)
     }
   }

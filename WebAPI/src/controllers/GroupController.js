@@ -9,10 +9,16 @@ class GroupController {
 
     const user_id = decodedToken.sub;
 
+    // SELECT sg.session_group_id, COUNT(sig.session_group_id) as qtdSession FROM `sessiongroup` as sg
+    // LEFT JOIN `sessioningroup` as sig ON sg.session_group_id = sig.session_group_id GROUP BY sg.session_group_id
+
     const groups = await knex('SessionGroup as sg')
-      .select('sg.session_group_id', 'game.name', 'sg.name as group_name')
+      .select('sg.session_group_id', 'sg.it_ends', 'game.name', 'sg.name as group_name')
+      .count('sig.session_group_id as qtdSession')
       .innerJoin('HasPermission as hp', 'hp.has_permission_id', 'sg.has_permission_id')
       .innerJoin('Game as game', 'game.game_id', 'hp.game_id')
+      .leftJoin('SessionInGroup as sig', 'sg.session_group_id', 'sig.session_group_id')
+      .groupBy('sg.session_group_id')
       .where('hp.user_id', user_id)
 
     response.json({ok: true, data: groups});

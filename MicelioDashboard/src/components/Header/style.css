@@ -2,10 +2,12 @@
 header.main{
     height: 100px;
     background-color: #2A9D8F ;
+    display: flex;
+    justify-content: space-between;
 }
 
 header.main {
-    padding-left: 50px;
+    padding: 0 50px;
     display: flex;
     align-items: center
 }
@@ -13,4 +15,10 @@ header.main {
 header.main h1 {
     color: white;
     font-size: 42px;
+}
+
+header.main span {
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
 }
