@@ -1,6 +1,6 @@
-# WebAPI
+# MicelioAPI
 
-O módulo WebAPI do Micélio é responsável por gerenciar os dados da plataforma. Ele recebe dados relacionados a usuários, dispositivos, e jogos e armazena eles no banco de dados. No caso dos jogos, as informações das atividades são filtradas e armazenadas em suas respectivas tabelas. Para persistir os dados foi utilizado o modelo de dados criado para o projeto, a documentação do modelo pode ser encontrada clicando [aqui](https://github.com/GPMM/micelio).
+O módulo MicelioAPI do Micélio é responsável por gerenciar os dados da plataforma. Ele recebe dados relacionados a usuários, dispositivos, e jogos e armazena eles no banco de dados. No caso dos jogos, as informações das atividades são filtradas e armazenadas em suas respectivas tabelas. Para persistir os dados foi utilizado o modelo de dados criado para o projeto, a documentação do modelo pode ser encontrada clicando [aqui](https://github.com/GPMM/micelio).
 
 
 
