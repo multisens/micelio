@@ -9,8 +9,6 @@ class ActivityController {
 				time, influenced_by, influenced_by_properties, properties
 				, entities, agents } = request.body;
 
-		// console.log(request.body)
-
 		const {game_id, device_id} = request.headers;
 
 		if (!activity_id) {
@@ -147,11 +145,12 @@ class ActivityController {
 					agent_id,
 					activity_id,
 					role,
+					position_x: agent_pos_x,
+					position_y:agent_pos_y,
 					properties: JSON.stringify(agent_properties)
 				};
 				
-				if(!registered_agents.includes(agent_id)){
-					const agent_data = {
+				const agent_data = {
 						agent_id,
 						name,
 						type,
@@ -166,7 +165,6 @@ class ActivityController {
 						}
 						game_characteres_to_insert.push(character_data);
 					}
-				}
 				
 				agents_activity.push(agent_data_activity);
 				
@@ -181,24 +179,24 @@ class ActivityController {
 					entity_id,
 					activity_id,
 					role,
+					position_x: entity_pos_x,
+					position_y: entity_pos_y,
 					properties: JSON.stringify(entity_properties)
 				};
 				
-				if(!registered_entities.includes(entity_id)){
-					const entity_data = {
+				const entity_data = {
+					entity_id,
+					name,
+					properties: JSON.stringify(entity_properties)
+				};
+				entities_to_insert.push(entity_data);
+				if(entity_pos_x !== undefined && entity_pos_y !== undefined){
+					const object_data = {
 						entity_id,
-						name,
-						properties: JSON.stringify(entity_properties)
-					};
-					entities_to_insert.push(entity_data);
-					if(entity_pos_x !== undefined && entity_pos_y !== undefined){
-						const object_data = {
-							entity_id,
-							position_x: entity_pos_x, 
-							position_y: entity_pos_y
-						}
-						game_objects_to_insert.push(object_data);
+						position_x: entity_pos_x, 
+						position_y: entity_pos_y
 					}
+					game_objects_to_insert.push(object_data);
 				}
 				
 				entities_activity.push(entity_data_activity);
@@ -207,14 +205,20 @@ class ActivityController {
 			// Agents
 
 			if(agents_to_insert.length > 0){
-				const inserted_agents = await trx('Agent').insert(agents_to_insert);
+				const inserted_agents = await trx('Agent')
+				.insert(agents_to_insert)
+				.onConflict('agent_id')
+  				.merge(['properties']);;
 			}
 			else{
 				const inserted_agents = -1;
 			}
 
 			if(game_characteres_to_insert.length > 0){
-				const inserted_game_characters = await trx('GameCharacter').insert(game_characteres_to_insert);
+				const inserted_game_characters = await trx('GameCharacter')
+				.insert(game_characteres_to_insert)
+				.onConflict('entity_id')
+  				.merge();;
 			}
 			else{
 				const inserted_game_characters = -1;
@@ -230,13 +234,19 @@ class ActivityController {
 			// Entities
 
 			if(entities_to_insert.length > 0){
-				const inserted_entities = await trx('Entity').insert(entities_to_insert);
+				const inserted_entities = await trx('Entity')
+				.insert(entities_to_insert)
+				.onConflict('entity_id')
+  				.merge(['properties']);
 			}
 			else{
 				const inserted_entities = -1;
 			}
 			if(game_objects_to_insert.length > 0){
-				const inserted_game_objects = await trx('GameObject').insert(game_objects_to_insert);
+				const inserted_game_objects = await trx('GameObject')
+				.insert(game_objects_to_insert)
+				.onConflict('entity_id')
+  				.merge();
 			}
 			else{
 				const inserted_game_objects = -1;
@@ -249,19 +259,6 @@ class ActivityController {
 			else{
 				const inserted_entities_activity = -1;
 			}
-	
-			// console.log("agents_to_insert");
-			// console.log(agents_to_insert);
-			// console.log("game_characteres_to_insert");
-			// console.log(game_characteres_to_insert);
-			// console.log("agents_activity");
-			// console.log(agents_activity);
-			// console.log("entities_to_insert");
-			// console.log(entities_to_insert);
-			// console.log("game_objects_to_insert");
-			// console.log(game_objects_to_insert);
-			// console.log("entities_activity");
-			// console.log(entities_activity);
 
 			await trx.commit();
 			return response.status(201).json({ok: 'true'});
