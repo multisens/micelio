@@ -87,8 +87,8 @@ CREATE TABLE Activity(
 
 CREATE TABLE Action(
 	activity_id varchar(150) NOT NULL,
-	position_x double(9, 6) NOT NULL,
-	position_y double(9, 6) NOT NULL,
+	position_x double(15, 6) NOT NULL,
+	position_y double(15, 6) NOT NULL,
 
 	PRIMARY KEY(activity_id),
 	FOREIGN KEY(activity_id) REFERENCES Activity(activity_id)
@@ -116,8 +116,8 @@ CREATE TABLE Agent(
 
 CREATE TABLE GameCharacter(
 	agent_id varchar(150) NOT NULL,
-	position_x double(9, 6),
-	position_y double(9, 6),
+	position_x double(15, 6),
+	position_y double(15, 6),
 
 	PRIMARY KEY(agent_id),
 	FOREIGN KEY(agent_id) REFERENCES Agent(agent_id)
@@ -128,8 +128,8 @@ CREATE TABLE ActivityAgents(
 	activity_id varchar(150) NOT NULL,
 	properties text NOT NULL,
 	role varchar(20),
-	position_x double(9, 6),
-	position_y double(9, 6),
+	position_x double(15, 6),
+	position_y double(15, 6),
 
 	PRIMARY KEY(agent_id, activity_id),
 	FOREIGN KEY(agent_id) REFERENCES Agent(agent_id),
@@ -146,8 +146,8 @@ CREATE TABLE Entity(
 
 CREATE TABLE GameObject(
 	entity_id varchar(150) NOT NULL,
-	position_x double(9, 6) NOT NULL,
-	position_y double(9, 6) NOT NULL,
+	position_x double(15, 6) NOT NULL,
+	position_y double(15, 6) NOT NULL,
 
 	PRIMARY KEY(entity_id),
 	FOREIGN KEY(entity_id) REFERENCES Entity(entity_id)
@@ -158,8 +158,8 @@ CREATE TABLE ActivityEntities(
 	activity_id varchar(150) NOT NULL,
 	properties text NOT NULL,
 	role varchar(20),
-	position_x double(9, 6),
-	position_y double(9, 6),
+	position_x double(15, 6),
+	position_y double(15, 6),
 
 
 	PRIMARY KEY(entity_id, activity_id),
