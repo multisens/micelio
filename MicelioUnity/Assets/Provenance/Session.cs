@@ -25,7 +25,7 @@ public class Session
 		
   	}
 
-  	public void SetSesssionGroup(string session_group)
+  	public void SetSessionGroup(string session_group)
 	{
 		this.session_group = session_group;
 	}
