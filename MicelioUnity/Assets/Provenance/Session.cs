@@ -20,8 +20,8 @@ public class Session
 		System.DateTime currentTime = System.DateTime.Now;
 	   	this.language = language;
 	   	this.game_stage = game_stage;
-	   	this.date = currentTime.Year+"-"+currentTime.Month+"-"+currentTime.Day;
-		this.start_time = currentTime.Hour+":"+currentTime.Minute+":"+currentTime.Second;
+	   	this.date = currentTime.ToString("yyyy-MM-dd");
+		this.start_time = currentTime.ToString("HH:mm:ss");
 		
   	}
 

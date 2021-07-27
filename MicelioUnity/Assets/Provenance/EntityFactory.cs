@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface AgentObject
+public interface EntityFactory
 {
 
-	Agent GetAgent();
+	Entity GetEntity();
 
 }

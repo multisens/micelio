@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Arma : MonoBehaviour, EntityObject
+public class Arma : EntityFactory
 {
-    private string id_entity = Entity.GenerateEntityID();
     public string nome = "Arma";
     public double peso;
-    public int poder ;
+    public float poder ;
 
-    public Arma(int poder, double peso)
+    public Arma(float poder, double peso)
     {
         this.poder = poder;
         this.peso = peso;
@@ -28,7 +27,7 @@ public class Arma : MonoBehaviour, EntityObject
 
     public Entity GetEntity()
     {   
-        Entity e = new Entity(id_entity, nome);
+        Entity e = new Entity(nome);
 		e.AddProperty("poder", poder);
         e.AddProperty("peso", peso);
         return e;

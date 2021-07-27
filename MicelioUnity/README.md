@@ -398,3 +398,12 @@ public class Soldado : MonoBehaviour, AgentObject
 
 > Obs.: Para pegar o identificador único de uma atividade, que deve ser passado no método `influenced_by`, após instânciar uma atividade, você pode usar `activity.activity_id`.
 
+
+
+
+
+### Ranking
+
+------
+
+Além de armazenar os dados dos jogos, o Micélio disponibliza uma rota para servir dados de ranking dos jogos. Para 

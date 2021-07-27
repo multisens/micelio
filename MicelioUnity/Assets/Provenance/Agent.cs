@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine; 
 using UnityEngine.Serialization; 
@@ -14,20 +15,26 @@ public class Agent
     public double position_y;
 	public Dictionary<string, object> properties;
 
-	public Agent(string id,string name,string type)
-	{	
-
+	public Agent(string name,string type){
+		this.agent_id = GenerateAgentID();
 		this.name = name;
 		this.type = type;
-		this.agent_id = id;
 		this.properties = new Dictionary<string, object>();
-
 	}
+
+	public Agent(string id, string name,string type)
+	{	
+		this.agent_id = id;
+		this.name = name;
+		this.type = type;
+		this.properties = new Dictionary<string, object>();
+	}
+	
 
 	public static string GenerateAgentID()
 	{
 		System.DateTime currentTime = System.DateTime.Now;
-		return "agent-"+currentTime.Day+currentTime.Hour+currentTime.Minute+currentTime.Second+currentTime.Millisecond;		
+		return "agent-"+currentTime.ToString("ddHHmmss");
 	}
 
 	public void SetPosition(double x, double y)
@@ -38,7 +45,14 @@ public class Agent
 
 	public void AddProperty(string key,object value)
 	{
-		this.properties.Add(key,value);
+		// conversão de float para double porque o LitJSON não
+		// consegue reconhecer floats
+		if(value is float){
+			this.properties.Add(key, (double) new decimal((float)value));
+		}
+		else{
+			this.properties.Add(key,value);
+		}
 	}
 
 	public void SetRole(string role)

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         micelio.StartSession(session);
 
         Soldado player = new Soldado(10,25,"soldier",150,130);
-        Arma gun = new Arma(5,1.5);
+        Arma gun = new Arma(5.5f,1.5);
 
         player.Fire(gun,"wave 1");
 

@@ -14,17 +14,22 @@ public class Entity
 
 	public Entity(string id, string name)
 	{
-
 		this.entity_id = id;
 		this.name = name;
 		this.properties = new Dictionary<string, object>();
+	}
 
+	public Entity(string name)
+	{
+		this.entity_id = GenerateEntityID();
+		this.name = name;
+		this.properties = new Dictionary<string, object>();
 	}
 
 	public static string GenerateEntityID()
 	{
 		System.DateTime currentTime = System.DateTime.Now;
-		return "entity-"+currentTime.Day+currentTime.Hour+currentTime.Minute+currentTime.Second+currentTime.Millisecond;		
+		return "entity-"+currentTime.ToString("ddHHmmss");		
 	}
 
 	public void SetPosition(double x, double y)
@@ -35,7 +40,14 @@ public class Entity
 
 	public void AddProperty(string key,object value)
 	{
-		this.properties.Add(key,value);
+		// conversão de float para double porque o LitJSON não
+		// consegue reconhecer floats
+		if(value is float){
+			this.properties.Add(key, (double) new decimal((float)value));
+		}
+		else{
+			this.properties.Add(key,value);
+		}
 	}
 
 	public void SetRole(string role)

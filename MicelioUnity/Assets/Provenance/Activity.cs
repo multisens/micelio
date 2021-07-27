@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 [System.Serializable]
@@ -28,7 +29,7 @@ public class Activity
 	private string GenerateActivityID()
 	{
 		System.DateTime currentTime = System.DateTime.Now;
-		return "activity-"+currentTime.Day+currentTime.Hour+currentTime.Minute+currentTime.Second+currentTime.Millisecond;		
+		return "activity-"+currentTime.ToString("ddHHmmss");		
 	}
 
 	public void SetPosition(double x, double y)
@@ -47,20 +48,32 @@ public class Activity
 		this.properties.Add(key,value);
 	} 
 
-	public void AddEntity(EntityObject eo, string role = null)
+	public void AddEntity(EntityFactory entity, string role = null)
 	{
-		Entity e = eo.GetEntity();
+		Entity e = entity.GetEntity();
 		if(role != null){
 			e.SetRole(role);
+		}
+		else{
+			if(e.role == null){
+				throw new ArgumentNullException("[MICELIO] Impossível inserir uma entidade sem uma role definida." +
+				" Adicione uma role antes de inserir o objeto ou na criação dele.");
+			}
 		}
 		this.entities.Add(e);
 	}
 
-	public void AddAgent(AgentObject ao, string role = null)
+	public void AddAgent(AgentFactory agent, string role = null)
 	{
-		Agent a = ao.GetAgent();
+		Agent a = agent.GetAgent();
 		if(role != null){
 			a.SetRole(role);
+		}
+		else{
+			if(a.role == null){
+				throw new ArgumentNullException("[MICELIO] Impossível inserir um agente sem uma role definida." +
+				" Adicione uma role antes de inserir o objeto ou na criação dele.");
+			}
 		}
 		this.agents.Add(a);	
 	}
