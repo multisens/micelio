@@ -1,0 +1,3019 @@
+{
+    "session_id": 405,
+    "name": "exported by script in 02/08/2021",
+    "language": "N/A",
+    "game_stage": "1",
+    "date": "2021-08-02",
+    "session_group_id": null,
+    "start_time": "20:19:15",
+    "end-time": null,
+    "activity": [
+        {
+            "activity_id": 1,
+            "name": "plantar",
+            "time": "3",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 375,
+            "position_y": 226,
+            "entities": [
+                {
+                    "entity_id": 257,
+                    "name": "tomate",
+                    "position_x": 226,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 2,
+            "name": "plantar",
+            "time": "6",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 575,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": 258,
+                    "name": "milho",
+                    "position_x": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 3,
+            "name": "desenvolvimento",
+            "time": "14",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 375,
+            "position_y": 226,
+            "entities": [
+                {
+                    "entity_id": 259,
+                    "name": "tomate",
+                    "position_x": 226,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 4,
+            "name": "desenvolvimento",
+            "time": "17",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 575,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": 260,
+                    "name": "milho",
+                    "position_x": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 5,
+            "name": "colher",
+            "time": "18",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "entity_id": 259,
+                    "name": "tomate",
+                    "position_x": null,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 6,
+            "name": "colher",
+            "time": "19",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "entity_id": 260,
+                    "name": "milho",
+                    "position_x": null,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 7,
+            "name": "inserir predador",
+            "time": "24",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "tipo_predador": "joaninha"
+            }
+        },
+        {
+            "activity_id": 8,
+            "name": "Novo inseto",
+            "time": "24",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 345,
+            "position_y": 228,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 263,
+                    "name": "joaninha",
+                    "type": "CPU",
+                    "position_x": 228,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 9,
+            "name": "plantar",
+            "time": "21",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 275,
+            "position_y": 177,
+            "entities": [
+                {
+                    "entity_id": 264,
+                    "name": "milho",
+                    "position_x": 177,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 10,
+            "name": "plantar",
+            "time": "23",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 325,
+            "position_y": 226,
+            "entities": [
+                {
+                    "entity_id": 265,
+                    "name": "tomate",
+                    "position_x": 226,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 11,
+            "name": "inserir predador",
+            "time": "26",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "tipo_predador": "besouro"
+            }
+        },
+        {
+            "activity_id": 12,
+            "name": "Novo inseto",
+            "time": "26",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 216,
+            "position_y": 220,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 266,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 220,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 13,
+            "name": "Colisão sem resultado",
+            "time": "26",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 325,
+            "position_y": 226,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 226,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 265,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 226,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 14,
+            "name": "migracao",
+            "time": "32",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "10": 3,
+                "tipo_de_praga": "pulgao"
+            }
+        },
+        {
+            "activity_id": 15,
+            "name": "Novo inseto",
+            "time": "32",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 25,
+            "position_y": 173,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 267,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 173,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 16,
+            "name": "Novo inseto",
+            "time": "32",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 25,
+            "position_y": 434,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 434,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 17,
+            "name": "Novo inseto",
+            "time": "32",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 25,
+            "position_y": 348,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 269,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 348,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 18,
+            "name": "Colisão sem resultado",
+            "time": "32",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 269,
+            "position_y": 780368,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 780368,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 780368,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 19,
+            "name": "desenvolvimento",
+            "time": "32",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 275,
+            "position_y": 177,
+            "entities": [
+                {
+                    "entity_id": 270,
+                    "name": "milho",
+                    "position_x": 177,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 20,
+            "name": "Colisão sem resultado",
+            "time": "33",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 275,
+            "position_y": 177,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "267",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 177,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 270,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 177,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21,
+            "name": "desenvolvimento",
+            "time": "34",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 325,
+            "position_y": 226,
+            "entities": [
+                {
+                    "entity_id": 271,
+                    "name": "tomate",
+                    "position_x": 226,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 22,
+            "name": "Predacao",
+            "time": "34",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": "2520",
+            "position_y": "0254",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 266,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": "0254",
+                    "properties": {},
+                    "role": "predador"
+                },
+                {
+                    "agent_id": 269,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "0254",
+                    "properties": {},
+                    "role": "presa"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23,
+            "name": "Predacao",
+            "time": "34",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": "2520",
+            "position_y": "0254",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 266,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": "0254",
+                    "properties": {},
+                    "role": "predador"
+                },
+                {
+                    "agent_id": 267,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "0254",
+                    "properties": {},
+                    "role": "presa"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 24,
+            "name": "colher",
+            "time": "36",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "entity_id": 271,
+                    "name": "tomate",
+                    "position_x": null,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 25,
+            "name": "Colisão sem resultado",
+            "time": "36",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 275,
+            "position_y": 177,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "268",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 177,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 270,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 177,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 26,
+            "name": "Colisão sem resultado",
+            "time": "37",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 230,
+            "position_y": 284,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 284,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 284,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 27,
+            "name": "Colisão sem resultado",
+            "time": "37",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 275,
+            "position_y": 177,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 177,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 270,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 177,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 28,
+            "name": "Colisão sem resultado",
+            "time": "39",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 275,
+            "position_y": 177,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "268",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 177,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 270,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 177,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 29,
+            "name": "colher",
+            "time": "39",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "entity_id": 270,
+                    "name": "milho",
+                    "position_x": null,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 30,
+            "name": "Colisão sem resultado",
+            "time": "39",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 282,
+            "position_y": 123,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 123,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 123,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 31,
+            "name": "inserir predador",
+            "time": "42",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "tipo_predador": "besouro"
+            }
+        },
+        {
+            "activity_id": 32,
+            "name": "Novo inseto",
+            "time": "42",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 202,
+            "position_y": 183,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 272,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 183,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 33,
+            "name": "Colisão sem resultado",
+            "time": "44",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 567,
+            "position_y": 258,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "272",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 258,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 258,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 34,
+            "name": "Colisão sem resultado",
+            "time": "45",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 663,
+            "position_y": 310,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "272",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 310,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 310,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 35,
+            "name": "Colisão sem resultado",
+            "time": "45",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 739,
+            "position_y": 246,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 246,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 246,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 36,
+            "name": "Colisão sem resultado",
+            "time": "46",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 272,
+            "position_y": 7340247,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "besouro",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 7340247,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 266,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 7340247,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 37,
+            "name": "plantar",
+            "time": "44",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 225,
+            "entities": [
+                {
+                    "entity_id": 276,
+                    "name": "tomate",
+                    "position_x": 225,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 38,
+            "name": "Colisão sem resultado",
+            "time": "47",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 225,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "263",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 225,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 276,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 225,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 39,
+            "name": "plantar",
+            "time": "45",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 275,
+            "entities": [
+                {
+                    "entity_id": 277,
+                    "name": "tomate",
+                    "position_x": 275,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 40,
+            "name": "Colisão sem resultado",
+            "time": "48",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 728,
+            "position_y": 192,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "272",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 192,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 192,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 41,
+            "name": "plantar",
+            "time": "46",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": 278,
+                    "name": "tomate",
+                    "position_x": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 42,
+            "name": "Colisão sem resultado",
+            "time": "49",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 275,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 275,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 277,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 275,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 43,
+            "name": "Colisão sem resultado",
+            "time": "49",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 225,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 225,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 276,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 225,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 44,
+            "name": "Colisão sem resultado",
+            "time": "51",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "263",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 325,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 278,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 325,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 45,
+            "name": "Colisão sem resultado",
+            "time": "51",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 275,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "263",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 275,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 277,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 275,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 46,
+            "name": "Colisão sem resultado",
+            "time": "53",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 272,
+            "position_y": 1370209,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "besouro",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 1370209,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 266,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 1370209,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 47,
+            "name": "Colisão sem resultado",
+            "time": "54",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 325,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 278,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 325,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 48,
+            "name": "Colisão sem resultado",
+            "time": "54",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 275,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 275,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 277,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 275,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 49,
+            "name": "desenvolvimento",
+            "time": "55",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 225,
+            "entities": [
+                {
+                    "entity_id": 279,
+                    "name": "tomate",
+                    "position_x": 225,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 50,
+            "name": "desenvolvimento",
+            "time": "56",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 275,
+            "entities": [
+                {
+                    "entity_id": 280,
+                    "name": "tomate",
+                    "position_x": 275,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 51,
+            "name": "Colisão sem resultado",
+            "time": "57",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 275,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "272",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 275,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 280,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 275,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 52,
+            "name": "desenvolvimento",
+            "time": "57",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": 281,
+                    "name": "tomate",
+                    "position_x": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 53,
+            "name": "Colisão sem resultado",
+            "time": "57",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "272",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 325,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 281,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 325,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 54,
+            "name": "colher",
+            "time": "58",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "entity_id": 281,
+                    "name": "tomate",
+                    "position_x": null,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 55,
+            "name": "Colisão sem resultado",
+            "time": "58",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 495,
+            "position_y": 56,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 56,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 56,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 56,
+            "name": "colher",
+            "time": "59",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "entity_id": 280,
+                    "name": "tomate",
+                    "position_x": null,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 57,
+            "name": "migracao",
+            "time": "62",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "10": 4,
+                "tipo_de_praga": "pulgao"
+            }
+        },
+        {
+            "activity_id": 58,
+            "name": "Novo inseto",
+            "time": "62",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 754,
+            "position_y": 197,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 282,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 197,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 59,
+            "name": "Novo inseto",
+            "time": "62",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 754,
+            "position_y": 371,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 283,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 371,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 60,
+            "name": "Novo inseto",
+            "time": "62",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 754,
+            "position_y": 211,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 284,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 211,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 61,
+            "name": "Novo inseto",
+            "time": "62",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 754,
+            "position_y": 439,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 285,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 439,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 62,
+            "name": "Colisão sem resultado",
+            "time": "62",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 284,
+            "position_y": 7540197,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 7540197,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 282,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 7540197,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 63,
+            "name": "Colisão sem resultado",
+            "time": "62",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 285,
+            "position_y": 7800360,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 7800360,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 283,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 7800360,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 64,
+            "name": "colher",
+            "time": "62",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "entity_id": 279,
+                    "name": "tomate",
+                    "position_x": null,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 65,
+            "name": "Colisão sem resultado",
+            "time": "63",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 284,
+            "position_y": 7850293,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 7850293,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 283,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 7850293,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 66,
+            "name": "Predacao",
+            "time": "63",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": "6840",
+            "position_y": "0302",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 266,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": "0302",
+                    "properties": {},
+                    "role": "predador"
+                },
+                {
+                    "agent_id": 285,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "0302",
+                    "properties": {},
+                    "role": "presa"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 67,
+            "name": "Colisão sem resultado",
+            "time": "63",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 283,
+            "position_y": 7450210,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 7450210,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 282,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 7450210,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 68,
+            "name": "Colisão sem resultado",
+            "time": "63",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 705,
+            "position_y": 285,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 285,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 284,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 285,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 69,
+            "name": "Colisão sem resultado",
+            "time": "64",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 642,
+            "position_y": 173,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "272",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 173,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 283,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 173,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 70,
+            "name": "Colisão sem resultado",
+            "time": "64",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 284,
+            "position_y": 5730355,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 5730355,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 5730355,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 71,
+            "name": "Colisão sem resultado",
+            "time": "65",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 284,
+            "position_y": 5170291,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 5170291,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 282,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 5170291,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 72,
+            "name": "inserir predador",
+            "time": "65",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "tipo_predador": "besouro"
+            }
+        },
+        {
+            "activity_id": 73,
+            "name": "Novo inseto",
+            "time": "65",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 553,
+            "position_y": 254,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 286,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 254,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 74,
+            "name": "Colisão sem resultado",
+            "time": "65",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 286,
+            "position_y": 6000257,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "besouro",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 6000257,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 272,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 6000257,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 75,
+            "name": "Colisão sem resultado",
+            "time": "65",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 591,
+            "position_y": 276,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "272",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 276,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 276,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 76,
+            "name": "Colisão sem resultado",
+            "time": "65",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 286,
+            "position_y": 6760278,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "besouro",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 6760278,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 266,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 6760278,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 77,
+            "name": "Colisão sem resultado",
+            "time": "66",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 284,
+            "position_y": 4540347,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 4540347,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 282,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 4540347,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 78,
+            "name": "inserir predador",
+            "time": "66",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "tipo_predador": "joaninha"
+            }
+        },
+        {
+            "activity_id": 79,
+            "name": "Novo inseto",
+            "time": "66",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 570,
+            "position_y": 318,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 287,
+                    "name": "joaninha",
+                    "type": "CPU",
+                    "position_x": 318,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 80,
+            "name": "Colisão sem resultado",
+            "time": "67",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 284,
+            "position_y": 3200101,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 3200101,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 283,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 3200101,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 81,
+            "name": "remover predador",
+            "time": "68",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 263,
+                    "name": "joaninha",
+                    "type": "CPU",
+                    "position_x": null,
+                    "properties": {},
+                    "role": "predador"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 82,
+            "name": "Colisão sem resultado",
+            "time": "68",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 488,
+            "position_y": 207,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 207,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 207,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 83,
+            "name": "Colisão sem resultado",
+            "time": "69",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 423,
+            "position_y": 149,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "286",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 149,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 282,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 149,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 84,
+            "name": "Novo inseto",
+            "time": "69",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 640,
+            "position_y": 333,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 288,
+                    "name": "joaninha",
+                    "type": "CPU",
+                    "position_x": 333,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 85,
+            "name": "inserir predador",
+            "time": "69",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "tipo_predador": "joaninha"
+            }
+        },
+        {
+            "activity_id": 86,
+            "name": "Colisão sem resultado",
+            "time": "70",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 284,
+            "position_y": 2660300,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 2660300,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 283,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 2660300,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 87,
+            "name": "Colisão sem resultado",
+            "time": "71",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 232,
+            "position_y": 130,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "286",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 130,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 283,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 130,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 88,
+            "name": "Colisão sem resultado",
+            "time": "71",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 284,
+            "position_y": 2440332,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 2440332,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 282,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 2440332,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 89,
+            "name": "Colisão sem resultado",
+            "time": "72",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 327,
+            "position_y": 235,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "286",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 235,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 235,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 90,
+            "name": "Colisão sem resultado",
+            "time": "73",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 284,
+            "position_y": 1740090,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 1740090,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 283,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 1740090,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 91,
+            "name": "plantar",
+            "time": "70",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 475,
+            "position_y": 377,
+            "entities": [
+                {
+                    "entity_id": 291,
+                    "name": "tomate",
+                    "position_x": 377,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 92,
+            "name": "Colisão sem resultado",
+            "time": "74",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 286,
+            "position_y": 7250324,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "besouro",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 7250324,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 272,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 7250324,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 93,
+            "name": "Reproducao",
+            "time": "74",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": "1010",
+            "position_y": "0158",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 282,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "0158",
+                    "properties": {},
+                    "role": "inseto_1"
+                },
+                {
+                    "agent_id": 283,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "0158",
+                    "properties": {},
+                    "role": "inseto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 94,
+            "name": "Colisão sem resultado",
+            "time": "74",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 284,
+            "position_y": 1020153,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 1020153,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 282,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 1020153,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 95,
+            "name": "Colisão sem resultado",
+            "time": "74",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 284,
+            "position_y": 800132,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 800132,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 283,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 800132,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 96,
+            "name": "Colisão sem resultado",
+            "time": "74",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 356,
+            "position_y": 268,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 268,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 268,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 97,
+            "name": "Colisão sem resultado",
+            "time": "75",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 286,
+            "position_y": 7680255,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "besouro",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 7680255,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 272,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 7680255,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 98,
+            "name": "Colisão sem resultado",
+            "time": "75",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 294,
+            "position_y": 357,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 357,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 357,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 99,
+            "name": "Novo inseto",
+            "time": "76",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 71,
+            "position_y": 42,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 294,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 42,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 100,
+            "name": "Colisão sem resultado",
+            "time": "76",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 294,
+            "position_y": 710041,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 710041,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 282,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 710041,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 101,
+            "name": "plantar",
+            "time": "73",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 425,
+            "position_y": 376,
+            "entities": [
+                {
+                    "entity_id": 295,
+                    "name": "tomate",
+                    "position_x": 376,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 102,
+            "name": "Reproducao",
+            "time": "77",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": "4940",
+            "position_y": "0116",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 266,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": "0116",
+                    "properties": {},
+                    "role": "inseto_1"
+                },
+                {
+                    "agent_id": 286,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": "0116",
+                    "properties": {},
+                    "role": "inseto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 103,
+            "name": "Colisão sem resultado",
+            "time": "78",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 457,
+            "position_y": 120,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "286",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 120,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 294,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 120,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 104,
+            "name": "Colisão sem resultado",
+            "time": "78",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 283,
+            "position_y": 3520344,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 3520344,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 3520344,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 105,
+            "name": "Novo inseto",
+            "time": "79",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 532,
+            "position_y": 64,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 296,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 64,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 106,
+            "name": "Colisão sem resultado",
+            "time": "79",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 296,
+            "position_y": 5320065,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "besouro",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 5320065,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 266,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 5320065,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 107,
+            "name": "Colisão sem resultado",
+            "time": "79",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 531,
+            "position_y": 75,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 75,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 294,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 75,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 108,
+            "name": "Colisão sem resultado",
+            "time": "79",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 286,
+            "position_y": 5320083,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "besouro",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 5320083,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 266,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 5320083,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 109,
+            "name": "Colisão sem resultado",
+            "time": "79",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 425,
+            "position_y": 376,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "283",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 376,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 295,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 376,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 110,
+            "name": "Colisão sem resultado",
+            "time": "80",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 296,
+            "position_y": 8150063,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "besouro",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 8150063,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 272,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 8150063,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 111,
+            "name": "morte",
+            "time": "82",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 268,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": null,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 112,
+            "name": "desenvolvimento",
+            "time": "81",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 475,
+            "position_y": 377,
+            "entities": [
+                {
+                    "entity_id": 297,
+                    "name": "tomate",
+                    "position_x": 377,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 113,
+            "name": "Colisão sem resultado",
+            "time": "82",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 283,
+            "position_y": 3250196,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "pulgao",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 3250196,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 282,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 3250196,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 114,
+            "name": "Colisão sem resultado",
+            "time": "82",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 648,
+            "position_y": 302,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "286",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 302,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 294,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 302,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 115,
+            "name": "Colisão sem resultado",
+            "time": "83",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 286,
+            "position_y": 6410261,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "besouro",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 6410261,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 266,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 6410261,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 116,
+            "name": "Colisão sem resultado",
+            "time": "83",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 286,
+            "position_y": 6490266,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "besouro",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 6490266,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 266,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 6490266,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 117,
+            "name": "Colisão sem resultado",
+            "time": "83",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 286,
+            "position_y": 6560268,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "besouro",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 6560268,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 266,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 6560268,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 118,
+            "name": "Colisão sem resultado",
+            "time": "83",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 661,
+            "position_y": 268,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "266",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 268,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 294,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 268,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 119,
+            "name": "Colisão sem resultado",
+            "time": "83",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": 425,
+            "position_y": 376,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": "296",
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 376,
+                    "properties": {},
+                    "role": "obeto_1"
+                },
+                {
+                    "agent_id": 295,
+                    "name": "",
+                    "type": "CPU",
+                    "position_x": 376,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 120,
+            "name": "multa",
+            "time": "84",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "7": "valor multa"
+            }
+        },
+        {
+            "activity_id": 121,
+            "name": "game over",
+            "time": "84",
+            "influenced_by": null,
+            "influenced_by_properties": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {}
+        }
+    ]
+}
