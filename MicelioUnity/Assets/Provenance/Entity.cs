@@ -19,13 +19,6 @@ public class Entity
 		this.properties = new Dictionary<string, object>();
 	}
 
-	public Entity(string name)
-	{
-		this.entity_id = GenerateEntityID();
-		this.name = name;
-		this.properties = new Dictionary<string, object>();
-	}
-
 	public static string GenerateEntityID()
 	{
 		System.DateTime currentTime = System.DateTime.Now;

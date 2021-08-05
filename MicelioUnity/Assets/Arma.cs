@@ -5,6 +5,7 @@ using System;
 
 public class Arma : EntityFactory
 {
+    private string id_entity = Entity.GenerateEntityID();
     public string nome = "Arma";
     public double peso;
     public float poder ;
@@ -27,7 +28,7 @@ public class Arma : EntityFactory
 
     public Entity GetEntity()
     {   
-        Entity e = new Entity(nome);
+        Entity e = new Entity(id_entity, nome);
 		e.AddProperty("poder", poder);
         e.AddProperty("peso", peso);
         return e;

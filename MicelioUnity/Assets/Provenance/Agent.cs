@@ -15,13 +15,6 @@ public class Agent
     public double position_y;
 	public Dictionary<string, object> properties;
 
-	public Agent(string name,string type){
-		this.agent_id = GenerateAgentID();
-		this.name = name;
-		this.type = type;
-		this.properties = new Dictionary<string, object>();
-	}
-
 	public Agent(string id, string name,string type)
 	{	
 		this.agent_id = id;
@@ -30,7 +23,6 @@ public class Agent
 		this.properties = new Dictionary<string, object>();
 	}
 	
-
 	public static string GenerateAgentID()
 	{
 		System.DateTime currentTime = System.DateTime.Now;

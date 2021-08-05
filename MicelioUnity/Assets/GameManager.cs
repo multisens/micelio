@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
         Arma gun = new Arma(5.5f,1.5);
 
         player.Fire(gun,"wave 1");
+        player.Fire(gun,"wave 2");
 
         micelio.CloseSession();        
     }

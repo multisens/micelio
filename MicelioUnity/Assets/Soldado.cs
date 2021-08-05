@@ -5,6 +5,7 @@ using System;
 
 public class Soldado : AgentFactory
 {
+    private string id_agent = Agent.GenerateAgentID();
     public string nome = "Soldado";
     public string type = "player";
     public double posx;
@@ -47,7 +48,7 @@ public class Soldado : AgentFactory
 
     public Agent GetAgent()
     {   
-        Agent a = new Agent(nome, type);
+        Agent a = new Agent(id_agent, nome, type);
         a.SetPosition(posx,posy);
         a.AddProperty("munição", municao);
         a.AddProperty("pontos de vida", hp);
