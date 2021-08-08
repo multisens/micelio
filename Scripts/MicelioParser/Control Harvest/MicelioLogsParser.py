@@ -10,11 +10,6 @@ from functools import *
 from datetime import datetime
 import json
 
-'''
-[ ] - Evento 7 muda o ID depois do desenvolvimento
-[ ] -
-[ ] -
-'''
 
 def description(document, file, events, agents, entities, show_a_e = False):
 	print('-------------------[Finished]-------------------')
