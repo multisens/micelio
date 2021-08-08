@@ -2,7 +2,6 @@
 AUTOR: 			Lucas Sargeiro
 DATA: 			01/08/2021
 DESCRICAO: 		Script para converter logs de jogos para o modelo utilizado no Micelio
-				utilizando a planilha micelio_ch.ods
 
 '''
 import pyexcel_ods3 as pods
@@ -11,16 +10,26 @@ from functools import *
 from datetime import datetime
 import json
 
-def description(planilha, file, tot_events, tot_agents, tot_entities):
+'''
+[ ] - Evento 7 muda o ID depois do desenvolvimento
+[ ] -
+[ ] -
+'''
+
+def description(document, file, events, agents, entities, show_a_e = False):
 	print('-------------------[Finished]-------------------')
 	print()
-	print(f'Origem: {planilha}')
+	print(f'Origem: {document}')
 	print(f'Destino: {file}')
 	print()
-	print(f'Eventos extraidos:\t{tot_events}')
-	print(f'Agentes encontrados:\t{tot_agents}')
-	print(f'Entidades encontradas:\t{tot_entities}')
-
+	print(f'Eventos extraidos:\t{len(events)}')
+	print(f'Agentes encontrados:\t{len(agents)}')
+	print(f'Entidades encontradas:\t{len(entities)}')
+	if show_a_e:
+		print('Agentes:')
+		pprint(agents)
+		print('Entidades:')
+		pprint(entities)
 
 def splitCoordinates(xy):
 	
@@ -40,7 +49,7 @@ def export_json(obj, file):
         json.dump(obj, f, indent=4, ensure_ascii=False)
 
 
-def controlHarvestToMicelioSession(planilha, file):
+def controlHarvestToMicelioSession(document, sheet, file, show_a_e = False):
 
 	ID_EVENT = 0
 	ID_SESSION = 1
@@ -56,10 +65,10 @@ def controlHarvestToMicelioSession(planilha, file):
 	ATT3_NAME = 12
 	ROLE = 13
 
-	data = pods.get_data(planilha)
+	data = pods.get_data(document)
 	
-	nao_vazios = lambda x: len(x) > 0
-	filtered_data = list(filter(nao_vazios, data['sessao'][1::]))
+	not_empty = lambda x: len(x) > 0
+	filtered_data = list(filter(not_empty, data[sheet][1::]))
 
 	day = datetime.now()
 	session = {	'session_id': filtered_data[0][ID_SESSION],
@@ -71,11 +80,16 @@ def controlHarvestToMicelioSession(planilha, file):
 				'start_time': day.strftime('%H:%M:%S'),
 				'end-time': None}
 
+	# Guarda as Atividades
 	activities = []
+	# Guarda os agentes para buscar os nomes quando não disponibilizados
 	agents = {}
+	# Guarda as entidades para buscar os nomes quando não disponibilizados
 	entities = {}
-	planted = {}
-
+	# Guarda os ids de todas as plantar plantadas, pois após o desenvolvimento o ID muda
+	planted_plants = {}
+	# Guarda as posicoes das plantas desenvolvidas, pois quando colhidas a posição não é conhecida
+	evolved_plants = {}
 
 	for evento in filtered_data:
 		activity = {}
@@ -110,21 +124,21 @@ def controlHarvestToMicelioSession(planilha, file):
 
 		elif str(evento[ID_FUNCTION]) == '7':
 
-			position = planted[evento[ATT1]] if evento[ATT1] in planted else {'x': 0, 'y':0}
+			real_plant = evolved_plants[evento[ATT1]]
 
-			activity['position_x'] = position['x']
-			activity['position_y'] = position['y']
+			activity['position_x'] = real_plant['x']
+			activity['position_y'] = real_plant['y']
 			activity['entities'] = [{
-				'entity_id': evento[ATT1],
+				'entity_id': real_plant['id'],
 				'name': evento[AGENT_NAME],
-				'position_x': position['x'],
-				'position_y': position['y'],
+				'position_x': real_plant['x'],
+				'position_y': real_plant['y'],
 				'properties': {},
 				'role': 'planta'
 			}]
 			activity['agents'] = []
 			
-			agents[evento[ATT1]] = evento[AGENT_NAME]
+			entities[evento[ATT1]] = evento[AGENT_NAME]
 
 			activity['properties'] = {}
 
@@ -147,7 +161,8 @@ def controlHarvestToMicelioSession(planilha, file):
 
 			activity['properties'] = {}
 
-		elif str(evento[ID_FUNCTION]) == '9' or str(evento[ID_FUNCTION]) == '9.1':
+		elif str(evento[ID_FUNCTION]) == '9':
+			
 			activity['position_x'] = evento[ATT2]
 			activity['position_y'] = evento[ATT3]
 			activity['entities'] = [{
@@ -159,13 +174,35 @@ def controlHarvestToMicelioSession(planilha, file):
 				'role': 'planta'
 			}]
 			activity['agents'] = []
-			
+
 			entities[evento[ATT1]] = evento[AGENT_NAME]
 
-			if str(evento[ID_FUNCTION]) == '9':
-				planted[evento[ATT1]] = {"x": evento[ATT2] , "y": evento[ATT3]}
+			activity['properties'] = {}
+
+			plant_id = evento[ATT2] + evento[ATT3]
+			planted_plants[plant_id] = evento[ATT1]
+
+		elif str(evento[ID_FUNCTION]) == '9.1':
+			
+			real_id = planted_plants[evento[ATT2] + evento[ATT3]]
+
+			activity['position_x'] = evento[ATT2]
+			activity['position_y'] = evento[ATT3]
+			activity['entities'] = [{
+				'entity_id': real_id,
+				'name': evento[AGENT_NAME],
+				'position_x': evento[ATT2],
+				'position_y': evento[ATT3],
+				'properties': {},
+				'role': 'planta'
+			}]
+			activity['agents'] = []
+
+			entities[evento[ATT1]] = evento[AGENT_NAME]
 
 			activity['properties'] = {}
+
+			evolved_plants[evento[ATT1]] = {'id': real_id, 'x': evento[ATT2], 'y': evento[ATT3]}
 
 		elif str(evento[ID_FUNCTION]) == '10':
 			activity['position_x'] = None
@@ -218,34 +255,47 @@ def controlHarvestToMicelioSession(planilha, file):
 		elif str(evento[ID_FUNCTION]) == '15':
 			
 			x, y = splitCoordinates(evento[ATT3])
-
-			nome_agente_2 = agents[evento[ATT1]] if evento[ATT1] in agents else '' 
-
 			activity['position_x'] = x
 			activity['position_y'] = y
-			activity['entities'] = []
-			activity['agents'] = [{
-				'agent_id': evento[ATT1],
-				'name': '',
-				'type': 'CPU',
-				'position_x': x,
-				'position_y': y,
-				'properties': {},
-				'role': 'predador'
-			},
-			{
-				'agent_id': evento[ATT2],
-				'name': evento[AGENT_NAME],
-				'type': 'CPU',
-				'position_x': x,
-				'position_y': y,
-				'properties': {},
-				'role': 'presa'
-			}]
+
+			if evento[ATT2] in entities.values():
+				activity['entities'] = [{
+					'agent_id': evento[ATT2],
+					'name': evento[AGENT_NAME],
+					'position_x': x,
+					'position_y': y,
+					'properties': {},
+					'role': 'presa'
+				}]
+				activity['agents'] = []
+				entities[evento[ATT2]] = evento[AGENT_NAME]
+			else:
+				activity['entities'] = []
+				activity['agents'] = [{
+					'agent_id': evento[ATT2],
+					'name': evento[AGENT_NAME],
+					'type': 'CPU',
+					'position_x': x,
+					'position_y': y,
+					'properties': {},
+					'role': 'presa'
+				}]
+
+				agents[evento[ATT2]] = evento[AGENT_NAME]
+
+			nome_agente = agents[evento[ATT1]]
+
+			activity['agents'].append({
+					'agent_id': evento[ATT1],
+					'name': nome_agente,
+					'type': 'CPU',
+					'position_x': x,
+					'position_y': y,
+					'properties': {},
+					'role': 'predador'
+			})
 			
-			if nome_agente_2 != '':
-				agents[evento[ATT1]] = nome_agente_2
-			agents[evento[ATT2]] = evento[AGENT_NAME]
+			agents[evento[ATT1]] = nome_agente
 
 			activity['properties'] = {}
 
@@ -280,39 +330,82 @@ def controlHarvestToMicelioSession(planilha, file):
 			activity['properties'] = {}
 
 		elif str(evento[ID_FUNCTION]) == '17':
-			activity['position_x'] = evento[ATT2]
-			activity['position_y'] = evento[ATT3]
-			activity['entities'] = []
 
-			nome_agente_1 = agents[evento[AGENT_NAME]] if evento[AGENT_NAME] in agents else '' 
-			nome_agente_2 = agents[evento[ATT1]] if evento[ATT1] in agents else '' 
+			if str(evento[AGENT_NAME]).isnumeric():
+				x = evento[ATT2]
+				y = evento[ATT3]
+				nome_agente_1 = agents[evento[AGENT_NAME]] if evento[AGENT_NAME] in agents else '' 
+				id_obj_1 = evento[AGENT_NAME]
+				id_obj_2 = evento[ATT1]
 
-			activity['agents'] = [{
-				'agent_id': evento[AGENT_NAME],
+				if id_obj_2 in entities:
+					activity['name'] += ' (Predação Inseto/Planta)'
+					nome_agente_2 = entities[id_obj_2] if id_obj_2 in entities else ''
+					activity['entities'] = [{
+						'entity_id': id_obj_2,
+						'name': nome_agente_2,
+						'position_x': x,
+						'position_y': y,
+						'properties': {},
+						'role': 'objeto_2'
+					}]
+					activity['agents'] = []
+					if nome_agente_2 != '':
+						entities[id_obj_2] = nome_agente_2
+				else:
+					activity['name'] += ' (Predação Inseto/Inseto)'		
+					nome_agente_2 = agents[id_obj_2] if id_obj_2 in agents else ''
+					activity['entities'] = []
+					activity['agents'] = [{
+						'agent_id': id_obj_2,
+						'name': nome_agente_2,
+						'type': 'CPU',
+						'position_x': x,
+						'position_y': y,
+						'properties': {},
+						'role': 'objeto_2'
+					}]
+					if nome_agente_2 != '':
+						agents[id_obj_2] = nome_agente_2
+			else:
+				x, y =  splitCoordinates(evento[ATT3])
+				nome_agente_1 = evento[AGENT_NAME]
+				nome_agente_2 = evento[AGENT_NAME]
+				activity['name'] += ' (Reprodução)'
+				id_obj_1 = evento[ATT1]
+				id_obj_2 = evento[ATT2]
+				activity['entities'] = []
+				activity['agents'] = [{
+					'agent_id': id_obj_2,
+					'name': nome_agente_2,
+					'type': 'CPU',
+					'position_x': x,
+					'position_y': y,
+					'properties': {},
+					'role': 'objeto_2'
+				}]
+
+				agents[evento[ATT2]] = nome_agente_1
+				
+
+			activity['position_x'] = x
+			activity['position_y'] = y
+			
+
+			activity['agents'].append({
+				'agent_id': id_obj_1,
 				'name': nome_agente_1,
 				'type': 'CPU',
-				'position_x': evento[ATT2],
-				'position_y': evento[ATT3],
+				'position_x': x,
+				'position_y': y,
 				'properties': {},
 				'role': 'obeto_1'
-			},
-			{
-				'agent_id': evento[ATT1],
-				'name': nome_agente_2,
-				'type': 'CPU',
-				'position_x': evento[ATT2],
-				'position_y': evento[ATT3],
-				'properties': {},
-				'role': 'objeto_2'
-			}]
-			
-			if nome_agente_1 != '':
-				agents[evento[AGENT_NAME]] = nome_agente_1
-			
-			if nome_agente_2 != '':
-				agents[evento[ATT1]] = nome_agente_2
+			})
 
 			activity['properties'] = {}
+
+			if nome_agente_1 != '':
+					agents[id_obj_1] = nome_agente_1
 
 		elif str(evento[ID_FUNCTION]) == '18':
 			activity['position_x'] = evento[ATT2]
@@ -344,14 +437,13 @@ def controlHarvestToMicelioSession(planilha, file):
 
 	session['activities'] = activities
 
-	description(planilha, file, len(filtered_data), len(agents), len(entities))
+	description(document, file, filtered_data, agents, entities, show_a_e)
 	export_json(session, file)
-
 
 
 if __name__ == "__main__":
 	
-	planilha = input('Base de dados: ')
+	document = input('Base de dados: ')
 	file = input('Extrair para: ')
-
-	controlHarvestToMicelioSession(planilha, file)
+	sheet = "sessao"
+	controlHarvestToMicelioSession(document, sheet, file)
