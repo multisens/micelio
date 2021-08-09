@@ -246,7 +246,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public string token = "token-12345678";
+    public string token = "token-12345678";
     public static Micelio micelio;
     
     void Start()
@@ -304,7 +304,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public string token = "token-12345678";
+    public string token = "token-12345678";
     public static Micelio micelio;
     
     void Start()
@@ -455,7 +455,7 @@ Além do armazenamento dos Logs do seu jogo o Micelio oferece um serviço de Ran
 ```c#
 public void EnviaRanking(string time, Player player)
 {
-	Activity ranking = new Activity("ranking", time);    
+    Activity ranking = new Activity("ranking", time);    
     ranking.AddProperty("Nome", player.name);
     ranking.AddProperty("Pontuação", player.score);
     micelio.SendActivity(fire);
