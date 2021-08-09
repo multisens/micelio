@@ -9,7 +9,7 @@ from pprint import pprint
 from functools import *
 from datetime import datetime
 import json
-
+import os
 
 def description(document, file, events, agents, entities, show_a_e = False):
 	print('-------------------[Finished]-------------------')
@@ -63,6 +63,7 @@ def controlHarvestToMicelioSession(document, sheet, file, show_a_e = False):
 	data = pods.get_data(document)
 	
 	not_empty = lambda x: len(x) > 0
+	
 	filtered_data = list(filter(not_empty, data[sheet][1::]))
 
 	day = datetime.now()
@@ -85,6 +86,8 @@ def controlHarvestToMicelioSession(document, sheet, file, show_a_e = False):
 	planted_plants = {}
 	# Guarda as posicoes das plantas desenvolvidas, pois quando colhidas a posição não é conhecida
 	evolved_plants = {}
+	# Guarda os indices das plantas que nao tiveram os ids encontrados para fazer um outro check no final
+	plants_without_id = {}
 
 	for evento in filtered_data:
 		activity = {}
@@ -93,7 +96,6 @@ def controlHarvestToMicelioSession(document, sheet, file, show_a_e = False):
 		activity['name'] = evento[ACTIVITY_NAME]
 		activity['time'] = str(evento[TIME])
 		activity['influenced_by'] = None
-		activity['influenced_by_properties'] = None
 
 		if str(evento[ID_FUNCTION]) == '2':
 			activity['position_x'] = None
@@ -119,7 +121,11 @@ def controlHarvestToMicelioSession(document, sheet, file, show_a_e = False):
 
 		elif str(evento[ID_FUNCTION]) == '7':
 
-			real_plant = evolved_plants[evento[ATT1]]
+			if evento[ATT1] in evolved_plants:
+				real_plant = evolved_plants[evento[ATT1]] 
+			else:
+				real_plant = {'id': -1, 'x': -1, 'y': -1}
+				plants_without_id[evento[ATT1]] = len(activities)
 
 			activity['position_x'] = real_plant['x']
 			activity['position_y'] = real_plant['y']
@@ -158,6 +164,11 @@ def controlHarvestToMicelioSession(document, sheet, file, show_a_e = False):
 
 		elif str(evento[ID_FUNCTION]) == '9':
 			
+			if str(evento[ATT2]) + str(evento[ATT3]) in plants_without_id:
+				index = plants_without_id[str(evento[ATT2]) + str(evento[ATT3])]
+				activities[index]['entities'][0]['entity_id'] = evento[ATT1]
+				del(plants_without_id[str(evento[ATT2]) + str(evento[ATT3])])
+
 			activity['position_x'] = evento[ATT2]
 			activity['position_y'] = evento[ATT3]
 			activity['entities'] = [{
@@ -174,12 +185,22 @@ def controlHarvestToMicelioSession(document, sheet, file, show_a_e = False):
 
 			activity['properties'] = {}
 
-			plant_id = evento[ATT2] + evento[ATT3]
+			plant_id = str(evento[ATT2]) + str(evento[ATT3])
 			planted_plants[plant_id] = evento[ATT1]
 
 		elif str(evento[ID_FUNCTION]) == '9.1':
 			
-			real_id = planted_plants[evento[ATT2] + evento[ATT3]]
+			if str(evento[ATT2]) + str(evento[ATT3]) in evolved_plants:
+				real_id = planted_plants[str(evento[ATT2]) + str(evento[ATT3])]
+				if evento[ATT1] in plants_without_id:
+					index = plants_without_id[evento[ATT1]]
+					activities[index]['entities'][0]['entity_id'] = real_id
+					activities[index]['entities'][0]['position_x'] = evento[ATT2]
+					activities[index]['entities'][0]['position_y'] = evento[ATT3]
+					del(plants_without_id[evento[ATT1]])
+			else:
+				real_id = -1
+				plants_without_id[str(evento[ATT2]) + str(evento[ATT3])] = len(activities)
 
 			activity['position_x'] = evento[ATT2]
 			activity['position_y'] = evento[ATT3]
@@ -278,7 +299,7 @@ def controlHarvestToMicelioSession(document, sheet, file, show_a_e = False):
 
 				agents[evento[ATT2]] = evento[AGENT_NAME]
 
-			nome_agente = agents[evento[ATT1]]
+			nome_agente = agents[evento[ATT1]] if evento[ATT1] in agents else ''
 
 			activity['agents'].append({
 					'agent_id': evento[ATT1],
@@ -438,7 +459,16 @@ def controlHarvestToMicelioSession(document, sheet, file, show_a_e = False):
 
 if __name__ == "__main__":
 	
-	document = input('Base de dados: ')
-	file = input('Extrair para: ')
+	# 	document = input('Base de dados: ')
+	# 	file = input('Extrair para: ')
+	# 	sheet = "sessao"
+	# 	controlHarvestToMicelioSession(document, sheet, file)
+	
+	ODS_DIR = './Sessoes/'
 	sheet = "sessao"
-	controlHarvestToMicelioSession(document, sheet, file)
+	files = os.listdir(ODS_DIR)
+
+	for document in files:
+		file = document.replace('.ods', '.json')
+		if document[(len(document)-4)::] == '.ods': 
+			controlHarvestToMicelioSession(ODS_DIR+document, sheet, file)
