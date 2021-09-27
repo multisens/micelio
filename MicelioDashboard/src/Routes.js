@@ -6,6 +6,8 @@ import Sign from './pages/Sign';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Game from './pages/Game';
+import Form from './pages/Form';
+import Experiment from './pages/Experiment';
 
 import {useAuth} from "./context/AuthContext";
 
@@ -25,6 +27,7 @@ const Routes = () => {
           <Route path={'/home'} component={Home} exact/>
           <Route path={'/sobre'} component={Dashboard}/>
           <Route path={'/game/:id'} component={Game}/>
+          <Route path={'/experiment'} component={Experiment}/>
           <Redirect to={'/home'} />
         </Switch>
       </BrowserRouter>
@@ -36,12 +39,11 @@ const Routes = () => {
       <Switch>
         <Route path={'/'} component={Index} exact/>
         <Route path={'/sign'} component={Sign}/>
+        <Route path={'/form/:id'} component={Form}/>
         <Redirect to={'/'} />
       </Switch>
     </BrowserRouter>
   )
-
-
 
 }
 

@@ -1,0 +1,14 @@
+/* Gamelist */
+.experimentlist-container {
+    width: 100%;
+    padding: 20px;
+    background-color: #f6f6f6;
+}
+
+.experimentlist-container .more-games {
+    text-align: center;
+}
+
+.experimentlist-container .more-games button {
+    max-width: 200px;
+}

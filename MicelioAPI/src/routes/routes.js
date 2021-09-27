@@ -6,6 +6,8 @@ const SessionRoutes = require('./session.route');
 const ActivityRoutes = require('./activity.route');
 const UserRoutes = require('./user.route');
 const GroupRoutes = require('./group.route');
+const ExperimentRoutes = require('./experiment.route');
+const FormRoutes = require('./form.route');
 
 const TokenMiddleware = require('../middleware/TokenMiddleware');
 const DeviceIDMiddleware = require('../middleware/DeviceIDMiddleware');
@@ -19,5 +21,7 @@ Router.use('/device', LogMiddleware, TokenMiddleware, DeviceRoutes);
 Router.use('/session', LogMiddleware, TokenMiddleware, DeviceIDMiddleware, SessionRoutes);
 Router.use('/activity', LogMiddleware, TokenMiddleware, DeviceIDMiddleware, ActivityRoutes);
 Router.use('/group', LogMiddleware, GroupRoutes);
+Router.use('/experiment', LogMiddleware, ExperimentRoutes);
+Router.use('/form', LogMiddleware, FormRoutes);
 
 module.exports = Router;
