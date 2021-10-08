@@ -5,71 +5,71 @@ import './style.css';
 import Api from '../../services/Api'
 
 import PageFormat from '../../components/PageFormat';
-import ExperimentCards from '../../components/ExperimentCards';
-import Card from '../../components/Card';
+import ExperimentCards from '../../components/ExperimentCardsContainer';
+import ExperimentCard from '../../components/ExperimentCard';
 import Popup from '../../components/Popup'
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
-const GAMELIST_MAX_CARDS = 4;
+const EXPLIST_MAX_CARDS = 4;
 
-function Home() {
+function Experiment() {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [isGamesExpanded, setIsGamesExpanded] = useState(false)
-  const [gameCards, setGameCards] = useState(GAMELIST_MAX_CARDS)
+  const [experimentCards, setExperimentCards] = useState(EXPLIST_MAX_CARDS)
 
-  const [newGame, setNewGame] = useState('')
-  const [newGameVersion, setNewGameVersion] = useState('')
+  const [newExperiment, setNewExperiment] = useState('')
+  const [experimentGame, setExperimentGame] = useState('')
 
-  const [gameList, setGameList] = useState([])
+  const [experimentList, setExperimentList] = useState([])
 
   const [isSearchingGame, setIsSearchingGame] = useState(false);
 
   const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
   const [shareUser, setShareUser] = useState('');
-  const [shareGame, setShareGame] = useState('');
+  const [shareExperiment, setShareExperiment] = useState('');
 
 
   useEffect(() => {
-    updateGameList();
+    updateExperimentList();
   }, [])
 
   useEffect(() => {
     if(isGamesExpanded || isSearchingGame) {
-      setGameCards(Infinity);
+      setExperimentCards(Infinity);
       return;
     }
-    setGameCards(GAMELIST_MAX_CARDS);
+    setExperimentCards(EXPLIST_MAX_CARDS);
 
   }, [isGamesExpanded, isSearchingGame])
 
-  const updateGameList = () => {
-    Api.get('/game').then(response => {
-      setGameList(response.data.data);
+  const updateExperimentList = () => {
+    Api.get('/experiment').then(response => {
+      setExperimentList(response.data.data); 
     })
   }
 
-  const doCreateGame = async event => {
+  const doCreateExperiment = async event => {
     event.preventDefault()
 
     try {
-      const response = await Api.post('/game', {
-        name: newGame,
-        version: newGameVersion
+      const response = await Api.post('/experiment', {
+        nameExperiment: newExperiment,
+        nameGame: experimentGame
       })
 
       if(!response.data.ok) {
         return alert('Não foi possível efetuar cadastro. Por favor, tente novamente')
       }
 
-      setNewGame('')
-      setNewGameVersion('')
+      setNewExperiment('')
+      setExperimentGame('')
       setIsPopupOpen(false)
 
       toast.success('Cadastrado com sucesso', {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
 
-      updateGameList()
+      updateExperimentList()
 
     }catch (e) {
       console.log(e.response.data)
@@ -77,16 +77,16 @@ function Home() {
     }
   }
 
-  const openSharePopup = game_id => {
-    setShareGame(game_id);
+  const openSharePopup = experiment_id => {
+    setShareExperiment(experiment_id);
     setIsSharePopupOpen(true);
   }
 
-  const doShareGame = async (formEvent) => {
+  const doShareExperiment = async (formEvent) => {
     formEvent.preventDefault();
 
     try{
-      await Api.post('/game/share', {game_id: shareGame, user_share: shareUser});
+      await Api.post('/experiment/share', {experiment_id: shareExperiment, user_share: shareUser});
       toast.success('Compartilhado com sucesso');
 
       setShareUser('');
@@ -95,7 +95,7 @@ function Home() {
     }
   }
 
-  const filterGameList = (keyboardEvent) => {
+  const filterExperimentList = (keyboardEvent) => {
     const filterText = keyboardEvent.target.value.toLowerCase().replace(' ', '');
 
     if(filterText) {
@@ -104,20 +104,26 @@ function Home() {
       setIsSearchingGame(false);
     }
 
-    gameList.forEach(game => {
-      const gameName = game.name.toLowerCase().replace(' ', '');
-      const $gameCard = document.getElementById(game.game_id);
+    experimentList.forEach(experiment => {
+      const expName = experiment.txt_experient_name.toLowerCase().replace(' ', '');
+      const gameName = experiment.gameName.toLowerCase().replace(' ', '');
+      const $experimentCard = document.getElementById(experiment.experiment_id);
 
-      if(!$gameCard) {
+      if(!$experimentCard) {
         return;
       }
 
       if(gameName.indexOf(filterText) === -1) {
-        $gameCard.style.display = 'none';
+        $experimentCard.style.display = 'none';
         return;
       }
 
-      $gameCard.style.display = 'flex';
+      if(expName.indexOf(filterText) === -1){
+        $experimentCard.style.display = 'none';
+        return;
+      }
+
+      $experimentCard.style.display = 'flex';
     })
   }
 
@@ -127,21 +133,19 @@ function Home() {
 
       <Popup isOpen={isSharePopupOpen} onClose={() => {setIsSharePopupOpen(false)}}>
         <h2>Compartilhe o jogo</h2>
-        <form onSubmit={doShareGame}>
+        <form onSubmit={doShareExperiment}>
           <input required type={'text'} placeholder={'Nome de usuário'} value={shareUser} onChange={e => {setShareUser(e.target.value)}} />
           <button className={'primary'}>Compartilhar</button>
         </form>
       </Popup>
 
-      <Popup isOpen={isPopupOpen} onClose={() => {
-        setIsPopupOpen(false)
-      }}>
-        <h2>Cadastre um novo jogo</h2>
-        <form onSubmit={doCreateGame}>
-          <input required type="text" className="primary" placeholder={'Nome'} value={newGame}
-                 onChange={e => setNewGame(e.target.value)}/>
-          <input required type="text" className="primary" placeholder={'Versão'} value={newGameVersion}
-                 onChange={e => setNewGameVersion(e.target.value)}/>
+      <Popup isOpen={isPopupOpen} onClose={() => {setIsPopupOpen(false)}}>
+        <h2>Cadastre um novo experimento</h2>
+        <form onSubmit={doCreateExperiment}>
+          <input required type="text" className="primary" placeholder={'Nome'} value={newExperiment}
+                 onChange={e => setNewExperiment(e.target.value)}/>
+          <input required type="text" className="primary" placeholder={'Jogo do Experimento'} value={experimentGame}
+                 onChange={e => setExperimentGame(e.target.value)}/>
           <button className="primary">Cadastrar</button>
         </form>
       </Popup>
@@ -149,26 +153,22 @@ function Home() {
       <PageFormat menuSelected={'experiment'}>
         <main className={'experimentlist-container'}>
 
-          <ExperimentCards title="Meus Experimentos" onSearch={filterGameList} onClickAdd={() => {
-            setIsPopupOpen(true);
-          }}>
+          <ExperimentCards title="Meus Experimentos" onSearch={filterExperimentList} onClickAdd={() => {setIsPopupOpen(true);}}>
             {
-              gameList.length > 0 ? gameList.slice(0, gameCards).map((game) => {
-                return (<Card key={game.game_id}
-                              id={game.game_id}
-                              name={game.name}
-                              created={game.groups_created}
-                              active={game.active_sessions}
-                              shared={game.is_shared}
-                              isOwner={game.is_owner}
-                              onShare={() => {openSharePopup(game.game_id)}} />);
+              experimentList.length > 0 ? experimentList.slice(0, experimentCards).map((exp) => {
+                return (<ExperimentCard key={exp.experiment_id}
+                                        id={exp.experiment_id}
+                                        name={exp.txt_experient_name}
+                                        game={exp.gameName}
+                                        isOwner={1}
+                                        onShare={() => {openSharePopup(exp.experiment_id)}} />);
               }) : (<span>Não há experimentos cadastrados</span>)
             }
           </ExperimentCards>
 
           {
-            gameList.length > 4 && !isSearchingGame ? (
-              <div className={'more-games'}>
+            experimentList.length > 4 && !isSearchingGame ? (
+              <div className={'more-experiments'}>
                 <button className={'primary'} onClick={() => {setIsGamesExpanded(!isGamesExpanded)}}>{isGamesExpanded ? 'Ver menos' : 'Ver mais'}</button>
               </div>
             ) : ''
@@ -180,4 +180,4 @@ function Home() {
   )
 }
 
-export default Home;
+export default Experiment;

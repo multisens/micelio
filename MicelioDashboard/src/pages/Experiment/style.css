@@ -5,10 +5,10 @@
     background-color: #f6f6f6;
 }
 
-.experimentlist-container .more-games {
+.experimentlist-container .more-experiments {
     text-align: center;
 }
 
-.experimentlist-container .more-games button {
+.experimentlist-container .more-experiments button {
     max-width: 200px;
 }

@@ -23,7 +23,7 @@ function Form () {
         try {
             const termResponse = await Api.get(`/form/${params.id}`);
 
-            const {data} = termResponse.data;
+            const {data} = termResponse.data.data;
 
             setConsentTerm(data);
         } catch (e) {
