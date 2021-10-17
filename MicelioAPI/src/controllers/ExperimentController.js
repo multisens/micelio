@@ -1,4 +1,5 @@
 const knex = require('../database/connection');
+const idGenerator = require('../utils/generators/idGenerator');
 const { decodeUserSession } = require('../utils/generators/userSessionGenerator');
 
 class ExperimentController {
@@ -15,11 +16,12 @@ class ExperimentController {
           .innerJoin('HasExpPermission as hep', 'hep.experiment_id', 'e.experiment_id')
           .innerJoin('MicelioUser as mu', 'mu.user_id', 'hep.user_id')
           .innerJoin('Game as g', 'g.game_id', 'e.game_id')
-          .where('mu.user_id', user_id);
+          .where('mu.user_id', user_id)
+          .first();
         
         if (!userExperiments) {
-            response.status(400).json({error: "Experiment not found"});
-		}
+            return response.status(400).json({error: "Experiment not found"});
+        }
     
         response.json({ok: true, data: userExperiments[0]});
 	}
@@ -49,61 +51,78 @@ class ExperimentController {
 
         //TODO: receber o id do usuário e setar a permissão do usuario
         const experimentId = await idGenerator('Experiment');
-        const token = sign({}, process.env.JWT_SECRET, {subject: experimentId});
 
         const trx = await knex.transaction();
 
         try{
 
             const user = await trx('MicelioUser')
-            .where('user_id', user_id)
-            .select('user_id')
-            .first();
-
+                              .where('user_id', user_id)
+                              .select('user_id')
+                              .first();
 
             if(!user){
                 return response.status(400).json({error: "Invalid user id"});
             }
 
             const insertedExperiment = await trx('Experiment')
-            .where('txt_exp_name', name)
-            .select('experiment_id')
-            .first();
+                                            .where('txt_experient_name', nameExperiment)
+                                            .select('experiment_id')
+                                            .first();
 
             if(insertedExperiment){
                 return response.status(400).json({error: "This experiment already exists"});
             }
 
+            const gameId = await trx('Game')
+                                .where('name', nameGame)
+                                .select('game_id')
+                                .first()
+
+            if(!gameId){
+                return response.status(400).json({error: "This game does not exist"});
+            }
+
+            const gamePermission = await trx('hasPermission')
+                                        .where('user_id', user)
+                                        .and('game_id', gameId)
+                                        .first()
+            
+            if(!gamePermission){
+                return response.status(400).json({error: "User does not have permission to this game"});
+            }
+
             const experimentData = {
                 experiment_id: experimentId,
-                name
+                txt_experient_name: nameExperiment,
+                game_id: gameId,
+                user_id: user
             }
 
-            const game = await trx('Game').insert(experimentData);
+            const experiment = await trx('Experiment').insert(experimentData);
 
-            const has_permission_id = await idGenerator('HasPermission', 'has_permission');
+            const has_exp_permission_id = await idGenerator('hasExpPermission', 'has_exp_permission');
 
             const permissionData = {
-                has_permission_id,
-                user_id,
-                game_id: gameId,
-                owner: true
+                has_exp_permission_id,
+                user_id: user,
+                experiment_id: experimentId,
             }
 
-            const gamePermission = await trx('HasPermission').insert(permissionData);
+            const expPermission = await trx('hasExpPermission').insert(permissionData);
 
-            if(game && gamePermission){
+            if(experiment && expPermission){
                 await trx.commit();
                 return response.status(201).json({ok: true});
             }
             else{
                 await trx.rollback();
-                return response.status(400).json({error: 'Cannot insert the game, check the information sent'});
+                return response.status(400).json({error: 'Cannot insert the experiment, check the information sent'});
             }
         }
         catch(err){
             await trx.rollback();
-            return response.status(400).json({error: 'Cannot insert the game, try again later'});
+            return response.status(400).json({error: 'Cannot insert the experiment, try again later'});
         }
 
     }

@@ -15,14 +15,14 @@ const EXPLIST_MAX_CARDS = 4;
 
 function Experiment() {
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false)
-  const [isGamesExpanded, setIsGamesExpanded] = useState(false)
-  const [experimentCards, setExperimentCards] = useState(EXPLIST_MAX_CARDS)
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isGamesExpanded, setIsGamesExpanded] = useState(false);
+  const [experimentCards, setExperimentCards] = useState(EXPLIST_MAX_CARDS);
 
-  const [newExperiment, setNewExperiment] = useState('')
-  const [experimentGame, setExperimentGame] = useState('')
+  const [newExperiment, setNewExperiment] = useState('');
+  const [experimentGame, setExperimentGame] = useState('');
 
-  const [experimentList, setExperimentList] = useState([])
+  const [experimentList, setExperimentList] = useState([]);
 
   const [isSearchingGame, setIsSearchingGame] = useState(false);
 
@@ -46,7 +46,11 @@ function Experiment() {
 
   const updateExperimentList = () => {
     Api.get('/experiment').then(response => {
-      setExperimentList(response.data.data); 
+        if(!response.data.ok){
+          setExperimentList([]);
+        } else {
+          setExperimentList([response.data.data]);
+        }
     })
   }
 
@@ -96,7 +100,7 @@ function Experiment() {
   }
 
   const filterExperimentList = (keyboardEvent) => {
-    const filterText = keyboardEvent.target.value.toLowerCase().replace(' ', '');
+    const filterText = keyboardEvent.target.value.toLowerCase().replaceAll(' ', '');
 
     if(filterText) {
       setIsSearchingGame(true);
@@ -105,20 +109,15 @@ function Experiment() {
     }
 
     experimentList.forEach(experiment => {
-      const expName = experiment.txt_experient_name.toLowerCase().replace(' ', '');
-      const gameName = experiment.gameName.toLowerCase().replace(' ', '');
+      const expName = experiment.txt_experient_name.toLowerCase().replaceAll(' ', '');
+      const gameName = experiment.gameName.toLowerCase().replaceAll(' ', '');
       const $experimentCard = document.getElementById(experiment.experiment_id);
 
       if(!$experimentCard) {
         return;
       }
 
-      if(gameName.indexOf(filterText) === -1) {
-        $experimentCard.style.display = 'none';
-        return;
-      }
-
-      if(expName.indexOf(filterText) === -1){
+      if(gameName.indexOf(filterText) === -1 && expName.indexOf(filterText) === -1) {
         $experimentCard.style.display = 'none';
         return;
       }

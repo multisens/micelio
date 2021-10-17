@@ -3,7 +3,7 @@ const knex = require('../../database/connection');
 
 const idGenerator = async (table, identifier) => {
 
-    if(! identifier){
+    if(!identifier){
         identifier = table;
     }
 
@@ -11,7 +11,7 @@ const idGenerator = async (table, identifier) => {
 
 
     const ids = await knex(table)
-    .select(columnName);
+                     .select(columnName);
 
     const filteredIds = ids.map((id) => id[columnName])
     let id = uuid();

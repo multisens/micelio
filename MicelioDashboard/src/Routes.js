@@ -6,8 +6,9 @@ import Sign from './pages/Sign';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Game from './pages/Game';
-import Form from './pages/Form';
 import Experiment from './pages/Experiment';
+import Form from './pages/Form';
+import ConsentTerm from './pages/ConsentTerm';
 
 import {useAuth} from "./context/AuthContext";
 
@@ -28,6 +29,7 @@ const Routes = () => {
           <Route path={'/sobre'} component={Dashboard}/>
           <Route path={'/game/:id'} component={Game}/>
           <Route path={'/experiment'} component={Experiment}/>
+          <Route path={'/consentTerm/:id'} component={ConsentTerm}/>
           <Redirect to={'/home'} />
         </Switch>
       </BrowserRouter>

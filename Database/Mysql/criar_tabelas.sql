@@ -170,8 +170,9 @@ CREATE TABLE ActivityEntities(
 create table experiment
 ( experiment_id      INT           PRIMARY KEY
 , txt_experient_name VARCHAR(200)
-, txt_consent_form   VARCHAR(4000)
+, txt_consent_term   VARCHAR(4000)
 , game_id            VARCHAR(40)
+, user_id            VARCHAR(40)
 , FOREIGN KEY(game_id)
     REFERENCES game(game_id)
 );

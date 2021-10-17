@@ -20,7 +20,7 @@ function ExperimentCard(props) {
 
   return (
     <li id={props.id}>
-      <div className={'card-header'} onClick={() => {history.push(`/experiment/${props.id}`)}}>
+      <div className={'card-header'} onClick={() => {history.push(`/consentTerm/${props.id}`)}}>
         <h2>{props.name}</h2>
         {(props.isOwner === 1)
           ? (<AiOutlineCrown size={24} color={'#E9C46A'}/>)
@@ -31,7 +31,7 @@ function ExperimentCard(props) {
         <p><b>Jogo vinculado: </b>{props.game}</p>
       </div>
       <div className={'card-options'}>
-        <div className={"card-option"} onClick={props.onShare}>
+        <div className={'card-option'} onClick={props.onShare}>
           <AiOutlineShareAlt size={25}/>
         </div>
       </div>
