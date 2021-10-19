@@ -168,7 +168,7 @@ CREATE TABLE ActivityEntities(
 );
 
 create table experiment
-( experiment_id      INT           PRIMARY KEY
+( experiment_id      VARCHAR(40)   PRIMARY KEY
 , txt_experient_name VARCHAR(200)
 , txt_consent_term   VARCHAR(4000)
 , game_id            VARCHAR(40)
@@ -178,9 +178,9 @@ create table experiment
 );
 
 create table hasExpPermission
-( has_exp_permission_id INT         PRIMARY KEY
+( has_exp_permission_id VARCHAR(40) PRIMARY KEY
 , user_id               VARCHAR(40)
-, experiment_id         INT
+, experiment_id         VARCHAR(40)
 , FOREIGN KEY(user_id) 
     REFERENCES miceliouser(user_id)
 , FOREIGN KEY(experiment_id) 
@@ -188,60 +188,60 @@ create table hasExpPermission
 );
 
 create table exp_group
-( group_id      INT
-, experiment_id INT
+( group_id      VARCHAR(40)
+, experiment_id VARCHAR(40)
 , PRIMARY KEY(group_id, experiment_id)
 , FOREIGN KEY(experiment_id) 
     REFERENCES experiment(experiment_id)
 );
 
 create table grp_user
-( user_form_id  INT          PRIMARY KEY
+( user_form_id  VARCHAR(40)  PRIMARY KEY
 , txt_name      VARCHAR(300) 
 , txt_email     varchar(400)
-, group_id      INT
-, experiment_id INT
+, group_id      VARCHAR(40)
+, experiment_id VARCHAR(40)
 , FOREIGN KEY(group_id, experiment_id) 
 	  REFERENCES exp_group(group_id, experiment_id)
 );
 
 create table game_stagetwo
-( game_id       INT
+( game_id       VARCHAR(40)
 , txt_game_link VARCHAR(4000)
 , txt_game_page VARCHAR(4000)
-, experiment_id INT
+, experiment_id VARCHAR(40)
 , PRIMARY KEY(game_id, experiment_id)
 , FOREIGN KEY(experiment_id) 
     REFERENCES experiment(experiment_id)
 );
 
 create table video_stagetwo
-( video_id       INT
+( video_id       VARCHAR(40)
 , txt_video_link VARCHAR(4000)
 , txt_video_page VARCHAR(4000)
-, experiment_id  INT
+, experiment_id  VARCHAR(40)
 , PRIMARY KEY(video_id, experiment_id)
 , FOREIGN KEY(experiment_id) 
     REFERENCES experiment(experiment_id)
 );
 
 create table form
-( form_id       INT
-, question_id   INT
-, stage_id      INT
+( form_id       VARCHAR(40)
+, question_id   VARCHAR(40)
+, stage_id      VARCHAR(40)
 , txt_question  VARCHAR(4000)
-, experiment_id INT
+, experiment_id VARCHAR(40)
 , PRIMARY KEY(form_id, question_id)
 , FOREIGN KEY(experiment_id)
     REFERENCES experiment(experiment_id)
 );
 
 create table answer
-( aswer_id     INT
+( aswer_id     VARCHAR(40)
 , txt_answer   VARCHAR(4000)
-, form_id      INT
-, question_id  INT
-, user_form_id INT
+, form_id      VARCHAR(40)
+, question_id  VARCHAR(40)
+, user_form_id VARCHAR(40)
 , PRIMARY KEY (aswer_id, form_id)
 , FOREIGN KEY(form_id, question_id) 
     REFERENCES form(form_id, question_id)
