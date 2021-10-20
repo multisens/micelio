@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import {ToastContainer, toast} from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './style.css';
 
@@ -6,61 +8,107 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Api from '../../services/Api';
 
+import 'react-toastify/dist/ReactToastify.min.css';
+
 function ConsentTerm () {
 
+    const history = useHistory();
     const params = useParams();
 
-    const [consentTerm, setConsentTerm] = useState(null);
+    const [consentTerm, setConsentTerm] = useState('');
+    const [newConsentTerm, setNewConsentTerm] = useState('');
+
+    const [buttonReturn, setButtonReturn] = useState(false);
+    const [buttonContinue, setButtonContinue] = useState(false);
 
     useEffect(() => {
         getConsentTerm();
-      }, [])
+    }, [])
     
     const getConsentTerm = async () => {
         try {
-            const termResponse = await Api.get(`/consentTerm`);
+            const termResponse = await Api.get(`/consentTerm/${params.id}`);
 
-            const {data} = termResponse.data.data;
+            if(termResponse.data.data === null){
+                setConsentTerm('');
+            } else {
+                setConsentTerm(termResponse.data.data);
+                setNewConsentTerm(termResponse.data.data);
+            }
+            
+            document.getElementById('consentTerm').focus();
 
-            setConsentTerm(data);
         } catch (e) {
-            //
+            console.log(e.response.data)
+            toast.error(`Não foi possível recuperar o termo de consentimento.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
         }
     }
 
-    const beginForm = async () => {
-        try {
-            
-        } catch (e) {
-            // Erro
+    const saveNewConsentTerm = async event => {
+        event.preventDefault();
+
+        if(newConsentTerm !== consentTerm){
+            try {
+
+                const response = await Api.post(`/consentTerm/${params.id}`, {
+                    txt_consent_term: newConsentTerm
+                })
+        
+                if(!response.data.ok) {
+                    toast.error(`Não foi possível salvar o termo de consentimento, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+                }
+        
+                setConsentTerm(newConsentTerm);
+        
+            }catch (e) {
+                console.log(e.response.data)
+                toast.error(`Não foi possível salvar o termo de consentimento.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+            }
+        }
+        if(buttonReturn){
+            setButtonReturn(false);
+            history.push(`/experiment`);
+        }
+        if(buttonContinue){
+            setButtonContinue(false);
+            history.push(`/nextPage`);
         }
     }
 
     return (
-        <div className={'content-body'}>
-            <Header title="Termo de Consentimento Livre e Esclarecido"/>
-            <div className={'container'}>
-                <div>
+        <>
+            <ToastContainer />
+            <div className={'content-body'}>
+                <Header title="Criação de Experimento - Passo 1/1"/>
+                <div className={'container'}>
                     <div>
-                        Digite no campo abaixo o termo de consentimento que ser&aacute; assinado pelos participantes do experimento:
-                    </div>
-                    <div>
-                        <form onSubmit={beginForm}>
-                            <div className={'text-field'}>
-                                <textarea required className={'primary'} name={'consentTerm'} rows="5" cols="50" value={consentTerm}
-                                    onChange={e => {
-                                        setConsentTerm(e.target.value)
-                                    }}/>
-                            </div><br/><br/>
-                            <button className={'primary'}>Seguinte</button>
-                        </form>
+                        <h2>
+                            Digite no campo abaixo o termo de consentimento que ser&aacute; lido pelos participantes antes de iniciarem o experimento:
+                        </h2><br/><br/>
+                        <div>
+                            <form onSubmit={saveNewConsentTerm}>
+                                <div className={'text-field'}>
+                                    <textarea className={'primary'} id={'consentTerm'} placeholder=" Insira o texto aqui..." value={newConsentTerm}
+                                              rows="20" cols="200" size="4000"
+                                              onChange={e => {setNewConsentTerm(e.target.value)}}
+                                    />
+                                </div><br/><br/>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td className={'b-return'}><button className={'primary'} onClick={() => {setButtonReturn(true)}}>Retornar</button></td>
+                                            <td className={'b-continue'}><button className={'primary'} onClick={() => {setButtonContinue(true)}}>Seguir</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
                     </div>
                 </div>
+                <Footer/>
             </div>
-            <Footer/>
-        </div>
+        </>
     );
-
 };
 
 export default ConsentTerm;

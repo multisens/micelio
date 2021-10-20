@@ -10,6 +10,6 @@
     size: 12px;
 }
 
-.confirm-button {
-    list-style:disc;
+.b-continue {
+    width: 60%;
 }

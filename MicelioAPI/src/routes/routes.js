@@ -7,6 +7,7 @@ const ActivityRoutes = require('./activity.route');
 const UserRoutes = require('./user.route');
 const GroupRoutes = require('./group.route');
 const ExperimentRoutes = require('./experiment.route');
+const ConsentTerm = require('./consentTerm.route');
 const FormRoutes = require('./form.route');
 
 const TokenMiddleware = require('../middleware/TokenMiddleware');
@@ -22,6 +23,7 @@ Router.use('/session', LogMiddleware, TokenMiddleware, DeviceIDMiddleware, Sessi
 Router.use('/activity', LogMiddleware, TokenMiddleware, DeviceIDMiddleware, ActivityRoutes);
 Router.use('/group', LogMiddleware, GroupRoutes);
 Router.use('/experiment', LogMiddleware, ExperimentRoutes);
+Router.use('/consentTerm', LogMiddleware, ConsentTerm);
 Router.use('/form', LogMiddleware, FormRoutes);
 
 module.exports = Router;
