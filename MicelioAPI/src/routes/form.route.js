@@ -6,6 +6,6 @@ const Router = express.Router();
 const formController = new FormController();
 
 Router.get('/:experiment_id', formController.get)
-Router.post('/', formController.create);
+Router.post('/:experiment_id', formController.create);
 
 module.exports = Router;

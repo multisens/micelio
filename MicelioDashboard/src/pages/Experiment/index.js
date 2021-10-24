@@ -150,7 +150,7 @@ function Experiment() {
 
           <ExperimentCards title="Meus Experimentos" onSearch={filterExperimentList} onClickAdd={() => {setIsPopupOpen(true);}}>
             {
-              experimentList.length > 0 ? experimentList.map((exp) => {
+              experimentList.length > 0 ? experimentList.slice(0, experimentCards).map((exp) => {
                 return (<ExperimentCard key={exp.experiment_id}
                                         id={exp.experiment_id}
                                         name={exp.txt_experient_name}

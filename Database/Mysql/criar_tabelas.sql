@@ -195,12 +195,12 @@ create table exp_group
     REFERENCES experiment(experiment_id)
 );
 
-create table grp_user
-( user_form_id  VARCHAR(40)  PRIMARY KEY
-, txt_name      VARCHAR(300) 
-, txt_email     varchar(400)
-, group_id      VARCHAR(40)
-, experiment_id VARCHAR(40)
+create table participant
+( participant_id VARCHAR(40)  PRIMARY KEY
+, txt_name       VARCHAR(300) 
+, txt_email      varchar(400)
+, group_id       VARCHAR(40)
+, experiment_id  VARCHAR(40)
 , FOREIGN KEY(group_id, experiment_id) 
 	  REFERENCES exp_group(group_id, experiment_id)
 );
@@ -241,10 +241,10 @@ create table answer
 , txt_answer   VARCHAR(4000)
 , form_id      VARCHAR(40)
 , question_id  VARCHAR(40)
-, user_form_id VARCHAR(40)
+, participant_id VARCHAR(40)
 , PRIMARY KEY (aswer_id, form_id)
 , FOREIGN KEY(form_id, question_id) 
     REFERENCES form(form_id, question_id)
-, FOREIGN KEY(user_form_id) 
-    REFERENCES grp_user(user_form_id)
+, FOREIGN KEY(participant_id) 
+    REFERENCES participant(participant_id)
 );

@@ -89,6 +89,21 @@ class ExperimentController {
             }
 
             const expPermission = await trx('hasExpPermission').insert(permissionData);
+
+            for(let i=1;i<=4;i++){
+
+                const groupData = {
+                    experiment_id: experimentId,
+                    group_id: i
+                }
+
+                const groupInsert = await trx('exp_group').insert(groupData);
+
+                if(!groupInsert){
+                    await trx.rollback();
+                    return response.status(400).json({error: 'Cannot insert the group, something went wrong'});
+                }
+            }
             
             if(experiment && expPermission){
                 await trx.commit();

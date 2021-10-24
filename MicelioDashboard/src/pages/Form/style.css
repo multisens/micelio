@@ -6,10 +6,22 @@
     justify-content: center;
 }
 
-.text-field { 
-    size: 12px;
+.consent-term{
+    font-size: 18px;
 }
 
-.confirm-button {
-    list-style:disc;
+.text-field { 
+    size: 14px;
+}
+
+#parent {
+    width: 10%;
+    white-space: nowrap;
+    overflow-x: visible;
+}
+
+.child{
+    width: 90%;
+    vertical-align: 10px;
+    display:inline-block;
 }
