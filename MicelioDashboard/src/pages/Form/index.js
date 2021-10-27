@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
-import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './style.css';
 
@@ -12,7 +11,6 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 function Form () {
 
-    const history = useHistory();
     const params = useParams();
 
     const [username, setName] = useState('');
