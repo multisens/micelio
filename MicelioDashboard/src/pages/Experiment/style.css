@@ -12,3 +12,14 @@
 .experimentlist-container .more-experiments button {
     max-width: 200px;
 }
+
+#parent {
+    width: 90%;
+    white-space: nowrap;
+    overflow-x: visible;
+}
+
+.child{
+    width: 10%;
+    display:inline-block;
+}

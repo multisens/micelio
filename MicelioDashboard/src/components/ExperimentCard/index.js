@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import {AiOutlineShareAlt, AiOutlinePlusCircle, AiOutlineCrown} from 'react-icons/ai'
+import {AiOutlineShareAlt, AiOutlineCrown} from 'react-icons/ai'
 
 
 const Hr = () => {

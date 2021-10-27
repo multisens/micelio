@@ -30,6 +30,7 @@ const Routes = () => {
           <Route path={'/game/:id'} component={Game}/>
           <Route path={'/experiment'} component={Experiment}/>
           <Route path={'/consentTerm/:id'} component={ConsentTerm}/>
+          <Route path={'/form/:id'} component={Form}/>
           <Redirect to={'/home'} />
         </Switch>
       </BrowserRouter>

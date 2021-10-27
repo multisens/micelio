@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {ToastContainer, toast} from 'react-toastify';
+import {AiOutlineCopy} from 'react-icons/ai';
 import './style.css';
 
-import Api from '../../services/Api'
+import Api from '../../services/Api';
 
 import PageFormat from '../../components/PageFormat';
 import ExperimentCards from '../../components/ExperimentCardsContainer';
@@ -27,9 +28,7 @@ function Experiment() {
   const [isSearchingGame, setIsSearchingGame] = useState(false);
 
   const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
-  const [shareUser, setShareUser] = useState('');
-  const [shareExperiment, setShareExperiment] = useState('');
-
+  const [shareLink, setShareLink] = useState('');
 
   useEffect(() => {
     updateExperimentList();
@@ -78,21 +77,8 @@ function Experiment() {
   }
 
   const openSharePopup = experiment_id => {
-    setShareExperiment(experiment_id);
+    setShareLink(`http://localhost:3000/micelio/form/${experiment_id}`); // link está cravado, desculpa por isso, foi só para testes
     setIsSharePopupOpen(true);
-  }
-
-  const doShareExperiment = async (formEvent) => {
-    formEvent.preventDefault();
-
-    try{
-      await Api.post('/experiment/share', {experiment_id: shareExperiment, user_share: shareUser});
-      toast.success('Compartilhado com sucesso');
-
-      setShareUser('');
-    }catch (e) {
-      toast.error(e.response.data.error, );
-    }
   }
 
   const filterExperimentList = (keyboardEvent) => {
@@ -127,11 +113,18 @@ function Experiment() {
       <ToastContainer />
 
       <Popup isOpen={isSharePopupOpen} onClose={() => {setIsSharePopupOpen(false)}}>
-        <h2>Compartilhe o jogo</h2>
-        <form onSubmit={doShareExperiment}>
-          <input required type={'text'} placeholder={'Nome de usuário'} value={shareUser} onChange={e => {setShareUser(e.target.value)}} />
-          <button className={'primary'}>Compartilhar</button>
-        </form>
+        <h2>Compartilhe o experimento</h2>
+        <br/>
+        <div>
+          <div>
+            <input type={'text'} readOnly={true} value={shareLink}/>
+          </div>
+          <div className={'card-options'}>
+            <div className={'card-option'}>
+              <AiOutlineCopy size={25} onClick={navigator.clipboard.writeText(shareLink)}/>
+            </div>
+          </div>
+        </div>
       </Popup>
 
       <Popup isOpen={isPopupOpen} onClose={() => {setIsPopupOpen(false)}}>

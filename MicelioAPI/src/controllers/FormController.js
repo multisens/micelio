@@ -33,8 +33,7 @@ class FormController {
         const {txt_email} = await knex('Participant')
                                  .select('txt_email')
                                  .where('txt_email', email)
-                                 .andWhere('experiment_id', experiment_id)
-                                 .first();
+                                 .andWhere('experiment_id', experiment_id);
 
         if(txt_email){
             return response.status(400).json({error: 'This email has already started this experiment'});

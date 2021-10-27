@@ -38,13 +38,9 @@ function Form () {
         try {
             const userResponse = await Api.post(`/form/${params.id}`, {username, email});
 
-            console.log(userResponse.data.error)
-
             if(!userResponse.data.ok){
                 toast.error(`E-mail já cadastrado no experimento.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
             }
-
-            history.push(`/nextPage`);
         } catch (e) {
             console.log(e.response.data)
             toast.error(`Algo deu errado, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
