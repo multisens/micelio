@@ -1,158 +1,164 @@
-import React, {useState, useEffect} from 'react';
-import {ToastContainer, toast} from 'react-toastify';
-import './style.css';
+import React, { useState, useEffect } from "react"
+import { ToastContainer, toast } from "react-toastify"
+import "./style.css"
 
-import Api from '../../services/Api'
+import Api from "../../services/Api"
 
-import PageFormat from '../../components/PageFormat';
-import GameCardsContainer from '../../components/GameCardsContainer';
-import Card from '../../components/Card';
-import SessionGroupList from '../../components/SessionGroupList';
-import Popup from '../../components/Popup'
+import PageFormat from "../../components/PageFormat"
+import GameCardsContainer from "../../components/GameCardsContainer"
+import Card from "../../components/Card"
+import SessionGroupList from "../../components/SessionGroupList"
+import Popup from "../../components/Popup"
 
-import 'react-toastify/dist/ReactToastify.min.css';
+import "react-toastify/dist/ReactToastify.min.css"
 
-const GAMELIST_MAX_CARDS = 4;
+const GAMELIST_MAX_CARDS = 4
 
 function Home() {
-
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [isGroupPopupOpen, setIsGroupPopupOpen] = useState(false)
   const [isGamesExpanded, setIsGamesExpanded] = useState(false)
   const [gameCards, setGameCards] = useState(GAMELIST_MAX_CARDS)
 
-  const [newGame, setNewGame] = useState('')
-  const [newGameVersion, setNewGameVersion] = useState('')
-  const [newGroupId, setNewGroupId] = useState('')
+  const [newGame, setNewGame] = useState("")
+  const [newGameVersion, setNewGameVersion] = useState("")
+  const [newGroupId, setNewGroupId] = useState("")
 
-  const [newGroupName, setNewGroupName] = useState('')
-  const [newGroupGame, setNewGroupGame] = useState('')
+  const [newGroupName, setNewGroupName] = useState("")
+  const [newGroupGame, setNewGroupGame] = useState("")
   const [gameList, setGameList] = useState([])
   const [groupList, setGroupList] = useState([])
 
-  const [isSearchingGame, setIsSearchingGame] = useState(false);
+  const [isSearchingGame, setIsSearchingGame] = useState(false)
 
-  const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
-  const [shareUser, setShareUser] = useState('');
-  const [shareGame, setShareGame] = useState('');
-
+  const [isSharePopupOpen, setIsSharePopupOpen] = useState(false)
+  const [shareUser, setShareUser] = useState("")
+  const [shareGame, setShareGame] = useState("")
 
   useEffect(() => {
-    updateGameList();
-    updateGroupList();
+    updateGameList()
+    updateGroupList()
   }, [])
 
   useEffect(() => {
-    if(isGamesExpanded || isSearchingGame) {
-      setGameCards(Infinity);
-      return;
+    if (isGamesExpanded || isSearchingGame) {
+      setGameCards(Infinity)
+      return
     }
-    setGameCards(GAMELIST_MAX_CARDS);
-
+    setGameCards(GAMELIST_MAX_CARDS)
   }, [isGamesExpanded, isSearchingGame])
 
   const updateGameList = () => {
-    Api.get('/game').then(response => {
-      setGameList(response.data.data);
+    Api.get("/game").then((response) => {
+      setGameList(response.data.data)
     })
   }
 
   const updateGroupList = () => {
-    Api.get('/group').then(response => {
+    Api.get("/group").then((response) => {
       setGroupList(response.data.data)
     })
   }
 
-  const doCreateGame = async event => {
+  const doCreateGame = async (event) => {
     event.preventDefault()
 
     try {
-      const response = await Api.post('/game', {
+      const response = await Api.post("/game", {
         name: newGame,
-        version: newGameVersion
+        version: newGameVersion,
       })
 
-      if(!response.data.ok) {
-        return alert('Não foi possível efetuar cadastro. Por favor, tente novamente')
+      if (!response.data.ok) {
+        return alert(
+          "Não foi possível efetuar cadastro. Por favor, tente novamente"
+        )
       }
 
-      setNewGame('')
-      setNewGameVersion('')
+      setNewGame("")
+      setNewGameVersion("")
       setIsPopupOpen(false)
 
-      toast.success('Cadastrado com sucesso', {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+      toast.success("Cadastrado com sucesso", {
+        style: { boxShadow: "1px 1px 5px rgba(0,0,0,.4)" },
+      })
 
       updateGameList()
-
-    }catch (e) {
+    } catch (e) {
       console.log(e.response.data)
-      toast.error(`Não foi possível efetuar cadastro. Por favor, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+      toast.error(
+        `Não foi possível efetuar cadastro. Por favor, tente novamente.`,
+        { style: { boxShadow: "1px 1px 5px rgba(0,0,0,.4)" } }
+      )
     }
   }
 
-  const openGroupPopup = game_id => {
-    setNewGroupGame(game_id);
-    setIsGroupPopupOpen(true);
+  const openGroupPopup = (game_id) => {
+    setNewGroupGame(game_id)
+    setIsGroupPopupOpen(true)
   }
 
-  const openSharePopup = game_id => {
-    setShareGame(game_id);
-    setIsSharePopupOpen(true);
+  const openSharePopup = (game_id) => {
+    setShareGame(game_id)
+    setIsSharePopupOpen(true)
   }
 
   const doCreateGroup = async () => {
-    const game_id = newGroupGame;
+    const game_id = newGroupGame
 
-    const response = await Api.post('/group', {game_id, name: newGroupName});
-    const group_id = response.data.group_id;
+    const response = await Api.post("/group", { game_id, name: newGroupName })
+    const group_id = response.data.group_id
 
-    setNewGroupId(group_id);
-    setNewGroupName('');
+    setNewGroupId(group_id)
+    setNewGroupName("")
 
-    toast.success('Grupo criado com sucesso');
+    toast.success("Grupo criado com sucesso")
 
     // desculpa v
-    updateGroupList();
-    updateGameList();
+    updateGroupList()
+    updateGameList()
     // sério, perdão ^
   }
 
   const doShareGame = async (formEvent) => {
-    formEvent.preventDefault();
+    formEvent.preventDefault()
 
-    try{
-      await Api.post('/game/share', {game_id: shareGame, user_share: shareUser});
-      toast.success('Compartilhado com sucesso');
+    try {
+      await Api.post("/game/share", {
+        game_id: shareGame,
+        user_share: shareUser,
+      })
+      toast.success("Compartilhado com sucesso")
 
-      setShareUser('');
-    }catch (e) {
-      toast.error(e.response.data.error, );
+      setShareUser("")
+    } catch (e) {
+      toast.error(e.response.data.error)
     }
   }
 
   const filterGameList = (keyboardEvent) => {
-    const filterText = keyboardEvent.target.value.toLowerCase().replace(' ', '');
+    const filterText = keyboardEvent.target.value.toLowerCase().replace(" ", "")
 
-    if(filterText) {
-      setIsSearchingGame(true);
-    }else{
-      setIsSearchingGame(false);
+    if (filterText) {
+      setIsSearchingGame(true)
+    } else {
+      setIsSearchingGame(false)
     }
 
-    gameList.forEach(game => {
-      const gameName = game.name.toLowerCase().replace(' ', '');
-      const $gameCard = document.getElementById(game.game_id);
+    gameList.forEach((game) => {
+      const gameName = game.name.toLowerCase().replace(" ", "")
+      const $gameCard = document.getElementById(game.game_id)
 
-      if(!$gameCard) {
-        return;
+      if (!$gameCard) {
+        return
       }
 
-      if(gameName.indexOf(filterText) === -1) {
-        $gameCard.style.display = 'none';
-        return;
+      if (gameName.indexOf(filterText) === -1) {
+        $gameCard.style.display = "none"
+        return
       }
 
-      $gameCard.style.display = 'flex';
+      $gameCard.style.display = "flex"
     })
   }
 
@@ -160,82 +166,132 @@ function Home() {
     <>
       <ToastContainer />
 
-      <Popup isOpen={isSharePopupOpen} onClose={() => {setIsSharePopupOpen(false)}}>
+      <Popup
+        isOpen={isSharePopupOpen}
+        onClose={() => {
+          setIsSharePopupOpen(false)
+        }}
+      >
         <h2>Compartilhe o jogo</h2>
         <form onSubmit={doShareGame}>
-          <input required type={'text'} placeholder={'Nome de usuário'} value={shareUser} onChange={e => {setShareUser(e.target.value)}} />
-          <button className={'primary'}>Compartilhar</button>
+          <input
+            required
+            type={"text"}
+            placeholder={"Nome de usuário"}
+            value={shareUser}
+            onChange={(e) => {
+              setShareUser(e.target.value)
+            }}
+          />
+          <button className={"primary"}>Compartilhar</button>
         </form>
       </Popup>
 
-      <Popup isOpen={isPopupOpen} onClose={() => {
-        setIsPopupOpen(false)
-      }}>
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={() => {
+          setIsPopupOpen(false)
+        }}
+      >
         <h2>Cadastre um novo jogo</h2>
         <form onSubmit={doCreateGame}>
-          <input required type="text" className="primary" placeholder={'Nome'} value={newGame}
-                 onChange={e => setNewGame(e.target.value)}/>
-          <input required type="text" className="primary" placeholder={'Versão'} value={newGameVersion}
-                 onChange={e => setNewGameVersion(e.target.value)}/>
-          <button className="primary">Cadastrar</button>
+          <input
+            required
+            type='text'
+            className='primary'
+            placeholder={"Nome"}
+            value={newGame}
+            onChange={(e) => setNewGame(e.target.value)}
+          />
+          <input
+            required
+            type='text'
+            className='primary'
+            placeholder={"Versão"}
+            value={newGameVersion}
+            onChange={(e) => setNewGameVersion(e.target.value)}
+          />
+          <button className='primary'>Cadastrar</button>
         </form>
       </Popup>
 
-      <Popup isOpen={isGroupPopupOpen} onClose={() => {
-        setIsGroupPopupOpen(false)
-        setNewGroupName('')
-        setNewGroupGame('')
-        setNewGroupId('')
-      }}>
+      <Popup
+        isOpen={isGroupPopupOpen}
+        onClose={() => {
+          setIsGroupPopupOpen(false)
+          setNewGroupName("")
+          setNewGroupGame("")
+          setNewGroupId("")
+        }}
+      >
         <h2>Cadastre um grupo</h2>
-        <input className={'primary'} type="text" value={newGroupName} placeholder={'Nome do grupo'} onChange={e => setNewGroupName(e.target.value)} />
-        <button className="primary" onClick={doCreateGroup}>Cadastrar</button>
-        {
-          newGroupId &&
-          (
-            <div className={'group-id'}>
-              {newGroupId}
-            </div>
-          )
-        }
-
+        <input
+          className={"primary"}
+          type='text'
+          value={newGroupName}
+          placeholder={"Nome do grupo"}
+          onChange={(e) => setNewGroupName(e.target.value)}
+        />
+        <button className='primary' onClick={doCreateGroup}>
+          Cadastrar
+        </button>
+        {newGroupId && <div className={"group-id"}>{newGroupId}</div>}
       </Popup>
 
-      <PageFormat menuSelected={'home'}>
-        <main className={'gamelist-container'}>
-
-          <GameCardsContainer title="Meus Jogos" onSearch={filterGameList} onClickAdd={() => {
-            setIsPopupOpen(true);
-          }}>
-            {
-              gameList.length > 0 ? gameList.slice(0, gameCards).map((game) => {
-                return (<Card key={game.game_id}
-                              id={game.game_id}
-                              name={game.name}
-                              created={game.groups_created}
-                              active={game.active_sessions}
-                              shared={game.is_shared}
-                              isOwner={game.is_owner}
-                              onCreateGroup={() => {openGroupPopup(game.game_id)}}
-                              onShare={() => {openSharePopup(game.game_id)}} />);
-              }) : (<span>Não há jogos cadastrados</span>)
-            }
+      <PageFormat menuSelected={"home"}>
+        <main className={"gamelist-container"}>
+          <GameCardsContainer
+            title='Meus Jogos'
+            onSearch={filterGameList}
+            onClickAdd={() => {
+              setIsPopupOpen(true)
+            }}
+          >
+            {gameList.length > 0 ? (
+              gameList.slice(0, gameCards).map((game) => {
+                return (
+                  <Card
+                    key={game.game_id}
+                    id={game.game_id}
+                    name={game.name}
+                    created={game.groups_created}
+                    active={game.active_sessions}
+                    shared={game.is_shared}
+                    isOwner={game.is_owner}
+                    onCreateGroup={() => {
+                      openGroupPopup(game.game_id)
+                    }}
+                    onShare={() => {
+                      openSharePopup(game.game_id)
+                    }}
+                  />
+                )
+              })
+            ) : (
+              <span>Não há jogos cadastrados</span>
+            )}
           </GameCardsContainer>
 
-          {
-            gameList.length > 4 && !isSearchingGame ? (
-              <div className={'more-games'}>
-                <button className={'primary'} onClick={() => {setIsGamesExpanded(!isGamesExpanded)}}>{isGamesExpanded ? 'Ver menos' : 'Ver mais'}</button>
-              </div>
-            ) : ''
-          }
+          {gameList.length > 4 && !isSearchingGame ? (
+            <div className={"more-games"}>
+              <button
+                className={"primary"}
+                onClick={() => {
+                  setIsGamesExpanded(!isGamesExpanded)
+                }}
+              >
+                {isGamesExpanded ? "Ver menos" : "Ver mais"}
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
 
-          <SessionGroupList groups={groupList}/>
-
+          {/* <SessionGroupList groups={groupList}/> */}
         </main>
       </PageFormat>
     </>
   )
 }
 
-export default Home;
+export default Home
