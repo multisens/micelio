@@ -13,6 +13,7 @@ public class Agent
     public string type;
     public double position_x;
     public double position_y;
+    public double? position_z;
 	public Dictionary<string, object> properties;
 
 	public Agent(string id, string name,string type)
@@ -29,10 +30,11 @@ public class Agent
 		return "agent-"+currentTime.ToString("ddHHmmss");
 	}
 
-	public void SetPosition(double x, double y)
+	public void SetPosition(double x, double y, double? z = null)
 	{
 		this.position_x = x;
 		this.position_y = y;
+		this.position_z = z;
 	}
 
 	public void AddProperty(string key,object value)
