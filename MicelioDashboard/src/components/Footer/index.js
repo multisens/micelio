@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <footer className={'main'}>
             <a href="https://eic.cefet-rj.br/gpmm">Micelio - Cefet/RJ | GPMM</a>
-            <AiFillGithub size={32} />
+            <a href="https://github.com/GPMM/micelio"><AiFillGithub size={32} /></a>
             <span>Igor, Lucas e Marcelo</span>
         </footer>
     );
