@@ -11,6 +11,7 @@ public class Activity
     public string time;
     public double position_x;
     public double position_y;
+    public double? position_z;
     public string influenced_by;
 	public Dictionary<string, object> properties;
 	public List<Agent> agents;
@@ -32,10 +33,11 @@ public class Activity
 		return "activity-"+currentTime.ToString("ddHHmmss");		
 	}
 
-	public void SetPosition(double x, double y)
+	public void SetPosition(double x, double y, double? z = null)
 	{
 		this.position_x = x;
 		this.position_y = y;
+		this.position_z = z;
 	}
 
 	public void SetInfluence(string activity_id)
