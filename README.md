@@ -10,7 +10,7 @@ A plataforma Micélio tem por objetivo coletar dados de proveniência de jogos d
  <br/>
 </div>
 
-O primeiro módulo, chamado Micélio Unity, é um módulo criado para ser utilizado em conjunto com a plataforma [Unity](https://unity. com) de desenvolvimento de jogos. Esse módulo é integrado ao jogo sendo desenvolvido e provê métodos para recolher os dados dos jogos de forma transparente para o desenvolvedor. 
+O primeiro módulo, chamado Micélio Unity, é um módulo criado para ser utilizado em conjunto com a plataforma [Unity](https://unity.com) de desenvolvimento de jogos. Esse módulo é integrado ao jogo sendo desenvolvido e provê métodos para recolher os dados dos jogos de forma transparente para o desenvolvedor. 
 
 Os dados recolhidos são armazenados em um banco de dados por meio de outro módulo, chamado Micélio API, esse é um serviço construído para receber os dados dos jogos cadastrados na plataforma. Esse módulo do sistema é responsável por receber os dados, seguindo o modelo de proveniência construído no projeto, trata-los e armazená-los no banco de dados. O tratamento desses dados é feito para verificar se as informações recebidas tratam-se de novos dados, ou atualização de dados já existentes. 
 
