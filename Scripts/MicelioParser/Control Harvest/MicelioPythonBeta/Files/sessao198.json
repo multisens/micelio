@@ -1,0 +1,1718 @@
+{
+    "session_id": 198,
+    "name": "exported by script in 09/08/2021",
+    "language": "N/A",
+    "game_stage": "1",
+    "date": "2021-08-09",
+    "session_group_id": null,
+    "start_time": "02:02:52",
+    "end-time": null,
+    "activities": [
+        {
+            "activity_id": 23612,
+            "name": "plantar",
+            "time": "3",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 377,
+            "entities": [
+                {
+                    "entity_id": 817,
+                    "name": "grama",
+                    "position_x": 275,
+                    "position_y": 377,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23613,
+            "name": "plantar",
+            "time": "4",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 226,
+            "entities": [
+                {
+                    "entity_id": 819,
+                    "name": "grama",
+                    "position_x": 375,
+                    "position_y": 226,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23614,
+            "name": "plantar",
+            "time": "5",
+            "influenced_by": null,
+            "position_x": 175,
+            "position_y": 273,
+            "entities": [
+                {
+                    "entity_id": 820,
+                    "name": "grama",
+                    "position_x": 175,
+                    "position_y": 273,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23615,
+            "name": "plantar",
+            "time": "6",
+            "influenced_by": null,
+            "position_x": 475,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": 822,
+                    "name": "grama",
+                    "position_x": 475,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23616,
+            "name": "desenvolvimento",
+            "time": "10",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 377,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "grama",
+                    "position_x": 275,
+                    "position_y": 377,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23617,
+            "name": "desenvolvimento",
+            "time": "11",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 226,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "grama",
+                    "position_x": 375,
+                    "position_y": 226,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23618,
+            "name": "plantar",
+            "time": "8",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 276,
+            "entities": [
+                {
+                    "entity_id": 825,
+                    "name": "grama",
+                    "position_x": 325,
+                    "position_y": 276,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23619,
+            "name": "desenvolvimento",
+            "time": "12",
+            "influenced_by": null,
+            "position_x": 175,
+            "position_y": 273,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "grama",
+                    "position_x": 175,
+                    "position_y": 273,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23620,
+            "name": "desenvolvimento",
+            "time": "13",
+            "influenced_by": null,
+            "position_x": 475,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "grama",
+                    "position_x": 475,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23621,
+            "name": "desenvolvimento",
+            "time": "15",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 276,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "grama",
+                    "position_x": 325,
+                    "position_y": 276,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23622,
+            "name": "colher",
+            "time": "25",
+            "influenced_by": null,
+            "position_x": 475,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "grama",
+                    "position_x": 475,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23623,
+            "name": "plantar",
+            "time": "29",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 376,
+            "entities": [
+                {
+                    "entity_id": 831,
+                    "name": "couve",
+                    "position_x": 375,
+                    "position_y": 376,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23624,
+            "name": "migracao",
+            "time": "32",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "10": 3,
+                "tipo_de_praga": "cigarrinha"
+            }
+        },
+        {
+            "activity_id": 23625,
+            "name": "Novo inseto",
+            "time": "33",
+            "influenced_by": null,
+            "position_x": 25,
+            "position_y": 155,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 25,
+                    "position_y": 155,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23626,
+            "name": "Novo inseto",
+            "time": "33",
+            "influenced_by": null,
+            "position_x": 25,
+            "position_y": 321,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 25,
+                    "position_y": 321,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23627,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "33",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "260",
+                    "position_y": "320",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "260",
+                    "position_y": "320",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "260",
+            "position_y": "320",
+            "properties": {}
+        },
+        {
+            "activity_id": 23628,
+            "name": "Novo inseto",
+            "time": "33",
+            "influenced_by": null,
+            "position_x": 25,
+            "position_y": 331,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 25,
+                    "position_y": 331,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23629,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "34",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 826,
+                    "name": "grama",
+                    "position_x": 136,
+                    "position_y": 307,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 136,
+                    "position_y": 307,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 136,
+            "position_y": 307,
+            "properties": {}
+        },
+        {
+            "activity_id": 23630,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "34",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 826,
+                    "name": "grama",
+                    "position_x": 138,
+                    "position_y": 316,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 138,
+                    "position_y": 316,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 138,
+            "position_y": 316,
+            "properties": {}
+        },
+        {
+            "activity_id": 23631,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "35",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 828,
+                    "name": "grama",
+                    "position_x": 280,
+                    "position_y": 288,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 280,
+                    "position_y": 288,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 280,
+            "position_y": 288,
+            "properties": {}
+        },
+        {
+            "activity_id": 23632,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "35",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 824,
+                    "name": "grama",
+                    "position_x": 334,
+                    "position_y": 191,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 334,
+                    "position_y": 191,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 334,
+            "position_y": 191,
+            "properties": {}
+        },
+        {
+            "activity_id": 23633,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "35",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 831,
+                    "name": "couve",
+                    "position_x": 375,
+                    "position_y": 329,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 375,
+                    "position_y": 329,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 375,
+            "position_y": 329,
+            "properties": {}
+        },
+        {
+            "activity_id": 23634,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "36",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "4570",
+                    "position_y": "0263",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "4570",
+                    "position_y": "0263",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "4570",
+            "position_y": "0263",
+            "properties": {}
+        },
+        {
+            "activity_id": 23635,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "37",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "5430",
+                    "position_y": "0218",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "5430",
+                    "position_y": "0218",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "5430",
+            "position_y": "0218",
+            "properties": {}
+        },
+        {
+            "activity_id": 23636,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "37",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "6050",
+                    "position_y": "0242",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "6050",
+                    "position_y": "0242",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "6050",
+            "position_y": "0242",
+            "properties": {}
+        },
+        {
+            "activity_id": 23637,
+            "name": "desenvolvimento",
+            "time": "38",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 376,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "couve",
+                    "position_x": 375,
+                    "position_y": 376,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 23638,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "40",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "6690",
+                    "position_y": "0349",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "6690",
+                    "position_y": "0349",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "6690",
+            "position_y": "0349",
+            "properties": {}
+        },
+        {
+            "activity_id": 23639,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "42",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 824,
+                    "name": "grama",
+                    "position_x": 419,
+                    "position_y": 262,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 419,
+                    "position_y": 262,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 419,
+            "position_y": 262,
+            "properties": {}
+        },
+        {
+            "activity_id": 23640,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "43",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "4340",
+                    "position_y": "0163",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "4340",
+                    "position_y": "0163",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "4340",
+            "position_y": "0163",
+            "properties": {}
+        },
+        {
+            "activity_id": 23641,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "45",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 824,
+                    "name": "grama",
+                    "position_x": 366,
+                    "position_y": 181,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 366,
+                    "position_y": 181,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 366,
+            "position_y": 181,
+            "properties": {}
+        },
+        {
+            "activity_id": 23642,
+            "name": "Predacao",
+            "time": "46",
+            "influenced_by": null,
+            "position_x": "3900",
+            "position_y": "0181",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 824,
+                    "name": "grama",
+                    "type": "CPU",
+                    "position_x": "3900",
+                    "position_y": "0181",
+                    "properties": {},
+                    "role": "presa"
+                },
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "3900",
+                    "position_y": "0181",
+                    "properties": {},
+                    "role": "predador"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23643,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "48",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 826,
+                    "name": "grama",
+                    "position_x": 155,
+                    "position_y": 226,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 155,
+                    "position_y": 226,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 155,
+            "position_y": 226,
+            "properties": {}
+        },
+        {
+            "activity_id": 23644,
+            "name": "Predacao",
+            "time": "48",
+            "influenced_by": null,
+            "position_x": "1550",
+            "position_y": "0226",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 826,
+                    "name": "grama",
+                    "type": "CPU",
+                    "position_x": "1550",
+                    "position_y": "0226",
+                    "properties": {},
+                    "role": "presa"
+                },
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "1550",
+                    "position_y": "0226",
+                    "properties": {},
+                    "role": "predador"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23645,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "49",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 828,
+                    "name": "grama",
+                    "position_x": 339,
+                    "position_y": 229,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 339,
+                    "position_y": 229,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 339,
+            "position_y": 229,
+            "properties": {}
+        },
+        {
+            "activity_id": 23646,
+            "name": "Predacao",
+            "time": "49",
+            "influenced_by": null,
+            "position_x": "3390",
+            "position_y": "0229",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 828,
+                    "name": "grama",
+                    "type": "CPU",
+                    "position_x": "3390",
+                    "position_y": "0229",
+                    "properties": {},
+                    "role": "presa"
+                },
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "3390",
+                    "position_y": "0229",
+                    "properties": {},
+                    "role": "predador"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23647,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "50",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "3280",
+                    "position_y": "0229",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "3280",
+                    "position_y": "0229",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "3280",
+            "position_y": "0229",
+            "properties": {}
+        },
+        {
+            "activity_id": 23648,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "52",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "5470",
+                    "position_y": "0209",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "5470",
+                    "position_y": "0209",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "5470",
+            "position_y": "0209",
+            "properties": {}
+        },
+        {
+            "activity_id": 23649,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "55",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 335,
+                    "position_y": 341,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 335,
+                    "position_y": 341,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 335,
+            "position_y": 341,
+            "properties": {}
+        },
+        {
+            "activity_id": 23650,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "55",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 335,
+                    "position_y": 341,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 335,
+                    "position_y": 341,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 335,
+            "position_y": 341,
+            "properties": {}
+        },
+        {
+            "activity_id": 23651,
+            "name": "Reproducao",
+            "time": "57",
+            "influenced_by": null,
+            "position_x": "4980",
+            "position_y": "0288",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "4980",
+                    "position_y": "0288",
+                    "properties": {},
+                    "role": "inseto_1"
+                },
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "4980",
+                    "position_y": "0288",
+                    "properties": {},
+                    "role": "inseto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23652,
+            "name": "Novo inseto",
+            "time": "58",
+            "influenced_by": null,
+            "position_x": 617,
+            "position_y": 256,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 836,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 617,
+                    "position_y": 256,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23653,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "58",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 836,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "6180",
+                    "position_y": "0256",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "6180",
+                    "position_y": "0256",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "6180",
+            "position_y": "0256",
+            "properties": {}
+        },
+        {
+            "activity_id": 23654,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "60",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 823,
+                    "name": "grama",
+                    "position_x": 236,
+                    "position_y": 335,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 236,
+                    "position_y": 335,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 236,
+            "position_y": 335,
+            "properties": {}
+        },
+        {
+            "activity_id": 23655,
+            "name": "Predacao",
+            "time": "61",
+            "influenced_by": null,
+            "position_x": "2590",
+            "position_y": "0342",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 823,
+                    "name": "grama",
+                    "type": "CPU",
+                    "position_x": "2590",
+                    "position_y": "0342",
+                    "properties": {},
+                    "role": "presa"
+                },
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "2590",
+                    "position_y": "0342",
+                    "properties": {},
+                    "role": "predador"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23656,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "61",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 329,
+                    "position_y": 341,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 329,
+                    "position_y": 341,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 329,
+            "position_y": 341,
+            "properties": {}
+        },
+        {
+            "activity_id": 23657,
+            "name": "migracao",
+            "time": "63",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "10": 1,
+                "tipo_de_praga": "pulgao"
+            }
+        },
+        {
+            "activity_id": 23658,
+            "name": "meta lancada",
+            "time": "63",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "10": 3,
+                "11": 30,
+                "planta_sorteada": "tomate"
+            }
+        },
+        {
+            "activity_id": 23659,
+            "name": "Novo inseto",
+            "time": "63",
+            "influenced_by": null,
+            "position_x": 25,
+            "position_y": 445,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 837,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 25,
+                    "position_y": 445,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23660,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "64",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 382,
+                    "position_y": 331,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 382,
+                    "position_y": 331,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 382,
+            "position_y": 331,
+            "properties": {}
+        },
+        {
+            "activity_id": 23661,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "64",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 382,
+                    "position_y": 331,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 382,
+                    "position_y": 331,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 382,
+            "position_y": 331,
+            "properties": {}
+        },
+        {
+            "activity_id": 23662,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "74",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "4230",
+                    "position_y": "0333",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "4230",
+                    "position_y": "0333",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "4230",
+            "position_y": "0333",
+            "properties": {}
+        },
+        {
+            "activity_id": 23663,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "75",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 420,
+                    "position_y": 360,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 420,
+                    "position_y": 360,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 420,
+            "position_y": 360,
+            "properties": {}
+        },
+        {
+            "activity_id": 23664,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "75",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 414,
+                    "position_y": 341,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 414,
+                    "position_y": 341,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 414,
+            "position_y": 341,
+            "properties": {}
+        },
+        {
+            "activity_id": 23665,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "75",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 420,
+                    "position_y": 360,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 420,
+                    "position_y": 360,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 420,
+            "position_y": 360,
+            "properties": {}
+        },
+        {
+            "activity_id": 23666,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "75",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 414,
+                    "position_y": 341,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 414,
+                    "position_y": 341,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 414,
+            "position_y": 341,
+            "properties": {}
+        },
+        {
+            "activity_id": 23667,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "77",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "2620",
+                    "position_y": "0202",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "2620",
+                    "position_y": "0202",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "2620",
+            "position_y": "0202",
+            "properties": {}
+        },
+        {
+            "activity_id": 23668,
+            "name": "morte",
+            "time": "81",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": null,
+                    "position_y": null,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23669,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "81",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 836,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "3710",
+                    "position_y": "0347",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 832,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "3710",
+                    "position_y": "0347",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "3710",
+            "position_y": "0347",
+            "properties": {}
+        },
+        {
+            "activity_id": 23670,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "81",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 402,
+                    "position_y": 332,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 836,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 402,
+                    "position_y": 332,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 402,
+            "position_y": 332,
+            "properties": {}
+        },
+        {
+            "activity_id": 23671,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "81",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 402,
+                    "position_y": 332,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 836,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 402,
+                    "position_y": 332,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 402,
+            "position_y": 332,
+            "properties": {}
+        },
+        {
+            "activity_id": 23672,
+            "name": "morte",
+            "time": "86",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 833,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": null,
+                    "position_y": null,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 23673,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "86",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 836,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "3310",
+                    "position_y": "0094",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 834,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "3310",
+                    "position_y": "0094",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "3310",
+            "position_y": "0094",
+            "properties": {}
+        },
+        {
+            "activity_id": 23674,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "91",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 360,
+                    "position_y": 329,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 836,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 360,
+                    "position_y": 329,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 360,
+            "position_y": 329,
+            "properties": {}
+        },
+        {
+            "activity_id": 23675,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "91",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 835,
+                    "name": "couve",
+                    "position_x": 360,
+                    "position_y": 329,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 836,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 360,
+                    "position_y": 329,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 360,
+            "position_y": 329,
+            "properties": {}
+        },
+        {
+            "activity_id": 23676,
+            "name": "meta nao cumprida",
+            "time": "92",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "5": "quantidade da meta",
+                "6": "tempo da meta",
+                "tipo_planta": "tomate"
+            }
+        },
+        {
+            "activity_id": 23677,
+            "name": "game over",
+            "time": "92",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {}
+        }
+    ]
+}

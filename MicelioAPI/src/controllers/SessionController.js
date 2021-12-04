@@ -10,7 +10,7 @@ class SessionController{
         let {game_id, device_id} = request.headers;
 
         const end_time = null;
-
+        
         if(!name) name = null;
 
         if (!language) {
