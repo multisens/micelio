@@ -14,18 +14,30 @@ class SessionController{
         if(!name) name = null;
 
         if (!language) {
+            console.error(`[ERRO VALIDAÇÃO SESSÃO] Não foi possível encontrar o idioma:\n`+
+                          `language: ${request.body.language}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);
             return response.status(400).json({error: "Invalid session language"});
         }
 
         if (!date) {
+            console.error(`[ERRO VALIDAÇÃO SESSÃO] Não foi possível encontrar a data:\n`+
+                          `date: ${request.body.date}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);
             return response.status(400).json({error: "Invalid session day"});
         }
 
         if (!game_stage) {
+            console.error(`[ERRO VALIDAÇÃO SESSÃO] Não foi possível encontrar a nível do jogo:\n`+
+                          `game_stage: ${request.body.game_stage}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);
             return response.status(400).json({error: "Invalid session game stage"});
         }
 
         if (!start_time) {
+            console.error(`[ERRO VALIDAÇÃO SESSÃO] Não foi possível encontrar o tempo de início do jogo:\n`+
+                          `start_time: ${request.body.start_time}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);
             return response.status(400).json({error: "Invalid session start time"});
         }
 
@@ -69,15 +81,16 @@ class SessionController{
                 return response.status(201).json({ok: true});
             }
             else{
+                console.error("[ERRO INSERÇÃO SESSÃO] Nao foi possível inserir a sessão.");
                 return response.status(400).json({error: 'Cannot insert session, try again later'});
             }
-
         }
         catch(err){
             trx.rollback();
+            console.error(`[ERRO INSERÇÃO SESSÃO] Nao foi possível inserir a sessão. ${err.code} - ${err.sqlMessage}`);
             return response.status(400).json({error: "Cannot insert, please check the acess token and the device id."});
         }
-
+        
     }
 
     async update(request, response){
@@ -87,6 +100,9 @@ class SessionController{
         const {game_id, device_id} = request.headers;
 
         if (!end_time) {
+            console.error(`[ERRO VALIDAÇÃO FIM DE SESSÃO] Não foi possível encontrar o tempo de termino na requisição:\n`+
+                          `end_time: ${request.body.end_time}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);
             return response.status(400).json({error: "Invalid session end time"});
         }
 
@@ -117,17 +133,20 @@ class SessionController{
                 }
                 else{
                     await trx.rollback();
+                    console.error("[ERRO FINALIZAR SESSÃO] Nao foi possível finalizar sessão.");
                     return response.status(400).json({error: "Cannot end session, check the information sent"});
                 }
             }
             else{
                 await trx.rollback();
+                console.error("[ERRO FINALIZAR SESSÃO] Nao foi possível encontrar uma sessão para finalizar.");
                 return response.status(400).json({error: "You dont have any opened session"});
             }
             
         }
         catch(err){
             await trx.rollback();
+            console.error(`[ERRO FINALIZAR SESSÃO] Nao foi possível finalizar a sessão. ${err.code} - ${err.sqlMessage}`);
             return response.status(400).json({error: "Cannot end session, check the information sent."});
         }
 

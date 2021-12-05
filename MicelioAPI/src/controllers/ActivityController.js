@@ -12,18 +12,30 @@ class ActivityController {
 		const {game_id, device_id} = request.headers;
 
 		if (!activity_id) {
+			console.error(`[ERRO VALIDAÇÃO ATIVIDADE] Não foi possível encontrar o identificador da atividade:\n`+
+                          `activity_id: ${request.body.activity_id}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);
 			return response.status(400).json("Invalid activity id");
 		}
 
 		if (!name) {
+			console.error(`[ERRO VALIDAÇÃO ATIVIDADE] Não foi possível encontrar o nome da atividade:\n`+
+                          `name: ${request.body.name}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);		
 			return response.status(400).json("Invalid activity name");
 		}
 
 		if (!time) {
+			console.error(`[ERRO VALIDAÇÃO ATIVIDADE] Não foi possível encontrar o tempo da atividade:\n`+
+                          `time: ${request.body.time}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);		
 			return response.status(400).json("Invalid activity time");
 		}
 
 		if (!agents) {
+			console.error(`[ERRO VALIDAÇÃO ATIVIDADE] Não foi possível encontrar a lista de agentes:\n`+
+                          `agents: ${JSON.stringify(request.body.agents, null, 2)}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);
 			return response.status(400).json("Invalid agents");
 		}
 		else{
@@ -37,28 +49,48 @@ class ActivityController {
 					}
 				});
 				if(agentsHasProps.indexOf(false) != -1){
+					console.error(`[ERRO VALIDAÇÃO ATIVIDADE] Os agentes não estão de acordo com as regras:\n`+
+                          `agents: ${JSON.stringify(request.body.agents, null, 2)}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);
 					return response.status(400).json("Invalid agents attributes, please check the following information: agent_id, name, type and role.");
 				}								
 			}
 			else{
+				console.error(`[ERRO VALIDAÇÃO ATIVIDADE] Não foi possível encontrar a lista de agentes:\n`+
+                          `agents: ${JSON.stringify(request.body.agents, null, 2)}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);
 				return response.status(400).json("Invalid agents");
 			}
 		}
 
 		if (!entities) {
+			console.error(`[ERRO VALIDAÇÃO ATIVIDADE] Não foi possível encontrar a lista de entidades:\n`+
+                          `entities: ${JSON.stringify(request.body.entities, null, 2)}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);
 			return response.status(400).json("Invalid entities");
 		}
 		else{
-			const entitesHasProps = entities.map((entity)=>{
-				if(entity.entity_id && entity.name && entity.role){
-					return true;
+			if(entities instanceof Array){
+				const entitesHasProps = entities.map((entity)=>{
+					if(entity.entity_id && entity.name && entity.role){
+						return true;
+					}
+					else{
+						return false;
+					}
+				});
+				if(entitesHasProps.indexOf(false) != -1){
+					console.error(`[ERRO VALIDAÇÃO ATIVIDADE] As entidades não estão de acordo com as regras:\n`+
+                          `entities: ${JSON.stringify(request.body.entities, null, 2)}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);
+					return response.status(400).json("Invalid entities attributes, please check the following information: entity_id, name and role.");
 				}
-				else{
-					return false;
-				}
-			});
-			if(entitesHasProps.indexOf(false) != -1){
-				return response.status(400).json("Invalid entities attributes, please check the following information: entity_id, name and role.");
+			}
+			else{
+				console.error(`[ERRO VALIDAÇÃO ATIVIDADE] Não foi possível encontrar a lista de entidades:\n`+
+                          `entities: ${JSON.stringify(request.body.entities, null, 2)}\n`+
+                          `body:${JSON.stringify(request.body, null, 2)}`);
+				return response.status(400).json("Invalid entities");
 			}	
 		}
 
@@ -266,6 +298,7 @@ class ActivityController {
         }
         catch(err){
             await trx.rollback();
+			console.error(`[ERRO INSERÇÃO ATIVIDADE] Nao foi possível cadastrar atividade. ${err.code} - ${err.sqlMessage}`);
             return response.status(400).json({error: err});
         }
 
