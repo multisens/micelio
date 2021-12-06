@@ -8,7 +8,6 @@ const UserRoutes = require('./user.route');
 const GroupRoutes = require('./group.route');
 
 const TokenMiddleware = require('../middleware/TokenMiddleware');
-const DeviceIDMiddleware = require('../middleware/DeviceIDMiddleware');
 const LogMiddleware = require('../middleware/LogMiddleware');
 
 const Router = express.Router();
@@ -16,8 +15,8 @@ const Router = express.Router();
 Router.use('/user', LogMiddleware, UserRoutes);
 Router.use('/game', LogMiddleware, GameRoutes);
 Router.use('/device', LogMiddleware, TokenMiddleware, DeviceRoutes);
-Router.use('/session', LogMiddleware, TokenMiddleware, DeviceIDMiddleware, SessionRoutes);
-Router.use('/activity', LogMiddleware, TokenMiddleware, DeviceIDMiddleware, ActivityRoutes);
+Router.use('/session', LogMiddleware, TokenMiddleware, SessionRoutes);
+Router.use('/activity', LogMiddleware, TokenMiddleware, ActivityRoutes);
 Router.use('/group', LogMiddleware, GroupRoutes);
 
 module.exports = Router;
