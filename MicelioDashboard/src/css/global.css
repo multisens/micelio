@@ -24,19 +24,6 @@ div.content-body{
     height: 100vh;
 }
 
-input {
-    border: 2px solid #bfbfbf;
-    border-radius: 8px;
-    min-height: 40px;
-
-    padding: 8px;
-
-    transition: all .5s;
-    outline: none;
-
-    width: 100%;
-}
-
 input.primary:focus {
     border: 2px solid #2A9D8F;
     transform: scale(1.03, 1.03);
@@ -73,3 +60,5 @@ button.primary:hover {
 input + button.primary {
     margin-top: 10px;
 }
+
+/*  */

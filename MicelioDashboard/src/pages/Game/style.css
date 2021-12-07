@@ -8,8 +8,8 @@
 }
 
 .gameinfo-container .gameinfo-avatar {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     background-color: white;
     border-radius: 8px;
     border: 1px solid #bfbfbf;
@@ -27,22 +27,15 @@
 .gameinfo {
     display: flex;
     flex-direction: column;
-    align-items: end;
     justify-content: flex-end;
 
 }
 .gameinfo strong {
     color: #264653;
 }
-.gameinfo span {
+.gameinfo > span {
     max-width: 600px;
     display: block;
     word-break: break-all;
     margin-top: 8px;
 }
-
-/*
-.gameinfo span + .gameinfo span {
-    margin-top: 5px;
-}
-*/
