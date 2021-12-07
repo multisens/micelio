@@ -19,7 +19,7 @@ class GameController{
       .innerJoin("MicelioUser as mu", 'mu.user_id', 'hp.user_id')
       .where('g.game_id', game_id)
       .andWhere('hp.user_id', user_id).first();
-      //todo: desculpa, precisa ajustar a tabela de haspermission
+      //TODO: desculpa, precisa ajustar a tabela de haspermission
       // remover coluna "owner", adicionar "user_id" na tabela de game (criador do jogo)
       // paz
 
@@ -38,8 +38,8 @@ class GameController{
       delete game.token;
     }
 
-    game.username = gameOwner.username; //todo:4 perdão, carreira
-    //todo: please help
+    game.username = gameOwner.username; //TODO:4 perdão, carreira
+    //TODO: please help
 
     const game_groups = await knex('SessionGroup as sg')
       .select('sg.session_group_id', 'sg.it_ends', 'sg.name')
@@ -54,44 +54,52 @@ class GameController{
 
     const user_id = decodedToken.sub;
 
-    /*const userGames = await knex('HasPermission').innerJoin('Game', 'HasPermission.game_id', 'Game.game_id')
-      .select('name', 'version', 'Game.game_id').where('HasPermission.user_id', user_id)*/
+    const ownUserGames = await knex('Game as g')
+      .select('g.*', knex.raw('TRUE as is_owner'))
+      .innerJoin('HasPermission as hp', 'hp.game_id', 'g.game_id')
+      .where('hp.user_id', user_id)
+      .andWhere('hp.owner', true);
 
-    const userGames = await knex.raw(`SELECT    Game.game_id,
-          Game.name,
-          Game.version,
-          HasPermission.owner as is_owner,
-          COUNT(B.session_id) AS active_sessions,
-          COUNT(SessionGroup.session_group_id) AS groups_created,
-          COUNT(C.has_permission_id) AS is_shared
-FROM Game
-         JOIN HasPermission
-              ON Game.game_id = HasPermission.game_id
-         LEFT JOIN
-     (
-         SELECT *
-         FROM HasPermission
-         WHERE HasPermission.owner = false
-     )
-         AS C
-     ON Game.game_id = C.game_id
-         LEFT JOIN
-     SessionGroup
-     ON HasPermission.has_permission_id = SessionGroup.has_permission_id
-         LEFT JOIN
-     (
-         SELECT Session.session_id, Session.game_id
-         FROM Session
-         WHERE Session.end_time IS NULL
-           AND Session.date = '${new Date().getFullYear()}-0${new Date().getMonth() + 1}-${new Date().getDate()}'
-     )
-         AS B
-     ON Game.game_id = B.game_id
-WHERE HasPermission.user_id = '${user_id}'
-GROUP BY Game.game_id, HasPermission.owner`);
-    // desculpa por isso ^
+    const sharedUserGames = await knex('Game as g')
+      .select('g.game_id', 'g.name', 'g.version', knex.raw('FALSE as is_owner'),  knex.raw('TRUE as is_shared'))
+      .innerJoin('HasPermission as hp', 'hp.game_id', 'g.game_id')
+      .where('hp.user_id', user_id)
+      .andWhere('hp.owner', false);
 
-    response.json({ok: true, data: userGames[0]})
+    const allUserGames = [...ownUserGames, ...sharedUserGames];
+    const allUserGamesId = allUserGames.map( game => game.game_id)
+
+    
+    const groupsCreatedByGame = await knex('SessionGroup as sg')
+      .innerJoin('HasPermission as hp','sg.has_permission_id','hp.has_permission_id')
+      .innerJoin('Game as g','g.game_id', 'hp.game_id')
+      .select('g.game_id')
+      .where('hp.user_id', user_id)
+      .groupBy('g.game_id')
+      .count('sg.session_group_id as groups_created');
+
+    const sessionByGame = await knex('Session as s')
+      .innerJoin('Game as g', 's.game_id', 'g.game_id')
+      .select('g.game_id')
+      .whereIn('g.game_id',allUserGamesId)
+      .andWhere('s.end_time', null)
+      .count('s.session_id as active_sessions')
+      .groupBy('g.game_id')
+
+    const userGames = allUserGames.map((game)=>{
+
+        const groupsCreated = groupsCreatedByGame.find(g => g.game_id === game.game_id);
+        const totalActiveSessions = sessionByGame.find(g => g.game_id === game.game_id);
+
+        return {
+          ...game,
+          groups_created: (groupsCreated)?groupsCreated.groups_created:0,
+          active_sessions: (totalActiveSessions)?totalActiveSessions.active_sessions:0
+        }
+
+    });
+
+    response.json({ok: true, data: userGames})
   }
 
 	async create(request, response){

@@ -77,7 +77,7 @@ function SessionGroupList({groups}) {
                 <Hr/>
                 <p><b>Status: </b>{group.it_ends ? 'Fechado' : 'Aberto'}</p>
                 <p><b>Jogo: </b>{group.name}</p>
-                <p><b>Sessões: </b>{group.qtdSession}</p>
+                <p><b>Sessões: </b>{group.total_sessions}</p>
               </li>
             ))
           }

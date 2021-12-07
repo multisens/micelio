@@ -72,8 +72,8 @@ function Game() {
 
   const getGameById = async () => {
     try {
-      const gameResponse = await Api.get(`/game/${params.id}`)
-
+      const gameResponse = await Api.get(`/game/${params.id}`);
+      
       const {game: gameData, groups: groupsData} = gameResponse.data
       setGame(gameData)
       setGroups(groupsData)

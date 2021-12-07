@@ -6,6 +6,7 @@ class DeviceController {
 
 		const { device_id, system_name, model, screen_width, screen_height } = request.body;
 
+		//TODO: validação
 		if (!device_id) {
 			return response.status(400).json({ error: "Invalid device id" });
 		}
