@@ -12,6 +12,7 @@ class ActivityController {
 
 		const {game_id, device_id} = request.headers;
 
+		//TODO: validação
 		if (!activity_id) {
 			return response.status(400).json("Invalid activity id");
 		}
@@ -24,6 +25,7 @@ class ActivityController {
 			return response.status(400).json("Invalid activity time");
 		}
 
+		//valida agents
 		if (!agents) {
 			return response.status(400).json("Invalid agents");
 		}
@@ -46,6 +48,7 @@ class ActivityController {
 			}
 		}
 
+		//valida entities
 		if (!entities) {
 			return response.status(400).json("Invalid entities");
 		}
@@ -67,6 +70,7 @@ class ActivityController {
 			return response.status(202).json({ok: true});
 		}
 
+		//começa transação
 		const trx = await knex.transaction();
 		
         try{

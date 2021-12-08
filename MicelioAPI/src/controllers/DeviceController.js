@@ -1,4 +1,5 @@
 const knex = require('../database/connection');
+const yup = require('yup');
 
 class DeviceController {
 
@@ -31,6 +32,7 @@ class DeviceController {
 			return response.status(202).json({ok: true});
 		}
 
+		//transação
 		try {
 
 			const data = {
@@ -61,6 +63,19 @@ class DeviceController {
 		} catch (err) {
 			return response.status(400).json({ error: err });
 		}
+
+	}
+
+	async validate(device){
+		//{ device_id, system_name, model, screen_width, screen_height }
+
+		let schema= yup.object().shape({
+			device_id: yup.string().required(),
+			system_name: yup.string().required(),
+			model: yup.string().required(),
+			screen_width: yup.string().required(),
+			screen_height: yup.string().required()
+		})
 
 	}
 
