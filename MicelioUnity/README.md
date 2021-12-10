@@ -84,7 +84,7 @@ Para instanciar um `Entity` precisamos de apenas dois parâmetros, são eles:
 
 - `role` : Papel da entidade atualmente. É utilizado quando uma atividade é enviada para saber qual a participação da entidade no evento. Para definir o papel de uma entidade utilize o método `SetRole(string role)`.
 
-- `position_x` e `position_y` : Posição atual da entidade. Define onde o objeto está apresentado na tela. Para definir a posição de uma entidade utilize o método `SetPosition(double x, double y)`.
+- `position_x`, `position_y` e `position_z`: Posição atual da entidade. Define onde o objeto está apresentado na tela. Para definir a posição de uma entidade utilize o método `SetPosition(double x, double y, [double? z])`.
 
 - `properties` : Propriedades gerais da entidade. Valores específicos de cada jogo. Para adicionar propriedades à entidade utilize o método `AddProperty(string name, object value)`.
 
@@ -134,7 +134,6 @@ public class Arma : EntityObject
 ```
 
 
-
 ##### AgentObject
 
 Ao implementar a interface `AgentObject` é necessário criar o método `GetAgent()`, esse método deve retornar um objeto da classe `Agent`.
@@ -159,7 +158,7 @@ Para instanciar um `Agent` precisamos de apenas três parâmetros, são eles:
 
 - `role` : Papel do agente atualmente. É utilizado quando uma atividade é enviada para saber qual a participação do agente no evento. Para definir o papel de um agente utilize o método `SetRole(string role)`.
 
-- `position_x` e `position_y` : Posição atual do agente. Define onde o objeto está apresentado na tela. Para definir a posição de um agente utilize o método `SetPosition(double x, double y)`.
+- `position_x`, `position_y` e `position_z` : Posição atual do agente. Define onde o objeto está apresentado na tela. Para definir a posição de um agente utilize o método `SetPosition(double x, double y, [double? z])`.
 
 - `properties` : Propriedades gerais do agente. Valores específicos de cada jogo. Para adicionar propriedades ao agente utilize o método `AddProperty(string name, object value)`.
 
@@ -217,7 +216,7 @@ public class Soldado : AgentObject
 
 ```
 
-
+> Obs.: A posição no eixo z é opcional quando definido o atributo Position.
 
 #### Considerações Finais
 
@@ -437,7 +436,7 @@ public class Soldado : MonoBehaviour, AgentObject
 ##### Parâmetros Opcionais
 
 - `influenced_by` : Define o identificador da atividade que gerou essa atividade. Esse parâmetro pode ser setado para ligar as atividades. Para definir o identificador utilize o método `SetInfluence(string activity_id)`.
-- `position_x` e `position_y` : Posição atual da atividade. Define onde o evento aconteceu. Para definir a posição de uma atividade utilize o método `SetPosition(double x, double y)`.
+- `position_x`, `position_y` e `position_z`: Posição atual da atividade. Define onde o evento aconteceu. Para definir a posição de uma atividade utilize o método `SetPosition(double x, double y, [double? z])`.
 - `properties` : Propriedades gerais da atividade. Valores específicos para cada uma. Para adicionar propriedades à atividade utilize o método `AddProperty(string name, object value)`.
 - `agents` : Array que define todos os agentes que participaram daquele evento. Para adicionar agentes a um evento utilize o método `AddAgent(AgentFactory agent_object)`, ou  `AddAgent(AgentFactory agent_object, string role)`.
 - `entities` : Array que define todos entidades que participaram daquele evento. Para adicionar entidades a um evento utilize o método `AddEntity(EntintyFactory entity_object)`, ou  `AddEntity(EntintyFactory entity_object, string role)`.
