@@ -49,52 +49,53 @@ function Game() {
       <PageFormat menuSelected={"dashboard"}>
         <div className='dashboard-container'>
           {game && (
-            <div className={"gameinfo-container"}>
-              <div className={"gameinfo-avatar"}>
-                {game.name.slice(0, 1).toUpperCase()}
-              </div>
-              <div className={"gameinfo"}>
-                {game.token && (
+            <>
+              <div className={"gameinfo-container"}>
+                <div className={"gameinfo-avatar"}>
+                  {game.name.slice(0, 1).toUpperCase()}
+                </div>
+                <div className={"gameinfo"}>
+                  {game.token && (
+                    <span>
+                      <strong>Token:</strong>
+                      <input
+                        id='game-token'
+                        type='text'
+                        disabled
+                        value={game.token}
+                        data-copy={game.token}
+                      />
+                    </span>
+                  )}
                   <span>
-                    <strong>Token:</strong>
-                    <input
-                      id='game-token'
-                      type='text'
-                      disabled
-                      value={game.token}
-                      data-copy={game.token}
-                    />
+                    <strong>Nome:</strong> {game.name}
                   </span>
-                )}
-                <span>
-                  <strong>Nome:</strong> {game.name}
-                </span>
-                <span>
-                  <strong>Versão:</strong> {game.version}
-                </span>
-                <span>
-                  <strong>Criador:</strong> {game.username}
-                </span>
+                  <span>
+                    <strong>Versão:</strong> {game.version}
+                  </span>
+                  <span>
+                    <strong>Criador:</strong> {game.username}
+                  </span>
+                </div>
+                <div>
+                  <AiOutlineCopy
+                    onClick={copyToken}
+                    color={"black"}
+                    size={24}
+                    style={{
+                      marginTop: 40,
+                      display: "block",
+                      marginLeft: 10,
+                      cursor: "pointer",
+                    }}
+                  />
+                </div>
               </div>
-              <div>
-                <AiOutlineCopy
-                  onClick={copyToken}
-                  color={"black"}
-                  size={24}
-                  style={{
-                    marginTop: 40,
-                    display: "block",
-                    marginLeft: 10,
-                    cursor: "pointer",
-                  }}
-                />
-              </div>
-              {/*<div id='view'></div>*/}
-            </div>
+              <Box mt={5}>
+                <GameTab groupList={groups} gameToken={game.token} />
+              </Box>
+            </>
           )}
-          <Box mt={5}>
-            <GameTab groupList={groups} gameToken={game.token} />
-          </Box>
 
           {/* <SessionGroupList groups={groups} /> */}
         </div>
