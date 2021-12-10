@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from "react"
-import {ToastContainer, toast} from "react-toastify"
-import {AiOutlineCopy} from 'react-icons/ai'
-import {useParams} from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { ToastContainer, toast } from "react-toastify"
+import { AiOutlineCopy } from "react-icons/ai"
+import { useParams } from "react-router-dom"
+import { Box } from "@chakra-ui/react"
 
 import "./style.css"
 
-import ClipboardHelper from '../../helper/ClipboardHelper'
+import ClipboardHelper from "../../helper/ClipboardHelper"
 import PageFormat from "../../components/PageFormat"
 import Api from "../../services/Api"
-import SessionGroupList from "../../components/SessionGroupList"
+import GameTab from "../../components/GameTab"
 
 function Game() {
   const params = useParams()
@@ -18,63 +19,13 @@ function Game() {
 
   useEffect(() => {
     getGameById()
-
-    var vlSpec = {
-      data: {
-        url: "https://vega.github.io/vega-lite/data/population.json",
-      },
-      transform: [
-        {filter: "datum.year == 2000"},
-        {calculate: "datum.sex == 2 ? 'Female' : 'Male'", as: "gender"},
-      ],
-      width: {step: 20},
-      mark: "bar",
-      encoding: {
-        column: {
-          field: "age",
-          type: "ordinal",
-          spacing: 10,
-        },
-        y: {
-          aggregate: "sum",
-          field: "people",
-          title: "population",
-          axis: {
-            grid: false,
-          },
-        },
-        x: {
-          field: "gender",
-          axis: {
-            title: "",
-          },
-        },
-        color: {
-          field: "gender",
-          scale: {
-            range: ["#777666", "#E7D24F"],
-          },
-        },
-      },
-      config: {
-        view: {
-          stroke: "transparent",
-        },
-        axis: {
-          domainWidth: 1,
-        },
-      },
-    }
-
-    // Embed the visualization in the container with id `vis`
-    window.vegaEmbed("#view", vlSpec)
   }, [])
 
   const getGameById = async () => {
     try {
-      const gameResponse = await Api.get(`/game/${params.id}`);
-      
-      const {game: gameData, groups: groupsData} = gameResponse.data
+      const gameResponse = await Api.get(`/game/${params.id}`)
+
+      const { game: gameData, groups: groupsData } = gameResponse.data
       setGame(gameData)
       setGroups(groupsData)
     } catch (e) {
@@ -83,14 +34,13 @@ function Game() {
   }
 
   const copyToken = () => {
-    const $element = document.getElementById('game-token');
+    const $element = document.getElementById("game-token")
     new ClipboardHelper().copy($element)
 
     toast.success("Token copiado com sucesso", {
       style: { boxShadow: "1px 1px 5px rgba(0,0,0,.4)" },
-      autoClose: 1200
+      autoClose: 1200,
     })
-
   }
 
   return (
@@ -98,7 +48,6 @@ function Game() {
       <ToastContainer />
       <PageFormat menuSelected={"dashboard"}>
         <div className='dashboard-container'>
-          {/*<button className={'primary'} style={{marginBottom: 20}}>Ver</button>*/}
           {game && (
             <div className={"gameinfo-container"}>
               <div className={"gameinfo-avatar"}>
@@ -107,28 +56,47 @@ function Game() {
               <div className={"gameinfo"}>
                 {game.token && (
                   <span>
-                  <strong>Token:</strong> <span id={'game-token'} data-copy={game.token}>{game.token}</span>
-                </span>
+                    <strong>Token:</strong>
+                    <input
+                      id='game-token'
+                      type='text'
+                      disabled
+                      value={game.token}
+                      data-copy={game.token}
+                    />
+                  </span>
                 )}
                 <span>
-                <strong>Nome:</strong> {game.name}
-              </span>
+                  <strong>Nome:</strong> {game.name}
+                </span>
                 <span>
-                <strong>Versão:</strong> {game.version}
-              </span>
+                  <strong>Versão:</strong> {game.version}
+                </span>
                 <span>
-                <strong>Criador:</strong> {game.username}
-              </span>
+                  <strong>Criador:</strong> {game.username}
+                </span>
               </div>
               <div>
-                <AiOutlineCopy onClick={copyToken} color={'black'} size={24}
-                               style={{marginTop: 20, display: 'block', marginLeft: 10, cursor: 'pointer'}}/>
+                <AiOutlineCopy
+                  onClick={copyToken}
+                  color={"black"}
+                  size={24}
+                  style={{
+                    marginTop: 40,
+                    display: "block",
+                    marginLeft: 10,
+                    cursor: "pointer",
+                  }}
+                />
               </div>
               {/*<div id='view'></div>*/}
             </div>
           )}
+          <Box mt={5}>
+            <GameTab groupList={groups} gameToken={game.token} />
+          </Box>
 
-          <SessionGroupList groups={groups}/>
+          {/* <SessionGroupList groups={groups} /> */}
         </div>
       </PageFormat>
     </>
