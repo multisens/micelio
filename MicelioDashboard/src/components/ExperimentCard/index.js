@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import {AiOutlineShareAlt, AiOutlineCrown} from 'react-icons/ai'
+import {AiOutlineForm, AiOutlineShareAlt, AiOutlineCrown} from 'react-icons/ai'
 
 
 const Hr = () => {
@@ -20,7 +20,7 @@ function ExperimentCard(props) {
 
   return (
     <li id={props.id}>
-      <div className={'card-header'} onClick={() => {history.push(`/consentTerm/${props.id}`)}}>
+      <div className={'card-header'} onClick={() => {history.push(`/expDetails/${props.id}`)}}>
         <h2>{props.name}</h2>
         {(props.isOwner === 1)
           ? (<AiOutlineCrown size={24} color={'#E9C46A'}/>)
@@ -31,6 +31,9 @@ function ExperimentCard(props) {
         <p><b>Jogo vinculado: </b>{props.game}</p>
       </div>
       <div className={'card-options'}>
+        <div className={'card-option'} onClick={() => {history.push(`/consentTerm/${props.id}`)}}>
+          <AiOutlineForm size={25}/>
+        </div>
         <div className={'card-option'} onClick={props.onShare}>
           <AiOutlineShareAlt size={25}/>
         </div>

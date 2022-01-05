@@ -20,8 +20,6 @@ class FormController {
         const {experiment_id} = request.params
         const {username, email} = request.body;
 
-		const group_id = Math.floor(Math.random()*(4))+1;
-
         if(!experiment_id){
             return response.status(400).json({error: "Missing experiment id"});
         }
@@ -30,7 +28,7 @@ class FormController {
             return response.status(400).json({error: "Missing username or email"});
         }
 
-        const {txt_email} = await knex('Participant')
+        const txt_email = await knex('Participant')
                                  .select('txt_email')
                                  .where('txt_email', email)
                                  .andWhere('experiment_id', experiment_id)
@@ -46,11 +44,20 @@ class FormController {
 
         try{
 
+            const {userGroup} = await knex('participant')
+                                  .select('group_id')
+                                  .count('group_id as total')
+                                  .where('experiment_id', experiment_id)
+                                  .groupBy('group_id')
+                                  .orderBy('total');
+
+            console.log('userGroup: ' + userGroup);
+
             const userData = {
                 participant_id,
                 txt_name: username,
                 txt_email: email,
-                group_id,
+                group_id: userGroup.group_id,
                 experiment_id
 			}
 

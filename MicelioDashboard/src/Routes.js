@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Game from './pages/Game';
 import Experiment from './pages/Experiment';
+import ExpDetails from './pages/ExpDetails';
 import Form from './pages/Form';
 import ConsentTerm from './pages/ConsentTerm';
 
@@ -29,6 +30,7 @@ const Routes = () => {
           <Route path={'/sobre'} component={Dashboard}/>
           <Route path={'/game/:id'} component={Game}/>
           <Route path={'/experiment'} component={Experiment}/>
+          <Route path={'/expDetails/:id'} component={ExpDetails}/>
           <Route path={'/consentTerm/:id'} component={ConsentTerm}/>
           <Route path={'/form/:id'} component={Form}/>
           <Redirect to={'/home'} />
