@@ -69,14 +69,6 @@ class DeviceController {
 	async validate(){
 		//{ device_id, system_name, model, screen_width, screen_height }
 
-		const device = {
-			device_id:"123123",
-			system_name:"asd123123asd",
-			model:"123123",
-			screen_width:"asda123123sd",
-			screen_height:"123123"
-		};
-
 		let schema= yup.object().shape({
 			device_id: yup.string().required(),
 			system_name: yup.string().required(),
