@@ -1,62 +1,61 @@
 .grouplist-header {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 }
-.grouplist-header p{
-    color: #7c7c7c;
-    font-size: 15px;
+.grouplist-header p {
+  color: #7c7c7c;
+  font-size: 15px;
 }
 .grouplist {
-    margin-top: 60px;
+  margin-top: 10px;
 }
 .grouplist ul {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
 }
 .grouplist li {
-    padding: 10px 10px;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 0 0 2px #dfdfdf;
+  padding: 10px 10px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 0 2px #dfdfdf;
 
-    border-left: 5px solid #2A9D8F;
+  border-left: 5px solid #2a9d8f;
 
-    cursor: pointer;
-    transition: all .2s;
+  cursor: pointer;
+  transition: all 0.2s;
 }
-.grouplist li hr{
-    margin-top: 8px;
-    margin-bottom: 15px;
-
+.grouplist li hr {
+  margin-top: 8px;
+  margin-bottom: 15px;
 }
-.grouplist li h3{
-    color: #264653;
+.grouplist li h3 {
+  color: #264653;
 }
-.grouplist li b{
-    color: #2A9D8F;
+.grouplist li b {
+  color: #2a9d8f;
 }
-.grouplist li p{
-    font-size: 15px;
-    padding: 1px 0px;
+.grouplist li p {
+  font-size: 15px;
+  padding: 1px 0px;
 }
-.grouplist li span{
-    font-size: 12px;
+.grouplist li span {
+  font-size: 12px;
 }
 .grouplist ul li:hover {
-    transform: scale(1.01, 1.01);
-    box-shadow: 0 0 4px #6f6f6f;
-    background-color: #efefef;
+  transform: scale(1.01, 1.01);
+  box-shadow: 0 0 4px #6f6f6f;
+  background-color: #efefef;
 }
 
 .more-groups {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .more-groups button {
-    max-width: 200px;
+  max-width: 200px;
 }

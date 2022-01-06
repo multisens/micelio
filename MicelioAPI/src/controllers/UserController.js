@@ -104,28 +104,29 @@ class UserController {
 		const { username, password } = request.body
 
 		if(!username) {
-			return response.status(400).json({error: "Invalid username"})
+			return response.status(400).json({error: "Invalid username"});
 		}
 
 		if(!password) {
-			return response.status(400).json({error: "Invalid password"})
+			return response.status(400).json({error: "Invalid password"});
 		}
 
-		const user_db = await knex('MicelioUser').select().where({ username }).first()
+		const user_db = await knex('MicelioUser').select().where({ username }).first();
+
 		if(!user_db) {
-			return response.status(404).json({error: "User not found"})
+			return response.status(404).json({error: "User not found"});
 		}
 
 		if(!isPasswordValid(user_db.password, password)){
-			return response.status(400).json({error: 'Invalid password'})
+			return response.status(400).json({error: 'Invalid password'});
 		}
 
-		delete user_db.password
+		delete user_db.password;
 
-		const token = generateUserSession(user_db.user_id)
+		const token = generateUserSession(user_db.user_id);
 
-		response.cookie('miceliotoken', token)
-		response.json({ok: true, data: user_db, token})
+		response.cookie('miceliotoken', token);
+		response.json({ok: true, data: user_db, token});
 	}
 
 	async logout(request, response) {

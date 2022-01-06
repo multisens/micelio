@@ -1,4 +1,5 @@
 const knex = require('../database/connection');
+const yup = require('yup');
 
 class DeviceController {
 
@@ -6,6 +7,7 @@ class DeviceController {
 
 		const { device_id, system_name, model, screen_width, screen_height } = request.body;
 
+		//TODO: validação
 		if (!device_id) {
 			return response.status(400).json({ error: "Invalid device id" });
 		}
@@ -30,6 +32,7 @@ class DeviceController {
 			return response.status(202).json({ok: true});
 		}
 
+		//transação
 		try {
 
 			const data = {
@@ -61,6 +64,32 @@ class DeviceController {
 			return response.status(400).json({ error: err });
 		}
 
+	}
+
+	async validate(){
+		//{ device_id, system_name, model, screen_width, screen_height }
+
+		const device = {
+			device_id:"123123",
+			system_name:"asd123123asd",
+			model:"123123",
+			screen_width:"asda123123sd",
+			screen_height:"123123"
+		};
+
+		let schema= yup.object().shape({
+			device_id: yup.string().required(),
+			system_name: yup.string().required(),
+			model: yup.string().required(),
+			screen_width: yup.string().required(),
+			screen_height: yup.string().required()
+		});
+
+		schema.isValid(device).catch(
+			function (err){
+				console.log(err);
+			}
+		).then(() => device)
 	}
 
 }

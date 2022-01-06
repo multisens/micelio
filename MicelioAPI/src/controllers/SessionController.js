@@ -61,7 +61,7 @@ class SessionController{
                 game_stage,
                 start_time,
                 end_time
-            }
+            };
 
             const session = await trx('Session').insert(data);
 
@@ -69,7 +69,7 @@ class SessionController{
                 const group = await trx('SessionGroup')
                 .where('session_group_id', session_group)
                 .select('session_group_id')
-                .first()
+                .first();
 
                 if(group){
                     await trx('SessionInGroup').insert({session_id: sessionId, session_group_id: session_group});

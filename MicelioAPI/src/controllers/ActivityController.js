@@ -1,16 +1,18 @@
 const knex = require('../database/connection');
 const idGenerator = require('../utils/generators/idGenerator');
+const path = require('path');
 
 class ActivityController {
 
 	async create(request, response){
 
 		let {activity_id, name, position_x, position_y,
-				time, influenced_by, influenced_by_properties, properties
-				, entities, agents } = request.body;
+				position_z, time, influenced_by, influenced_by_properties,
+				properties, entities, agents } = request.body;
 
 		const {game_id, device_id} = request.headers;
 
+		//TODO: validação
 		if (!activity_id) {
 			console.error(`[ERRO VALIDAÇÃO ATIVIDADE] Não foi possível encontrar o identificador da atividade:\n`+
                           `activity_id: ${request.body.activity_id}\n`+
@@ -32,6 +34,7 @@ class ActivityController {
 			return response.status(400).json("Invalid activity time");
 		}
 
+		//valida agents
 		if (!agents) {
 			console.error(`[ERRO VALIDAÇÃO ATIVIDADE] Não foi possível encontrar a lista de agentes:\n`+
                           `agents: ${JSON.stringify(request.body.agents, null, 2)}\n`+
@@ -63,6 +66,7 @@ class ActivityController {
 			}
 		}
 
+		//valida entities
 		if (!entities) {
 			console.error(`[ERRO VALIDAÇÃO ATIVIDADE] Não foi possível encontrar a lista de entidades:\n`+
                           `entities: ${JSON.stringify(request.body.entities, null, 2)}\n`+
@@ -98,6 +102,7 @@ class ActivityController {
 			return response.status(202).json({ok: true});
 		}
 
+		//começa transação
 		const trx = await knex.transaction();
 		
         try{
@@ -109,6 +114,7 @@ class ActivityController {
             .select('session_id')
             .first();
 
+			//desculpa
 			activity_id = `${activity_id}#${session_id}`;
 
 			const activity_data = {
@@ -127,7 +133,8 @@ class ActivityController {
 				const action_data = {
 					activity_id,
 					position_x,
-					position_y		
+					position_y,
+					position_z
 				};
 
 				const inserted_action = await trx('Action').insert(action_data);
@@ -143,7 +150,7 @@ class ActivityController {
 					influenced: activity_id,
 					properties: JSON.stringify(influenced_by_properties)
 				}
-				const inserted_activity = await trx('Action').insert(influenced_by_data);
+				const inserted_influence = await trx('InfluencedBy').insert(influenced_by_data);
 
 			}
 
@@ -168,7 +175,7 @@ class ActivityController {
 
 			agents.forEach((value)=>{
 
-				let {agent_id, name, type, role, position_x: agent_pos_x, position_y: agent_pos_y, properties: agent_properties} = value;
+				let {agent_id, name, type, role, position_x: agent_pos_x, position_y: agent_pos_y, position_z: agent_pos_z, properties: agent_properties} = value;
 
 				agent_id = `${agent_id}#${session_id}`;
 
@@ -179,31 +186,34 @@ class ActivityController {
 					role,
 					position_x: agent_pos_x,
 					position_y:agent_pos_y,
+					position_z:agent_pos_z,
 					properties: JSON.stringify(agent_properties)
 				};
+
+				if(agent_pos_x !== undefined && agent_pos_y !== undefined){
+					const character_data = {
+						agent_id,
+						position_x: agent_pos_x, 
+						position_y: agent_pos_y,
+						position_z: agent_pos_z
+					}
+					game_characteres_to_insert.push(character_data);
+				}
 				
 				const agent_data = {
 						agent_id,
 						name,
 						type,
 						properties: JSON.stringify(agent_properties)
-					};
-					agents_to_insert.push(agent_data);
-					if(agent_pos_x !== undefined&& agent_pos_y !== undefined){
-						const character_data = {
-							agent_id,
-							position_x: agent_pos_x, 
-							position_y: agent_pos_y
-						}
-						game_characteres_to_insert.push(character_data);
-					}
-				
+				};
+					
+				agents_to_insert.push(agent_data);
 				agents_activity.push(agent_data_activity);
 				
 			});
 			
 			entities.forEach((value)=>{
-				let {entity_id, name, role, position_x: entity_pos_x, position_y: entity_pos_y, properties: entity_properties} = value;
+				let {entity_id, name, role, position_x: entity_pos_x, position_y: entity_pos_y,  position_z: entity_pos_z, properties: entity_properties} = value;
 				
 				entity_id = `${entity_id}#${session_id}`;
 				
@@ -213,24 +223,27 @@ class ActivityController {
 					role,
 					position_x: entity_pos_x,
 					position_y: entity_pos_y,
+					position_z: entity_pos_z,
 					properties: JSON.stringify(entity_properties)
 				};
 				
+				if(entity_pos_x !== undefined && entity_pos_y !== undefined){
+					const object_data = {
+						entity_id,
+						position_x: entity_pos_x, 
+						position_y: entity_pos_y,
+						position_z: entity_pos_z
+					}
+					game_objects_to_insert.push(object_data);
+				}
+
 				const entity_data = {
 					entity_id,
 					name,
 					properties: JSON.stringify(entity_properties)
 				};
-				entities_to_insert.push(entity_data);
-				if(entity_pos_x !== undefined && entity_pos_y !== undefined){
-					const object_data = {
-						entity_id,
-						position_x: entity_pos_x, 
-						position_y: entity_pos_y
-					}
-					game_objects_to_insert.push(object_data);
-				}
 				
+				entities_to_insert.push(entity_data);	
 				entities_activity.push(entity_data_activity);
 			});
 
@@ -240,7 +253,7 @@ class ActivityController {
 				const inserted_agents = await trx('Agent')
 				.insert(agents_to_insert)
 				.onConflict('agent_id')
-  				.merge(['properties']);;
+  				.merge(['properties']);
 			}
 			else{
 				const inserted_agents = -1;
@@ -250,7 +263,7 @@ class ActivityController {
 				const inserted_game_characters = await trx('GameCharacter')
 				.insert(game_characteres_to_insert)
 				.onConflict('entity_id')
-  				.merge();;
+  				.merge();
 			}
 			else{
 				const inserted_game_characters = -1;
@@ -302,6 +315,12 @@ class ActivityController {
             return response.status(400).json({error: err});
         }
 
+	}
+
+
+	async index(request, response){
+		const baseDir = path.join(__dirname, '..', '..', '..', 'Scripts', 'MicelioParser', 'Control Harvest', 'JsonConverter', 'Exports')
+		return response.status(200).sendFile('sessao208.json', {root: baseDir});
 	}
 }
 

@@ -9,23 +9,26 @@ class GroupController {
 
     const user_id = decodedToken.sub;
 
-    // SELECT sg.session_group_id, COUNT(sig.session_group_id) as qtdSession FROM `sessiongroup` as sg
+    // SELECT sg.session_group_id, COUNT(sig.session_group_id) as total_sessions FROM `sessiongroup` as sg
     // LEFT JOIN `sessioningroup` as sig ON sg.session_group_id = sig.session_group_id GROUP BY sg.session_group_id
 
     const groups = await knex('SessionGroup as sg')
       .select('sg.session_group_id', 'sg.it_ends', 'game.name', 'sg.name as group_name')
-      .count('sig.session_group_id as qtdSession')
+      .count('sig.session_group_id as total_sessions')
       .innerJoin('HasPermission as hp', 'hp.has_permission_id', 'sg.has_permission_id')
       .innerJoin('Game as game', 'game.game_id', 'hp.game_id')
       .leftJoin('SessionInGroup as sig', 'sg.session_group_id', 'sig.session_group_id')
       .groupBy('sg.session_group_id')
       .where('hp.user_id', user_id)
-
-    response.json({ok: true, data: groups});
+    
+    console.log(groups)
+    response.status(200).json({ok: true, data: groups});
   }
 
   async create(request, response) {
     const {game_id, name} = request.body;
+
+    //TODO: validação
     if(!game_id){
       return response.status(400).json({error: "Jogo inválido"});
     }
@@ -39,7 +42,8 @@ class GroupController {
 
     const user_id = decodedToken.sub;
 
-    const new_group_id = Math.round(Math.random() * 100000);
+    //TODO: refatorar group id
+    const session_group_id = Math.round(Math.random() * 100000);
 
     const permission_db = await knex('HasPermission')
       .select('has_permission_id')
@@ -50,13 +54,13 @@ class GroupController {
     }
 
     await knex('SessionGroup').insert({
-      session_group_id: new_group_id,
+      session_group_id,
       has_permission_id: permission_db.has_permission_id,
       it_ends: 0,
       name
     })
 
-    response.json({ok: true, group_id: new_group_id});
+    response.json({ok: true, group_id: session_group_id});
   }
 
 }
