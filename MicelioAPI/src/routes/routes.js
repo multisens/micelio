@@ -15,7 +15,7 @@ const Router = express.Router()
 
 Router.use("/user", LogMiddleware, UserRoutes)
 Router.use("/game", LogMiddleware, GameRoutes)
-Router.use('/visualizacao', LogMiddleware, TokenMiddleware, VisualizacaoRoutes);
+Router.use('/visualizacao', LogMiddleware, VisualizacaoRoutes);
 Router.use("/device", LogMiddleware, TokenMiddleware, DeviceRoutes)
 Router.use("/session", LogMiddleware, TokenMiddleware, SessionRoutes)
 Router.use("/activity", LogMiddleware, ActivityRoutes)
