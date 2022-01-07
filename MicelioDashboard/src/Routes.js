@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import Game from './pages/Game';
 
 import {useAuth} from "./context/AuthContext";
+import Profile from "./pages/Profile";
 
 require('dotenv').config();
 
@@ -24,8 +25,9 @@ const Routes = () => {
         <Switch>
           <Route path={'/home'} component={Home} exact/>
           <Route path={'/sobre'} component={Dashboard}/>
+          <Route path={'/profile'} component={Profile}/>
           <Route path={'/game/:id'} component={Game}/>
-          <Redirect to={'/home'} />
+          <Redirect to={'/home'}/>
         </Switch>
       </BrowserRouter>
     )

@@ -100,6 +100,33 @@ class UserController {
 
 	}
 
+	async update(request, response) {
+		const {username, email, password, newPassword} = request.body;
+
+		const { miceliotoken } = request.cookies
+
+		if(!miceliotoken) {
+			return response.status(401).send()
+		}
+
+		try{
+			const { sub: userId } = decodeUserSession(miceliotoken)
+
+			const updatedUser = {}
+
+			if(username) updatedUser.username = username
+			if(email) updatedUser.email = email
+
+			await knex('MicelioUser').update(updatedUser).where('user_id', userId)
+
+			response.json({ok: true})
+
+		}catch (e) {
+			return response.status(401)
+		}
+
+	}
+
 	async login(request, response) {
 		const { username, password } = request.body
 
