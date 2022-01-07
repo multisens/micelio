@@ -20,7 +20,7 @@ CREATE TABLE Visualization(
     name varchar(100) NOT NULL,
     config text NOT NULL,
 
-    PRIMARY KEY(game_id),
+    PRIMARY KEY(game_id,user_id,name),
     FOREIGN KEY(user_id) REFERENCES MicelioUser(user_id),
     FOREIGN KEY(game_id) REFERENCES Game(game_id)
 );
