@@ -1,9 +1,42 @@
+const { request } = require('express');
 const express = require('express');
 const knex = require('../database/connection');
 const idGenerator = require('../utils/generators/idGenerator');
 const { decodeUserSession } = require('../utils/generators/userSessionGenerator')
 
 class VisualizacaoController {
+
+  async get(request, response){
+
+    //Validação de token
+    const { miceliotoken } = request.cookies;
+    if(!miceliotoken) {
+			return response.status(401).send();
+		}
+
+    let {name} = request.body;
+
+    if(!name){
+      return response.status(400).json({error: 'invalid name'});
+    }
+
+    try{
+      
+      name = name.toLoweCase();
+
+      const visualization = knex('visualization').select().where({name}).first();
+      
+      if(!visualization){
+        return response.status(400).json({error: 'Cannot insert user, try again later'});
+      }else{
+        return response.send(visualization);
+      }
+
+    }catch(e){
+      return response.status(400).json({error: 'Cannot connect to database, try again later'});
+    }
+
+  }
 
   async create(request, response){
     
@@ -62,7 +95,7 @@ class VisualizacaoController {
       }
       
     }
-    catch(err){
+    catch(e){
       return response.status(400).json({error: 'Cannot connect to database, try again later'});
     }
 

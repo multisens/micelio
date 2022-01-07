@@ -5,5 +5,6 @@ const Router = express.Router();
 const visualizacaoController = new VisualizacaoController();
 
 Router.post("/:game_id", visualizacaoController.create);
+Router.get("/", visualizacaoController.get);
 
 module.exports = Router;
