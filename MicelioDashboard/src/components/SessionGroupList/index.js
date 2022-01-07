@@ -28,7 +28,7 @@ function SessionGroupList({ groups }) {
       return
     }
 
-    setGroupsLimit(4)
+    setGroupsLimit(4);
   }, [isGroupsExpanded, isSearchingGroup])
 
   const filterGroupList = (keyboardEvent) => {
