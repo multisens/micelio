@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import { AiOutlineCopy } from "react-icons/ai"
 import { useParams } from "react-router-dom"
-import { Box } from "@chakra-ui/react"
+import { Box, Textarea } from "@chakra-ui/react"
 
 import "./style.css"
 
@@ -10,10 +10,14 @@ import ClipboardHelper from "../../helper/ClipboardHelper"
 import PageFormat from "../../components/PageFormat"
 import Api from "../../services/Api"
 import GameTab from "../../components/GameTab"
+import Popup from "../../components/Popup"
 
 function Game() {
   const params = useParams()
-
+  
+  const [visualizationName, setVisualizationName] = useState("")
+  const [configurationJson, setConfigurationJson] = useState("")
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [game, setGame] = useState(null)
   const [groups, setGroups] = useState([])
 
@@ -43,9 +47,62 @@ function Game() {
     })
   }
 
+  const doCreateVisualization = async (formEvent) => {
+    formEvent.preventDefault()
+
+    try {
+      await Api.post(`/visualization/${params.id}`, {
+        name: visualizationName,
+        config: configurationJson,
+      })
+
+      toast.success("Visualização cadastrada com sucesso")
+      setIsPopupOpen(false)
+    } catch (e) {
+      toast.error(e.response.data.error)
+    }
+
+  }
+
+  const exibirPopUp = () => {
+    setIsPopupOpen(true)
+  }
+
   return (
     <>
       <ToastContainer />
+
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={() => {
+          setIsPopupOpen(false)
+        }}
+      >
+        <h2>Cadastre um nova visualização</h2>
+        <form onSubmit={doCreateVisualization}>
+          <input
+            required
+            type='text'
+            className='primary'
+            placeholder={"Nome"}
+            value={visualizationName}
+            onChange={(e) => setVisualizationName(e.target.value)}
+          />
+          <Textarea
+            className='primary'
+            placeholder={"JSON de Configuração"}
+            value={configurationJson}
+            resize="none"
+            focusBorderColor="#2A9D8F"
+            isRequired={true}
+            marginTop={4}
+            height={140}
+            onChange={(e) => setConfigurationJson(e.target.value)}
+          />
+          <button className='primary'>Cadastrar</button>
+        </form>
+      </Popup>
+
       <PageFormat menuSelected={"dashboard"}>
         <div className='dashboard-container'>
           {game && (
@@ -90,10 +147,14 @@ function Game() {
                     }}
                   />
                 </div>
-                <div className="button-container">
+                <div className="drop-button-container">
                   <button className='drop-button'>Excluir Jogo</button>
                 </div>
               </div>
+                <div className="visualization-button-container">
+                  <button className='primary' onClick={exibirPopUp}>Nova Visualização</button>
+
+                </div>
               <Box mt={5}>
                 <GameTab groupList={groups} gameToken={game.token} />
               </Box>
