@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import Api from "../../services/Api"
 import { getPopulation } from "../../helper/Visualization"
 
-const Visualization = () => {
+const Visualization = ({component_id}) => {
   useEffect(async () => {
     const activitiesList = [
       "Novo inseto",
@@ -170,11 +170,11 @@ const Visualization = () => {
         population
       )
 
-      window.vegaEmbed("#viewMicelio", JSON.parse(visualization))
+      window.vegaEmbed(`#${component_id}`, JSON.parse(visualization))
     })
   })
 
-  return <div id='viewMicelio'></div>
+  return <div id={component_id}></div>
 }
 
 export default Visualization

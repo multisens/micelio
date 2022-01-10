@@ -38,12 +38,25 @@ class GameController{
       delete game.token;
     }
 
-    game.username = gameOwner.username; //TODO:4 perdão, carreira
-    //TODO: please help
+    game.username = gameOwner.username; //todo:4 perdão, carreira
+
+    // const game_groups = await knex('SessionGroup as sg')
+    //   .select('sg.session_group_id', 'sg.it_ends', 'sg.name')
+    //   .innerJoin('SessionInGroup as sig', 'sig.session_group_id','sg.session_group_id')
+    //   .where('sg.has_permission_id', game.has_permission_id)
+    //   .groupBy('sg.session_group_id', 'sg.name', 'sg.it_ends');
+    // // //todo: please help
+
 
     const game_groups = await knex('SessionGroup as sg')
       .select('sg.session_group_id', 'sg.it_ends', 'sg.name')
+      .count('sig.session_group_id as total_sessions')
+      .innerJoin('HasPermission as hp', 'hp.has_permission_id', 'sg.has_permission_id')
+      .innerJoin('Game as game', 'game.game_id', 'hp.game_id')
+      .leftJoin('SessionInGroup as sig', 'sg.session_group_id', 'sig.session_group_id')
+      .groupBy('sg.session_group_id')
       .where('sg.has_permission_id', game.has_permission_id);
+
 
     return response.json({game, groups: game_groups});
   }
@@ -69,7 +82,7 @@ class GameController{
     const allUserGames = [...ownUserGames, ...sharedUserGames];
     const allUserGamesId = allUserGames.map( game => game.game_id)
 
-    
+
     const groupsCreatedByGame = await knex('SessionGroup as sg')
       .innerJoin('HasPermission as hp','sg.has_permission_id','hp.has_permission_id')
       .innerJoin('Game as g','g.game_id', 'hp.game_id')
