@@ -90,6 +90,9 @@ function Game() {
                     }}
                   />
                 </div>
+                <div className="button-container">
+                  <button className='drop-button'>Excluir Jogo</button>
+                </div>
               </div>
               <Box mt={5}>
                 <GameTab groupList={groups} gameToken={game.token} />

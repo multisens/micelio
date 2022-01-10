@@ -38,3 +38,36 @@
   word-break: break-all;
   margin-top: 8px;
 }
+
+.button-container{
+  width: 100%;
+
+  position: relative;
+}
+
+button.drop-button {
+  background-color: #e63946;
+  min-width: 110px;
+
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+
+  border-radius: 8px;
+  padding: 10px 5px;
+
+  height: 50px;
+  transition: all .2s;
+  outline: none;
+
+  position: absolute;
+  right: 10px;
+}
+
+button.drop-button:hover {
+  background-color: #bd313d;
+  color: white;
+
+  transform: scale(1.02, 1.02);
+}
