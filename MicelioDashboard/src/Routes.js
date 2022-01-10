@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import Index from './pages/Index';
 import Sign from './pages/Sign';
 import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
+import About from './pages/About';
 import Game from './pages/Game';
 
 import {useAuth} from "./context/AuthContext";
@@ -23,7 +23,7 @@ const Routes = () => {
       <BrowserRouter basename="/micelio">
         <Switch>
           <Route path={'/home'} component={Home} exact/>
-          <Route path={'/sobre'} component={Dashboard}/>
+          <Route path={'/sobre'} component={About}/>
           <Route path={'/game/:id'} component={Game}/>
           <Redirect to={'/home'} />
         </Switch>
