@@ -71,7 +71,7 @@ function ConsentTerm () {
         }
         if(buttonContinue){
             setButtonContinue(false);
-            history.push(`/nextPage`);
+            history.push(`/linkGame/${params.id}`);
         }
     }
 
@@ -79,7 +79,7 @@ function ConsentTerm () {
         <>
             <ToastContainer />
             <div className={'content-body'}>
-                <Header title="Criação de Experimento - Passo 1/1"/>
+                <Header title="Criação de Experimento - Passo 1/2"/>
                 <div className={'container'}>
                     <div>
                         <h2>

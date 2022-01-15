@@ -10,6 +10,7 @@ import Experiment from './pages/Experiment';
 import ExpDetails from './pages/ExpDetails';
 import Form from './pages/Form';
 import ConsentTerm from './pages/ConsentTerm';
+import LinkGame from './pages/LinkGame';
 
 import {useAuth} from "./context/AuthContext";
 
@@ -32,6 +33,7 @@ const Routes = () => {
           <Route path={'/experiment'} component={Experiment}/>
           <Route path={'/expDetails/:id'} component={ExpDetails}/>
           <Route path={'/consentTerm/:id'} component={ConsentTerm}/>
+          <Route path={'/linkGame/:id'} component={LinkGame}/>
           <Route path={'/form/:id'} component={Form}/>
           <Redirect to={'/home'} />
         </Switch>

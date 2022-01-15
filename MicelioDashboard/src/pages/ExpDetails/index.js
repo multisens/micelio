@@ -18,7 +18,7 @@ function ExpDetails() {
 
   const getExperimentById = async () => {
     try{
-      const expResponse = await Api.get(`/experiment/${params.id}`);
+      const expResponse = await Api.get(`/expDetails/${params.id}`);
 
       const {experiment: expData} = expResponse.data;
       setExperiment(expData);
@@ -30,24 +30,12 @@ function ExpDetails() {
   return (
       <PageFormat menuSelected={'dashboard'}>
         <div className="dashboard-container">
-          {/*<button className={'primary'} style={{marginBottom: 20}}>Ver</button>*/}
-          {experiment && (
-            <div className={'gameinfo-container'}>
-              <div className={'gameinfo-avatar'}>
-                {
-                  experiment.name.slice(0, 1).toUpperCase()
-                }
-              </div>
+          <div className={'gameinfo-container'}>
               <div className={'gameinfo'}>
-                {
-                  experiment.token && (<span><strong>Token:</strong> {experiment.token}</span>)
-                }
-                <span><strong>Nome:</strong> {experiment.name}</span>
-                <span><strong>Versão:</strong> {experiment.version}</span>
-                <span><strong>Criador:</strong> {experiment.username}</span>
+                <span><strong>Nome:</strong></span>
+                <span><strong>Criador:</strong></span>
               </div>
-            </div>
-          )}
+          </div>
         </div>
       </PageFormat>
   ) 

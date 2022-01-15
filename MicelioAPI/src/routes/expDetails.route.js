@@ -5,6 +5,6 @@ const Router = express.Router();
 
 const expDetailsController = new ExpDetailsController();
 
-Router.get('/:experiment_id', expDetailsController.index);
+Router.get('/:experiment_id', expDetailsController.get);
 
 module.exports = Router;
