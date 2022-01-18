@@ -5,7 +5,7 @@ const { decodeUserSession } = require('../utils/generators/userSessionGenerator'
 
 class VisualizacaoController {
 
-  async get(request, response){
+  async index(request, response){
 
     //Validação de token
     const { miceliotoken } = request.cookies;
@@ -15,22 +15,13 @@ class VisualizacaoController {
 
     const { sub: user_id } = decodeUserSession(miceliotoken)
     const {game_id} = request.params;
-    let {name} = request.body;
-
-    if(!name){
-      return response.status(400).json({error: 'invalid name'});
-    }
 
     try{
-      name = name.toLowerCase();
-      
       const visualization = await knex('Visualization')
       .select("*")
       .where('user_id',user_id)
       .andWhere('game_id',game_id)
-      .andWhere('name',name)
-      .first();
-      
+
       if(!visualization){
         return response.status(400).json({error: 'Cannot get visualization, try again later'});
       }else{

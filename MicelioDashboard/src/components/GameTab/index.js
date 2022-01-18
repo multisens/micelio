@@ -1,9 +1,19 @@
+import { useEffect, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react"
 
-import SessionGroupList from "../../components/SessionGroupList"
-import Visualization from "../Visualization"
+import Api from "../../services/Api";
+import SessionGroupList from "../../components/SessionGroupList";
+import Visualization from "../Visualization";
 
-const GameTab = ({ groupList, gameToken }) => {
+const GameTab = ({ groupList, gameToken, gameId, visualizationSingleSessionName }) => {
+  
+  const [visualizationConfig, setVisualizationConfig] = useState({});
+
+  useEffect( async () => {
+    const response = await Api.get(`/visualization/${gameId}`);
+    setVisualizationConfig(JSON.parse(response.data.config));
+  }, []);
+
   return (
     <Tabs variant='enclosed' colorScheme={"green"}>
       <TabList>
@@ -16,7 +26,12 @@ const GameTab = ({ groupList, gameToken }) => {
           <SessionGroupList groups={groupList} />
         </TabPanel>
         <TabPanel>
-          <Visualization />
+          {
+            visualizationConfig.graphs !== undefined && 
+            <Visualization 
+            props = {visualizationConfig}
+          />
+          }
         </TabPanel>
       </TabPanels>
     </Tabs>

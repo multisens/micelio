@@ -156,7 +156,8 @@ function Game() {
 
                 </div>
               <Box mt={5}>
-                <GameTab groupList={groups} gameToken={game.token} />
+                <GameTab groupList={groups} gameToken={game.token} gameId = {params.id} 
+                  visualizationSingleSessionName="dashboard1" />
               </Box>
             </>
           )}

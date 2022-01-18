@@ -1,0 +1,87 @@
+{
+    "screen_width": 824,
+    "type": "session",
+    "graphs": [
+        {
+            "id": "Linha do Tempo",
+            "activities": [
+              "Novo inseto",
+              "Predacao",
+              "inserir predador",
+              "Reproducao",
+              "plantar",
+              "colher",
+              "meta cumprida"
+            ],
+            "type": "Timeline"
+        },
+
+        {
+            "id": "card_1",
+            "type": "Card",
+            "title": "Pontuação",
+            "object_name": "ranking",
+            "object_type": "entity",
+            "object_prop": "points",
+            "value_type": "total|percentage|average|final"
+        },
+
+        {
+            "id": "Atividades",
+            "type": "ActivityList",
+            "activities": [
+              "Novo inseto",
+              "Predacao",
+              "inserir predador",
+              "Reproducao",
+              "plantar",
+              "colher",
+              "meta cumprida"
+            ],
+            "circle_bins": 40,
+            "filter_by": "Linha do Tempo"
+        },
+
+        {
+            "id": "Heat Map",
+            "type": "HeatMap",
+            "activities": [
+              "inserir predador",
+              "Predacao",
+              "plantar",
+              "colher"
+            ],
+            "filter_by": "Linha do Tempo"
+        },
+
+        {
+            "id": "Gráfico de População",
+            "type": "Population",
+            "agents": [
+              "pulgao",
+              "cigarrinha",
+              "joaninha",
+              "besouro",
+              "grilo",
+              "lagarta"
+            ],
+            "entities": ["milho"],
+            "checbox_filter": "true",
+            "insert": [
+              { "name": "plantar" },
+              { "name": "Novo inseto" },
+              { "name": "inserir predador" },
+              { "name": "Reproducao", "role": ["inseto_1"] },
+              { "name": "migracao" }
+            ],
+            "remove": [
+              { "name": "Predacao", "role": ["presa"] },
+              { "name": "remover predador" },
+              { "name": "morte" }
+            ],
+
+            "filter_by": "Linha do Tempo"
+        }
+
+    ]
+}
