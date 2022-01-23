@@ -45,7 +45,6 @@ function Quiz () {
                 }
             }
         }catch (e) {
-                console.log(e.response.data)
                 toast.error(`Não foi possível salvar os dados informados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
         }
     }
