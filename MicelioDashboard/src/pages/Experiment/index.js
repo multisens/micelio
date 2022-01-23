@@ -91,7 +91,7 @@ function Experiment() {
     }
 
     experimentList.forEach(experiment => {
-      const expName = experiment.txt_experient_name.toLowerCase().replaceAll(' ', '');
+      const expName = experiment.txt_experiment_name.toLowerCase().replaceAll(' ', '');
       const gameName = experiment.gameName.toLowerCase().replaceAll(' ', '');
       const $experimentCard = document.getElementById(experiment.experiment_id);
 
@@ -146,7 +146,7 @@ function Experiment() {
               experimentList.length > 0 ? experimentList.slice(0, experimentCards).map((exp) => {
                 return (<ExperimentCard key={exp.experiment_id}
                                         id={exp.experiment_id}
-                                        name={exp.txt_experient_name}
+                                        name={exp.txt_experiment_name}
                                         game={exp.gameName}
                                         isOwner={1}
                                         onShare={() => {openSharePopup(exp.experiment_id)}} />);

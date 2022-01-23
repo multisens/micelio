@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 
 import './style.css';
@@ -20,7 +20,7 @@ function ExpDetails() {
     try{
       const expResponse = await Api.get(`/expDetails/${params.id}`);
 
-      const {experiment: expData} = expResponse.data;
+      const {expDetails: expData} = expResponse.data;
       setExperiment(expData);
     }catch (e) {
       // todo: jogo não encontrado
@@ -30,12 +30,19 @@ function ExpDetails() {
   return (
       <PageFormat menuSelected={'dashboard'}>
         <div className="dashboard-container">
-          <div className={'gameinfo-container'}>
-              <div className={'gameinfo'}>
-                <span><strong>Nome:</strong></span>
-                <span><strong>Criador:</strong></span>
+        {experiment && (
+            <div className={'expinfo-container'}>
+              <div className={'expinfo-avatar'}>
+                {
+                  experiment.txt_experiment_name.slice(0, 1).toUpperCase()
+                }
               </div>
-          </div>
+              <div className={'expinfo'}>
+                <span><strong>Nome:</strong> {experiment.txt_experiment_name}</span>
+                <span><strong>Criador:</strong> {experiment.username}</span>
+              </div>
+            </div>
+          )}
         </div>
       </PageFormat>
   ) 

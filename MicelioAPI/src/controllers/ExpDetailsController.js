@@ -1,5 +1,4 @@
 const knex = require('../database/connection');
-const idGenerator = require('../utils/generators/idGenerator');
 const { decodeUserSession } = require('../utils/generators/userSessionGenerator');
 
 class ExpDetailsController {
@@ -12,7 +11,7 @@ class ExpDetailsController {
         const user_id = decodedToken.sub;
     
         const expDetails = await knex('Experiment as e')
-          .select('e.txt_experiment_name', 'hep.user_id', 'mu.username', 'hep.has_permission_id')
+          .select('e.txt_experiment_name', 'hep.user_id', 'mu.username', 'hep.has_exp_permission_id')
           .innerJoin('HasExpPermission as hep', 'hep.experiment_id', 'e.experiment_id')
           .innerJoin("MicelioUser as mu", 'mu.user_id', 'hep.user_id')
           .where('e.experiment_id', experiment_id)
@@ -24,10 +23,8 @@ class ExpDetailsController {
     
         const expOwner = await knex('Experiment as e')
           .select('user.username')
-          .innerJoin('HasExpPermission as hep', 'hep.experiment_id', 'e.experiment_id')
-          .innerJoin('MicelioUser as user', 'user.user_id', 'hep.user_id')
-          .where("e.user_id", 'user.user_id')
-          .andWhere('e.experiment_id', experiment_id).first();
+          .innerJoin('MicelioUser as user', 'e.user_id', 'user.user_id')
+          .where('e.experiment_id', experiment_id).first();
 
         expDetails.username = expOwner.username; 
     

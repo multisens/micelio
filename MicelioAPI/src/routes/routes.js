@@ -8,8 +8,9 @@ const UserRoutes = require('./user.route');
 const GroupRoutes = require('./group.route');
 const ExperimentRoutes = require('./experiment.route');
 const ExpDetailsRoutes = require('./expDetails.route');
-const ConsentTerm = require('./consentTerm.route');
-const LinkGame = require('./linkGame.route');
+const ConsentTermRoutes = require('./consentTerm.route');
+const LinkRoutes = require('./link.route');
+const QuizRoutes = require('./quiz.route');
 const FormRoutes = require('./form.route');
 
 const TokenMiddleware = require('../middleware/TokenMiddleware');
@@ -26,8 +27,9 @@ Router.use('/activity', LogMiddleware, TokenMiddleware, DeviceIDMiddleware, Acti
 Router.use('/group', LogMiddleware, GroupRoutes);
 Router.use('/experiment', LogMiddleware, ExperimentRoutes);
 Router.use('/expDetails', LogMiddleware, ExpDetailsRoutes);
-Router.use('/consentTerm', LogMiddleware, ConsentTerm);
-Router.use('/linkGame', LogMiddleware, LinkGame);
+Router.use('/consentTerm', LogMiddleware, ConsentTermRoutes);
+Router.use('/link', LogMiddleware, LinkRoutes);
+Router.use('/quiz', LogMiddleware, QuizRoutes);
 Router.use('/form', LogMiddleware, FormRoutes);
 
 module.exports = Router;

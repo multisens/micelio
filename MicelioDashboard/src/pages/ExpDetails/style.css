@@ -3,11 +3,11 @@
     width: 100%;
 }
 
-.gameinfo-container {
+.expinfo-container {
     display: flex;
 }
 
-.gameinfo-container .gameinfo-avatar {
+.expinfo-container .expinfo-avatar {
     width: 250px;
     height: 250px;
     background-color: white;
@@ -24,17 +24,17 @@
     font-weight: 700;
 }
 
-.gameinfo {
+.expinfo {
     display: flex;
     flex-direction: column;
     align-items: end;
     justify-content: flex-end;
 
 }
-.gameinfo strong {
+.expinfo strong {
     color: #264653;
 }
-.gameinfo span {
+.expinfo span {
     max-width: 600px;
     display: block;
     word-break: break-all;

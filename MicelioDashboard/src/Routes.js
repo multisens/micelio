@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch, NavLink } from 'react-router-dom';
 
 
 import Index from './pages/Index';
@@ -6,11 +6,14 @@ import Sign from './pages/Sign';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Game from './pages/Game';
+// experiment logged in micelio
 import Experiment from './pages/Experiment';
 import ExpDetails from './pages/ExpDetails';
-import Form from './pages/Form';
 import ConsentTerm from './pages/ConsentTerm';
-import LinkGame from './pages/LinkGame';
+import Link from './pages/Link';
+import Quiz from './pages/Quiz';
+// experiment not logged in micelio
+import Form from './pages/Form';
 
 import {useAuth} from "./context/AuthContext";
 
@@ -33,7 +36,8 @@ const Routes = () => {
           <Route path={'/experiment'} component={Experiment}/>
           <Route path={'/expDetails/:id'} component={ExpDetails}/>
           <Route path={'/consentTerm/:id'} component={ConsentTerm}/>
-          <Route path={'/linkGame/:id'} component={LinkGame}/>
+          <Route path={'/link/:id'} component={Link}/>
+          <Route path={'/quiz/:id'} component={Quiz}/>
           <Route path={'/form/:id'} component={Form}/>
           <Redirect to={'/home'} />
         </Switch>

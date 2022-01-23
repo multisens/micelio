@@ -169,7 +169,7 @@ CREATE TABLE ActivityEntities(
 
 create table experiment
 ( experiment_id      VARCHAR(40)   PRIMARY KEY
-, txt_experient_name VARCHAR(200)
+, txt_experiment_name VARCHAR(200)
 , txt_consent_term   VARCHAR(4000)
 , game_id            VARCHAR(40)
 , user_id            VARCHAR(40)
@@ -206,21 +206,21 @@ create table participant
 );
 
 create table game_stagetwo
-( game_id       VARCHAR(40)
+( game_page_id       VARCHAR(40)
 , txt_game_link VARCHAR(4000)
 , txt_game_page VARCHAR(4000)
 , experiment_id VARCHAR(40)
-, PRIMARY KEY(game_id, experiment_id)
+, PRIMARY KEY(game_page_id, experiment_id)
 , FOREIGN KEY(experiment_id) 
     REFERENCES experiment(experiment_id)
 );
 
 create table video_stagetwo
-( video_id       VARCHAR(40)
+( video_page_id       VARCHAR(40)
 , txt_video_link VARCHAR(4000)
 , txt_video_page VARCHAR(4000)
 , experiment_id  VARCHAR(40)
-, PRIMARY KEY(video_id, experiment_id)
+, PRIMARY KEY(video_page_id, experiment_id)
 , FOREIGN KEY(experiment_id) 
     REFERENCES experiment(experiment_id)
 );
