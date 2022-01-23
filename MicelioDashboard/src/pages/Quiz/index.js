@@ -15,6 +15,8 @@ function Quiz () {
     const history = useHistory();
     const params = useParams();
 
+    const count = 0;
+
     const [selected, setSelectedValue] = useState('I');
 
     const [question, setNewQuestion] = useState('');
@@ -25,18 +27,22 @@ function Quiz () {
     
     const getContent = async () => {
         try {
-            const dataResponse = await Api.get(`/quiz/${params.id}`);
+            //const dataResponse = await Api.get(`/quiz/${params.id}`);
         } catch (e) {
             toast.error(`Não foi possível recuperar os dados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
         }
     }
 
-    const saveContent = async (link, text) => {
+    const saveContent = async (count) => {
         try {
-            const response = await Api.post(`/quiz/${params.id}`)
+            for(let i = 0;i<count.lenght();i++){
+                const response = await Api.post(`/quiz/${params.id}`, {
+                    question
+                });
             
-            if(!response.data.ok) {
-                toast.error(`Não foi possível salvar os dados informados, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+                if(!response.data.ok) {
+                    toast.error(`Não foi possível salvar os dados informados, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+                }
             }
         }catch (e) {
                 console.log(e.response.data)
@@ -55,27 +61,29 @@ function Quiz () {
                             Cria&ccedil;&atilde;o dos question&aacute;rios.
                         </h2><br/>
                         <div>
-                            <form name={'form01'} onSubmit={saveContent}>
+                            <form name={'form01'} onSubmit={saveContent(count)}>
                                 <div className={'radio-input'} id={'parent'}>
-                                    <input type="radio" name={'page'} id={'gamePage'} value={'I'} checked={selected === 'I'} onChange={e => {setSelectedValue(e.target.value)}}/>
+                                    <input type="radio" name={'quiz'} value={'I'} checked={selected === 'I'} onChange={e => {setSelectedValue(e.target.value)}}/>
                                     <div className={'child'}>Question&aacute;rio Inicial</div>
-                                    <input type="radio" name={'page'} id={'gamePage'} value={'E'} checked={selected === 'E'} onChange={e => {setSelectedValue(e.target.value)}}/>
+                                    <input type="radio" name={'quiz'} value={'E'} checked={selected === 'E'} onChange={e => {setSelectedValue(e.target.value)}}/>
                                     <div className={'child'}>Question&aacute;rio Especial</div>
-                                    <input type="radio" name={'page'} id={'gamePage'} value={'F'} checked={selected === 'F'} onChange={e => {setSelectedValue(e.target.value)}}/>
+                                    <input type="radio" name={'quiz'} value={'F'} checked={selected === 'F'} onChange={e => {setSelectedValue(e.target.value)}}/>
                                     <div className={'child'}>Question&aacute;rio Final</div>
                                 </div><br/>
                                 <div>
                                     <div>
-                                        <input type={'text'} className={'primary'} id={'gameLink'} placeholder="Digite aqui a pergunta..." value={setNewQuestion}
-                                        rows="20" cols="20" size="400" onChange={e => {setNewQuestion(e.target.value)}}/>
+                                        <div>
+                                            <input type={'text'} className={'primary'} id={'question_'+count} placeholder="Digite aqui a pergunta..." value={setNewQuestion}
+                                            rows="20" cols="20" size="400" onChange={e => {setNewQuestion(e.target.value)}}/>
+                                        </div><br/>
+                                    </div>
+                                    <div id={'parent'}>
+                                            <input type="radio" name={'question'} id={'essay_'+count} value={'D'} checked={selected === 'D'} onChange={e => {setSelectedValue(e.target.value)}}/>
+                                            <div className={'child'}>Quest&atilde;o dissertativa</div>
+                                            <input type="radio" name={'question'} id={'optative_'+count} value={'O'} checked={selected === 'O'} onChange={e => {setSelectedValue(e.target.value)}}/>
+                                            <div className={'child'}>Quest&atilde;o optativa</div>
                                     </div><br/>
                                 </div>
-                                <div id={'parent'}>
-                                        <input type="radio" name={'page'} id={'gamePage'} value={'I'} checked={selected === 'I'} onChange={e => {setSelectedValue(e.target.value)}}/>
-                                        <div className={'child'}>Quest&atilde;o dissertativa</div>
-                                        <input type="radio" name={'page'} id={'gamePage'} value={'I'} checked={selected === 'I'} onChange={e => {setSelectedValue(e.target.value)}}/>
-                                        <div className={'child'}>Quest&atilde;o optativa</div>
-                                </div><br/>
                                 <table>
                                     <tbody>
                                         <tr>

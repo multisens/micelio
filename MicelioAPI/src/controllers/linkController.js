@@ -29,9 +29,13 @@ class LinkController {
             return response.status(400).json({error: "Missing experiment id"});
         }
 
-        if(page === 'G') {
+        let {link, text} = request.body;
 
-            const {link, text} = request.body;
+        if (!link && !text) {
+            return response.status(400).json({error: "Missing link and text"});
+        }
+
+        if(page === 'G') {
 
             const game = await knex('Game_Stagetwo as g')
                             .select('g.txt_game_link', 'g.txt_game_page')
@@ -86,7 +90,6 @@ class LinkController {
                 return response.status(400).json({error: 'Cannot update the game page, try again later'});
             }
         } else {
-            const {link, text} = request.body;
 
             const video = await knex('Video_Stagetwo as v')
                              .select('v.txt_video_link', 'v.txt_video_page')

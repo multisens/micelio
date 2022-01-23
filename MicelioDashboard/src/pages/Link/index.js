@@ -31,7 +31,6 @@ function Link () {
 
     useEffect(() => {
         loadPage('G');
-        getContent();
     }, [])
     
     const getContent = async () => {
@@ -78,12 +77,12 @@ function Link () {
                 toast.error(`Não foi possível salvar os dados informados, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
             }
         }catch (e) {
-                console.log(e.response.data)
                 toast.error(`Não foi possível salvar os dados informados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
         }
     }
 
     const loadPage = async (e) => {
+        getContent();
         if (e === 'G'){
             document.getElementById('game-page').style.display = '';
             document.getElementById('video-page').style.display = 'none';
