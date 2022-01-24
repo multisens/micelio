@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS answer;
 DROP TABLE IF EXISTS game_stagetwo;
 DROP TABLE IF EXISTS video_stagetwo;
 DROP TABLE IF EXISTS participant;
+DROP TABLE IF EXISTS options;
+DROP TABLE IF EXISTS questions;
 DROP TABLE IF EXISTS form;
 DROP TABLE IF EXISTS exp_group;
 DROP TABLE IF EXISTS hasExpPermission;

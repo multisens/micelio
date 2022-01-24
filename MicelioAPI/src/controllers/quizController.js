@@ -13,57 +13,114 @@ class QuizController {
 	async update(request, response) {
 
         const {experiment_id} = request.params;
-        const {page} = request.body;
+        const {selected, question, selectedOpt} = request.body;
 
         if(!experiment_id){
             return response.status(400).json({error: "Missing experiment id"});
         }
 
-        return response.status(201).json({ok: true});
+        const form = await knex('Form as f')
+                          .select('f.form_id')
+                          .where('f.experiment_id', experiment_id)
+                          .andWhere('f.ind_stage', selected)
+                          .first();
 
-        if(page === 'G') {
-
-            const {link, text} = request.body;
-
-            const game = await knex('Game_Stagetwo as g')
-                            .select('g.txt_game_link', 'g.txt_game_page')
-                             .where('g.experiment_id', experiment_id)
-                             .first();
-
-            if (!link && game) {
-                link = game.txt_game_link;
-            }
-            if (!text && game) {
-                text = game.txt_game_page;
-            }
+        if(selected === 'I') {
 
             const trx = await knex.transaction();
 
             try{
-                if(!game) {
-                    const game_page_id = await idGenerator('Game_Stagetwo', 'game_page');
 
-                    const gameData = {
-                        game_page_id,
-                        txt_game_link: link,
-                        txt_game_page: text,
+                if(!form){
+                    const form_id = await idGenerator('form');
+
+                    form.form_id = form_id;
+
+                    const formData = {
+                        form_id,
+                        ind_stage: selected,
                         experiment_id
                     };
 
-                    const gameChange = await trx('Game_Stagetwo').insert(gameData);
+                    const formInsert = await trx('form').insert(formData);
 
-                    if(gameChange){
+                    if(formInsert){
                         await trx.commit();
                         return response.status(201).json({ok: true});
                     }
                     else{
                         await trx.rollback();
                         return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+                    }
+                }
+                
+                if (selectedOpt === 'D') {
+                    const question_aux = await knex('Questions as q')
+                                        .select('q.txt_question', 'q.question_id')
+                                        .where('q.form_id', form.form_id)
+                                        .first();
+
+                    if(!question_aux) {
+
+                        const question_id = await idGenerator('Questions', 'question');
+
+                        const questionData = {
+                            question_id,
+                            txt_question: question,
+                            form_id: form.form_id
+                        };
+
+                        const questionInsert = await trx('Questions').insert(questionData);
+
+                        if(questionInsert){
+                            await trx.commit();
+                            return response.status(201).json({ok: true});
+                        }
+                        else{
+                            await trx.rollback();
+                            return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+                        }
+                    } else {
+                        const quenstionUpdate = await trx('Questions').where('form_id', form.form_id).andWhere('question_id', question_aux.question_id).update({txt_question: question});
+
+                        if(quenstionUpdate){
+                            await trx.commit();
+                            return response.status(201).json({ok: true});
+                        }
+                        else{
+                            await trx.rollback();
+                            return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+                        }
                     }
                 } else {
-                    const gameChange = await trx('Game_Stagetwo').where('experiment_id', experiment_id).update({txt_game_link: link, txt_game_page: text});
+                    //Não implementado
+                    return response.status(400).json({error: 'Cannot update the question, check the information sent'});
+                }
+            }
+            catch(err){
+                await trx.rollback();
+                return response.status(400).json({error: 'Cannot update the game page, try again later'});
+            }
+        } else if (selected === 'E') {
+            return response.status(201).json({ok: true});
+            const trx = await knex.transaction();
 
-                    if(gameChange){
+            try{
+
+                if(!form){
+                    const form_id = await idGenerator('form');
+
+                    form.form_id = form_id;
+
+                    const formData = {
+                        form_id,
+                        ind_stage: selected,
+                        experiment_id
+                    };
+
+                    const formInsert = await trx('form').insert(formData);
+
+                    if(formInsert){
                         await trx.commit();
                         return response.status(201).json({ok: true});
                     }
@@ -71,6 +128,49 @@ class QuizController {
                         await trx.rollback();
                         return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
                     }
+                }
+                
+                if (selectedOpt === 'D') {
+                    const question_aux = await knex('Questions as q')
+                                        .select('q.txt_question', 'q.question_id')
+                                        .where('q.form_id', form.form_id)
+                                        .first();
+
+                    if(!question_aux) {
+
+                        const question_id = await idGenerator('Questions', 'question');
+
+                        const questionData = {
+                            question_id,
+                            txt_question: question,
+                            form_id: form.form_id
+                        };
+
+                        const questionInsert = await trx('Questions').insert(questionData);
+
+                        if(questionInsert){
+                            await trx.commit();
+                            return response.status(201).json({ok: true});
+                        }
+                        else{
+                            await trx.rollback();
+                            return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+                        }
+                    } else {
+                        const quenstionUpdate = await trx('Questions').where('form_id', form.form_id).andWhere('question_id', question_aux.question_id).update({txt_question: question});
+
+                        if(quenstionUpdate){
+                            await trx.commit();
+                            return response.status(201).json({ok: true});
+                        }
+                        else{
+                            await trx.rollback();
+                            return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+                        }
+                    }
+                } else {
+                    //Não implementado
+                    return response.status(400).json({error: 'Cannot update the question, check the information sent'});
                 }
             }
             catch(err){
@@ -78,59 +178,80 @@ class QuizController {
                 return response.status(400).json({error: 'Cannot update the game page, try again later'});
             }
         } else {
-            const {link, text} = request.body;
-
-            const video = await knex('Video_Stagetwo as v')
-                             .select('v.txt_video_link', 'v.txt_video_page')
-                              .where('v.experiment_id', experiment_id)
-                              .first();
-
-            if (!link && video) {
-                link = video.txt_video_link;
-            }
-            if (!text && video) {
-                text = video.txt_video_page;
-            }
-
+            return response.status(201).json({ok: true});
             const trx = await knex.transaction();
 
             try{
-                if(!video) {
-                    const video_page_id = await idGenerator('Video_Stagetwo', 'video_page');
 
-                    const videoData = {
-                        video_page_id,
-                        txt_video_link: link,
-                        txt_video_page: text,
+                if(!form){
+                    const form_id = await idGenerator('form');
+
+                    form.form_id = form_id;
+
+                    const formData = {
+                        form_id,
+                        ind_stage: selected,
                         experiment_id
                     };
 
-                    const videoChange = await trx('Video_Stagetwo').insert(videoData);
+                    const formInsert = await trx('form').insert(formData);
 
-                    if(videoChange){
+                    if(formInsert){
                         await trx.commit();
                         return response.status(201).json({ok: true});
                     }
                     else{
                         await trx.rollback();
-                        return response.status(400).json({error: 'Cannot update the video page, check the information sent'});
+                        return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+                    }
+                }
+                
+                if (selectedOpt === 'D') {
+                    const question_aux = await knex('Questions as q')
+                                        .select('q.txt_question', 'q.question_id')
+                                        .where('q.form_id', form.form_id)
+                                        .first();
+
+                    if(!question_aux) {
+
+                        const question_id = await idGenerator('Questions', 'question');
+
+                        const questionData = {
+                            question_id,
+                            txt_question: question,
+                            form_id: form.form_id
+                        };
+
+                        const questionInsert = await trx('Questions').insert(questionData);
+
+                        if(questionInsert){
+                            await trx.commit();
+                            return response.status(201).json({ok: true});
+                        }
+                        else{
+                            await trx.rollback();
+                            return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+                        }
+                    } else {
+                        const quenstionUpdate = await trx('Questions').where('form_id', form.form_id).andWhere('question_id', question_aux.question_id).update({txt_question: question});
+
+                        if(quenstionUpdate){
+                            await trx.commit();
+                            return response.status(201).json({ok: true});
+                        }
+                        else{
+                            await trx.rollback();
+                            return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+                        }
                     }
                 } else {
-                    const videoChange = await trx('Video_Stagetwo').where('experiment_id', experiment_id).update({txt_video_link: link, txt_video_page: text});
-
-                    if(videoChange){
-                        await trx.commit();
-                        return response.status(201).json({ok: true});
-                    }
-                    else{
-                        await trx.rollback();
-                        return response.status(400).json({error: 'Cannot update the video page, check the information sent'});
-                    }
+                    //Não implementado
+                    return response.status(400).json({error: 'Cannot update the question, check the information sent'});
                 }
             }
             catch(err){
                 await trx.rollback();
-                return response.status(400).json({error: 'Cannot update the video page, try again later'});
+                return response.status(400).json({error: 'Cannot update the game page, try again later'});
             }
         }
     }
