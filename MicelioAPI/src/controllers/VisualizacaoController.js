@@ -20,7 +20,7 @@ class VisualizacaoController {
       const visualization = await knex('Visualization')
       .select("*")
       .where('user_id',user_id)
-      .andWhere('game_id',game_id)
+      .andWhere('game_id',game_id).first();
 
       if(!visualization){
         return response.status(400).json({error: 'Cannot get visualization, try again later'});
@@ -40,33 +40,33 @@ class VisualizacaoController {
     let { name, config } = request.body;
     const visualization_id =  await idGenerator('Visualization');
     const { miceliotoken } = request.cookies;
-    
+
     //Validações
     if(!miceliotoken) {
       return response.status(401).send()
 		}
-    
+
     const { sub: user_id } = decodeUserSession(miceliotoken)
-    
+
     if(!game_id){
       response.status(400).json({erro : 'invalid game id'})
     }
-    
+
     if(!name){
       response.status(400).json({erro : 'invalid name'})
     }
-    
+
     if(!config){
       response.status(400).json({erro : 'invalid json config'})
     }
-    
+
     //VALIDAR PERMISSÃO DO USUARIO
-    
+
     //Conceções com o Banco
     try{
-      
+
       name = name.toLowerCase();
-      
+
       const registeredConfig = await knex('Visualization')
       .select('visualization_id', 'name')
       .where('user_id',user_id)
@@ -93,7 +93,7 @@ class VisualizacaoController {
       }else{
         return response.status(400).json({error : 'Cannot insert user, try again later'})
       }
-      
+
     }
     catch(e){
       return response.status(400).json({error: 'Cannot connect to database, try again later'});

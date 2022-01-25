@@ -30,11 +30,18 @@ const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingle
 
         <TabPanel>
           <Select maxWidth={450}>
-            <option value='option0' disabled={true}>Escolha a sessão que deseja ver</option>
+            <option value='option0'>Escolha a sessão que deseja ver</option>
             <option value='option1'>Player: mhbarros  - 10/06/2021</option>
             <option value='option2'>Player: igdark    - 10/06/2021</option>
           </Select>
           <br/>
+          {
+            visualizationConfig.graphs !== undefined &&
+            <Visualization
+              props={visualizationConfig}
+              component_id="single"
+            />
+          }
         </TabPanel>
 
         <TabPanel>
