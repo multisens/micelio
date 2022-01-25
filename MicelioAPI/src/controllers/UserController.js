@@ -1,138 +1,192 @@
 const knex = require('../database/connection');
 const idGenerator = require('../utils/generators/idGenerator');
-const { generatePassword, isPasswordValid } = require('../utils/generators/passwordGenerator');
-const { generateUserSession, decodeUserSession } = require('../utils/generators/userSessionGenerator')
+const {generatePassword, isPasswordValid} = require('../utils/generators/passwordGenerator');
+const {generateUserSession, decodeUserSession} = require('../utils/generators/userSessionGenerator')
 
 class UserController {
 
-	async get(request, response) {
-		const { miceliotoken } = request.cookies
+  async get(request, response) {
+    const {miceliotoken} = request.cookies
 
-		if(!miceliotoken) {
-			return response.status(401).send()
-		}
+    if (!miceliotoken) {
+      return response.status(401).send()
+    }
 
-		try{
-			const { sub: userId } = decodeUserSession(miceliotoken)
+    try {
+      const {sub: userId} = decodeUserSession(miceliotoken)
 
-			const user_db = await knex('MicelioUser').select().where({ user_id: userId }).first()
-			delete user_db.password
+      const user_db = await knex('MicelioUser').select().where({user_id: userId}).first()
+      delete user_db.password
 
-			response.json({ok: true, data: user_db})
+      response.json({ok: true, data: user_db})
 
-		}catch (e) {
-			return response.status(401)
-		}
-	}
+    } catch (e) {
+      return response.status(401)
+    }
+  }
 
-	async create(request, response) {
-		let { username, password, confirmation_password, email } = request.body;
+  async create(request, response) {
+    let {username, password, confirmation_password, email} = request.body;
 
-		if (!username) {
-			return response.status(400).json({ error: "Invalid username" });
-		}
+    if (!username) {
+      return response.status(400).json({error: "Invalid username"});
+    }
 
-		if (!password) {
-			return response.status(400).json({ error: "Invalid password" });
-		}
+    if (!password) {
+      return response.status(400).json({error: "Invalid password"});
+    }
 
-		if (!confirmation_password) {
-			return response.status(400).json({ error: "Invalid password" });
-		}
-		else{
-			if(confirmation_password != password) {
-				return response.status(400).json({ error: "The passwords do not match" });
-			}
-		}
+    if (!confirmation_password) {
+      return response.status(400).json({error: "Invalid password"});
+    } else {
+      if (confirmation_password != password) {
+        return response.status(400).json({error: "The passwords do not match"});
+      }
+    }
 
-		if (!email) {
-			return response.status(400).json({ error: "Invalid e-mail" });
-		}
+    if (!email) {
+      return response.status(400).json({error: "Invalid e-mail"});
+    }
 
-		const hashedPassword = generatePassword(password);
+    const hashedPassword = generatePassword(password);
 
-		try {
+    try {
 
-			username = username.toLowerCase();
-			email = email.toLowerCase();
+      username = username.toLowerCase();
+      email = email.toLowerCase();
 
-			const registeredUser = await knex('MicelioUser')
-			.select('username', 'email')
-			.where('username', username)
-			.orWhere('email', email)
-			.first();
+      const registeredUser = await knex('MicelioUser')
+        .select('username', 'email')
+        .where('username', username)
+        .orWhere('email', email)
+        .first();
 
-			if(registeredUser){
-				if(registeredUser.username === username) {
-					return response.status(400).json({error: 'User already exists.'});
-				}
-				if(registeredUser.email === email) {
-					return response.status(400).json({error: 'Email already in use.'});
-				}
-			}
+      if (registeredUser) {
+        if (registeredUser.username === username) {
+          return response.status(400).json({error: 'User already exists.'});
+        }
+        if (registeredUser.email === email) {
+          return response.status(400).json({error: 'Email already in use.'});
+        }
+      }
 
-			const user_id =  await idGenerator('MicelioUser', 'user');
+      const user_id = await idGenerator('MicelioUser', 'user');
 
-			const data = {
-				user_id,
-				username,
-				email,
-				password: hashedPassword
-			}
+      const data = {
+        user_id,
+        username,
+        email,
+        password: hashedPassword
+      }
 
-			const insertedUser = await knex('MicelioUser')
-			.insert(data);
+      const insertedUser = await knex('MicelioUser')
+        .insert(data);
 
-			const token = generateUserSession(user_id);
-			response.cookie('miceliotoken', token);
+      const token = generateUserSession(user_id);
+      response.cookie('miceliotoken', token);
 
-			if(insertedUser){
-				return response.status(201).json({ok: true});
-			}
-			else{
-				return response.status(400).json({error: 'Cannot insert user, try again later'});
-			}
+      if (insertedUser) {
+        return response.status(201).json({ok: true});
+      } else {
+        return response.status(400).json({error: 'Cannot insert user, try again later'});
+      }
 
-		}
-		catch(err){
-		    return response.status(400).json({error: 'Cannot connect to database, try again later'});
-		}
+    } catch (err) {
+      return response.status(400).json({error: 'Cannot connect to database, try again later'});
+    }
 
-	}
+  }
 
-	async login(request, response) {
-		const { username, password } = request.body
+  async update(request, response) {
+    const {username, email, password, newPassword} = request.body;
 
-		if(!username) {
-			return response.status(400).json({error: "Invalid username"});
-		}
+    const {miceliotoken} = request.cookies
 
-		if(!password) {
-			return response.status(400).json({error: "Invalid password"});
-		}
+    if (!miceliotoken) {
+      return response.status(401).send()
+    }
 
-		const user_db = await knex('MicelioUser').select().where({ username }).first();
+    try {
+      const {sub: userId} = decodeUserSession(miceliotoken)
 
-		if(!user_db) {
-			return response.status(404).json({error: "User not found"});
-		}
+      const updatedUser = {}
 
-		if(!isPasswordValid(user_db.password, password)){
-			return response.status(400).json({error: 'Invalid password'});
-		}
+      if (username) updatedUser.username = username
+      if (email) updatedUser.email = email
 
-		delete user_db.password;
+      await knex('MicelioUser').update(updatedUser).where('user_id', userId)
 
-		const token = generateUserSession(user_db.user_id);
+      response.json({ok: true})
 
-		response.cookie('miceliotoken', token);
-		response.json({ok: true, data: user_db, token});
-	}
+    } catch (e) {
+      return response.status(401)
+    }
 
-	async logout(request, response) {
-		response.clearCookie('miceliotoken')
-		response.send()
-	}
+  }
+
+  async login(request, response) {
+    const {username, password} = request.body
+
+    if (!username) {
+      return response.status(400).json({error: "Invalid username"});
+    }
+
+    if (!password) {
+      return response.status(400).json({error: "Invalid password"});
+    }
+
+    const user_db = await knex('MicelioUser').select().where({username}).first();
+
+    if (!user_db) {
+      return response.status(404).json({error: "User not found"});
+    }
+
+    if (!isPasswordValid(user_db.password, password)) {
+      return response.status(400).json({error: 'Invalid password'});
+    }
+
+    delete user_db.password;
+
+    const token = generateUserSession(user_db.user_id);
+
+    response.cookie('miceliotoken', token);
+    response.json({ok: true, data: user_db, token});
+  }
+
+  async logout(request, response) {
+    response.clearCookie('miceliotoken')
+    response.send()
+  }
+
+  async updatePassword(request, response) {
+    const {currentPassword, password, passwordConfirm} = request.body
+    const {miceliotoken} = request.cookies
+
+    if (!miceliotoken) {
+      return response.status(401).send()
+    }
+
+    try {
+      const {sub: userId} = decodeUserSession(miceliotoken)
+
+      const currentUser = await knex('MicelioUser').select().where('user_id', userId).first()
+      if (!currentUser) {
+        return response.status(401).send()
+      }
+
+      if (!isPasswordValid(currentUser.password, currentPassword)) {
+        return response.status(400).json({error: "Senha atual inválida"})
+      }
+
+      await knex('MicelioUser').update({password}).where('user_id', userId)
+      return response.status(200).send()
+
+    } catch (e) {
+      console.log(e)
+      return response.status(500)
+    }
+
+  }
 }
 
 module.exports = UserController;

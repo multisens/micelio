@@ -10,12 +10,17 @@ import ClipboardHelper from "../../helper/ClipboardHelper"
 import PageFormat from "../../components/PageFormat"
 import Api from "../../services/Api"
 import GameTab from "../../components/GameTab"
+import Popup from "../../components/Popup";
 
 function Game() {
   const params = useParams()
 
   const [game, setGame] = useState(null)
   const [groups, setGroups] = useState([])
+
+  const [newGroupName, setNewGroupName] = useState('')
+  const [newGroupId, setNewGroupId] = useState('')
+  const [isGroupPopupOpen, setIsGroupPopupOpen] = useState(false)
 
   useEffect(() => {
     getGameById()
@@ -33,6 +38,20 @@ function Game() {
     }
   }
 
+  const doCreateGroup = async () => {
+    setIsGroupPopupOpen(true)
+
+    const response = await Api.post("/group", { game_id: params.id, name: newGroupName })
+    const group_id = response.data.group_id
+
+    setNewGroupId(group_id)
+    setNewGroupName("")
+
+    toast.success("Grupo criado com sucesso")
+
+    await getGameById()
+  }
+
   const copyToken = () => {
     const $element = document.getElementById("game-token")
     new ClipboardHelper().copy($element)
@@ -45,6 +64,27 @@ function Game() {
 
   return (
     <>
+      <Popup
+        isOpen={isGroupPopupOpen}
+        onClose={() => {
+          setNewGroupName('')
+          setNewGroupId('')
+          setIsGroupPopupOpen(false)
+        }}
+      >
+        <h2>Cadastre um grupo</h2>
+        <input
+          className={"primary"}
+          type='text'
+          value={newGroupName}
+          placeholder={"Nome do grupo"}
+          onChange={(e) => {setNewGroupName(e.target.value)}}
+        />
+        <button className='primary' onClick={doCreateGroup}>
+          Cadastrar
+        </button>
+        {newGroupId && <div className={"group-id"}>{newGroupId}</div>}
+      </Popup>
       <ToastContainer />
       <PageFormat menuSelected={"dashboard"}>
         <div className='dashboard-container'>
@@ -92,7 +132,7 @@ function Game() {
                 </div>
               </div>
               <Box mt={5}>
-                <GameTab groupList={groups} gameToken={game.token} />
+                <GameTab groupList={groups} gameToken={game.token} onAddGroup={doCreateGroup}/>
               </Box>
             </>
           )}

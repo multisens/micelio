@@ -14,7 +14,7 @@ const Hr = () => {
   )
 }
 
-function SessionGroupList({ groups }) {
+function SessionGroupList({ groups, onAddGroup }) {
   if (!groups) groups = []
 
   const [isGroupsExpanded, setIsGroupsExpanded] = useState(false)
@@ -62,7 +62,7 @@ function SessionGroupList({ groups }) {
       <div className={"grouplist"}>
         <div className={"grouplist-header"}>
           <div>
-            <button className='primary'>Criar grupo</button>
+            <button className='primary' onClick={() => {onAddGroup()}}>Criar grupo</button>
             {/* todo: adicionar icone*/}
           </div>
           <div>
@@ -87,7 +87,7 @@ function SessionGroupList({ groups }) {
                 {group.it_ends ? "Fechado" : "Aberto"}
               </p>
               <p>
-                <b>Jogo: </b>
+                <b>Nome: </b>
                 {group.name}
               </p>
               <p>
