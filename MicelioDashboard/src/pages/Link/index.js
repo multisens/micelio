@@ -106,22 +106,11 @@ function Link () {
     }
 
     const clickedButton = async (button) => {
-        if(gameLink !== newGameLink || gameText !== newGameText){
-            saveContent(newGameLink, newGameText);
-
-            setGameLink(newGameLink);
-            setGameText(newGameText);
-        }
-        if(videoLink !== newVideoLink || videoText !== newVideoText){
-            saveContent(newVideoLink, newVideoText);
-
-            setVideoLink(newVideoLink);
-            setVideoText(newVideoText);
-        }
+        loadPage(selected)
         if (button === 'R') {
             history.push(`/consentTerm/${params.id}`);
         } else {
-            history.push(`/quiz/${params.id}`);
+            history.push(`/initialQuest/${params.id}`);
         }
     }
 

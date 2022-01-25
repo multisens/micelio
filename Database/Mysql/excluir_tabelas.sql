@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS answer;
+DROP TABLE IF EXISTS answers;
 DROP TABLE IF EXISTS game_stagetwo;
 DROP TABLE IF EXISTS video_stagetwo;
 DROP TABLE IF EXISTS participant;

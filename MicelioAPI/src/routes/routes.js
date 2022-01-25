@@ -10,7 +10,7 @@ const ExperimentRoutes = require('./experiment.route');
 const ExpDetailsRoutes = require('./expDetails.route');
 const ConsentTermRoutes = require('./consentTerm.route');
 const LinkRoutes = require('./link.route');
-const QuizRoutes = require('./quiz.route');
+const InitialQuestRoutes = require('./initialQuest.route');
 const FormRoutes = require('./form.route');
 
 const TokenMiddleware = require('../middleware/TokenMiddleware');
@@ -29,7 +29,7 @@ Router.use('/experiment', LogMiddleware, ExperimentRoutes);
 Router.use('/expDetails', LogMiddleware, ExpDetailsRoutes);
 Router.use('/consentTerm', LogMiddleware, ConsentTermRoutes);
 Router.use('/link', LogMiddleware, LinkRoutes);
-Router.use('/quiz', LogMiddleware, QuizRoutes);
+Router.use('/initialQuest', LogMiddleware, InitialQuestRoutes);
 Router.use('/form', LogMiddleware, FormRoutes);
 
 module.exports = Router;

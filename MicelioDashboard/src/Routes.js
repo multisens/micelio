@@ -11,7 +11,7 @@ import Experiment from './pages/Experiment';
 import ExpDetails from './pages/ExpDetails';
 import ConsentTerm from './pages/ConsentTerm';
 import Link from './pages/Link';
-import Quiz from './pages/Quiz';
+import InitialQuest from './pages/InitialQuest';
 // experiment not logged in micelio
 import Form from './pages/Form';
 
@@ -37,7 +37,7 @@ const Routes = () => {
           <Route path={'/expDetails/:id'} component={ExpDetails}/>
           <Route path={'/consentTerm/:id'} component={ConsentTerm}/>
           <Route path={'/link/:id'} component={Link}/>
-          <Route path={'/quiz/:id'} component={Quiz}/>
+          <Route path={'/initialQuest/:id'} component={InitialQuest}/>
           <Route path={'/form/:id'} component={Form}/>
           <Redirect to={'/home'} />
         </Switch>

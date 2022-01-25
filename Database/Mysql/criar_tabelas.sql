@@ -237,6 +237,8 @@ create table form
 create table questions
 ( question_id  VARCHAR(40)
 , txt_question VARCHAR(4000)
+, ind_type     CHAR(1)
+, ind_order    INT
 , form_id      VARCHAR(40)
 , PRIMARY KEY(question_id)
 , FOREIGN KEY(form_id)
