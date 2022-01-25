@@ -7,6 +7,7 @@ const ActivityRoutes = require("./activity.route")
 const UserRoutes = require("./user.route")
 const GroupRoutes = require("./group.route")
 const AboutRoutes = require("./about.route")
+const VisualizacaoRoutes = require("./visualizacao.route");
 
 const TokenMiddleware = require("../middleware/TokenMiddleware")
 const LogMiddleware = require("../middleware/LogMiddleware")
@@ -15,6 +16,7 @@ const Router = express.Router()
 
 Router.use("/user", LogMiddleware, UserRoutes)
 Router.use("/game", LogMiddleware, GameRoutes)
+Router.use('/visualization', LogMiddleware, VisualizacaoRoutes);
 Router.use("/device", LogMiddleware, TokenMiddleware, DeviceRoutes)
 Router.use("/session", LogMiddleware, TokenMiddleware, SessionRoutes)
 Router.use("/activity", LogMiddleware, ActivityRoutes)

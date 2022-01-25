@@ -3,51 +3,21 @@ import { useEffect } from "react"
 import Api from "../../services/Api"
 import { getPopulation } from "../../helper/Visualization"
 
-const Visualization = ({component_id}) => {
+const Visualization = ({props, component_id}) => {
+
   useEffect(async () => {
-    const activitiesList = [
-      "Novo inseto",
-      "Predacao",
-      "inserir predador",
-      "Reproducao",
-      "plantar",
-      "colher",
-      "meta cumprida",
-    ]
-    const activitiesHeatMapList = [
-      "inserir predador",
-      "Predacao",
-      "plantar",
-      "colher",
-    ]
-    const agents = [
-      "pulgao",
-      "cigarrinha",
-      "joaninha",
-      "besouro",
-      "grilo",
-      "lagarta",
-    ]
-    const entities = ["milho"]
+    const activitiesList = props.graphs[0].activities;
+    const activitiesHeatMapList = props.graphs[3].activities;
+    const agents = props.graphs[4].agents;
+    const entities = props.graphs[4].entities;
     const activitiesMap = {
-      remove: [
-        { name: "Predacao", role: ["presa"] },
-        { name: "remover predador" },
-        { name: "morte" },
-      ],
-      insert: [
-        { name: "plantar" },
-        { name: "Novo inseto" },
-        { name: "inserir predador" },
-        { name: "Reproducao", role: ["inseto_1"] },
-        { name: "migracao" },
-      ],
+      insert: props.graphs[4].insert,
+      remove: props.graphs[4].remove,
     }
-    const specialWidth = 824
-    const CircleBins = 40
+    const specialWidth = props.screen_width;
+    const CircleBins = props.graphs[0].circle_bins;
 
     const vl = window.vl
-
     const width = 800
 
     await Api.get("/activity").then((response) => {
@@ -61,11 +31,10 @@ const Visualization = ({component_id}) => {
       var data = response.data.activities.filter((a) => {
         if (activitiesList.includes(a.name)) return a
       })
-      /* var heatMapData = response.data.activities.filter(a => {if(activitiesHeatMapList.includes(a.name)) return a}); */
+      var heatMapData = response.data.activities.filter(a => {if(activitiesHeatMapList.includes(a.name)) return a});
 
       //criação dos filtros
       const brush = vl.selectInterval().encodings("x")
-
       const selectActivityName = vl.selectMulti().fields("name")
 
       //crição dos gráficos
@@ -116,7 +85,7 @@ const Visualization = ({component_id}) => {
 
       const heatMap = vl
         .markRect({ clip: true })
-        .data(data)
+        .data(heatMapData)
         .encode(
           vl
             .x()
@@ -141,7 +110,7 @@ const Visualization = ({component_id}) => {
           vl.tooltip(["name", "time"])
         )
         .title("Heat Map")
-        .transform([vl.filter(selectActivityName), vl.filter(brush)])
+        .transform([vl.filter(brush)])
         .width(width / 2)
         .height(width / 3)
 
@@ -158,7 +127,7 @@ const Visualization = ({component_id}) => {
             .title("Insetos")
             .legend({ orient: "bottom" })
         )
-        .title("População")
+        .title("Gráfico de População")
         .transform(vl.filter(brush))
         .width(specialWidth)
 
