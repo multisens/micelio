@@ -9,8 +9,12 @@ import {ToastContainer, toast} from "react-toastify";
 
 function Profile() {
 
-  const [username, setUsername] = useState(null)
-  const [email, setEmail] = useState(null)
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirm, setPasswordConfirm] = useState('')
 
   useEffect(() => {
     Api.get('/user').then((response) => {
@@ -32,11 +36,28 @@ function Profile() {
     }).catch(error => {
       alert(error)
     })
-
   }
 
   const doUpdatePassword = event => {
     event.preventDefault();
+
+    if(password !== passwordConfirm) {
+      toast.error('As senhas não conferem', {
+        autoClose: 1200
+      })
+
+      return;
+    }
+
+    Api.post('/user/update-password', {currentPassword, password}).then(response => {
+      console.log(response)
+      toast.success("Atualizado com sucesso", {
+        style: { boxShadow: "1px 1px 5px rgba(0,0,0,.4)" },
+        autoClose: 1200,
+      })
+    }).catch(error => {
+      alert(error.message)
+    })
   }
 
   return (
@@ -70,12 +91,19 @@ function Profile() {
               <Text fontSize={'lg'} fontWeight={'bold'}>Atualizar senha</Text>
               <form onSubmit={doUpdatePassword}>
                 <FormControl paddingTop={5} w={400}>
+                  <FormLabel htmlFor={'currentPassword'} fontWeight={'bold'}>Senha atual</FormLabel>
+                  <input name={'currentPassword'} type={'password'} className={'primary'} value={currentPassword}
+                         onChange={e => setCurrentPassword(e.target.value)}/>
+                </FormControl>
+                <FormControl paddingTop={5} w={400}>
                   <FormLabel htmlFor={'password'} fontWeight={'bold'}>Nova senha</FormLabel>
-                  <input name={'password'} type={'password'} className={'primary'}/>
+                  <input name={'password'} type={'password'} className={'primary'} value={password}
+                         onChange={e => setPassword(e.target.value)}/>
                 </FormControl>
                 <FormControl paddingTop={5} w={400}>
                   <FormLabel htmlFor={'passwordConfirm'} fontWeight={'bold'}>Confirme sua nova senha</FormLabel>
-                  <input name={'passwordConfirm'} type={'password'} className={'primary'}/>
+                  <input name={'passwordConfirm'} type={'password'} className={'primary'} value={passwordConfirm}
+                         onChange={e => setPasswordConfirm(e.target.value)}/>
                 </FormControl>
                 <FormControl paddingTop={5} w={400}>
                   <button className={'primary'}>Atualizar senha</button>
