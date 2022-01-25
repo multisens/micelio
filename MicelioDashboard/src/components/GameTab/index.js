@@ -35,7 +35,6 @@ const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingle
             <option value='option2'>Player: igdark    - 10/06/2021</option>
           </Select>
           <br/>
-          <Visualization component_id="single"/>
         </TabPanel>
 
         <TabPanel>
@@ -48,7 +47,7 @@ const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingle
           {
             visualizationConfig.graphs !== undefined &&
             <Visualization
-              props = {visualizationConfig}
+              props={visualizationConfig}
               component_id="group"
             />
           }

@@ -5,7 +5,6 @@ import Index from './pages/Index';
 import Sign from './pages/Sign';
 import Home from './pages/Home';
 import About from './pages/About';
-import Profile from "./pages/Profile";
 import Game from './pages/Game';
 
 import {useAuth} from "./context/AuthContext";
