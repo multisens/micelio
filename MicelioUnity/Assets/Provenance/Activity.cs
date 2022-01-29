@@ -22,9 +22,9 @@ public class Activity
 		this.activity_id = GenerateActivityID();
 		this.name = name;
 		this.time = time;
-		agents = new List<Agent>();
-		entities = new List<Entity>();
-
+		this.agents = new List<Agent>();
+		this.entities = new List<Entity>();
+		this.properties = new Dictionary<string, object>();
 	}
 
 	private string GenerateActivityID()
