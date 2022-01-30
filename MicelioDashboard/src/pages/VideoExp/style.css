@@ -6,6 +6,16 @@
     justify-content: center;
 }
 
+.game-page {
+    size: 12px;
+    display: '';
+}
+
+.video-page { 
+    size: 12px;
+    display: 'none';
+}
+
 .b-continue {
     width: 60%;
 }

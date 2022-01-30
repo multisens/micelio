@@ -35,7 +35,7 @@ class FormController {
                                  .first();
 
         if(txt_email){
-            return response.status(400).json({error: 'This email has already started this experiment'});
+            return response.status(201).json({ok: true});
         }
 
 		const participant_id = await idGenerator('Participant');
@@ -43,29 +43,29 @@ class FormController {
         const trx = await knex.transaction();
 
         try{
-
-            const {userGroup} = await knex('participant')
-                                  .select('group_id')
-                                  .count('group_id as total')
-                                  .where('experiment_id', experiment_id)
-                                  .groupBy('group_id')
-                                  .orderBy('total');
-
-            console.log('userGroup: ' + userGroup);
+            let count = 0;
+            const {group_id, num_part_total} = await knex('Exp_group')
+                                                    .select('group_id', 'num_part_total')
+                                                    .orderBy(['num_part_total', { column: 'group_id', order: 'asc' }])
+                                                    .first();
 
             const userData = {
                 participant_id,
                 txt_name: username,
                 txt_email: email,
-                group_id: userGroup.group_id,
+                group_id,
                 experiment_id
-			}
+            }
 
 			const userInsert = await trx('participant').insert(userData);
 
-            if(userInsert){
+            count = num_part_total + 1;
+
+            const groupAdd = await trx('Exp_group').where('group_id', group_id).update('num_part_total', count);
+
+            if(userInsert && groupAdd){
                 await trx.commit();
-                return response.status(201).json({ok: true});
+                return response.status(201).json({ok: true, group_id});
             }
             else{
                 await trx.rollback();

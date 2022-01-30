@@ -10,7 +10,7 @@ import Api from '../../services/Api';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
-function GameExp () {
+function VideoExp () {
 
     const history = useHistory();
     const params = useParams();
@@ -18,25 +18,26 @@ function GameExp () {
     const [btnReturn, setBtnReturn] = useState(false);
     const [btnContinue, setBtnContinue] = useState(false);
 
-    const [gameLink, setGameLink] = useState('');
-    const [gameText, setGameText] = useState('');
+    const [videoLink, setVideoLink] = useState('');
+    const [videoText, setVideoText] = useState('');
+
 
     useEffect(() => {
-        getGameLink()
+        getVideoLink();
     }, [])
     
-    const getGameLink = async () => {
+    const getVideoLink = async () => {
         try {
-            const dataResponse = await Api.get(`/gameLink/${params.id}`);
+            const dataResponse = await Api.get(`/videoLink/${params.id}`);
 
-            const game = dataResponse.data.game;
+            const video = dataResponse.data.video;
 
-            if(!dataResponse.data.game){
-                setGameLink('');
-                setGameText('');
+            if(!dataResponse.data.video){
+                setVideoLink('');
+                setVideoText('');
             } else {
-                setGameLink(game.txt_game_link);
-                setGameText(game.txt_game_page);
+                setVideoLink(video.txt_video_link);
+                setVideoText(video.txt_video_page);
             }
         } catch (e) {
             toast.error(`Não foi possível recuperar os dados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
@@ -45,7 +46,7 @@ function GameExp () {
 
     const workFlow = () => {
         if (btnReturn) {
-            history.push(`/form/${params.id}`);
+            history.push(`/gameExp/${params.id}`);
         }
         if (btnContinue) {
             history.push(`/videoExp/${params.id}`);
@@ -56,13 +57,13 @@ function GameExp () {
         <>
             <ToastContainer />
             <div className={'content-body'}>
-                <Header title="Acesso ao jogo"/>
+                <Header title="Criação de Experimento - Passo 3/6"/>
                 <div className={'container'}>
                     <div>
                         <div>
                             <form name={'form01'} onSubmit={workFlow}>
-                                <div className={'game-page'} id={'game-page'}>
-                                    {gameLink + ' - ' + gameText}
+                                <div className={'video-page'} id={'video-page'}>
+                                    {videoLink + ' - ' + videoText}
                                 </div><br/><br/>
                                 <table>
                                     <tbody>
@@ -82,4 +83,4 @@ function GameExp () {
     );
 };
 
-export default GameExp;
+export default VideoExp;

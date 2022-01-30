@@ -20,33 +20,21 @@ function InitialQuest () {
     const [btnReturn, setBtnReturn] = useState(false);
     const [btnContinue, setBtnContinue] = useState(false)
 
-    const [lastIndex, setLastIndex] = useState();
-
-    const [questions, setQuestions] = useState([]);
+    const [questionList, setQuestionList] = useState([]);
+    const [changedIndex, setChangedIndex] = useState(0);
 
     useEffect(() => {
-        getContent();
-    }, [])
-    
-    const getContent = async () => {
-        try {
-            const questionData = await Api.get(`/initialQuest/${params.id}`);
-            if (true) {
-                setQuestions(['Maça', 'Banana', 'Pera']);
-            } else {
-                setQuestions(questionData);
-            }
-        } catch (e) {
-            toast.error(`Não foi possível recuperar os dados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
-        }
-    }
+        Api.get(`/initialQuest/${params.id}`).then(response => {
+            setQuestionList(['Maça', 'Banana', 'Pera']);
+        });
+    }, [params.id])
 
     const saveContent = async event => {
         event.preventDefault();
 
         try {
             let response;
-            questions.map((question, index) => (
+            questionList.map((question, index) => (
                     response = Api.post(`/initialQuest/${params.id}`, {
                         question,
                         order: index
@@ -69,16 +57,16 @@ function InitialQuest () {
     }
 
     const addQuestion = async () => {
-        setQuestions([...questions, '']);
+        setQuestionList([...questionList, '']);
     }
 
-    const changeQuestion = (keyboardEvent) => {
-        const questionText = keyboardEvent.target.value;
-        setQuestions([...questions, questionText]);
+    const changeQuestion = () => {
+        const $question = document.getElementById('input_' + changedIndex);
+        questionList[changedIndex] = $question.value;
     }
 
     const removeQuestion = async () => {
-        setQuestions(questions.slice(0, -1));
+        setQuestionList(questionList.slice(0, -1));
     }
 
     return (
@@ -94,12 +82,13 @@ function InitialQuest () {
                         <div>
                             <form name={'form01'} onSubmit={saveContent}>
                                 <div>
-                                    {questions.map((question, index) => {
+                                    {questionList.map((question, index) => {
                                         return (
                                             <CreateQuestion key={index}
                                                             id={index}
                                                             text={question}
                                                             onChange={changeQuestion}
+                                                            onClick={() => {setChangedIndex(index)}}
                                             />
                                         );
                                     })}

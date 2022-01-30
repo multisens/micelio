@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Redirect, Switch, NavLink } from 'react-router-dom';
 
-
 import Index from './pages/Index';
 import Sign from './pages/Sign';
 import Home from './pages/Home';
@@ -15,6 +14,8 @@ import VideoLink from './pages/VideoLink';
 import InitialQuest from './pages/InitialQuest';
 // experiment not logged in micelio
 import Form from './pages/Form';
+import GameExp from './pages/GameExp';
+import VideoExp from './pages/VideoExp';
 
 import {useAuth} from "./context/AuthContext";
 
@@ -41,6 +42,8 @@ const Routes = () => {
           <Route path={'/videoLink/:id'} component={VideoLink}/>
           <Route path={'/initialQuest/:id'} component={InitialQuest}/>
           <Route path={'/form/:id'} component={Form}/>
+          <Route path={'/gameExp/:id'} component={GameExp}/>
+          <Route path={'/videoExp/:id'} component={VideoExp}/>
           <Redirect to={'/home'} />
         </Switch>
       </BrowserRouter>
@@ -53,6 +56,8 @@ const Routes = () => {
         <Route path={'/'} component={Index} exact/>
         <Route path={'/sign'} component={Sign}/>
         <Route path={'/form/:id'} component={Form}/>
+        <Route path={'/gameExp/:id'} component={GameExp}/>
+        <Route path={'/videoExp/:id'} component={VideoExp}/>
         <Redirect to={'/'} />
       </Switch>
     </BrowserRouter>

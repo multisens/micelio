@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import './style.css';
 
 import Header from '../../components/Header';
@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 function Form () {
 
+    const history = useHistory();
     const params = useParams();
 
     const [username, setName] = useState('');
@@ -32,7 +33,9 @@ function Form () {
         }
     }
 
-    const beginForm = async () => {
+    const beginForm = async event => {
+        event.preventDefault();
+        
         try {
             const userResponse = await Api.post(`/form/${params.id}`, {username, email});
 
@@ -43,6 +46,8 @@ function Form () {
             console.log(e.response.data)
             toast.error(`Algo deu errado, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
         }
+
+        history.push(`/gameExp/${params.id}`);
     }
 
     return (
