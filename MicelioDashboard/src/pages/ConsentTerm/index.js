@@ -71,7 +71,7 @@ function ConsentTerm () {
         }
         if(buttonContinue){
             setButtonContinue(false);
-            history.push(`/link/${params.id}`);
+            history.push(`/gameLink/${params.id}`);
         }
     }
 
@@ -79,17 +79,17 @@ function ConsentTerm () {
         <>
             <ToastContainer />
             <div className={'content-body'}>
-                <Header title="Criação de Experimento - Passo 1/3"/>
+                <Header title="Criação de Experimento - Passo 1/6"/>
                 <div className={'container'}>
                     <div>
                         <h2>
-                            Digite no campo abaixo o termo de consentimento que ser&aacute; lido pelos participantes antes de iniciarem o experimento:
+                            Digite no campo abaixo o termo de consentimento:
                         </h2><br/><br/>
                         <div>
                             <form onSubmit={saveNewConsentTerm}>
                                 <div className={'text-field'}>
-                                    <textarea className={'primary'} id={'consentTerm'} placeholder=" Insira o texto aqui..." value={newConsentTerm}
-                                              rows="20" cols="200" size="4000"
+                                    <textarea className={'primary'} id={'consentTerm'} rows={15} cols={120} size={4000}
+                                              placeholder=" Insira o texto aqui..." value={newConsentTerm}
                                               onChange={e => {setNewConsentTerm(e.target.value)}}
                                     />
                                 </div><br/><br/>

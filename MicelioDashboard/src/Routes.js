@@ -10,7 +10,8 @@ import Game from './pages/Game';
 import Experiment from './pages/Experiment';
 import ExpDetails from './pages/ExpDetails';
 import ConsentTerm from './pages/ConsentTerm';
-import Link from './pages/Link';
+import GameLink from './pages/GameLink';
+import VideoLink from './pages/VideoLink';
 import InitialQuest from './pages/InitialQuest';
 // experiment not logged in micelio
 import Form from './pages/Form';
@@ -36,7 +37,8 @@ const Routes = () => {
           <Route path={'/experiment'} component={Experiment}/>
           <Route path={'/expDetails/:id'} component={ExpDetails}/>
           <Route path={'/consentTerm/:id'} component={ConsentTerm}/>
-          <Route path={'/link/:id'} component={Link}/>
+          <Route path={'/gameLink/:id'} component={GameLink}/>
+          <Route path={'/videoLink/:id'} component={VideoLink}/>
           <Route path={'/initialQuest/:id'} component={InitialQuest}/>
           <Route path={'/form/:id'} component={Form}/>
           <Redirect to={'/home'} />

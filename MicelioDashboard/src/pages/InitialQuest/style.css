@@ -11,29 +11,26 @@
     font-weight: bold;
 }
 
-.add-button {
+#parent {
+    width: 10%;
+    white-space: nowrap;
+    overflow-x: visible;
+}
+
+.buttons {
     width: 50px;
     margin: 0 auto;
 }
 
-.add-button .child-add {
-    float: right;
+.child-add {
+    width: 50px;
+    margin: 0 auto;
 }
 
-#parent {
-    width: 10%;
-    white-space: normal;
-    overflow-x: hidden;
-}
-
-.child{
-    width: 90%;
-    vertical-align: middle;
-    display:inline-block;
-}
-
-.child .opt-amount {
-    width: 30px;
+.child-remove {
+    width: 50px;
+    margin: 0 auto;
+    color: rgb(150, 0, 0);
 }
 
 .b-continue {

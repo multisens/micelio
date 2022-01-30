@@ -9,7 +9,8 @@ const GroupRoutes = require('./group.route');
 const ExperimentRoutes = require('./experiment.route');
 const ExpDetailsRoutes = require('./expDetails.route');
 const ConsentTermRoutes = require('./consentTerm.route');
-const LinkRoutes = require('./link.route');
+const GameLinkRoutes = require('./gameLink.route');
+const VideoLinkRoutes = require('./videoLink.route');
 const InitialQuestRoutes = require('./initialQuest.route');
 const FormRoutes = require('./form.route');
 
@@ -28,7 +29,8 @@ Router.use('/group', LogMiddleware, GroupRoutes);
 Router.use('/experiment', LogMiddleware, ExperimentRoutes);
 Router.use('/expDetails', LogMiddleware, ExpDetailsRoutes);
 Router.use('/consentTerm', LogMiddleware, ConsentTermRoutes);
-Router.use('/link', LogMiddleware, LinkRoutes);
+Router.use('/gameLink', LogMiddleware, GameLinkRoutes);
+Router.use('/videoLink', LogMiddleware, VideoLinkRoutes);
 Router.use('/initialQuest', LogMiddleware, InitialQuestRoutes);
 Router.use('/form', LogMiddleware, FormRoutes);
 

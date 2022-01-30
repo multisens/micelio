@@ -94,6 +94,7 @@ class ExperimentController {
 
                 const groupData = {
                     experiment_id: experimentId,
+                    num_part_total: 0,
                     group_id: i
                 }
 
