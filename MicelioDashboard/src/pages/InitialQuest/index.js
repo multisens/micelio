@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forceUpdate } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
 import { AiOutlinePlusCircle, AiFillCloseCircle } from 'react-icons/ai'
 import { useHistory } from 'react-router-dom';
@@ -20,14 +20,15 @@ function InitialQuest () {
     const [btnReturn, setBtnReturn] = useState(false);
     const [btnContinue, setBtnContinue] = useState(false)
 
-    const [questionList, setQuestionList] = useState([]);
-    const [changedIndex, setChangedIndex] = useState(0);
+    const [questionList, setQuestionList] = useState(['']);
+    const [changeList, setChangeList] = useState([]);
+    const [clickedIndex, setClickedIndex] = useState(0);
 
-    useEffect(() => {
+    /*useEffect(() => {
         Api.get(`/initialQuest/${params.id}`).then(response => {
             setQuestionList(['Maça', 'Banana', 'Pera']);
         });
-    }, [params.id])
+    }, [params.id])*/
 
     const saveContent = async event => {
         event.preventDefault();
@@ -60,13 +61,18 @@ function InitialQuest () {
         setQuestionList([...questionList, '']);
     }
 
-    const changeQuestion = () => {
-        const $question = document.getElementById('input_' + changedIndex);
-        questionList[changedIndex] = $question.value;
+    const changeQuestion = (value, index) => {   
+        let newArrayQuestion = questionList;
+        newArrayQuestion[index] = value;
+        setQuestionList(newArrayQuestion);
     }
 
     const removeQuestion = async () => {
-        setQuestionList(questionList.slice(0, -1));
+        if (questionList.length === 1) {
+            setQuestionList(['']);
+        } else {
+            setQuestionList(questionList.slice(0, -1));
+        }
     }
 
     return (
@@ -84,11 +90,10 @@ function InitialQuest () {
                                 <div>
                                     {questionList.map((question, index) => {
                                         return (
-                                            <CreateQuestion key={index}
-                                                            id={index}
+                                            <CreateQuestion key={index+questionList[index]}
+                                                            index={index}
                                                             text={question}
-                                                            onChange={changeQuestion}
-                                                            onClick={() => {setChangedIndex(index)}}
+                                                            onChangeFunction={changeQuestion}
                                             />
                                         );
                                     })}

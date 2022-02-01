@@ -32,7 +32,7 @@ class InitialQuestController {
 	async update(request, response) {
 
         const {experiment_id} = request.params;
-        const {question, selectedOpt, order} = request.body;
+        const {question, order} = request.body;
         const selected = 'I';
 
         if(!experiment_id){
@@ -72,56 +72,50 @@ class InitialQuestController {
                 }
             }
             
-            if (selectedOpt === 'D') {
-                const question_aux = await knex('Questions as q')
-                                    .select('q.txt_question', 'q.question_id')
-                                    .where('q.form_id', form.form_id)
-                                    .first();
+            const question_aux = await knex('Questions as q')
+                                .select('q.txt_question', 'q.ind_order')
+                                .where('q.form_id', form.form_id)
+                                .first();
 
-                if(!question_aux) {
+            if(!question_aux) {
 
-                    const question_id = await idGenerator('Questions', 'question');
+                const question_id = await idGenerator('Questions', 'question');
 
-                    const questionData = {
-                        question_id,
-                        txt_question: question,
-                        ind_type: selectedOpt,
-                        ind_order: order,
-                        form_id: form.form_id
-                    };
+                const questionData = {
+                    question_id,
+                    txt_question: question,
+                    ind_type: 'D',
+                    ind_order: order,
+                    form_id: form.form_id
+                };
 
-                    const questionInsert = await trx('Questions').insert(questionData);
+                const questionInsert = await trx('Questions').insert(questionData);
 
-                    if(questionInsert){
-                        await trx.commit();
-                        return response.status(201).json({ok: true});
-                    }
-                    else{
-                        await trx.rollback();
-                        return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
-                    }
-                } else {
-                    const quenstionUpdate = await trx('Questions').where('form_id', form.form_id).andWhere('question_id', question_aux.question_id).update({txt_question: question, ind_type: selectedOpt, ind_order: order});
-
-                    if(quenstionUpdate){
-                        await trx.commit();
-                        return response.status(201).json({ok: true});
-                    }
-                    else{
-                        await trx.rollback();
-                        return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
-                    }
+                if(questionInsert){
+                    await trx.commit();
+                    return response.status(201).json({ok: true});
+                }
+                else{
+                    await trx.rollback();
+                    return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
                 }
             } else {
-                //Não implementado
-                return response.status(400).json({error: 'Cannot update the question, check the information sent'});
+                const quenstionUpdate = await trx('Questions').where('form_id', form.form_id).andWhere('ind_order', question_aux.ind_order).update({txt_question: question, ind_type: 'D'});
+
+                if(quenstionUpdate){
+                    await trx.commit();
+                    return response.status(201).json({ok: true});
+                }
+                else{
+                    await trx.rollback();
+                    return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+                }
             }
         }
         catch(err){
             await trx.rollback();
             return response.status(400).json({error: 'Cannot update the game page, try again later'});
         }
-
     }
 }
 
