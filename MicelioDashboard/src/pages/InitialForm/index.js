@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
-import { AiOutlinePlusCircle, AiFillCloseCircle } from 'react-icons/ai'
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './style.css';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import CreateQuestion from '../../components/CreateQuestion';
+import BuildQuestion from '../../components/BuildQuestion';
 import Api from '../../services/Api';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
-function InitialQuest () {
+function InitialForm () {
 
     const history = useHistory();
     const params = useParams();
@@ -23,7 +22,7 @@ function InitialQuest () {
     const [questionList, setQuestionList] = useState([]);
 
     useEffect(() => {
-        Api.get(`/initialQuest/${params.id}`).then(response => {
+        Api.get(`/initialForm/${params.id}`).then(response => {
             const questions = response.data;
             if (questions.length < 1) {
                 setQuestionList(['']);
@@ -38,7 +37,7 @@ function InitialQuest () {
 
         try {
             for (let i=0;i<questionList.length;i++) {
-                const response = await Api.post(`/initialQuest/${params.id}`, {
+                const response = await Api.post(`/initialForm/${params.id}`, {
                     question: questionList[i],
                     order: i
                 })
@@ -54,29 +53,17 @@ function InitialQuest () {
         }
 
         if (btnReturn) {
-            history.push(`/videoLink/${params.id}`);
+            history.push(`/consentTerm/${params.id}`);
         }
         if (btnContinue) {
-            history.push(`/initialQuest/${params.id}`);
+            history.push(`/gameLink/${params.id}`);
         }
-    }
-
-    const addQuestion = async () => {
-        setQuestionList([...questionList, '']);
     }
 
     const changeQuestion = (value, index) => {   
         let newArrayQuestion = questionList;
         newArrayQuestion[index] = value;
         setQuestionList(newArrayQuestion);
-    }
-
-    const removeQuestion = async () => {
-        if (questionList.length === 1) {
-            setQuestionList(['']);
-        } else {
-            setQuestionList(questionList.slice(0, -1));
-        }
     }
 
     return (
@@ -94,17 +81,14 @@ function InitialQuest () {
                                 <div>
                                     {questionList.map((question, index) => {
                                         return (
-                                            <CreateQuestion key={index+questionList[index]}
+                                            <BuildQuestion key={index+questionList[index]}
                                                             index={index}
+                                                            question={question}
                                                             text={question}
                                                             onChangeFunction={changeQuestion}
                                             />
                                         );
                                     })}
-                                    <div id={'parent'} className={'buttons'}>
-                                        <AiOutlinePlusCircle className={'child-add'} size={35} onClick={addQuestion}/>
-                                        <AiFillCloseCircle className={'child-remove'} size={35} onClick={removeQuestion}/>
-                                    </div><br/><br/>
                                     <table>
                                         <tbody>
                                             <tr>
@@ -124,4 +108,4 @@ function InitialQuest () {
     );
 };
 
-export default InitialQuest;
+export default InitialForm;

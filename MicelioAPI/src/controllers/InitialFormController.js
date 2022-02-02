@@ -1,7 +1,7 @@
 const knex = require('../database/connection');
 const idGenerator = require('../utils/generators/idGenerator');
 
-class InitialQuestController {
+class InitialFormController {
 
     async get(request, response) {
 
@@ -20,6 +20,8 @@ class InitialQuestController {
         if (!form_id) {
             return response.json({ok: 'no_data_found'});
         }
+
+        return response.status(201).json({ok: true});
 
         const questions = await knex('Questions as q')
                                  .select('q.txt_question')
@@ -54,6 +56,8 @@ class InitialQuestController {
                              .andWhere('f.ind_stage', selected)
                              .select('f.form_id')
                              .first();
+
+        return response.status(201).json({ok: true});
 
         const trx = await knex.transaction();
 
@@ -130,4 +134,4 @@ class InitialQuestController {
     }
 }
 
-module.exports = InitialQuestController;
+module.exports = InitialFormController;
