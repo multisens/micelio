@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
 import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './style.css';
 
@@ -20,6 +21,9 @@ function InitialForm () {
     const [btnContinue, setBtnContinue] = useState(false)
 
     const [questionList, setQuestionList] = useState([]);
+
+    const location = useLocation();
+    const email = location.state.params;
 
     useEffect(() => {
         Api.get(`/initialForm/${params.id}`).then(response => {
@@ -53,7 +57,7 @@ function InitialForm () {
         }
 
         if (btnReturn) {
-            history.push(`/consentTerm/${params.id}`);
+            history.push(`/form/${params.id}`);
         }
         if (btnContinue) {
             history.push(`/gameLink/${params.id}`);

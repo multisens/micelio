@@ -6,6 +6,9 @@ class InitialFormController {
     async get(request, response) {
 
         const {experiment_id} = request.params;
+        const {email} = request.body;
+
+        console.log(email);
 
         if(!experiment_id){
             return response.status(400).json({error: "Missing experiment id"});
@@ -21,8 +24,6 @@ class InitialFormController {
             return response.json({ok: 'no_data_found'});
         }
 
-        return response.status(201).json({ok: true});
-
         const questions = await knex('Questions as q')
                                  .select('q.txt_question')
                                  .where('q.form_id', form_id)
@@ -37,9 +38,8 @@ class InitialFormController {
                 questionsArray.push(questionsAux[i].txt_question)
             }
         }
-
         response.json(questionsArray);
-	}
+    }
 
     async update(request, response) {
 
@@ -56,8 +56,6 @@ class InitialFormController {
                              .andWhere('f.ind_stage', selected)
                              .select('f.form_id')
                              .first();
-
-        return response.status(201).json({ok: true});
 
         const trx = await knex.transaction();
 

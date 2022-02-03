@@ -47,7 +47,7 @@ function Form () {
             toast.error(`Algo deu errado, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
         }
 
-        history.push(`/initialForm/${params.id}`);
+        history.push(`/initialForm/${params.id}`, {params: email});
     }
 
     return (

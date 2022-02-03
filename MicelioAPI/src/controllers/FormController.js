@@ -3,16 +3,16 @@ const idGenerator = require('../utils/generators/idGenerator');
 
 class FormController {
 
-	async get(request, response) {
-		const {experiment_id} = request.params;
+    async get(request, response) {
+        const {experiment_id} = request.params;
 
-		const {txt_consent_term} = await knex('Experiment as e')
+        const {txt_consent_term} = await knex('Experiment as e')
                                         .select('e.txt_consent_term')
                                         .where('e.experiment_id', experiment_id)
                                         .first();
-	
-		return response.json({ok: true, data: txt_consent_term});
-	}
+
+        return response.json({ok: true, data: txt_consent_term});
+    }
 	
 
 	async create(request, response) {
@@ -29,10 +29,10 @@ class FormController {
         }
 
         const txt_email = await knex('Participant')
-                                 .select('txt_email')
-                                 .where('txt_email', email)
-                                 .andWhere('experiment_id', experiment_id)
-                                 .first();
+                               .select('txt_email')
+                               .where('txt_email', email)
+                               .andWhere('experiment_id', experiment_id)
+                               .first();
 
         if(txt_email){
             return response.status(201).json({ok: true});
