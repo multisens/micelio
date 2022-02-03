@@ -10,7 +10,7 @@ function BuildQuestion(props) {
       <div>
         <input  type={'text'}
                 className={'primary'} size={100} 
-                placeholder={'Digite a pergunta...'} 
+                placeholder={'Digite sua resposta...'} 
                 defaultValue={props.text}
                 onChange={(event)=>props.onChangeFunction(event.target.value, props.index)}
                 />

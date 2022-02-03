@@ -12,9 +12,13 @@ import ConsentTerm from './pages/ConsentTerm';
 import GameLink from './pages/GameLink';
 import VideoLink from './pages/VideoLink';
 import InitialQuest from './pages/InitialQuest';
+import SpecQuest from './pages/SpecQuest';
+import FinalQuest from './pages/FinalQuest';
 // experiment not logged in micelio
 import Form from './pages/Form';
 import InitialForm from './pages/InitialForm';
+import SpecForm from './pages/SpecForm';
+import FinalForm from './pages/FinalForm';
 import GameExp from './pages/GameExp';
 import VideoExp from './pages/VideoExp';
 
@@ -42,8 +46,12 @@ const Routes = () => {
           <Route path={'/gameLink/:id'} component={GameLink}/>
           <Route path={'/videoLink/:id'} component={VideoLink}/>
           <Route path={'/initialQuest/:id'} component={InitialQuest}/>
+          <Route path={'/specQuest/:id'} component={SpecQuest}/>
+          <Route path={'/finalQuest/:id'} component={FinalQuest}/>
           <Route path={'/form/:id'} component={Form}/>
           <Route path={'/initialForm/:id'} component={InitialForm}/>
+          <Route path={'/specForm/:id'} component={SpecForm}/>
+          <Route path={'/finalForm/:id'} component={FinalForm}/>
           <Route path={'/gameExp/:id'} component={GameExp}/>
           <Route path={'/videoExp/:id'} component={VideoExp}/>
           <Redirect to={'/home'} />
@@ -59,6 +67,8 @@ const Routes = () => {
         <Route path={'/sign'} component={Sign}/>
         <Route path={'/form/:id'} component={Form}/>
         <Route path={'/initialForm/:id'} component={InitialForm}/>
+        <Route path={'/specForm/:id'} component={SpecForm}/>
+        <Route path={'/finalForm/:id'} component={FinalForm}/>
         <Route path={'/gameExp/:id'} component={GameExp}/>
         <Route path={'/videoExp/:id'} component={VideoExp}/>
         <Redirect to={'/'} />

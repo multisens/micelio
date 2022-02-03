@@ -1,7 +1,7 @@
 const knex = require('../database/connection');
 const idGenerator = require('../utils/generators/idGenerator');
 
-class InitialQuestController {
+class SpecFormController {
 
     async get(request, response) {
 
@@ -13,7 +13,7 @@ class InitialQuestController {
 
         const form = await knex('Form as f')
                           .select('f.form_id')
-                          .where('f.ind_stage', 'I')
+                          .where('f.ind_stage', 'E')
                           .andWhere('f.experiment_id', experiment_id)
                           .first();
 
@@ -37,56 +37,26 @@ class InitialQuestController {
                 questionsArray.push(questionsAux[i].txt_question)
             }
         }
-
         response.json(questionsArray);
-	}
+    }
 
     async update(request, response) {
 
         const {experiment_id} = request.params;
         const {question, order} = request.body;
-        const selected = 'I';
+        const selected = 'E';
 
         if(!experiment_id){
             return response.status(400).json({error: "Missing experiment id"});
         }
 
-        const form = await knex('Form as f')
-                             .where('f.experiment_id', experiment_id)
-                             .andWhere('f.ind_stage', selected)
-                             .select('f.form_id')
-                             .first();
-
-        const trx = await knex.transaction();
+        const {form_id} = await knex('Form as f')
+                            .where('f.experiment_id', experiment_id)
+                            .andWhere('f.ind_stage', selected)
+                            .select('f.form_id')
+                            .first();
 
         try{
-            const form_id_gen = await idGenerator('form');
-
-            let form_id = '';
-
-            if(!form){
-                form_id = form_id_gen;
-
-                const formData = {
-                    form_id,
-                    ind_stage: selected,
-                    experiment_id
-                };
-
-                const formInsert = await trx('form').insert(formData);
-
-                if(formInsert){
-                    await trx.commit();
-                }
-                else{
-                    await trx.rollback();
-                    return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
-                }
-            }
-
-            if(form_id === '') {
-                form_id = form.form_id;
-            }
             
             const questions_aux = await knex('Questions as q')
                                        .where('q.form_id', form_id)
@@ -94,6 +64,10 @@ class InitialQuestController {
                                        .orderBy('q.ind_order');
             
             const questionAuxList = JSON.parse(JSON.stringify(questions_aux));
+
+            return response.status(201).json({ok: true});
+
+            const trx = await knex.transaction();
 
             if (!questionAuxList[order]) {
                 const question_id = await idGenerator('Questions', 'question');
@@ -137,4 +111,4 @@ class InitialQuestController {
     }
 }
 
-module.exports = InitialQuestController;
+module.exports = SpecFormController;

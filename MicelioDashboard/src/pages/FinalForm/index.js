@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
 import { useHistory } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './style.css';
 
@@ -12,11 +11,10 @@ import Api from '../../services/Api';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
-function InitialForm () {
+function FinalForm () {
 
     const history = useHistory();
     const params = useParams();
-    const location = useLocation();
 
     const [btnReturn, setBtnReturn] = useState(false);
     const [btnContinue, setBtnContinue] = useState(false)
@@ -25,14 +23,8 @@ function InitialForm () {
 
     const [answerList, setAnswerList] = useState([]);
 
-    const [email, setEmail] = useState();
-
     useEffect(() => {
-        setEmail(location.state.params);
-    }, [location.state.params])
-
-    useEffect(() => {
-        Api.get(`/initialForm/${params.id}`).then(response => {
+        Api.get(`/finalForm/${params.id}`).then(response => {
             const questions = response.data;
             if (questions.length < 1) {
                 setQuestionList(['']);
@@ -42,14 +34,14 @@ function InitialForm () {
                 setAnswerList(['']);
             }
         });
-    }, [email, params.id])
+    }, [params.id])
 
     const saveContent = async event => {
         event.preventDefault();
 
         try {
             for (let i=0;i<questionList.length;i++) {
-                const response = await Api.post(`/initialForm/${params.id}`, {
+                const response = await Api.post(`/finalForm/${params.id}`, {
                     question: questionList[i],
                     order: i
                 })
@@ -65,10 +57,10 @@ function InitialForm () {
         }
 
         if (btnReturn) {
-            history.push(`/form/${params.id}`);
+            history.push(`/specForm/${params.id}`);
         }
         if (btnContinue) {
-            history.push(`/gameExp/${params.id}`);
+            history.push(`/finalForm/${params.id}`);
         }
     }
 
@@ -82,7 +74,7 @@ function InitialForm () {
         <>
             <ToastContainer />
             <div className={'content-body'}>
-                <Header title="Questionário Inicial"/>
+                <Header title="Questionário Final"/>
                 <div className={'container'}>
                     <div>
                         <div>
@@ -102,7 +94,7 @@ function InitialForm () {
                                         <tbody>
                                             <tr>
                                                 <td className={'b-return'}><button className={'primary'} onClick={() => {setBtnReturn(true)}}>Retornar</button></td>
-                                                <td className={'b-continue'}><button className={'primary'} onClick={() => {setBtnContinue(true)}}>Seguir</button></td>
+                                                <td className={'b-continue'}><button className={'primary'} onClick={() => {setBtnContinue(true)}}>Concluir</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -117,4 +109,4 @@ function InitialForm () {
     );
 };
 
-export default InitialForm;
+export default FinalForm;

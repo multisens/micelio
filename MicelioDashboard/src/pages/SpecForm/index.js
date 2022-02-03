@@ -12,11 +12,10 @@ import Api from '../../services/Api';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
-function InitialForm () {
+function SpecForm () {
 
     const history = useHistory();
     const params = useParams();
-    const location = useLocation();
 
     const [btnReturn, setBtnReturn] = useState(false);
     const [btnContinue, setBtnContinue] = useState(false)
@@ -25,14 +24,8 @@ function InitialForm () {
 
     const [answerList, setAnswerList] = useState([]);
 
-    const [email, setEmail] = useState();
-
     useEffect(() => {
-        setEmail(location.state.params);
-    }, [location.state.params])
-
-    useEffect(() => {
-        Api.get(`/initialForm/${params.id}`).then(response => {
+        Api.get(`/specForm/${params.id}`).then(response => {
             const questions = response.data;
             if (questions.length < 1) {
                 setQuestionList(['']);
@@ -42,14 +35,14 @@ function InitialForm () {
                 setAnswerList(['']);
             }
         });
-    }, [email, params.id])
+    }, [params.id])
 
     const saveContent = async event => {
         event.preventDefault();
 
         try {
             for (let i=0;i<questionList.length;i++) {
-                const response = await Api.post(`/initialForm/${params.id}`, {
+                const response = await Api.post(`/specForm/${params.id}`, {
                     question: questionList[i],
                     order: i
                 })
@@ -65,10 +58,10 @@ function InitialForm () {
         }
 
         if (btnReturn) {
-            history.push(`/form/${params.id}`);
+            history.push(`/videoExp/${params.id}`);
         }
         if (btnContinue) {
-            history.push(`/gameExp/${params.id}`);
+            history.push(`/finalForm/${params.id}`);
         }
     }
 
@@ -82,7 +75,7 @@ function InitialForm () {
         <>
             <ToastContainer />
             <div className={'content-body'}>
-                <Header title="Questionário Inicial"/>
+                <Header title="Questionário Específico"/>
                 <div className={'container'}>
                     <div>
                         <div>
@@ -117,4 +110,4 @@ function InitialForm () {
     );
 };
 
-export default InitialForm;
+export default SpecForm;

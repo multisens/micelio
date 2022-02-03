@@ -57,7 +57,7 @@ function InitialQuest () {
             history.push(`/videoLink/${params.id}`);
         }
         if (btnContinue) {
-            history.push(`/initialQuest/${params.id}`);
+            history.push(`/specQuest/${params.id}`);
         }
     }
 

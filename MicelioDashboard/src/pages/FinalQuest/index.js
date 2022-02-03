@@ -1,55 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
+import { AiOutlinePlusCircle, AiFillCloseCircle } from 'react-icons/ai'
 import { useHistory } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './style.css';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import BuildQuestion from '../../components/BuildQuestion';
+import CreateQuestion from '../../components/CreateQuestion';
 import Api from '../../services/Api';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
-function InitialForm () {
+function FinalQuest () {
 
     const history = useHistory();
     const params = useParams();
-    const location = useLocation();
 
     const [btnReturn, setBtnReturn] = useState(false);
     const [btnContinue, setBtnContinue] = useState(false)
 
     const [questionList, setQuestionList] = useState([]);
 
-    const [answerList, setAnswerList] = useState([]);
-
-    const [email, setEmail] = useState();
-
     useEffect(() => {
-        setEmail(location.state.params);
-    }, [location.state.params])
-
-    useEffect(() => {
-        Api.get(`/initialForm/${params.id}`).then(response => {
+        Api.get(`/finalQuest/${params.id}`).then(response => {
             const questions = response.data;
             if (questions.length < 1) {
                 setQuestionList(['']);
-                setAnswerList(['']);
             } else {
                 setQuestionList(response.data);
-                setAnswerList(['']);
             }
         });
-    }, [email, params.id])
+    }, [params.id])
 
     const saveContent = async event => {
         event.preventDefault();
 
         try {
             for (let i=0;i<questionList.length;i++) {
-                const response = await Api.post(`/initialForm/${params.id}`, {
+                const response = await Api.post(`/finalQuest/${params.id}`, {
                     question: questionList[i],
                     order: i
                 })
@@ -58,51 +47,67 @@ function InitialForm () {
                     toast.error(`Não foi possível salvar os dados informados. Tente novamente`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
                 }
             }
-
-
         }catch (e) {
             toast.error(`Não foi possível salvar os dados informados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
         }
 
         if (btnReturn) {
-            history.push(`/form/${params.id}`);
+            history.push(`/specQuest/${params.id}`);
         }
         if (btnContinue) {
-            history.push(`/gameExp/${params.id}`);
+            history.push(`/experiment`, { saved: true} );
         }
     }
 
-    const changeAnswer = (value, index) => {   
-        let newArrayAnswer = answerList;
-        newArrayAnswer[index] = value;
-        setQuestionList(newArrayAnswer);
+    const addQuestion = async () => {
+        setQuestionList([...questionList, '']);
+    }
+
+    const changeQuestion = (value, index) => {   
+        let newArrayQuestion = questionList;
+        newArrayQuestion[index] = value;
+        setQuestionList(newArrayQuestion);
+    }
+
+    const removeQuestion = async () => {
+        if (questionList.length === 1) {
+            setQuestionList(['']);
+        } else {
+            setQuestionList(questionList.slice(0, -1));
+        }
     }
 
     return (
         <>
             <ToastContainer />
             <div className={'content-body'}>
-                <Header title="Questionário Inicial"/>
+                <Header title="Criação de Experimento - Passo 6/6"/>
                 <div className={'container'}>
                     <div>
+                        <h2>
+                            Cria&ccedil;&atilde;o do question&aacute;rio final.
+                        </h2><br/>
                         <div>
                             <form name={'form01'} onSubmit={saveContent}>
                                 <div>
                                     {questionList.map((question, index) => {
                                         return (
-                                            <BuildQuestion key={index+questionList[index]}
+                                            <CreateQuestion key={index+questionList[index]}
                                                             index={index}
-                                                            question={question}
-                                                            text={answerList[index]}
-                                                            onChangeFunction={changeAnswer}
+                                                            text={question}
+                                                            onChangeFunction={changeQuestion}
                                             />
                                         );
                                     })}
+                                    <div id={'parent'} className={'buttons'}>
+                                        <AiOutlinePlusCircle className={'child-add'} size={35} onClick={addQuestion}/>
+                                        <AiFillCloseCircle className={'child-remove'} size={35} onClick={removeQuestion}/>
+                                    </div><br/><br/>
                                     <table>
                                         <tbody>
                                             <tr>
                                                 <td className={'b-return'}><button className={'primary'} onClick={() => {setBtnReturn(true)}}>Retornar</button></td>
-                                                <td className={'b-continue'}><button className={'primary'} onClick={() => {setBtnContinue(true)}}>Seguir</button></td>
+                                                <td className={'b-continue'}><button className={'primary'} onClick={() => {setBtnContinue(true)}}>Concluir</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -117,4 +122,4 @@ function InitialForm () {
     );
 };
 
-export default InitialForm;
+export default FinalQuest;

@@ -49,7 +49,7 @@ function VideoExp () {
             history.push(`/gameExp/${params.id}`);
         }
         if (btnContinue) {
-            history.push(`/videoExp/${params.id}`);
+            history.push(`/specForm/${params.id}`);
         }
     }
 
@@ -57,7 +57,7 @@ function VideoExp () {
         <>
             <ToastContainer />
             <div className={'content-body'}>
-                <Header title="Criação de Experimento - Passo 3/6"/>
+                <Header title="Acesso a videoaula"/>
                 <div className={'container'}>
                     <div>
                         <div>

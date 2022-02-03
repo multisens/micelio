@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useLocation } from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 import {AiOutlineCopy} from 'react-icons/ai';
 import './style.css';
@@ -30,8 +31,18 @@ function Experiment() {
   const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
   const [shareLink, setShareLink] = useState('');
 
+  const location = useLocation();
+
   useEffect(() => {
     updateExperimentList();
+
+    if (location.state) {
+      if (location.state.saved) {
+        toast.success('Criação de experimento finalizada com sucesso.', {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}});
+        location.state.saved = false;
+        console.log(location.state.saved)
+      }
+    }
   }, [])
 
   useEffect(() => {
@@ -81,6 +92,11 @@ function Experiment() {
     setIsSharePopupOpen(true);
   }
 
+  const copyLink = () => {
+    navigator.clipboard.writeText(shareLink);
+    toast.success('Link copiado com sucesso.', {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}});
+  }
+
   const filterExperimentList = (keyboardEvent) => {
     const filterText = keyboardEvent.target.value.toLowerCase().replaceAll(' ', '');
 
@@ -121,7 +137,7 @@ function Experiment() {
           </div>
           <div className={'card-options'}>
             <div className={'card-option'}>
-              <AiOutlineCopy size={25} onClick={navigator.clipboard.writeText(shareLink)}/>
+              <AiOutlineCopy size={25} onClick={copyLink}/>
             </div>
           </div>
         </div>
