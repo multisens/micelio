@@ -38,6 +38,10 @@ function FinalQuest () {
 
         try {
             for (let i=0;i<questionList.length;i++) {
+                if (questionList[i] === '') {
+                    toast.error(`Questão ${i+1} em branco. Por favor, delete ou insira dados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+                    return false;
+                }
                 const response = await Api.post(`/finalQuest/${params.id}`, {
                     question: questionList[i],
                     order: i

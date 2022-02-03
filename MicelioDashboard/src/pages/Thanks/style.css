@@ -1,0 +1,11 @@
+.container {
+    padding: 100px 40px;
+    display: flex;
+    flex:1;
+    align-items: center;
+    justify-content: center;
+}
+
+.thanks {
+    font-size: 40px;
+}

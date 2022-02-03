@@ -60,7 +60,7 @@ function FinalForm () {
             history.push(`/specForm/${params.id}`);
         }
         if (btnContinue) {
-            history.push(`/finalForm/${params.id}`);
+            history.push(`/thanks`);
         }
     }
 

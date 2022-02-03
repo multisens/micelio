@@ -21,6 +21,7 @@ import SpecForm from './pages/SpecForm';
 import FinalForm from './pages/FinalForm';
 import GameExp from './pages/GameExp';
 import VideoExp from './pages/VideoExp';
+import Thanks from './pages/Thanks';
 
 import {useAuth} from "./context/AuthContext";
 
@@ -54,6 +55,7 @@ const Routes = () => {
           <Route path={'/finalForm/:id'} component={FinalForm}/>
           <Route path={'/gameExp/:id'} component={GameExp}/>
           <Route path={'/videoExp/:id'} component={VideoExp}/>
+          <Route path={'/thanks'} component={Thanks}/>
           <Redirect to={'/home'} />
         </Switch>
       </BrowserRouter>
@@ -71,6 +73,7 @@ const Routes = () => {
         <Route path={'/finalForm/:id'} component={FinalForm}/>
         <Route path={'/gameExp/:id'} component={GameExp}/>
         <Route path={'/videoExp/:id'} component={VideoExp}/>
+        <Route path={'/thanks'} component={Thanks}/>
         <Redirect to={'/'} />
       </Switch>
     </BrowserRouter>
