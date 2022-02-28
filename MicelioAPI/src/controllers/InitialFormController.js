@@ -43,7 +43,7 @@ class InitialFormController {
     async update(request, response) {
 
         const {experiment_id} = request.params;
-        const {question, order} = request.body;
+        const {answer, order, participant_id} = request.body;
         const selected = 'I';
 
         if(!experiment_id){
@@ -56,33 +56,36 @@ class InitialFormController {
                             .select('f.form_id')
                             .first();
 
+        const trx = await knex.transaction();
+
         try{
-            
-            const questions_aux = await knex('Questions as q')
-                                       .where('q.form_id', form_id)
-                                       .select('q.ind_order')
-                                       .orderBy('q.ind_order');
-            
-            const questionAuxList = JSON.parse(JSON.stringify(questions_aux));
 
-            return response.status(201).json({ok: true});
+            const {question_id} = await knex('Questions as q')
+                                         .where('q.form_id', form_id)
+                                         .andWhere('q.ind_order', order)
+                                         .select('q.question_id')
+                                         .first();
 
-            const trx = await knex.transaction();
+            const hasAnswer = await knex('Answers as a')
+                                   .where('a.question_id', question_id)
+                                   .andWhere('a.participant_id', participant_id)
+                                   .select('a.answer_id')
+                                   .first();
 
-            if (!questionAuxList[order]) {
-                const question_id = await idGenerator('Questions', 'question');
+            if (!hasAnswer) {
+                const gen_answer_id = await idGenerator('Questions', 'question');
 
-                const questionData = {
+                const answerData = {
+                    answer_id: gen_answer_id,
+                    txt_answer: answer,
+                    ind_option: null,
                     question_id,
-                    txt_question: question,
-                    ind_type: 'D',
-                    ind_order: order,
-                    form_id
+                    participant_id
                 };
 
-                const questionInsert = await trx('Questions').insert(questionData);
+                const answerInsert = await trx('Answers').insert(answerData);
 
-                if(questionInsert){
+                if(answerInsert){
                     await trx.commit();
                     return response.status(201).json({ok: true});
                 }
@@ -90,9 +93,8 @@ class InitialFormController {
                     await trx.rollback();
                     return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
                 }
-            } else
-            if (questionAuxList[order].ind_order === order) {
-                const questionUpdate = await trx('Questions as q').where('q.ind_order', order).andWhere('q.form_id', form_id).update('q.txt_question', question);
+            } else {
+                const questionUpdate = await trx('Answers as a').where('a.answer_id', hasAnswer.answer_id).update('a.txt_answer', answer);
 
                 if(questionUpdate){
                     await trx.commit();

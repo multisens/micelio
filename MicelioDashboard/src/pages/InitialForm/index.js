@@ -25,10 +25,10 @@ function InitialForm () {
 
     const [answerList, setAnswerList] = useState([]);
 
-    const [email, setEmail] = useState();
+    const [partId, setPartId] = useState();
 
     useEffect(() => {
-        setEmail(location.state.params);
+        setPartId(location.state.params);
     }, [location.state.params])
 
     useEffect(() => {
@@ -42,30 +42,29 @@ function InitialForm () {
                 setAnswerList(['']);
             }
         });
-    }, [email, params.id])
+    }, [params.id])
 
     const saveContent = async event => {
         event.preventDefault();
 
         try {
-            for (let i=0;i<questionList.length;i++) {
+            for (let i=0;i<answerList.length;i++) {
                 const response = await Api.post(`/initialForm/${params.id}`, {
-                    question: questionList[i],
-                    order: i
+                    answer: answerList[i],
+                    order: i,
+                    participant_id: partId
                 })
 
                 if(!response.data.ok){
                     toast.error(`Não foi possível salvar os dados informados. Tente novamente`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
                 }
             }
-
-
         }catch (e) {
             toast.error(`Não foi possível salvar os dados informados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
         }
 
         if (btnReturn) {
-            history.push(`/form/${params.id}`);
+            history.push(`/form/${params.id}`, {params: partId});
         }
         if (btnContinue) {
             history.push(`/gameExp/${params.id}`);
@@ -75,7 +74,7 @@ function InitialForm () {
     const changeAnswer = (value, index) => {   
         let newArrayAnswer = answerList;
         newArrayAnswer[index] = value;
-        setQuestionList(newArrayAnswer);
+        setAnswerList(newArrayAnswer);
     }
 
     return (

@@ -42,12 +42,12 @@ function Form () {
             if(!userResponse.data.ok){
                 toast.error(`E-mail já cadastrado no experimento.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
             }
+
+            history.push(`/initialForm/${params.id}`, {params: userResponse.data.participant_id});
         } catch (e) {
             console.log(e.response.data)
             toast.error(`Algo deu errado, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
         }
-
-        history.push(`/initialForm/${params.id}`, {params: email});
     }
 
     return (

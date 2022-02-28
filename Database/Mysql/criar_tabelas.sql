@@ -256,12 +256,12 @@ create table options
 );
 
 create table answers
-( aswer_id       VARCHAR(40)
+( answer_id      VARCHAR(40)
 , txt_answer     VARCHAR(4000)
 , ind_option     CHAR(1)
 , question_id    VARCHAR(40)
 , participant_id VARCHAR(40)
-, PRIMARY KEY (aswer_id, question_id)
+, PRIMARY KEY (answer_id, question_id)
 , FOREIGN KEY (question_id)
 	REFERENCES questions(question_id)
 , FOREIGN KEY(participant_id) 

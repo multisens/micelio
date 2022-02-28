@@ -28,14 +28,14 @@ class FormController {
             return response.status(400).json({error: "Missing username or email"});
         }
 
-        const txt_email = await knex('Participant')
-                               .select('txt_email')
-                               .where('txt_email', email)
-                               .andWhere('experiment_id', experiment_id)
-                               .first();
+        const part_id = await knex('Participant')
+                             .select('participant_id')
+                             .where('txt_email', email)
+                             .andWhere('experiment_id', experiment_id)
+                             .first();
 
-        if(txt_email){
-            return response.status(201).json({ok: true});
+        if(part_id){
+            return response.status(201).json({ok: true, participant_id: part_id.participant_id});
         }
 
 		const participant_id = await idGenerator('Participant');
@@ -65,7 +65,7 @@ class FormController {
 
             if(userInsert && groupAdd){
                 await trx.commit();
-                return response.status(201).json({ok: true, group_id});
+                return response.status(201).json({ok: true, participant_id});
             }
             else{
                 await trx.rollback();

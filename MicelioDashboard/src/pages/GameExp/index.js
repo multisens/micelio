@@ -45,7 +45,7 @@ function GameExp () {
 
     const workFlow = () => {
         if (btnReturn) {
-            history.push(`/form/${params.id}`);
+            history.push(`/initialForm/${params.id}`);
         }
         if (btnContinue) {
             history.push(`/videoExp/${params.id}`);

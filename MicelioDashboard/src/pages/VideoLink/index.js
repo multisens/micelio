@@ -85,7 +85,7 @@ function VideoLink () {
                 <div className={'container'}>
                     <div>
                         <h2>
-                            Cria&ccedil;&atilde;o da p&aacute;gina de informa&ccedil;&otilde;es da V&iacute;deo-Aula.
+                            Cria&ccedil;&atilde;o da p&aacute;gina de informa&ccedil;&otilde;es da Videoaula.
                         </h2><br/>
                         <div>
                             <form name={'form01'} onSubmit={saveContent}>
