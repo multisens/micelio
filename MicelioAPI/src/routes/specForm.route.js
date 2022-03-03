@@ -5,7 +5,7 @@ const Router = express.Router();
 
 const specFormController = new SpecFormController();
 
-Router.get('/:experiment_id', specFormController.get)
+Router.get('/:experiment_id/:participant_id', specFormController.get)
 Router.post('/:experiment_id', specFormController.update);
 
 module.exports = Router;

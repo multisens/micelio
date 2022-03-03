@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
-import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 import './style.css';
 
 import Header from '../../components/Header';
@@ -14,6 +13,7 @@ function VideoExp () {
 
     const history = useHistory();
     const params = useParams();
+    const location = useLocation();
 
     const [btnReturn, setBtnReturn] = useState(false);
     const [btnContinue, setBtnContinue] = useState(false);
@@ -21,6 +21,13 @@ function VideoExp () {
     const [videoLink, setVideoLink] = useState('');
     const [videoText, setVideoText] = useState('');
 
+    const [partId, setPartId] = useState();
+    const [groupId, setGroupId] = useState();
+
+    useEffect(() => {
+        setPartId(location.state.params.partId);
+        setGroupId(location.state.params.groupId);
+    }, [location.state.params])
 
     useEffect(() => {
         getVideoLink();
@@ -46,10 +53,16 @@ function VideoExp () {
 
     const workFlow = () => {
         if (btnReturn) {
-            history.push(`/gameExp/${params.id}`);
+            history.push(`/initialForm/${params.id}`, {params: partId});
         }
         if (btnContinue) {
-            history.push(`/specForm/${params.id}`);
+            if(groupId === "1"){
+                history.push(`/specForm/${params.id}`, {params: partId});
+            } else if (groupId === "2") {
+                history.push(`/gameExp/${params.id}`, {params: {partId, groupId}});
+            } else {
+                history.push(`/finalForm/${params.id}`, {params: partId});
+            }
         }
     }
 

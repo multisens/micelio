@@ -78,7 +78,7 @@ function Form () {
                                         <div className={'child'}>Declaro ter compreendido como será minha participação e manifesto meu livre consentimento em participar.</div>
                                 </div>
                                 <br/><br/>
-                                <button className={'primary'}>Continuar</button>
+                                <button className={'primary'}>Confirmar</button>
                             </form>
                         </div>
                     </div>

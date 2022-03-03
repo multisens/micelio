@@ -5,7 +5,7 @@ const Router = express.Router();
 
 const initialFormController = new InitialFormController();
 
-Router.get('/:experiment_id', initialFormController.get)
+Router.get('/:experiment_id/:participant_id', initialFormController.get)
 Router.post('/:experiment_id', initialFormController.update);
 
 module.exports = Router;

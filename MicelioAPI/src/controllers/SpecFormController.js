@@ -5,7 +5,7 @@ class SpecFormController {
 
     async get(request, response) {
 
-        const {experiment_id} = request.params;
+        const {experiment_id, participant_id} = request.params;
 
         if(!experiment_id){
             return response.status(400).json({error: "Missing experiment id"});
@@ -24,20 +24,40 @@ class SpecFormController {
         const form_id = form.form_id;
 
         const questions = await knex('Questions as q')
-                                 .select('q.txt_question')
+                                 .select('q.txt_question', 'q.question_id')
                                  .where('q.form_id', form_id)
                                  .orderBy('q.ind_order')
 
         const questionsAux = JSON.parse(JSON.stringify(questions));
 
         let questionsArray = [];
+        let answersArray = [];
 
         if (questions) {
             for (let i=0;i<questionsAux.length;i++) {
                 questionsArray.push(questionsAux[i].txt_question)
+
+                const answers = await knex('Answers as a')
+                                     .select('a.txt_answer')
+                                     .where('a.participant_id', participant_id)
+                                     .andWhere('a.question_id', questionsAux[i].question_id)
+                                     .first();
+
+                if(!answers){
+                    answersArray.push('');
+                } else {
+                    answersArray.push(answers.txt_answer);
+                }
             }
         }
-        response.json(questionsArray);
+
+        const {group_id} = await knex('Participant as p')
+                               .select('p.group_id')
+                               .where('p.participant_id', participant_id)
+                               .andWhere('p.experiment_id', experiment_id)
+                               .first();
+
+        response.json({questions: questionsArray, answers: answersArray, groupId: group_id});
     }
 
     async update(request, response) {

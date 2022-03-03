@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import './style.css';
 
 import Header from '../../components/Header';
@@ -15,49 +16,68 @@ function FinalForm () {
 
     const history = useHistory();
     const params = useParams();
+    const location = useLocation();
 
     const [btnReturn, setBtnReturn] = useState(false);
     const [btnContinue, setBtnContinue] = useState(false)
 
     const [questionList, setQuestionList] = useState([]);
-
     const [answerList, setAnswerList] = useState([]);
 
+    const [partId, setPartId] = useState();
+    const [groupId, setGroupId] = useState();
+
     useEffect(() => {
-        Api.get(`/finalForm/${params.id}`).then(response => {
-            const questions = response.data;
+        setPartId(location.state.params);
+    }, [location.state.params])
+
+    useEffect(() => {
+        getLists();
+    }, [])
+
+    const getLists = () => {
+        Api.get(`/finalForm/${params.id}/${location.state.params}`).then(response => {
+            const questions = response.data.questions;
+            const answers = response.data.answers;
             if (questions.length < 1) {
                 setQuestionList(['']);
                 setAnswerList(['']);
             } else {
-                setQuestionList(response.data);
-                setAnswerList(['']);
+                setQuestionList(questions);
+                setAnswerList(answers);
             }
+            setGroupId(response.data.groupId);
         });
-    }, [params.id])
+    }
 
     const saveContent = async event => {
         event.preventDefault();
 
         try {
-            for (let i=0;i<questionList.length;i++) {
+            for (let i=0;i<answerList.length;i++) {
                 const response = await Api.post(`/finalForm/${params.id}`, {
-                    question: questionList[i],
-                    order: i
+                    answer: answerList[i],
+                    order: i,
+                    participant_id: partId
                 })
 
                 if(!response.data.ok){
                     toast.error(`Não foi possível salvar os dados informados. Tente novamente`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
                 }
             }
-
-
         }catch (e) {
             toast.error(`Não foi possível salvar os dados informados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
         }
 
         if (btnReturn) {
-            history.push(`/specForm/${params.id}`);
+            if (groupId === "1") {
+                history.push(`/specForm/${params.id}`, {params: partId});
+            } else
+            if (groupId === "3") {
+                history.push(`/videoExp/${params.id}`, {params: {partId, groupId}});
+            } else {
+                history.push(`/gameExp/${params.id}`, {params: {partId, groupId}});
+            }
         }
         if (btnContinue) {
             history.push(`/thanks`);
@@ -67,7 +87,7 @@ function FinalForm () {
     const changeAnswer = (value, index) => {   
         let newArrayAnswer = answerList;
         newArrayAnswer[index] = value;
-        setQuestionList(newArrayAnswer);
+        setAnswerList(newArrayAnswer);
     }
 
     return (

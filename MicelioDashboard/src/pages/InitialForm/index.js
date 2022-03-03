@@ -18,31 +18,36 @@ function InitialForm () {
     const params = useParams();
     const location = useLocation();
 
-    const [btnReturn, setBtnReturn] = useState(false);
     const [btnContinue, setBtnContinue] = useState(false)
 
     const [questionList, setQuestionList] = useState([]);
-
     const [answerList, setAnswerList] = useState([]);
 
     const [partId, setPartId] = useState();
+    const [groupId, setGroupId] = useState();
 
     useEffect(() => {
         setPartId(location.state.params);
     }, [location.state.params])
 
     useEffect(() => {
-        Api.get(`/initialForm/${params.id}`).then(response => {
-            const questions = response.data;
+        getLists();
+    }, [])
+
+    const getLists = () => {
+        Api.get(`/initialForm/${params.id}/${location.state.params}`).then(response => {
+            const questions = response.data.questions;
+            const answers = response.data.answers;
             if (questions.length < 1) {
                 setQuestionList(['']);
                 setAnswerList(['']);
             } else {
-                setQuestionList(response.data);
-                setAnswerList(['']);
+                setQuestionList(questions);
+                setAnswerList(answers);
             }
+            setGroupId(response.data.groupId);
         });
-    }, [params.id])
+    }
 
     const saveContent = async event => {
         event.preventDefault();
@@ -63,11 +68,12 @@ function InitialForm () {
             toast.error(`Não foi possível salvar os dados informados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
         }
 
-        if (btnReturn) {
-            history.push(`/form/${params.id}`, {params: partId});
-        }
         if (btnContinue) {
-            history.push(`/gameExp/${params.id}`);
+            if(groupId === "4"){
+                history.push(`/gameExp/${params.id}`, {params: {partId, groupId}});
+            } else {
+                history.push(`/videoExp/${params.id}`, {params: {partId, groupId}});
+            }
         }
     }
 
@@ -100,7 +106,6 @@ function InitialForm () {
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td className={'b-return'}><button className={'primary'} onClick={() => {setBtnReturn(true)}}>Retornar</button></td>
                                                 <td className={'b-continue'}><button className={'primary'} onClick={() => {setBtnContinue(true)}}>Seguir</button></td>
                                             </tr>
                                         </tbody>
