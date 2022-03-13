@@ -60,7 +60,7 @@ const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingle
             <option value=''>Escolha uma sessão:</option>
             {
               visualizations.map(v => (
-                  <option value={v.visualization_id}>{v.name}</option>
+                  <option key={v.visualization_id} value={v.visualization_id}>{v.name}</option>
               ))
             }
           </Select>
