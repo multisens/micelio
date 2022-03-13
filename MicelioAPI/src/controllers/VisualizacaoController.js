@@ -17,10 +17,10 @@ class VisualizacaoController {
     const {game_id} = request.params;
 
     try{
-      const visualization = await knex('Visualization')
+      const visualization = await knex('visualization')
       .select("*")
       .where('user_id',user_id)
-      .andWhere('game_id',game_id).first();
+      .andWhere('game_id',game_id);
 
       if(!visualization){
         return response.status(400).json({error: 'Cannot get visualization, try again later'});

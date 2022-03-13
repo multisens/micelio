@@ -7,6 +7,7 @@ class UserController {
 
   async get(request, response) {
     const {miceliotoken} = request.cookies
+    console.log(miceliotoken)
 
     if (!miceliotoken) {
       return response.status(401).send()

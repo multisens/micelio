@@ -39,7 +39,7 @@ function Sign() {
       history.push('/home');
 
     }catch (e) {
-      const msg = e.response ? e.response.data.error : 'Houve um erro na comunicação. Por favor, tente novamente.'
+      const msg = e.response ? e.response?.data.error : 'Houve um erro na comunicação. Por favor, tente novamente.'
       alert(msg);
     }
   }

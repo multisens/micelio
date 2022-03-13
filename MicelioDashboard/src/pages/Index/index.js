@@ -28,8 +28,8 @@ function Index() {
 
       history.push('/home')
     }catch (e) {
-
-      toast.error(e.response.data.error)
+      const msg = e.response ? e.response.data.error : 'Houve um erro ao entrar. Por favor, tente novamente.'
+      toast.error(msg)
     }
   }
 

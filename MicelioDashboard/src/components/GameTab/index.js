@@ -10,11 +10,38 @@ const tabSelectedStyle = {bg: '#2A9D8F', color: 'white', border: '2px solid #bfb
 const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingleSessionName }) => {
 
   const [visualizationConfig, setVisualizationConfig] = useState({});
+  const [visualizations, setVisualizations] = useState([])
+  const [currentVisualization, setCurrentVisualization] = useState('')
 
-  useEffect( async () => {
-    const response = await Api.get(`/visualization/${gameId}`);
-    setVisualizationConfig(JSON.parse(response.data.config));
+  useEffect( () => {
+    getVisualizations()
   }, []);
+
+  const getVisualizations = async () => {
+    try {
+      const response = await Api.get(`/visualization/${gameId}`);
+      // setVisualizationConfig(response.data.config);
+      setVisualizations(response.data)
+    }catch (e) {
+      console.error(e.response)
+    }
+  }
+
+  const drawCurrentVisualization = (e) => {
+    const currentVisualizationId = e.target.value
+    setCurrentVisualization(currentVisualizationId)
+
+    const visualization = visualizations.filter(visualization => {
+      return visualization.visualization_id == currentVisualizationId
+    })
+
+    if(!visualization.length) {
+      setVisualizationConfig({})
+      return
+    }
+
+    setVisualizationConfig(JSON.parse(visualization[0].config))
+  }
 
   return (
     <Tabs variant='enclosed' colorScheme={"green"}>
@@ -29,14 +56,17 @@ const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingle
         </TabPanel>
 
         <TabPanel>
-          <Select maxWidth={450}>
-            <option value='option0'>Escolha a sessão que deseja ver</option>
-            <option value='option1'>Player: mhbarros  - 10/06/2021</option>
-            <option value='option2'>Player: igdark    - 10/06/2021</option>
+          <Select maxWidth={450} onChange={drawCurrentVisualization} value={currentVisualization}>
+            <option value=''>Escolha uma sessão:</option>
+            {
+              visualizations.map(v => (
+                  <option value={v.visualization_id}>{v.name}</option>
+              ))
+            }
           </Select>
           <br/>
           {
-            visualizationConfig.graphs !== undefined &&
+            (visualizationConfig && visualizationConfig?.graphs !== undefined) &&
             <Visualization
               props={visualizationConfig}
               component_id="single"
