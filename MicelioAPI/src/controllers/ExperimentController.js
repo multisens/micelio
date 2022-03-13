@@ -80,7 +80,7 @@ class ExperimentController {
 
             const experiment = await trx('Experiment').insert(experimentData);
 
-            const has_exp_permission_id = await idGenerator('hasExpPermission', 'has_exp_permission');
+            const has_exp_permission_id = await idGenerator('HasExpPermission', 'has_exp_permission');
 
             const permissionData = {
                 has_exp_permission_id,
@@ -88,7 +88,7 @@ class ExperimentController {
                 experiment_id: experimentId,
             }
 
-            const expPermission = await trx('hasExpPermission').insert(permissionData);
+            const expPermission = await trx('HasExpPermission').insert(permissionData);
 
             for(let i=1;i<=4;i++){
 
@@ -98,7 +98,7 @@ class ExperimentController {
                     group_id: i
                 }
 
-                const groupInsert = await trx('exp_group').insert(groupData);
+                const groupInsert = await trx('ExpGroup').insert(groupData);
 
                 if(!groupInsert){
                     await trx.rollback();

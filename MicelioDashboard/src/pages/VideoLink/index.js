@@ -99,7 +99,9 @@ function VideoLink () {
                                               placeholder="Insira aqui as informações para a vídeo-aula..." value={newVideoText}
                                               onChange={e => {setNewVideoText(e.target.value)}}
                                     />
-                                </div><br/><br/>
+                                </div>
+                                <div>Utilize o coringa [LINK] para posicionar o lugar onde o link deve aparecer no texto.</div>
+                                <br/><br/>
                                 <table>
                                     <tbody>
                                         <tr>

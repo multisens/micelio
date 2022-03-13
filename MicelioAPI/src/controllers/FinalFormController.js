@@ -114,9 +114,9 @@ class FinalFormController {
                     return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
                 }
             } else {
-                const questionUpdate = await trx('Answers as a').where('a.answer_id', hasAnswer.answer_id).update('a.txt_answer', answer);
+                const answerUpdate = await trx('Answers as a').where('a.answer_id', hasAnswer.answer_id).update('a.txt_answer', answer);
 
-                if(questionUpdate){
+                if(answerUpdate){
                     await trx.commit();
                     return response.status(201).json({ok: true});
                 }

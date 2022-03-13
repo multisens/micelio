@@ -44,7 +44,8 @@ function SpecQuest () {
                 }
                 const response = await Api.post(`/specQuest/${params.id}`, {
                     question: questionList[i],
-                    order: i
+                    order: i,
+                    length: questionList.length
                 })
 
                 if(!response.data.ok){

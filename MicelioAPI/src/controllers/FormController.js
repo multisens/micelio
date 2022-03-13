@@ -44,7 +44,7 @@ class FormController {
 
         try{
             let count = 0;
-            const {group_id, num_part_total} = await knex('Exp_group')
+            const {group_id, num_part_total} = await knex('ExpGroup')
                                                     .select('group_id', 'num_part_total')
                                                     .orderBy(['num_part_total', { column: 'group_id', order: 'asc' }])
                                                     .first();
@@ -57,11 +57,11 @@ class FormController {
                 experiment_id
             }
 
-			const userInsert = await trx('participant').insert(userData);
+			const userInsert = await trx('Participant').insert(userData);
 
             count = num_part_total + 1;
 
-            const groupAdd = await trx('Exp_group').where('group_id', group_id).update('num_part_total', count);
+            const groupAdd = await trx('ExpGroup').where('group_id', group_id).update('num_part_total', count);
 
             if(userInsert && groupAdd){
                 await trx.commit();

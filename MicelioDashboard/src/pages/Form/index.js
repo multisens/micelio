@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
 import { useParams, useHistory } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown'
 import './style.css';
 
 import Header from '../../components/Header';
@@ -58,7 +59,9 @@ function Form () {
                 <div className={'container'}>
                     <div>
                         <div className="consent-term">
+                            <ReactMarkdown>
                                 {consentTerm}
+                            </ReactMarkdown>
                         </div>
                         <br/><br/>
                         <div>

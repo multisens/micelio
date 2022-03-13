@@ -44,7 +44,7 @@ class SpecQuestController {
     async update(request, response) {
 
         const {experiment_id} = request.params;
-        const {question, order} = request.body;
+        const {question, order, length} = request.body;
         const selected = 'E';
 
         if(!experiment_id){
@@ -52,19 +52,20 @@ class SpecQuestController {
         }
 
         const form = await knex('Form as f')
-                             .where('f.experiment_id', experiment_id)
-                             .andWhere('f.ind_stage', selected)
-                             .select('f.form_id')
-                             .first();
-
-        const trx = await knex.transaction();
+                          .where('f.experiment_id', experiment_id)
+                          .andWhere('f.ind_stage', selected)
+                          .select('f.form_id')
+                          .first();
 
         try{
-            const form_id_gen = await idGenerator('form');
+            const form_id_gen = await idGenerator('Form');
 
             let form_id = '';
 
             if(!form){
+
+                const trx = await knex.transaction();
+
                 form_id = form_id_gen;
 
                 const formData = {
@@ -73,14 +74,14 @@ class SpecQuestController {
                     experiment_id
                 };
 
-                const formInsert = await trx('form').insert(formData);
+                const formInsert = await trx('Form').insert(formData);
 
                 if(formInsert){
                     await trx.commit();
                 }
                 else{
                     await trx.rollback();
-                    return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+                    return response.status(400).json({error: 'Cannot insert the forms.'});
                 }
             }
 
@@ -95,7 +96,25 @@ class SpecQuestController {
             
             const questionAuxList = JSON.parse(JSON.stringify(questions_aux));
 
+            // Excluir questoes deletadas da tela
+            if (questionAuxList.length > length && order === 0) {
+                const trx = await knex.transaction();
+
+                const questionsDelete = await trx('Questions').delete().where('ind_order', '>=', length).andWhere('form_id', form_id);
+
+                if(questionsDelete){
+                    await trx.commit();
+                }
+                else{
+                    await trx.rollback();
+                    return response.status(400).json({error: `Cannot update the question ${order}`});
+                }
+            }
+
             if (!questionAuxList[order]) {
+
+                const trx = await knex.transaction();
+
                 const question_id = await idGenerator('Questions', 'question');
 
                 const questionData = {
@@ -114,10 +133,13 @@ class SpecQuestController {
                 }
                 else{
                     await trx.rollback();
-                    return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+                    return response.status(400).json({error: `Cannot insert the question ${order}`});
                 }
             } else
             if (questionAuxList[order].ind_order === order) {
+
+                const trx = await knex.transaction();
+
                 const questionUpdate = await trx('Questions as q').where('q.ind_order', order).andWhere('q.form_id', form_id).update('q.txt_question', question);
 
                 if(questionUpdate){
@@ -126,13 +148,12 @@ class SpecQuestController {
                 }
                 else{
                     await trx.rollback();
-                    return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+                    return response.status(400).json({error: `Cannot update the question ${order}`});
                 }
-            } 
+            }
         }
         catch(err){
-            await trx.rollback();
-            return response.status(400).json({error: 'Cannot update the game page, try again later'});
+            return response.status(400).json({error: 'Something went wrong, try again later'});
         }
     }
 }

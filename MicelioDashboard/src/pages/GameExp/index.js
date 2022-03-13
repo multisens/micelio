@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
 import { useHistory, useParams, useLocation } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown'
 import './style.css';
 
 import Header from '../../components/Header';
@@ -74,7 +75,9 @@ function GameExp () {
                         <div>
                             <form name={'form01'} onSubmit={workFlow}>
                                 <div className={'game-page'} id={'game-page'}>
-                                    {gameLink + ' - ' + gameText}
+                                    <ReactMarkdown>
+                                        {gameText.replace('[LINK]', gameLink)}
+                                    </ReactMarkdown>
                                 </div><br/><br/>
                                 <table>
                                     <tbody>

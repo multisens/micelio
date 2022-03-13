@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
 import { useHistory, useParams, useLocation } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import './style.css';
 
 import Header from '../../components/Header';
@@ -76,7 +77,9 @@ function VideoExp () {
                         <div>
                             <form name={'form01'} onSubmit={workFlow}>
                                 <div className={'video-page'} id={'video-page'}>
-                                    {videoLink + ' - ' + videoText}
+                                    <ReactMarkdown>
+                                        {videoText.replace('[LINK]', videoLink)}
+                                    </ReactMarkdown>
                                 </div><br/><br/>
                                 <table>
                                     <tbody>

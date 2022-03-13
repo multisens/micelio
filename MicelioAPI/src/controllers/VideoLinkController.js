@@ -7,7 +7,7 @@ class VideoLinkController {
 
         const {experiment_id} = request.params;
 
-        const video = await knex('Video_Stagetwo as v')
+        const video = await knex('VideoStagetwo as v')
                          .select('v.txt_video_link', 'v.txt_video_page')
                           .where('v.experiment_id', experiment_id)
                           .first();
@@ -29,7 +29,7 @@ class VideoLinkController {
             return response.status(400).json({error: "Missing link and text"});
         }
 
-        const video = await knex('Video_Stagetwo as v')
+        const video = await knex('VideoStagetwo as v')
                             .select('v.txt_video_link', 'v.txt_video_page')
                             .where('v.experiment_id', experiment_id)
                             .first();
@@ -45,7 +45,7 @@ class VideoLinkController {
 
         try{
             if(!video) {
-                const video_page_id = await idGenerator('Video_Stagetwo', 'video_page');
+                const video_page_id = await idGenerator('VideoStagetwo', 'video_page');
 
                 const videoData = {
                     video_page_id,
@@ -54,7 +54,7 @@ class VideoLinkController {
                     experiment_id
                 };
 
-                const videoChange = await trx('Video_Stagetwo').insert(videoData);
+                const videoChange = await trx('VideoStagetwo').insert(videoData);
 
                 if(videoChange){
                     await trx.commit();
@@ -65,7 +65,7 @@ class VideoLinkController {
                     return response.status(400).json({error: 'Cannot update the video page, check the information sent'});
                 }
             } else {
-                const videoChange = await trx('Video_Stagetwo').where('experiment_id', experiment_id).update({txt_video_link: newVideoLink, txt_video_page: newVideoText});
+                const videoChange = await trx('VideoStagetwo').where('experiment_id', experiment_id).update({txt_video_link: newVideoLink, txt_video_page: newVideoText});
 
                 if(videoChange){
                     await trx.commit();

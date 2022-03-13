@@ -102,7 +102,9 @@ function GameLink () {
                                               placeholder="Insira aqui o texto sobre seu jogo..." value={newGameText}
                                               onChange={e => {setNewGameText(e.target.value)}}
                                     />
-                                </div><br/><br/>
+                                </div>
+                                <div>Utilize o coringa [LINK] para posicionar o lugar onde o link deve aparecer no texto.</div>
+                                <br/><br/>
                                 <table>
                                     <tbody>
                                         <tr>

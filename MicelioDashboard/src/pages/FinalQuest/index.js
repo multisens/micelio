@@ -44,7 +44,8 @@ function FinalQuest () {
                 }
                 const response = await Api.post(`/finalQuest/${params.id}`, {
                     question: questionList[i],
-                    order: i
+                    order: i,
+                    length: questionList.length
                 })
 
                 if(!response.data.ok){
