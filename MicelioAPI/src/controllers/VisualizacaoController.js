@@ -17,7 +17,7 @@ class VisualizacaoController {
     const {game_id} = request.params;
 
     try{
-      const visualization = await knex('visualization')
+      const visualization = await knex('Visualization')
       .select("*")
       .where('user_id',user_id)
       .andWhere('game_id',game_id);
