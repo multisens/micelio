@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Select } from "@chakra-ui/react"
+import {Tabs, TabList, TabPanels, Tab, TabPanel, Select, Box} from "@chakra-ui/react"
 
 import Api from "../../services/Api";
 import SessionGroupList from "../../components/SessionGroupList";
@@ -12,6 +12,8 @@ const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingle
   const [visualizationConfig, setVisualizationConfig] = useState({});
   const [visualizations, setVisualizations] = useState([])
   const [currentVisualization, setCurrentVisualization] = useState('')
+  const [currentSession, setCurrentSession] = useState('')
+  const [currentGroup, setCurrentGroup] = useState('')
 
   useEffect( () => {
     getVisualizations()
@@ -56,37 +58,64 @@ const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingle
         </TabPanel>
 
         <TabPanel>
-          <Select maxWidth={450} onChange={drawCurrentVisualization} value={currentVisualization}>
-            <option value=''>Escolha uma sessão:</option>
+          <Select bg={'white'} maxWidth={450} onChange={drawCurrentVisualization} value={currentVisualization}>
+            <option value=''>Escolha uma visualização:</option>
             {
               visualizations.map(v => (
                   <option key={v.visualization_id} value={v.visualization_id}>{v.name}</option>
               ))
             }
           </Select>
-          <br/>
           {
-            (visualizationConfig && visualizationConfig?.graphs !== undefined) &&
-            <Visualization
-              props={visualizationConfig}
-              component_id="single"
-            />
+            currentVisualization && (
+                  <Select mt={2} bg={'white'} maxWidth={450} value={currentSession} onChange={e => {setCurrentSession(e.target.value)}}>
+                    <option value=''>Escolha uma sessão:</option>
+                    <option value={'1'}>02/03/2022 20:05 - iguinho</option>
+                    <option value={'2'}>02/03/2022 20:32 - mhbarros</option>
+                    <option value={'3'}>03/03/2022 22:28 - sargeirolucas</option>
+                  </Select>
+              )
+          }
+
+          {
+            (currentSession && visualizationConfig && visualizationConfig?.graphs !== undefined) &&
+            <Box mt={10}>
+              <Visualization
+                  props={visualizationConfig}
+                  component_id="single"
+              />
+            </Box>
           }
         </TabPanel>
 
         <TabPanel>
-          <Select maxWidth={300}>
-            <option value='option0' disabled={true}>Escolha o grupo de sessões</option>
-            <option value='option1'>45854</option>
-            <option value='option2'>46229</option>
+          <Select bg={'white'} maxWidth={450} onChange={drawCurrentVisualization} value={currentVisualization}>
+            <option value=''>Escolha uma visualização:</option>
+            {
+              visualizations.map(v => (
+                  <option key={v.visualization_id} value={v.visualization_id}>{v.name}</option>
+              ))
+            }
           </Select>
-          <br/>
+
           {
-            visualizationConfig.graphs !== undefined &&
-            <Visualization
-              props={visualizationConfig}
-              component_id="group"
-            />
+            currentVisualization && (
+                  <Select mt={2} value={currentGroup} onChange={e => setCurrentGroup(e.target.value)} maxWidth={450} bg={'white'}>
+                    <option value=''>Escolha o grupo de sessões</option>
+                    <option value='2'>45854</option>
+                    <option value='3'>46229</option>
+                  </Select>
+              )
+          }
+
+          {
+            (visualizationConfig.graphs !== undefined && currentGroup) &&
+            <Box mt={10}>
+              <Visualization
+                  props={visualizationConfig}
+                  component_id="group"
+              />
+            </Box>
           }
         </TabPanel>
 
