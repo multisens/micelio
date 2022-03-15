@@ -88,7 +88,7 @@ function Experiment() {
   }
 
   const openSharePopup = experiment_id => {
-    setShareLink(`http://localhost:3000/micelio/form/${experiment_id}`); // link está cravado, desculpa por isso, foi só para testes
+    setShareLink(`https://cursa.eic.cefet-rj.br/micelio/form/${experiment_id}`); // link está cravado, desculpa por isso, foi só para testes
     setIsSharePopupOpen(true);
   }
 
