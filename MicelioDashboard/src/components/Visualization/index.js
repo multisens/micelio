@@ -3,9 +3,9 @@ import { useEffect } from "react"
 import Api from "../../services/Api"
 import { getPopulation } from "../../helper/Visualization"
 
-const Visualization = ({props, component_id}) => {
+const Visualization = ({props, component_id, session, game_token}) => {
 
-  useEffect(async () => {
+  useEffect(() => {
     const activitiesList = props.graphs[0].activities;
     const activitiesHeatMapList = props.graphs[3].activities;
     const agents = props.graphs[4].agents;
@@ -20,7 +20,12 @@ const Visualization = ({props, component_id}) => {
     const vl = window.vl
     const width = 800
 
-    await Api.get("/activity").then((response) => {
+    const params = new URLSearchParams()
+    params.set('session_id', session)
+
+    Api.get("/activity", {params, headers: {
+      token: game_token
+      }}).then((response) => {
       //controle de dados
       var populationData = getPopulation(
         response.data,

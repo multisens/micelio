@@ -11,12 +11,14 @@ const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingle
 
   const [visualizationConfig, setVisualizationConfig] = useState({});
   const [visualizations, setVisualizations] = useState([])
+  const [sessionList, setSessionList] = useState([]);
   const [currentVisualization, setCurrentVisualization] = useState('')
   const [currentSession, setCurrentSession] = useState('')
   const [currentGroup, setCurrentGroup] = useState('')
 
   useEffect( () => {
     getVisualizations()
+    getSessions()
   }, []);
 
   const getVisualizations = async () => {
@@ -25,6 +27,20 @@ const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingle
       // setVisualizationConfig(response.data.config);
       setVisualizations(response.data)
     }catch (e) {
+      console.error(e.response)
+    }
+  }
+
+  const getSessions = async () => {
+    try {
+      const response = await Api.get('/session', {
+        headers: {
+          token: gameToken
+        }
+      });
+      setSessionList(response.data)
+
+    } catch (e) {
       console.error(e.response)
     }
   }
@@ -70,9 +86,11 @@ const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingle
             currentVisualization && (
                   <Select mt={2} bg={'white'} maxWidth={450} value={currentSession} onChange={e => {setCurrentSession(e.target.value)}}>
                     <option value=''>Escolha uma sessão:</option>
-                    <option value={'1'}>02/03/2022 20:05 - iguinho</option>
-                    <option value={'2'}>02/03/2022 20:32 - mhbarros</option>
-                    <option value={'3'}>03/03/2022 22:28 - sargeirolucas</option>
+                    {
+                      sessionList.length && sessionList.map(session => (
+                          <option value={session.session_id}>{new Date(session.date).toLocaleDateString()} ({session.start_time}) - {session.name}</option>
+                        ))
+                    }
                   </Select>
               )
           }
@@ -81,6 +99,8 @@ const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingle
             (currentSession && visualizationConfig && visualizationConfig?.graphs !== undefined) &&
             <Box mt={10}>
               <Visualization
+                  session={currentSession}
+                  game_token={gameToken}
                   props={visualizationConfig}
                   component_id="single"
               />

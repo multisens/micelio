@@ -14,6 +14,6 @@ Router.post(
   activityController.create
 )
 
-Router.get("/", activityController.index)
+Router.get("/", TokenMiddleware, activityController.index)
 
 module.exports = Router
