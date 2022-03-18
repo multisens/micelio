@@ -33,8 +33,11 @@ class ActivityController {
         .leftJoin('ActivityEntities as entities', 'entities.activity_id', '=', 'Activity.activity_id')
         .leftJoin('Entity as entity', 'entity.entity_id', 'entities.entity_id')
         .leftJoin('Agent as agent', 'agent.agent_id', 'agents.agent_id')
+        .where('Activity.session_id', session.session_id)
 
     const activityStruct = {}
+
+    console.log(activities.length)
 
     activities.forEach(activity => {
       if(!activityStruct[activity.activity_id]) {
