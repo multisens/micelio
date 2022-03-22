@@ -9,6 +9,7 @@ import Game from './pages/Game';
 
 import {useAuth} from "./context/AuthContext";
 import Profile from "./pages/Profile";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 require('dotenv').config();
 
@@ -38,6 +39,7 @@ const Routes = () => {
       <Switch>
         <Route path={'/'} component={Index} exact/>
         <Route path={'/sign'} component={Sign}/>
+        <Route path={'/privacy'} component={PrivacyPolicy} />
         <Redirect to={'/'} />
       </Switch>
     </BrowserRouter>

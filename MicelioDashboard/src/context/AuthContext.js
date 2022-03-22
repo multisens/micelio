@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import Api from "../services/Api";
 
-const AuthContext = createContext('auth')
+const AuthContext = createContext({})
 
 export const AuthProvider = ({children}) => {
 
@@ -13,7 +13,8 @@ export const AuthProvider = ({children}) => {
     Api.get('/user').then(() => {
       setAuth(true)
       setIsLoading(false)
-    }).catch(() => {
+
+    }).catch((error) => {
       setIsLoading(false)
     })
 
