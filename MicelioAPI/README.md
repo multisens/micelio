@@ -6,11 +6,8 @@ O módulo MicelioAPI do Micélio é responsável por gerenciar os dados da plata
 
 ## Rotas
 
-O Micélio foi dividido em 6 rotas principais, considerando o modelo de dados criado para API. Cada uma das rotas é acessada em uma determinada fase, desde o cadastro de um usuário, passando pelo cadastro de um jogo na plataforma até a inserção de informações geradas nas sessões de um jogo. Cada fase de acesso da API pode ser definida pelos nomes abaixo:
+O Micélio foi dividido em 4 rotas principais, considerando o modelo de dados criado para API. Cada uma das rotas é acessada em uma determinada fase, desde cadastro de um dispositivo, passando pelo inicio de uma sessão, a inserção de informações geradas nas sessões de um jogo e o término de uma sessão . Cada fase de acesso da API pode ser definida pelos nomes abaixo:
 
-- Cadastro do Usuário;
-
-- Cadastro do Jogo;
 - Cadastro do Dispositivos;
 - Inicio da Sessão;
 - Inserção de Atividades;
@@ -18,103 +15,9 @@ O Micélio foi dividido em 6 rotas principais, considerando o modelo de dados cr
 
 
 
-As rotas de cadastro de usuários e jogos são rotas ecxclusivas da plataforma, ou seja, o desenvolvedor de um jogo não consegue acessar. Já as outras rotas estão disponíveis para o desenvolvedor desde que tenha as credenciais de acesso (token do jogo) . 
+As rotas disponíveis publicamente precisam de algumas chaves para validar o envio dos dados, essas chaves são representadas pelo token de um jogo e a identificação de um dispositivo. 
 
 
-
-### Cadastro do Usuário
-
-Essa rota é acessada apenas uma vez para cada usuário criado. Ela serve para cadastrar um usuário na plataforma que terá direito de registrar seus jogos.
-
-**Rota:** `/user`
-
-**Método:** POST
-
-**Corpo:**
-
-```json
-{
-    "username": "lucassargeiro",
-    "email": "meu@email.com",
-    "password": "my_password",
-    "confirmation_password": "my_password"
-}
-```
-
-Descrição:
-
-- `user` : nome que o usuário utilizará para entrar no sistema;
-- `password` : senha que o usuário utilizará para entrar no sistema.
-
-
-
-**Objeto gerado para banco:**
-
-```json
-{
-    "user_id": "us-8u937827",
-    "user": "lucassargeiro",
-    "password": "my_password"
-}
-```
-
-
-
-------
-
-### Cadastro do Jogo
-
-Essa rota é acessada apenas uma vez para cada jogo criado. Ela serve para cadastrar um jogo no banco e gerar a chave de acesso do jogo para API.
-
-**Rota:** `/game`
-
-**Método:** POST
-
-**Corpo:**
-
-```json
-{
-    "user_id": "us-8u937827",
-    "name": "nome_do_jogo",
-    "version": "versao_do_jogo"
-}
-```
-
-Descrição:
-
-- `user_id`: identificador do usuário que criou o jogo
-
-- `name` : nome do jogo;
-
-- `version` : versão do jogo.
-
-  
-
-**Objetos gerado para banco:**
-
-```json
-# TABELA Game ----------------------------------------------------------------------------------------------------------------------
-{
-    "game_id": "id0019293",
-    "token": "HVJHVADVSJA15D4S5DF1S5DF4S5AFDSD",
-    "name": "nome_do_jogo",
-    "version": "versao_do_jogo",
-}
-
-# TABELA HasPermission -------------------------------------------------------------------------------------------------------------
-{
-    "has_permission_id": "hp-89379473847",
-    "user_id": "us-8u937827",
-    "game_id": "id0019293",
-    "owner": true
-}
-```
-
-> Obs.: O `game_id` servirá para refenciar o jogo no banco de dados, enquanto o `token` servirá como chave para API, permitindo a mesma, identificar para qual jogo os dados estão sendo enviados.
-
-
-
-------
 
 ### Cadastro do Dispositivos
 
@@ -124,7 +27,7 @@ Essa rota é acessada toda vez que um novo dispositivo quer enviar informações
 
 **Método:** POST
 
-**Cabeçalho:log**
+**Cabeçalho (header):**
 
 ```json
 {
@@ -132,7 +35,7 @@ Essa rota é acessada toda vez que um novo dispositivo quer enviar informações
 }
 ```
 
-**Corpo:**
+**Corpo (body):**
 
 ```json
 {
@@ -146,7 +49,7 @@ Essa rota é acessada toda vez que um novo dispositivo quer enviar informações
 
 Descrição:
 
-- `device_id` : identificação unica do dispositivo (MAC);
+- `device_id` : identificação unica do dispositivo (ex: MAC);
 
 - `system` :  sistema operacional do dispositivo;
 
@@ -178,13 +81,13 @@ Descrição:
 
 ### Inicio da Sessão
 
-Essa rota é acessada toda vez que um jogador inicia um jogo em um dispoisitivo ja cadastrado. Ela serve para identificar a sessão de um jogo.
+Essa rota é acessada toda vez que um jogador inicia um jogo em um dispositivo já cadastrado. Ela serve para identificar a sessão de um jogo.
 
 **Rota:** `/session`
 
 **Método:** POST
 
-**Cabeçalho:**
+**Cabeçalho (header):**
 
 ```json
 {
@@ -193,7 +96,7 @@ Essa rota é acessada toda vez que um jogador inicia um jogo em um dispoisitivo 
 }
 ```
 
-**Corpo:**
+**Corpo  (body):**
 
 ```json
 {
@@ -252,7 +155,7 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
 
 **Método:** POST
 
-**Cabeçalho:**
+**Cabeçalho (header):**
 
 ```json
 {
@@ -261,7 +164,7 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
 }
 ```
 
-**Corpo:**
+**Corpo (body):**
 
 ```json
 {
@@ -278,7 +181,7 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
             "entity_id": "P-01",
             "name": "Plant",
             "position_x": 12354,
-            "position_x": 65498,
+            "position_y": 65498,
             "properties": {"health": 50},
             "role": "item plantado"
         }
@@ -289,7 +192,7 @@ Essa rota é acessada após a criação de uma sessão, após criar uma sessão 
             "name": "Sargeiro",
             "type": "NPC",
             "position_x": 12354,
-            "position_x": 65498,
+            "position_y": 65498,
             "properties":{"energia": 100},
             "role": "quem plantou"
         }
@@ -320,7 +223,7 @@ Descrição:
   - `entity_id` : identificador único da entidade;
   - `name` : nome da entidade, pode definir qual o tipo de objeto dele pertence;
   - `position_x` : posição no eixo X do objeto no momento da atividade (opcional);
-  - `position_x` : posição no eixo Y do objeto no momento da atividade (opcional);
+  - `position_y` : posição no eixo Y do objeto no momento da atividade (opcional);
   - `properties` : JSON convertido em string de atributos associados à entidade. Essas informações são informações relacionadas ao objeto, e é mantido o histórico de mudança ocorrido em cada atividade (opcional).
   - `role`: papel daquela entidade naquela atividade, define qual a participação do objeto naquele evento.
   
@@ -334,7 +237,7 @@ Descrição:
 
   - `position_x` : posição no eixo X do agente no momento da atividade (opicional);
 
-  - `position_x` : posição no eixo Y do agente no momento da atividade (opicional);
+  - `position_y` : posição no eixo Y do agente no momento da atividade (opicional);
 
   - `properties` :  JSON convertido em string de atributos associados ao agente. Essas informações são informações relacionadas ao agente, e é mantido os históricos de mudança ocorridos em cada atividade (opcional).
 
@@ -380,7 +283,7 @@ Descrição:
 {
     "entity_id": "P-01",
     "position_x": 12354,
-    "position_x": 65498
+    "position_y": 65498
 }        
 # TABELA ActivityEntities -----------------------------------------------------------------------------------------------------------
 {
@@ -410,7 +313,7 @@ Descrição:
 {
     "agent_id": "A-01",
     "position_x": 12354,
-    "position_x": 65498,
+    "position_y": 65498,
 }
 ```
 
@@ -453,16 +356,68 @@ Descrição:
 
 
 
+
+
 ## Códigos de Erro
 
 Com o objetivo de facilitar o entendimento de uma requisição mal sucessida alguns códigos de erro foram criados. A descrição de cada um deles e uma breve solução podem ser encontrados abaixo:
 
 
 
-| Código | Status Code | Descrição                                                    | Solução                                                      |
-| ------ | :---------: | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| D-001  |     401     | The device information is missing.                           | Verifique se a informação de identificação do dispositivo `device_id` está sendo passada no cabeçalho da requisição. |
-| D-002  |     404     | The device information is wrong. Make sure you have resgistered the device before send any information. | Verifique se o dispositivo foi cadastrado corretamente, pois a informação não está sendo encontrada no banco. |
-| T-001  |     401     | You dont have game permissions to send a request.            | Verifique se a chave da API `token` está sendo passada no cabeçalho da requisição. |
-| T-002  |     401     | You dont have a valid key to send a request.                 | Verifique se a chave passada na requisição está correta, pois a mesma não está sendo encontrada no banco. |
-| T-003  |     400     | Cannot validate your token.                                   | Verifique se o token enviado está correto.                   |
+#### D-001
+
+**Status:** 401
+
+**Descrição:** The device information is missing.
+
+**Solução:** Verifique se a informação de identificação do dispositivo `device_id` está sendo passada no cabeçalho da requisição.
+
+
+
+#### D-002
+
+**Status:** 404
+
+**Descrição: **The device information is wrong. Make sure you have resgistered the device before send any information.
+
+**Solução:** Verifique se o dispositivo foi cadastrado corretamente, pois a informação não está sendo encontrada no banco.
+
+
+
+#### T-001
+
+**Status:** 401
+
+**Descrição:** You dont have game permissions to send a request.
+
+**Solução:** Verifique se a chave da API `token` está sendo passada no cabeçalho da requisição.
+
+
+
+#### T-002
+
+**Status:** 401
+
+**Descrição: **You dont have a valid key to send a request.
+
+**Solução:** Verifique se a chave passada na requisição está correta, pois a mesma não está sendo encontrada no banco.
+
+
+
+#### T-003
+
+**Status:** 400
+
+**Descrição:**  Cannot validate your token.
+
+**Solução:**   Verifique se o token enviado está correto.
+
+
+
+
+
+# Subindo uma Instância do Micélio API
+
+
+
+[WIP]
