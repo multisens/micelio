@@ -428,7 +428,7 @@ npm install
 
 ### Configuração do ambiente
 Na pasta raiz, copie o arquivo .env.example e crie um novo chamado `.env`. Nesse novo arquivo, preencha as variáveis de ambiente necessárias para a execução do projeto, de acordo com a seguinte descrição:
-- ENV - Nome do ambiente
+- ENV - Nome do ambiente (dev|prod)
 - HTTP_PORT - Porta onde o serviço será executado
 - JWT_SECRET - Hash de encriptação do JWT
 - DATABASE_* - Variáveis de configuração de acesso ao banco de dados
