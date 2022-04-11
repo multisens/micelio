@@ -418,6 +418,32 @@ Com o objetivo de facilitar o entendimento de uma requisição mal sucessida alg
 
 # Subindo uma Instância do Micélio API
 
+Para iniciar uma versão de desenvolvimento do MicelioAPI, é necessário possuir o *NodeJS* e o banco de dados *MySql* instalado em sua máquina
 
+### Instalar as dependências
+Na pasta raiz do MicelioAPI, execute:
+```
+npm install
+```
 
-[WIP]
+### Configuração do ambiente
+Na pasta raiz, copie o arquivo .env.example e crie um novo chamado `.env`. Nesse novo arquivo, preencha as variáveis de ambiente necessárias para a execução do projeto, de acordo com a seguinte descrição:
+- ENV - Nome do ambiente
+- HTTP_PORT - Porta onde o serviço será executado
+- JWT_SECRET - Hash de encriptação do JWT
+- DATABASE_* - Variáveis de configuração de acesso ao banco de dados
+
+### Configuração do banco de dados
+1. Crie um banco de dados no MySql chamado "micelio"
+2. Execute a SQL de criação de tabelas contida na pasta Database/Mysql/criar_tabelas.sql
+3. Execute a SQL de atualização contida na pasta Database/Mysql/updates/00_incluiPositionZCriaVisualizacao.sql
+
+### Iniciando o projeto
+Com tudo configurado, para executar a instância, basta rodar o seguinte comando na pasta MicelioAPI:
+
+```
+npm run dev
+```
+
+### Criação do banco de dados
+No MySql, 
