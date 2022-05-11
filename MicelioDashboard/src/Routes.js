@@ -11,6 +11,7 @@ import ExpDetails from './pages/ExpDetails';
 import ConsentTerm from './pages/ConsentTerm';
 import GameLink from './pages/GameLink';
 import GameQuest from './pages/GameQuest';
+import GameForm from './pages/GameForm';
 import VideoLink from './pages/VideoLink';
 import InitialQuest from './pages/InitialQuest';
 import SpecQuest from './pages/SpecQuest';
@@ -47,6 +48,7 @@ const Routes = () => {
           <Route path={'/consentTerm/:id'} component={ConsentTerm}/>
           <Route path={'/gameLink/:id'} component={GameLink}/>
           <Route path={'/gameQuest/:id'} component={GameQuest}/>
+          <Route path={'/gameForm/:id'} component={GameForm}/>
           <Route path={'/videoLink/:id'} component={VideoLink}/>
           <Route path={'/initialQuest/:id'} component={InitialQuest}/>
           <Route path={'/specQuest/:id'} component={SpecQuest}/>
@@ -74,6 +76,7 @@ const Routes = () => {
         <Route path={'/specForm/:id'} component={SpecForm}/>
         <Route path={'/finalForm/:id'} component={FinalForm}/>
         <Route path={'/gameExp/:id'} component={GameExp}/>
+        <Route path={'/gameForm/:id'} component={GameForm}/>
         <Route path={'/videoExp/:id'} component={VideoExp}/>
         <Route path={'/thanks'} component={Thanks}/>
         <Redirect to={'/'} />

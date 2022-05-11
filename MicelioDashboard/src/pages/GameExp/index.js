@@ -21,6 +21,7 @@ function GameExp () {
 
     const [gameLink, setGameLink] = useState('');
     const [gameText, setGameText] = useState('');
+    const [hasGameForm, setHasGameForm] = useState('');
 
     const [partId, setPartId] = useState();
     const [groupId, setGroupId] = useState();
@@ -43,9 +44,11 @@ function GameExp () {
             if(!dataResponse.data.game){
                 setGameLink('');
                 setGameText('');
+                setHasGameForm('');
             } else {
                 setGameLink(game.txt_game_link);
                 setGameText(game.txt_game_page);
+                setHasGameForm(game.has_game_form);
             }
         } catch (e) {
             toast.error(`Não foi possível recuperar os dados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
@@ -61,7 +64,11 @@ function GameExp () {
             }
         }
         if (btnContinue) {
-            history.push(`/finalForm/${params.id}`, {params: partId});
+            if(hasGameForm === 'S') {
+                history.push(`/gameForm/${params.id}`, {params: partId});
+            } else {
+                history.push(`/finalForm/${params.id}`, {params: partId});
+            }
         }
     }
 

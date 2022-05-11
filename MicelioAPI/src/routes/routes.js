@@ -19,6 +19,7 @@ const FinalFormRoutes = require('./finalForm.route');
 const GameLinkRoutes = require('./gameLink.route');
 const VideoLinkRoutes = require('./videoLink.route');
 const GameQuestRoutes = require('./gameQuest.route');
+const GameFormRoutes = require('./gameForm.route');
 
 const TokenMiddleware = require('../middleware/TokenMiddleware');
 const DeviceIDMiddleware = require('../middleware/DeviceIDMiddleware');
@@ -45,5 +46,6 @@ Router.use('/finalForm', LogMiddleware, FinalFormRoutes);
 Router.use('/gameLink', LogMiddleware, GameLinkRoutes);
 Router.use('/videoLink', LogMiddleware, VideoLinkRoutes);
 Router.use('/gameQuest', LogMiddleware, GameQuestRoutes);
+Router.use('/gameForm', LogMiddleware, GameFormRoutes);
 
 module.exports = Router;
