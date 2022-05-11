@@ -10,6 +10,7 @@ import Experiment from './pages/Experiment';
 import ExpDetails from './pages/ExpDetails';
 import ConsentTerm from './pages/ConsentTerm';
 import GameLink from './pages/GameLink';
+import GameQuest from './pages/GameQuest';
 import VideoLink from './pages/VideoLink';
 import InitialQuest from './pages/InitialQuest';
 import SpecQuest from './pages/SpecQuest';
@@ -45,6 +46,7 @@ const Routes = () => {
           <Route path={'/expDetails/:id'} component={ExpDetails}/>
           <Route path={'/consentTerm/:id'} component={ConsentTerm}/>
           <Route path={'/gameLink/:id'} component={GameLink}/>
+          <Route path={'/gameQuest/:id'} component={GameQuest}/>
           <Route path={'/videoLink/:id'} component={VideoLink}/>
           <Route path={'/initialQuest/:id'} component={InitialQuest}/>
           <Route path={'/specQuest/:id'} component={SpecQuest}/>

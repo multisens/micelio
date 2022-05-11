@@ -8,7 +8,7 @@ class GameLinkController {
         const {experiment_id} = request.params;
 
         const game = await knex('GameStagetwo as g')
-                        .select('g.txt_game_link', 'g.txt_game_page')
+                        .select('g.txt_game_link', 'g.txt_game_page', 'g.has_game_form')
                          .where('g.experiment_id', experiment_id)
                          .first();
     
@@ -23,7 +23,7 @@ class GameLinkController {
             return response.status(400).json({error: "Missing experiment id"});
         }
 
-        let {newGameLink, newGameText} = request.body;
+        let {newGameLink, newGameText, newGameHasForm} = request.body;
 
         if (!newGameLink && !newGameText) {
             return response.status(400).json({error: "Missing link and text"});
@@ -51,6 +51,7 @@ class GameLinkController {
                     game_page_id,
                     txt_game_link: newGameLink,
                     txt_game_page: newGameText,
+                    has_game_form: newGameHasForm,
                     experiment_id
                 };
 
@@ -65,7 +66,7 @@ class GameLinkController {
                     return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
                 }
             } else {
-                const gameChange = await trx('GameStagetwo').where('experiment_id', experiment_id).update({txt_game_link: newGameLink, txt_game_page: newGameText});
+                const gameChange = await trx('GameStagetwo').where('experiment_id', experiment_id).update({txt_game_link: newGameLink, txt_game_page: newGameText, has_game_form: newGameHasForm});
 
                 if(gameChange){
                     await trx.commit();

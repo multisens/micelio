@@ -24,6 +24,9 @@ function GameLink () {
     const [gameText, setGameText] = useState('');
     const [newGameText, setNewGameText] = useState('');
 
+    const [gameHasQuest, setGameHasQuest] = useState(false);
+    const [gameHasForm, setGameHasForm] = useState('');
+
     useEffect(() => {
         getGameLink()
     }, [])
@@ -42,6 +45,13 @@ function GameLink () {
                 setNewGameLink(game.txt_game_link);
                 setGameText(game.txt_game_page);
                 setNewGameText(game.txt_game_page);
+                if(game.has_game_form === 'S') {
+                    setGameHasQuest(true);
+                    setGameHasForm('S');
+                } else {
+                    setGameHasQuest(false);
+                    setGameHasForm('N');
+                }
             }
         } catch (e) {
             toast.error(`Não foi possível recuperar os dados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
@@ -51,12 +61,20 @@ function GameLink () {
     const saveContent = async event => {
         event.preventDefault();
 
-        if (gameLink !== newGameLink || gameText !== newGameText)
+        let newGameHasForm;
+        if(gameHasQuest){
+            newGameHasForm = 'S';
+        } else {
+            newGameHasForm = 'N';
+        }
+
+        if (gameLink !== newGameLink || gameText !== newGameText || gameHasForm !== newGameHasForm)
         {
             try {
                 const response = await Api.post(`/gameLink/${params.id}`, {
                     newGameLink,
-                    newGameText
+                    newGameText,
+                    newGameHasForm
                 })
 
                 setGameLink(newGameLink);
@@ -76,7 +94,11 @@ function GameLink () {
             history.push(`/consentTerm/${params.id}`);
         }
         if (btnContinue) {
-            history.push(`/videoLink/${params.id}`);
+            if(gameHasQuest){
+                history.push(`/gameQuest/${params.id}`);
+            } else {
+                history.push(`/videoLink/${params.id}`);
+            }
         }
     }
 
@@ -104,6 +126,16 @@ function GameLink () {
                                     />
                                 </div>
                                 <div>Utilize o coringa [LINK] para posicionar o lugar onde o link deve aparecer no texto.</div>
+                                <br/><br/>
+                                <div id={'parent'}>
+                                    <div>Seu experimento terá um questionário específico sobre o jogo?</div><br/>
+                                    <input type={'radio'} className={'child'} id={'game-spec-quest'} value={gameHasQuest}
+                                           onClick={() => setGameHasQuest(!gameHasQuest)} checked={gameHasQuest}/>
+                                    <div className={'child'} id={'radio-text'}>Sim</div>
+                                    <input type={'radio'} className={'child'} id={'game-spec-quest'} value={gameHasQuest}
+                                           onClick={() => setGameHasQuest(!gameHasQuest)} checked={!gameHasQuest}/>
+                                    <div className={'child'} id={'radio-text'}>Não</div>
+                                </div>
                                 <br/><br/>
                                 <table>
                                     <tbody>
