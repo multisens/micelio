@@ -67,7 +67,7 @@ function GameExp () {
             if(hasGameForm === 'S') {
                 history.push(`/gameForm/${params.id}`, {params: partId});
             } else {
-                history.push(`/finalForm/${params.id}`, {params: partId});
+                history.push(`/finalForm/${params.id}`, {params: {partId}});
             }
         }
     }

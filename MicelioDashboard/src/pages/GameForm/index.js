@@ -73,7 +73,8 @@ function GameForm () {
             history.push(`/gameExp/${params.id}`, {params: {partId, groupId}});
         }
         if (btnContinue) {
-            history.push(`/finalForm/${params.id}`, {params: partId});
+            const hasGameForm = 'S';
+            history.push(`/finalForm/${params.id}`, {params: {partId, hasGameForm}});
         }
     }
 

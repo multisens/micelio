@@ -26,9 +26,11 @@ function FinalForm () {
 
     const [partId, setPartId] = useState();
     const [groupId, setGroupId] = useState();
+    const [hasGameForm, setHasGameForm] = useState();
 
     useEffect(() => {
-        setPartId(location.state.params);
+        setPartId(location.state.params.partId);
+        setHasGameForm(location.state.params.hasGameForm);
     }, [location.state.params])
 
     useEffect(() => {
@@ -36,7 +38,7 @@ function FinalForm () {
     }, [])
 
     const getLists = () => {
-        Api.get(`/finalForm/${params.id}/${location.state.params}`).then(response => {
+        Api.get(`/finalForm/${params.id}/${location.state.params.partId}`).then(response => {
             const questions = response.data.questions;
             const answers = response.data.answers;
             if (questions.length < 1) {
@@ -76,7 +78,11 @@ function FinalForm () {
             if (groupId === "3") {
                 history.push(`/videoExp/${params.id}`, {params: {partId, groupId}});
             } else {
-                history.push(`/gameExp/${params.id}`, {params: {partId, groupId}});
+                if (hasGameForm === "S") {
+                    history.push(`/gameForm/${params.id}`, {params: partId});
+                } else {
+                    history.push(`/gameExp/${params.id}`, {params: {partId, groupId}});
+                }
             }
         }
         if (btnContinue) {

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown'
 
 import './style.css';
 
@@ -6,7 +7,7 @@ function BuildQuestion(props) {
 
   return (
     <div>
-      <p>{props.question}</p><br/>
+      <p><ReactMarkdown>{props.question}</ReactMarkdown></p><br/>
       <div>
         <input  type={'text'}
                 className={'primary'} size={100} 

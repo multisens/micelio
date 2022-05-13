@@ -73,7 +73,7 @@ function SpecForm () {
             history.push(`/videoExp/${params.id}`, {params: {partId, groupId}});
         }
         if (btnContinue) {
-            history.push(`/finalForm/${params.id}`, {params: partId});
+            history.push(`/finalForm/${params.id}`, {params: {partId}});
         }
     }
 

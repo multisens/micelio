@@ -62,7 +62,7 @@ function VideoExp () {
             } else if (groupId === "2") {
                 history.push(`/gameExp/${params.id}`, {params: {partId, groupId}});
             } else {
-                history.push(`/finalForm/${params.id}`, {params: partId});
+                history.push(`/finalForm/${params.id}`, {params: {partId}});
             }
         }
     }
