@@ -78,9 +78,21 @@ function VideoExp () {
                             <form name={'form01'} onSubmit={workFlow}>
                                 <div className={'video-page'} id={'video-page'}>
                                     <ReactMarkdown>
-                                        {videoText.replace('[LINK]', videoLink)}
+                                        {videoText}
                                     </ReactMarkdown>
                                 </div><br/><br/>
+                                <div align="center">
+                                    <iframe title="video" 
+                                            width={640} 
+                                            height={390}
+                                            align="middle"
+                                            src={videoLink} 
+                                            frameborder={0} 
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                            allowFullScreen 
+                                    />
+                                </div><br/><br/>
+                                <div>Após ter assistido ao vídeo, prossiga para próxima etapa da avaliação através do botão abaixo.</div>
                                 <table>
                                     <tbody>
                                         <tr>

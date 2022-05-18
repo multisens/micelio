@@ -77,6 +77,10 @@ function VideoLink () {
         }
     }
 
+    const adjustLink = (link) => {
+        setNewVideoLink(link.replace('watch?v=', 'embed/'));
+    }
+
     return (
         <>
             <ToastContainer />
@@ -92,7 +96,7 @@ function VideoLink () {
                                 <div className={'video-page'} id={'video-page'}>
                                     <input type={'text'} className={'primary'} id={'videoLink'} size={100}
                                            placeholder="Insira aqui o link da vídeo-aula..." value={newVideoLink}
-                                           onChange={e => {setNewVideoLink(e.target.value)}}
+                                           onChange={e => {adjustLink(e.target.value)}}
                                     />
                                     <br/><br/>
                                     <textarea className={'primary'} id={'videoText'} rows={15} cols={100} size={4000}
@@ -100,7 +104,7 @@ function VideoLink () {
                                               onChange={e => {setNewVideoText(e.target.value)}}
                                     />
                                 </div>
-                                <div>Utilize o coringa [LINK] para posicionar o lugar onde o link deve aparecer no texto.</div>
+                                <div>O vídeo irá aparecer abaixo do texto.</div>
                                 <br/><br/>
                                 <table>
                                     <tbody>
