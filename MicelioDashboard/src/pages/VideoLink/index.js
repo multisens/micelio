@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './style.css';
 
@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 function VideoLink () {
 
     const history = useHistory();
+    const location = useLocation();
     const params = useParams();
 
     const [btnReturn, setBtnReturn] = useState(false);
@@ -70,7 +71,15 @@ function VideoLink () {
         }
 
         if (btnReturn) {
-            history.push(`/gameLink/${params.id}`);
+            if (location.state !== undefined) {
+                if (location.state.params === 'S') {
+                    history.push(`/gameQuest/${params.id}`);
+                } else {
+                    history.push(`/gameLink/${params.id}`);
+                }
+            } else {
+                history.push(`/gameLink/${params.id}`);
+            }
         }
         if (btnContinue) {
             history.push(`/initialQuest/${params.id}`);

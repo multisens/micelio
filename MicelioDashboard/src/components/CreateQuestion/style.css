@@ -1,0 +1,14 @@
+#question {
+    width: 90%;
+    white-space: nowrap;
+    overflow-x: visible;
+}
+
+input.primary + .remove-question{
+    margin-top: 5px;
+}
+
+.remove-question {
+    color: rgb(150, 0, 0);
+    font-size: 30px;
+}

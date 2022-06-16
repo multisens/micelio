@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
-import { AiOutlinePlusCircle, AiFillCloseCircle } from 'react-icons/ai'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './style.css';
@@ -52,8 +52,6 @@ function GameQuest () {
                     toast.error(`Não foi possível salvar os dados informados. Tente novamente`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
                 }
             }
-
-
         }catch (e) {
             toast.error(`Não foi possível salvar os dados informados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
         }
@@ -62,7 +60,7 @@ function GameQuest () {
             history.push(`/gameLink/${params.id}`);
         }
         if (btnContinue) {
-            history.push(`/videoLink/${params.id}`);
+            history.push(`/videoLink/${params.id}`, {params: 'S'});
         }
     }
 
@@ -76,11 +74,16 @@ function GameQuest () {
         setQuestionList(newArrayQuestion);
     }
 
-    const removeQuestion = async () => {
+    const removeQuestion = (index) => {
         if (questionList.length === 1) {
             setQuestionList(['']);
         } else {
-            setQuestionList(questionList.slice(0, -1));
+            let newArrayQuestion = [];
+            questionList.splice(index, 1);
+            for (let i=0;i<questionList.length;i++) {
+                newArrayQuestion[i] = questionList[i];
+            }
+            setQuestionList(newArrayQuestion);
         }
     }
 
@@ -103,12 +106,12 @@ function GameQuest () {
                                                             index={index}
                                                             text={question}
                                                             onChangeFunction={changeQuestion}
+                                                            onClickFunction={removeQuestion}
                                             />
                                         );
                                     })}
-                                    <div id={'parent'} className={'buttons'}>
+                                    <div className={'buttons'}>
                                         <AiOutlinePlusCircle className={'child-add'} size={35} onClick={addQuestion}/>
-                                        <AiFillCloseCircle className={'child-remove'} size={35} onClick={removeQuestion}/>
                                     </div><br/><br/>
                                     <table>
                                         <tbody>

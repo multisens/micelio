@@ -96,21 +96,6 @@ class GameQuestController {
             
             const questionAuxList = JSON.parse(JSON.stringify(questions_aux));
 
-            // Excluir questoes deletadas da tela
-            if (questionAuxList.length > length && order === 0) {
-                const trx = await knex.transaction();
-
-                const questionsDelete = await trx('Questions').delete().where('ind_order', '>=', length).andWhere('form_id', form_id);
-
-                if(questionsDelete){
-                    await trx.commit();
-                }
-                else{
-                    await trx.rollback();
-                    return response.status(400).json({error: `Cannot update the question ${order}`});
-                }
-            }
-
             if (!questionAuxList[order]) {
 
                 const trx = await knex.transaction();
@@ -129,7 +114,6 @@ class GameQuestController {
 
                 if(questionInsert){
                     await trx.commit();
-                    return response.status(201).json({ok: true});
                 }
                 else{
                     await trx.rollback();
@@ -144,13 +128,28 @@ class GameQuestController {
 
                 if(questionUpdate){
                     await trx.commit();
-                    return response.status(201).json({ok: true});
                 }
                 else{
                     await trx.rollback();
                     return response.status(400).json({error: `Cannot update the question ${order}`});
                 }
             }
+
+            // Excluir questoes deletadas da tela
+            if (questionAuxList.length > length && order === length-1) {
+                const trx = await knex.transaction();
+
+                const questionsDelete = await trx('Questions').delete().where('ind_order', '>=', length).andWhere('form_id', form_id);
+
+                if(questionsDelete){
+                    await trx.commit();
+                }
+                else{
+                    await trx.rollback();
+                    return response.status(400).json({error: `Cannot update the question ${order}`});
+                }
+            }
+            return response.status(201).json({ok: true});
         }
         catch(err){
             return response.status(400).json({error: 'Something went wrong, try again later'});

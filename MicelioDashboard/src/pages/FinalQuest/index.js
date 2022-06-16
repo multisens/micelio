@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {ToastContainer, toast} from 'react-toastify';
-import { AiOutlinePlusCircle, AiFillCloseCircle } from 'react-icons/ai'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import './style.css';
@@ -74,11 +74,11 @@ function FinalQuest () {
         setQuestionList(newArrayQuestion);
     }
 
-    const removeQuestion = async () => {
+    const removeQuestion = (index) => {
         if (questionList.length === 1) {
             setQuestionList(['']);
         } else {
-            setQuestionList(questionList.slice(0, -1));
+            setQuestionList(questionList.slice(index, 1));
         }
     }
 
@@ -101,12 +101,12 @@ function FinalQuest () {
                                                             index={index}
                                                             text={question}
                                                             onChangeFunction={changeQuestion}
+                                                            onClickFunction={removeQuestion}
                                             />
                                         );
                                     })}
-                                    <div id={'parent'} className={'buttons'}>
+                                    <div className={'buttons'}>
                                         <AiOutlinePlusCircle className={'child-add'} size={35} onClick={addQuestion}/>
-                                        <AiFillCloseCircle className={'child-remove'} size={35} onClick={removeQuestion}/>
                                     </div><br/><br/>
                                     <table>
                                         <tbody>
