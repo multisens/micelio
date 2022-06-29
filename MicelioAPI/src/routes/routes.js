@@ -8,6 +8,7 @@ const UserRoutes = require("./user.route")
 const GroupRoutes = require("./group.route")
 const AboutRoutes = require("./about.route")
 const VisualizacaoRoutes = require("./visualizacao.route");
+const RankingRoutes = require("./ranking.route");
 
 const TokenMiddleware = require("../middleware/TokenMiddleware")
 const LogMiddleware = require("../middleware/LogMiddleware")
@@ -22,5 +23,6 @@ Router.use("/session", LogMiddleware, TokenMiddleware, SessionRoutes)
 Router.use("/activity", LogMiddleware, ActivityRoutes)
 Router.use("/group", LogMiddleware, GroupRoutes)
 Router.use("/about", AboutRoutes)
+Router.use("/ranking", TokenMiddleware, RankingRoutes)
 
 module.exports = Router
