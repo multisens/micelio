@@ -135,15 +135,26 @@ const Visualization = ({props, component_id}) => {
       const visualization = vl.vconcat(
         timeLine,
         heatMap,
-        activitiesCircle,
-        population
+        //activitiesCircle,
+        //population
+      )
+
+      const visualization2 = vl.vconcat(
+          timeLine,
+          activitiesCircle
       )
 
       window.vegaEmbed(`#${component_id}`, JSON.parse(visualization))
+      window.vegaEmbed(`#teste`, JSON.parse(visualization2))
     })
   })
 
-  return <div id={component_id}></div>
+  return (
+      <>
+        <div id={component_id}></div>
+        <div id="teste"></div>
+      </>
+  )
 }
 
 export default Visualization

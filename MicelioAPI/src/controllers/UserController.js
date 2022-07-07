@@ -126,6 +126,7 @@ class UserController {
   }
 
   async login(request, response) {
+    console.log('here')
     const {username, password} = request.body
 
     if (!username) {

@@ -4,13 +4,13 @@ const idGenerator = require('../utils/generators/idGenerator');
 class SessionController{
 
 	async create(request, response){
-        
+
         let {name, language, date, game_stage, session_group, start_time} = request.body;
 
         let {game_id, device_id} = request.headers;
 
         const end_time = null;
-        
+
         if(!name) name = null;
 
         if (!language) {
@@ -78,7 +78,7 @@ class SessionController{
 
             if(session){
                 trx.commit();
-                return response.status(201).json({ok: true});
+                return response.status(201).json({session_id: sessionId});
             }
             else{
                 console.error("[ERRO INSERÇÃO SESSÃO] Nao foi possível inserir a sessão.");
@@ -90,7 +90,7 @@ class SessionController{
             console.error(`[ERRO INSERÇÃO SESSÃO] Nao foi possível inserir a sessão. ${err.code} - ${err.sqlMessage}`);
             return response.status(400).json({error: "Cannot insert, please check the acess token and the device id."});
         }
-        
+
     }
 
     async update(request, response){
@@ -126,7 +126,7 @@ class SessionController{
                 const sessionUpdated = await trx('Session')
                 .update('end_time', end_time)
                 .where('session_id', session_id);
-                
+
                 if(sessionUpdated){
                     await trx.commit();
                     return response.status(201).json({ok: true});
@@ -142,7 +142,7 @@ class SessionController{
                 console.error("[ERRO FINALIZAR SESSÃO] Nao foi possível encontrar uma sessão para finalizar.");
                 return response.status(400).json({error: "You dont have any opened session"});
             }
-            
+
         }
         catch(err){
             await trx.rollback();
