@@ -2,9 +2,12 @@ const express = require('express');
 const SessionController = require('../controllers/SessionController.js');
 
 const DeviceIDMiddleware = require('../middleware/DeviceIDMiddleware');
+const TokenMiddleware = require('../middleware/TokenMiddleware');
 
 const Router = express.Router();
 const sessionController = new SessionController;
+
+Router.get('/', TokenMiddleware, sessionController.get)
 
 Router.post('/', DeviceIDMiddleware, sessionController.create);
 Router.post('/test', DeviceIDMiddleware, sessionController.create);

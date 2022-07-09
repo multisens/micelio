@@ -3,6 +3,18 @@ const idGenerator = require('../utils/generators/idGenerator');
 
 class SessionController{
 
+  async get(request, response) {
+    const gameToken = request.headers.token;
+
+    const sessionList = await knex.select(["sess.*"])
+        .from("session as sess")
+        .innerJoin("game", "sess.game_id", "game.game_id")
+        .where("game.token", gameToken)
+
+
+    response.json(sessionList)
+  }
+
 	async create(request, response){
 
         let {name, language, date, game_stage, session_group, start_time} = request.body;

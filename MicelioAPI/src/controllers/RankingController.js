@@ -4,14 +4,6 @@ class RankingController {
   async get(request, response) {
     const game_id = request.headers.game_id;
 
-    /*const dbResponse = await knex.select(["act.*"])
-        .from('activity as act')
-        .innerJoin('session as sess', 'act.session_id', 'sess.session_id')
-        .innerJoin("entity as ent", "")
-        .innerJoin('game', 'sess.game_id', 'game.game_id')
-        .where('game.game_id', game_id)
-        .where('act.name', 'score')*/
-
     try{
       const dbResponse = await knex.select(["actage.properties", "age.name", "age.agent_id"])
           .from("activityagents as actage")

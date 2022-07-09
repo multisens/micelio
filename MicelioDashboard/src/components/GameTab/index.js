@@ -4,6 +4,7 @@ import {Tabs, TabList, TabPanels, Tab, TabPanel, Select, Box} from "@chakra-ui/r
 import Api from "../../services/Api";
 import SessionGroupList from "../../components/SessionGroupList";
 import Visualization from "../Visualization";
+import SessionTab from "../../pages/Game/Tabs/SessionTab";
 
 const tabSelectedStyle = {bg: '#2A9D8F', color: 'white', border: '2px solid #bfbfbf'}
 
@@ -48,11 +49,15 @@ const GameTab = ({ groupList, gameToken, onAddGroup, gameId, visualizationSingle
   return (
     <Tabs variant='enclosed' colorScheme={"green"}>
       <TabList>
+        <Tab _selected={tabSelectedStyle}>Sessões</Tab>
         <Tab _selected={tabSelectedStyle}>Grupos criados</Tab>
         <Tab _selected={tabSelectedStyle}>Visualizações</Tab>
         <Tab _selected={tabSelectedStyle}>Grupos de Visualização</Tab>
       </TabList>
       <TabPanels>
+        <TabPanel>
+          <SessionTab gameToken={gameToken}/>
+        </TabPanel>
         <TabPanel>
           <SessionGroupList groups={groupList} onAddGroup={() => {onAddGroup()}}/>
         </TabPanel>
