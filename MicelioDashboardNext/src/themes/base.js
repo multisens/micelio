@@ -1,4 +1,5 @@
 import { extendTheme } from '@chakra-ui/react';
+import { COLOR_PRIMARY, COLOR_PRIMARY_DARK } from '../styles/_variables';
 
 export default extendTheme({
   global: {
@@ -6,10 +7,15 @@ export default extendTheme({
       fontFamily: 'Poppins, sans-serif',
     },
   },
+  sizes: {
+    container: {
+      '2xl': '1440px',
+    },
+  },
   colors: {
     micelio: {
-      primary: '#52b788',
-      primaryDark: '#40916c',
+      primary: COLOR_PRIMARY,
+      primaryDark: COLOR_PRIMARY_DARK,
     },
   },
   components: {
@@ -23,6 +29,25 @@ export default extendTheme({
           _hover: {
             backgroundColor: 'micelio.primaryDark',
           },
+        },
+      },
+    },
+    List: {
+      parts: ['list', 'item'],
+      variants: {
+        primary: {
+          list: {
+            background: 'red',
+            color: 'red',
+          },
+        },
+      },
+    },
+    ListItem: {
+      variants: {
+        selected: {
+          background: 'red',
+          color: 'red',
         },
       },
     },

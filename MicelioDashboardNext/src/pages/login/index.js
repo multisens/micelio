@@ -1,25 +1,31 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Button, Flex, Heading, Input, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import Api from '../../services/Api';
 import { toast, ToastContainer } from 'react-toastify';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function LoginPage() {
   const router = useRouter();
+  const { user, setUser } = useContext(AuthContext);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   const doLogin = async (formEvent) => {
     formEvent.preventDefault();
 
     try {
-      await Api.post('/user/login', { username, password });
+      const response = await Api.post('/user/login', { username, password });
+
+      setUser(response.data.data);
 
       await router.push('/home');
-
-      // setAuth(true);
     } catch (e) {
       const msg = e.response ? e.response.data.error : 'Houve um erro ao entrar. Por favor, tente novamente.';
       toast.error(msg);
