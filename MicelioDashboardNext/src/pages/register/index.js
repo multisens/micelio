@@ -5,7 +5,7 @@ export default function LoginPage() {
   return (
     <Flex>
       <Flex flex={1} justifyContent={'center'} alignItems={'center'} h={'100vh'}>
-        <Flex boxShadow={'0 0 5px gray'} padding={8} borderRadius={8} w={'100%'} maxW={'400px'} flexDir={'column'}>
+        <Flex boxShadow={'0 0 5px #a5a5a5'} padding={8} borderRadius={8} w={'100%'} maxW={'400px'} flexDir={'column'}>
           <Heading textAlign={'center'}>Micelio</Heading>
           <Box mt={10}>
             <Heading size={'sm'} textAlign={'center'}>
