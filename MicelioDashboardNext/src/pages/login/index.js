@@ -14,7 +14,9 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    console.log(user);
+    if (user) {
+      router.push('/home');
+    }
   }, [user]);
 
   const doLogin = async (formEvent) => {

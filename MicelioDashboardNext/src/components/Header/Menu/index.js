@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_PRIMARY } from '../../../styles/_variables';
+import { COLOR_PRIMARY_DARK } from '../../../styles/_variables';
 
 export const HeaderMenu = styled.ul`
   list-style: none;
@@ -18,6 +18,8 @@ export const HeaderMenuItem = styled.li`
   display: flex;
   align-items: center;
   cursor: pointer;
+  color: white;
+  transition: all 0.2s;
 
   & + & {
     margin-left: 50px;
@@ -28,8 +30,12 @@ export const HeaderMenuItem = styled.li`
     margin-right: 5px;
   }
 
+  &:hover {
+    transform: translateY(-1px);
+  }
+
   &.selected {
-    background-color: ${COLOR_PRIMARY};
+    background-color: ${COLOR_PRIMARY_DARK};
     border-radius: 20px;
     color: white;
 

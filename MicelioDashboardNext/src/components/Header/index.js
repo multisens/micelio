@@ -1,14 +1,17 @@
-import { Container, Flex, Heading, List, ListItem, Text } from '@chakra-ui/react';
+import { Button, Container, Flex, Heading, List, ListItem, Text } from '@chakra-ui/react';
 import { HeaderMenu, HeaderMenuItem } from './Menu';
 import { AiFillHome, AiFillInfoCircle, AiOutlineUser } from 'react-icons/ai';
+import Link from 'next/link';
 
 export default function Header() {
   return (
     <>
-      <Flex flexDirection={'column'}>
-        <Container maxW={'container.2xl'} mt={4}>
+      <Flex flexDirection={'column'} bg={'micelio.primary'} pt={3} pb={3}>
+        <Container maxW={'container.xl'}>
           <Flex>
-            <Heading flex={1}>Micelio</Heading>
+            <Heading flex={1} color={'white'}>
+              <Link href={'/home'}>Micelio</Link>
+            </Heading>
             <Flex flex={3}>
               <HeaderMenu>
                 <HeaderMenuItem className={'selected'}>
@@ -26,10 +29,9 @@ export default function Header() {
               </HeaderMenu>
             </Flex>
             <Flex flex={1} justifyContent={'end'} alignItems={'center'}>
-              <Text>Sair</Text>
+              <Button>Sair</Button>
             </Flex>
           </Flex>
-          <hr style={{ marginTop: 4, backgroundColor: '#cdcdcd' }} />
         </Container>
       </Flex>
     </>

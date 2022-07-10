@@ -1,13 +1,24 @@
 import Header from '../../components/Header';
-import { Box, Button, Container, Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { Box, Button, Container, Flex, Grid, GridItem, Heading, Text, useConst } from '@chakra-ui/react';
+import { useContext, useEffect, useState } from 'react';
 import Api from '../../services/Api';
 import { toast, ToastContainer } from 'react-toastify';
-import { IoGameController, IoAdd } from 'react-icons/io5';
+import { IoGameController } from 'react-icons/io5';
+import { BsPlusCircle } from 'react-icons/bs';
 import GameCard from '../../components/GameCard';
+import { useRouter } from 'next/router';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function HomePage() {
   const [gameList, setGameList] = useState(null);
+  const { user } = useContext(AuthContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/login');
+    }
+  }, [user]);
 
   useEffect(() => {
     try {
@@ -19,15 +30,16 @@ export default function HomePage() {
       toast.error(msg);
     }
   });
+
   return (
     <>
       <ToastContainer />
       <Header />
-      <Container maxW={'container.2xl'} mt={10}>
+      <Container maxW={'container.xl'} mt={10}>
         <Flex alignItems={'end'} mb={10}>
           <Heading>Seus jogos</Heading>
           <Button variant={'primary'} size={'sm'} ms={5}>
-            <IoAdd color={'white'} size={18} style={{ marginRight: 5 }} />
+            <BsPlusCircle color={'white'} size={12} style={{ marginRight: 5 }} />
             Novo jogo
           </Button>
         </Flex>
@@ -44,9 +56,6 @@ const NoGamesAvailable = () => {
       <Flex flexDirection={'column'} alignItems={'center'}>
         <IoGameController size={64} color={'rgba(0,0,0,.3)'} />
         <Text>Nenhum jogo cadastrado</Text>
-        <Button mt={10} variant={'primary'}>
-          Cadastrar jogo
-        </Button>
       </Flex>
     </Flex>
   );
@@ -59,10 +68,12 @@ const GameList = ({ gameList }) => {
         gameList.map((game) => (
           <GridItem>
             <GameCard
+              id={game.game_id}
               title={game.name}
               groupCount={game.groups_created}
               activeSessionCount={game.active_sessions}
               status={'Privado'}
+              isOwner={game.is_owner}
             />
           </GridItem>
         ))}

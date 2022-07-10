@@ -13,6 +13,12 @@ export default extendTheme({
     },
   },
   colors: {
+    test: {
+      50: '#ff0000',
+    },
+    colorSchemes: {
+      test: '#ff0000',
+    },
     micelio: {
       primary: COLOR_PRIMARY,
       primaryDark: COLOR_PRIMARY_DARK,
