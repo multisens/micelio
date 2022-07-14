@@ -6,6 +6,8 @@ import Api from '../../services/Api';
 import { Box, Button, Container, Flex, Heading, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { FiArrowLeft } from 'react-icons/fi';
+import { FaShareAlt } from 'react-icons/fa';
+import GroupTab from '../../components/GameTabs/GroupTab';
 
 export default function GamePage(props) {
   const [currentGame, setCurrentGame] = useState(null);
@@ -18,8 +20,6 @@ export default function GamePage(props) {
       setCurrentGame(response.data.game);
     });
   }, [gameId]);
-
-  console.log(currentGame);
 
   return (
     <>
@@ -58,7 +58,11 @@ export default function GamePage(props) {
                   <strong>Criador:</strong> {currentGame?.username}
                 </Text>
               </Box>
-              <Button bg={'red'} color={'white'} mt={8} fontWeight={'bold'}>
+              <Button mt={8} fontWeight={'bold'}>
+                <FaShareAlt style={{ marginRight: 4 }} />
+                Compartilhar
+              </Button>
+              <Button bg={'red'} color={'white'} mt={2} fontWeight={'bold'}>
                 Deletar jogo
               </Button>
             </Flex>
@@ -70,7 +74,7 @@ export default function GamePage(props) {
               </TabList>
               <TabPanels>
                 <TabPanel>
-                  <p>one!</p>
+                  <GroupTab />
                 </TabPanel>
                 <TabPanel>
                   <p>two!</p>
