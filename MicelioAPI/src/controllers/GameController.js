@@ -8,6 +8,11 @@ class GameController{
   async index(request, response){
     const {game_id} = request.params;
     const {miceliotoken: userToken} = request.cookies;
+
+    if(!userToken) {
+      return response.status(401).send()
+    }
+
     const decodedToken = decodeUserSession(userToken);
 
     const user_id = decodedToken.sub;
@@ -63,6 +68,9 @@ class GameController{
 
   async get(request, response) {
     const {miceliotoken: userToken} = request.cookies
+    if(!userToken) {
+      return response.status(401).send()
+    }
     const decodedToken = decodeUserSession(userToken)
 
     const user_id = decodedToken.sub;

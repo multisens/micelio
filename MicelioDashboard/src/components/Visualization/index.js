@@ -1,7 +1,7 @@
-import { useEffect } from "react"
+import {useEffect} from "react"
 
 import Api from "../../services/Api"
-import { getPopulation } from "../../helper/Visualization"
+import {getPopulation} from "../../helper/Visualization"
 
 const Visualization = ({props, component_id}) => {
 
@@ -23,127 +23,207 @@ const Visualization = ({props, component_id}) => {
     await Api.get("/activity").then((response) => {
       //controle de dados
       var populationData = getPopulation(
-        response.data,
-        agents,
-        entities,
-        activitiesMap
+          response.data,
+          agents,
+          entities,
+          activitiesMap
       )
       var data = response.data.activities.filter((a) => {
         if (activitiesList.includes(a.name)) return a
       })
-      var heatMapData = response.data.activities.filter(a => {if(activitiesHeatMapList.includes(a.name)) return a});
+      var heatMapData = response.data.activities.filter(a => {
+        if (activitiesHeatMapList.includes(a.name)) return a
+      });
 
       //criação dos filtros
-      const brush = vl.selectInterval().encodings("x")
+      const brush = vl.selectInterval('abc').encodings("x")
+
       const selectActivityName = vl.selectMulti().fields("name")
 
       //crição dos gráficos
       const timeLine = vl
-        .markArea()
-        .data(data)
-        .encode(
-          vl.x().fieldQ("time").title("Tempo de jogo"),
-          vl.y().count().title(""),
-          vl
-            .color()
-            .fieldN("name")
-            .scale({ scheme: "paired" })
-            .title("Atividades")
-        )
-        .title("Linha do Tempo")
-        .select(brush, selectActivityName)
-        .height(40)
-        .width(specialWidth)
+          .markArea()
+          .data(data)
+          .encode(
+              vl.x().fieldQ("time").title("Tempo de jogo"),
+              vl.y().count().title(""),
+              vl
+                  .color()
+                  .fieldN("name")
+                  .scale({scheme: "paired"})
+                  .title("Atividades")
+          )
+          .title("Linha do Tempo")
+          .select(brush, selectActivityName)
+          .height(40)
+          .width(specialWidth)
 
       const activitiesCircle = vl
-        .markCircle()
-        .data(data)
-        .encode(
-          vl
-            .y()
-            .fieldN("name")
-            .title("")
-            .axis({ grid: true, gridColor: "#F0F0F0" })
-            .sort(activitiesList),
-          vl
-            .x()
-            .fieldQ("time")
-            .title("Tempo de jogo")
-            .bin({ maxbins: CircleBins }),
-          vl
-            .size()
-            .count()
-            .scale({ range: [20, 500] })
-            .title("QTD"), //.legend({orient: "bottom"}),
-          vl.color().fieldN("name").scale({ scheme: "paired" }).legend(false),
-          vl.tooltip("name")
-        )
-        .title("Atividades")
-        .transform([vl.filter(selectActivityName), vl.filter(brush)])
-        .height(400)
-        .width(specialWidth)
+          .markCircle()
+          .data(data)
+          .encode(
+              vl
+                  .y()
+                  .fieldN("name")
+                  .title("")
+                  .axis({grid: true, gridColor: "#F0F0F0"})
+                  .sort(activitiesList),
+              vl
+                  .x()
+                  .fieldQ("time")
+                  .title("Tempo de jogo")
+                  .bin({maxbins: CircleBins}),
+              vl
+                  .size()
+                  .count()
+                  .scale({range: [20, 500]})
+                  .title("QTD"), //.legend({orient: "bottom"}),
+              vl.color().fieldN("name").scale({scheme: "paired"}).legend(false),
+              vl.tooltip("name")
+          )
+          .title("Atividades")
+          .transform([vl.filter(selectActivityName), vl.filter(brush)])
+          .height(400)
+          .width(specialWidth)
 
       const heatMap = vl
-        .markRect({ clip: true })
-        .data(heatMapData)
-        .encode(
-          vl
-            .x()
-            .fieldQ("position_x")
-            .bin({ maxbins: 20 })
-            .axis({ grid: true, gridColor: "#FFFFFF" })
-            .title("")
-            .scale({ domainMin: 0 }),
-          vl
-            .y()
-            .fieldQ("position_y")
-            .bin({ maxbins: 20 })
-            .axis({ grid: true, gridColor: "#FFFFFF" })
-            .title("")
-            .scale({ domainMin: 0 })
-            .sort("descending"),
-          vl
-            .color()
-            .count()
-            .scale({ scheme: "reds" })
-            .legend({ orient: "bottom", padding: 10 }),
-          vl.tooltip(["name", "time"])
-        )
-        .title("Heat Map")
-        .transform([vl.filter(brush)])
-        .width(width / 2)
-        .height(width / 3)
+          .markRect({clip: true})
+          .data(heatMapData)
+          .encode(
+              vl
+                  .x()
+                  .fieldQ("position_x")
+                  .bin({maxbins: 20})
+                  .axis({grid: true, gridColor: "#FFFFFF"})
+                  .title("")
+                  .scale({domainMin: 0}),
+              vl
+                  .y()
+                  .fieldQ("position_y")
+                  .bin({maxbins: 20})
+                  .axis({grid: true, gridColor: "#FFFFFF"})
+                  .title("")
+                  .scale({domainMin: 0})
+                  .sort("descending"),
+              vl
+                  .color()
+                  .count()
+                  .scale({scheme: "reds"})
+                  .legend({orient: "bottom", padding: 10}),
+              vl.tooltip(["name", "time"])
+          )
+          .title("Heat Map")
+          .transform([vl.filter(brush)])
+          .width(width / 2)
+          .height(width / 3)
 
       const population = vl
-        .markLine({ interpolate: "step", clip: true })
-        .data(populationData)
-        .encode(
-          vl.x().fieldQ("time").title("Tempo de jogo"),
-          vl.y().fieldQ("quantity").scale({ domainMin: 0 }),
-          vl.color().fieldN("agent"),
-          vl
-            .color()
-            .fieldN("agent")
-            .title("Insetos")
-            .legend({ orient: "bottom" })
-        )
-        .title("Gráfico de População")
-        .transform(vl.filter(brush))
-        .width(specialWidth)
+          .markLine({interpolate: "step", clip: true})
+          .data(populationData)
+          .encode(
+              vl.x().fieldQ("time").title("Tempo de jogo"),
+              vl.y().fieldQ("quantity").scale({domainMin: 0}),
+              vl.color().fieldN("agent"),
+              vl
+                  .color()
+                  .fieldN("agent")
+                  .title("Insetos")
+                  .legend({orient: "bottom"})
+          )
+          .title("Gráfico de População")
+          .transform(vl.filter(brush))
+          .width(specialWidth)
 
       //returna o concatenado dos gráficos
       const visualization = vl.vconcat(
-        timeLine,
-        heatMap,
-        activitiesCircle,
-        population
+          timeLine,
+          heatMap,
+          activitiesCircle,
+          population
       )
 
+      let activitiesCircle2 = vl
+          .markCircle()
+          .data(data)
+          .encode(
+              vl
+                  .y()
+                  .fieldN("name")
+                  .title("")
+                  .axis({grid: true, gridColor: "#F0F0F0"})
+                  .sort(activitiesList),
+              vl
+                  .x()
+                  .fieldQ("time")
+                  .title("Tempo de jogo")
+                  .bin({maxbins: CircleBins}),
+              vl
+                  .size()
+                  .count()
+                  .scale({range: [20, 500]})
+                  .title("QTD"), //.legend({orient: "bottom"}),
+              vl.color().fieldN("name").scale({scheme: "paired"}).legend(false),
+              vl.tooltip("name")
+          )
+          .title("Atividades")
+          .height(400)
+          .width(specialWidth)
+
+      const visu2 = vl.vconcat(timeLine, activitiesCircle2)
+
       window.vegaEmbed(`#${component_id}`, JSON.parse(visualization))
+      window.vegaEmbed(`#novo`, JSON.parse(activitiesCircle2))
+
+      var
+          final = []
+      let c = 0
+      const interval = setInterval(() => {
+
+        final.push(data[c])
+        if (c < data.length) c++
+        console.log(final)
+        if (c === data.length) clearInterval(interval)
+
+        var xdomain = [-20, 120]
+        var ydomain = [-20, 120]
+        var pathStep = 10
+
+        const pathMap = vl.markRect({clip: true, tickBand: "extent"})
+            .data(final)
+            .encode(
+                vl.x().fieldQ("position_x").bin({extent: xdomain, step: pathStep}).axis({
+                  grid: true,
+                  gridColor: "#FFFFFF"
+                }).title("")
+                    .scale({domain: xdomain}),
+                vl.y().fieldQ("position_y").bin({extent: ydomain, step: pathStep}).axis({
+                  grid: true,
+                  gridColor: "#FFFFFF"
+                }).title("")
+                    .scale({domain: ydomain}),
+                vl.color().fieldQ("time").scale({scheme: "reds"}),
+                vl.tooltip(["name", "time"])
+            )
+            .title("Mapa de caminho")
+            .width(specialWidth / 2)
+            .height(specialWidth / 2)
+
+        window.vegaEmbed(`#novo`, JSON.parse(pathMap))
+
+      }, 100)
     })
   })
 
-  return <div id={component_id}></div>
+  const getCircleGraphic = (data) => {
+
+  }
+
+  return (
+      <>
+        <div id={'novo'}></div>
+        <div id={component_id}></div>
+      </>
+  )
 }
 
 export default Visualization

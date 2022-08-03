@@ -29,7 +29,7 @@ export default function HomePage() {
       const msg = e.response ? e.response.data.error : 'Houve um erro ao entrar. Por favor, tente novamente.';
       toast.error(msg);
     }
-  });
+  }, []);
 
   return (
     <>
@@ -63,7 +63,7 @@ const NoGamesAvailable = () => {
 
 const GameList = ({ gameList }) => {
   return (
-    <Grid templateColumns={'1fr 1fr 1fr 1fr'}>
+    <Grid templateColumns={'1fr 1fr 1fr 1fr'} columnGap={5}>
       {gameList &&
         gameList.map((game) => (
           <GridItem>
