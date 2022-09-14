@@ -92,7 +92,11 @@ function ConsentTerm () {
                                               placeholder=" Insira o texto aqui..." value={newConsentTerm}
                                               onChange={e => {setNewConsentTerm(e.target.value)}}
                                     />
-                                </div><br/><br/>
+                                </div>
+                                <div><br/><br/>
+                                    <a href="https://blog.logrocket.com/how-to-safely-render-markdown-using-react-markdown/" target="blank">Clique aqui</a> para sintaxe de formatação do texto.
+                                </div>
+                                <br/><br/>
                                 <table>
                                     <tbody>
                                         <tr>

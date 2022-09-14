@@ -113,7 +113,9 @@ function VideoLink () {
                                               onChange={e => {setNewVideoText(e.target.value)}}
                                     />
                                 </div>
-                                <div>O vídeo irá aparecer abaixo do texto.</div>
+                                <div>O vídeo irá aparecer abaixo do texto.<br/><br/>
+                                    <a href="https://blog.logrocket.com/how-to-safely-render-markdown-using-react-markdown/" target="blank">Clique aqui</a> para sintaxe de formatação do texto.
+                                </div>
                                 <br/><br/>
                                 <table>
                                     <tbody>

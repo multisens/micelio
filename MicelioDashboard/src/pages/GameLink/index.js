@@ -136,6 +136,9 @@ function GameLink () {
                                            onClick={() => setGameHasQuest(!gameHasQuest)} checked={!gameHasQuest}/>
                                     <div className={'child'} id={'radio-text'}>Não</div>
                                 </div>
+                                <div>
+                                    <a href="https://blog.logrocket.com/how-to-safely-render-markdown-using-react-markdown/" target="blank">Clique aqui</a> para sintaxe de formatação do texto.
+                                </div>
                                 <br/><br/>
                                 <table>
                                     <tbody>
