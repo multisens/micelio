@@ -55,12 +55,18 @@ function FinalForm () {
     const saveContent = async event => {
         event.preventDefault();
 
+        let has_ended_exp = 'N';
+        if (btnContinue) {
+            has_ended_exp = 'S';
+        }
+        
         try {
             for (let i=0;i<answerList.length;i++) {
                 const response = await Api.post(`/finalForm/${params.id}`, {
                     answer: answerList[i],
                     order: i,
-                    participant_id: partId
+                    participant_id: partId,
+                    ended: has_ended_exp
                 })
 
                 if(!response.data.ok){

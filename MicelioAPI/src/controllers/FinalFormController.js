@@ -63,7 +63,7 @@ class FinalFormController {
     async update(request, response) {
 
         const {experiment_id} = request.params;
-        const {answer, order, participant_id} = request.body;
+        const {answer, order, participant_id, ended} = request.body;
         const selected = 'F';
 
         if(!experiment_id){
@@ -79,7 +79,6 @@ class FinalFormController {
         const trx = await knex.transaction();
 
         try{
-
             const {question_id} = await knex('Questions as q')
                                          .where('q.form_id', form_id)
                                          .andWhere('q.ind_order', order)
@@ -107,7 +106,6 @@ class FinalFormController {
 
                 if(answerInsert){
                     await trx.commit();
-                    return response.status(201).json({ok: true});
                 }
                 else{
                     await trx.rollback();
@@ -118,16 +116,32 @@ class FinalFormController {
 
                 if(answerUpdate){
                     await trx.commit();
-                    return response.status(201).json({ok: true});
                 }
                 else{
                     await trx.rollback();
                     return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
                 }
-            } 
+            }
         }
         catch(err){
             await trx.rollback();
+            return response.status(400).json({error: 'Cannot update the game page, try again later'});
+        }
+
+        const trx1 = await knex.transaction();
+
+        try {
+            const partUpdate = await trx1('Participant as p').where('p.participant_id', participant_id).update('p.has_ended_exp', ended);
+
+            if(partUpdate){
+                await trx1.commit();
+                return response.status(201).json({ok: true});
+            }else {
+                await trx1.rollback();
+                return response.status(400).json({error: 'Cannot update the game page, check the information sent'});
+            }
+        } catch (err) {
+            await trx1.rollback();
             return response.status(400).json({error: 'Cannot update the game page, try again later'});
         }
     }

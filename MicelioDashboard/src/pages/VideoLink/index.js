@@ -114,7 +114,7 @@ function VideoLink () {
                                     />
                                 </div>
                                 <div>O vídeo irá aparecer abaixo do texto.<br/><br/>
-                                    <a href="https://blog.logrocket.com/how-to-safely-render-markdown-using-react-markdown/" target="blank">Clique aqui</a> para sintaxe de formatação do texto.
+                                    <a href="https://imgur.com/61HlYuW" target="blank">Clique aqui</a> para sintaxe de formatação do texto.
                                 </div>
                                 <br/><br/>
                                 <table>

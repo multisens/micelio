@@ -137,7 +137,7 @@ function GameLink () {
                                     <div className={'child'} id={'radio-text'}>Não</div>
                                 </div>
                                 <div>
-                                    <a href="https://blog.logrocket.com/how-to-safely-render-markdown-using-react-markdown/" target="blank">Clique aqui</a> para sintaxe de formatação do texto.
+                                    <a href="https://imgur.com/61HlYuW" target="blank">Clique aqui</a> para sintaxe de formatação do texto.
                                 </div>
                                 <br/><br/>
                                 <table>
