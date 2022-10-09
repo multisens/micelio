@@ -8,15 +8,17 @@ function CreateQuestion(props) {
   return (
     <div>
       <p>Questão {props.index + 1}</p><br/>
-      <div>
+      <div className='question'>
         <input type={'text'}
                id={'question'}
                className={'primary'} size={100} 
                placeholder={'Digite a pergunta...'} 
                defaultValue={props.text}
                onChange={(event)=>props.onChangeFunction(event.target.value, props.index)}
-        />&nbsp;&nbsp;&nbsp;&nbsp;
-        <AiFillCloseCircle className={'remove-question'} onClick={()=>props.onClickFunction(props.index)}/>
+        />
+        <div>
+          <AiFillCloseCircle className={'remove-question'} onClick={()=>props.onClickFunction(props.index)}/>
+        </div>
       </div><br/><br/>
     </div>
   );

@@ -1,11 +1,11 @@
-#question {
-    width: 90%;
-    white-space: nowrap;
-    overflow-x: visible;
+.question {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-input.primary + .remove-question{
-    margin-top: 5px;
+#question {
+    margin: 0px 10px 0px 0px;
 }
 
 .remove-question {
