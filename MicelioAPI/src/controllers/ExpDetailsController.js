@@ -95,12 +95,21 @@ class ExpDetailsController {
 
     async export (request, response) {
       
-      const {experiment_id} = request.params
-      const {group} = request.body
+      const {experiment_id, group_id} = request.params
 
-      console.log(group, experiment_id)
+      const array = []
 
-      return response.json({ok: true, data: [{nome: 'Pedro', sobrenome: 'Telles'}]});
+      if (group_id === '1') {
+        array.push({nome: 'Pedro', sobrenome: '1'})
+      } else if (group_id === '2') {
+        array.push({nome: 'Pedro', sobrenome: '2'})
+      } else if (group_id === '3') {
+        array.push({nome: 'Pedro', sobrenome: '3'})
+      } else {
+        array.push({nome: 'Pedro', sobrenome: '4'})
+      }
+
+      return response.json({ok: true, data: array});
     }
 }
 

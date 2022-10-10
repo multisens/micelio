@@ -17,12 +17,11 @@ function ExpDetails() {
   const [answerGroups, setAnswerGroups] = useState([]);
   const [groupExport, setGroupExport] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  const data = [{nome: 'Pedro',
-                sobrenome: 'Telles'}]
+  const [fileName, setFileName] = useState('');
 
   useEffect(() => {
     getExperimentById();
+    getAnswers(1);
   }, [])
 
   const getExperimentById = async () => {
@@ -38,15 +37,21 @@ function ExpDetails() {
     }
   }
 
-  const exportAnswers = async (event, done) => {
-    const $exportSselect = document.getElementById('export-select').value;
+  const getAnswers = selected => {
+    try{
+      Api.get(`/expDetails/${params.id}/${selected}`).then((expResponse) => {
+        setGroupExport(expResponse.data.data);
+        setFileName(`Respostas_Grupo_${selected}.csv`);
+      })
+    }catch (e) {
+
+    }
+  }
+
+  const exportAnswers = (event, done) => {
     if(!isLoading){
       setIsLoading(true);
       try{
-        const expResponse = await Api.post(`/expDetails/${params.id}`, {
-          group: $exportSselect
-        })
-        setGroupExport([expResponse.data.data]);
         setIsLoading(false);
         done(true);
       } catch (e) {
@@ -74,7 +79,7 @@ function ExpDetails() {
                 <span><strong>Total de participantes:</strong> {experiment.partTotal}</span>
               </div>
               <div className={'exp-export'}>
-                <select id={'export-select'} className={'export-select'}>
+                <select id={'export-select'} className={'export-select'} onChange={e => {getAnswers(e.target.value)}}>
                   <option value={1}>Grupo 1</option>
                   <option value={2}>Grupo 2</option>
                   <option value={3}>Grupo 3</option>
@@ -82,7 +87,7 @@ function ExpDetails() {
                 </select>
                 <CSVLink className={'export-button'}
                          data={groupExport}
-                         filename={'teste.csv'}
+                         filename={fileName}
                          asyncOnClick={true}
                          onClick={exportAnswers}>
                   {(isLoading) 
