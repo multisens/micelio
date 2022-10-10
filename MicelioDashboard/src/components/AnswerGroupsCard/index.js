@@ -1,6 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import {AiOutlineSync, AiOutlineCheck} from 'react-icons/ai'
+import {AiOutlineEllipsis, AiOutlineCheck} from 'react-icons/ai'
 
 const Hr = () => {
   return (
@@ -36,8 +35,8 @@ function AnswerGroupsCard(props) {
                 </td>
                 <td className='text-ended'>
                   {(list.has_ended_exp === 'S')
-                   ? (<AiOutlineCheck size={22} color={'#2A9D8F'} alt={'Finalizado'}/>)
-                   : (<AiOutlineSync size={22} color={'#727272'} alt={'Em andamento'}/>)}
+                   ? (<AiOutlineCheck size={22} color={'#2A9D8F'}/>)
+                   : (<AiOutlineEllipsis size={22} color={'#727272'}/>)}
                 </td>
               </tr>
             )

@@ -8,8 +8,8 @@
 }
 
 .expinfo-container .expinfo-avatar {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     background-color: white;
     border-radius: 8px;
     border: 1px solid #bfbfbf;
@@ -41,8 +41,36 @@
     margin-top: 8px;
 }
 
-/*
-.gameinfo span + .gameinfo span {
-    margin-top: 5px;
+.expinfo-container .exp-export {
+    margin-left: 50px;
+    display: flex;
+    align-items: flex-end;
 }
-*/
+
+select.export-select {
+    padding: 3px 10px;
+    font-size: 14px;
+}
+
+.export-button {
+    background-color: #264653;
+    color: white;
+
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+
+    margin-left: 10px;
+    border-radius: 8px;
+    padding: 3px 20px;
+
+    transition: all .2s;
+    outline: none;
+}
+
+.export-button:hover {
+    background-color: #1a313a;
+    color: #e5e5e5;
+
+    transform: scale(1.02, 1.02);
+}

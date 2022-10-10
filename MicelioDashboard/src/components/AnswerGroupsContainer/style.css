@@ -60,6 +60,10 @@
     color: #2A9D8F;
 }
 
+.card-content table{
+    border-spacing: 6px;
+}
+
 .text-content{
     text-align: left;
 }

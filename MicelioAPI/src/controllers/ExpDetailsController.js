@@ -93,6 +93,15 @@ class ExpDetailsController {
         return response.json({expDetails, groupsArray});
     }
 
+    async export (request, response) {
+      
+      const {experiment_id} = request.params
+      const {group} = request.body
+
+      console.log(group, experiment_id)
+
+      return response.json({ok: true, data: [{nome: 'Pedro', sobrenome: 'Telles'}]});
+    }
 }
 
 module.exports = ExpDetailsController;

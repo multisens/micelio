@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
+import { CSVLink } from 'react-csv';
 
 import './style.css';
 
@@ -14,7 +15,11 @@ function ExpDetails() {
 
   const [experiment, setExperiment] = useState(null);
   const [answerGroups, setAnswerGroups] = useState([]);
-  const [partTotal, setPartTotal] = useState(0);
+  const [groupExport, setGroupExport] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const data = [{nome: 'Pedro',
+                sobrenome: 'Telles'}]
 
   useEffect(() => {
     getExperimentById();
@@ -26,17 +31,29 @@ function ExpDetails() {
 
       const {expDetails: expData} = expResponse.data;
       const {groupsArray: groupData} = expResponse.data;
-      const {countTotal: countData} = expResponse.data;
       setExperiment(expData);
       setAnswerGroups(groupData);
-      setPartTotal(countData);
     }catch (e) {
       // todo: jogo não encontrado
     }
   }
 
-  const filterGroupsList = () => {
-    alert(1);
+  const exportAnswers = async (event, done) => {
+    const $exportSselect = document.getElementById('export-select').value;
+    if(!isLoading){
+      setIsLoading(true);
+      try{
+        const expResponse = await Api.post(`/expDetails/${params.id}`, {
+          group: $exportSselect
+        })
+        setGroupExport([expResponse.data.data]);
+        setIsLoading(false);
+        done(true);
+      } catch (e) {
+        setIsLoading(false);
+        done(false);
+      }
+    }
   }
 
   return (
@@ -56,10 +73,27 @@ function ExpDetails() {
                 <span><strong>Finalizados:</strong> {experiment.partEnded}</span>
                 <span><strong>Total de participantes:</strong> {experiment.partTotal}</span>
               </div>
+              <div className={'exp-export'}>
+                <select id={'export-select'} className={'export-select'}>
+                  <option value={1}>Grupo 1</option>
+                  <option value={2}>Grupo 2</option>
+                  <option value={3}>Grupo 3</option>
+                  <option value={4}>Grupo 4</option>
+                </select>
+                <CSVLink className={'export-button'}
+                         data={groupExport}
+                         filename={'teste.csv'}
+                         asyncOnClick={true}
+                         onClick={exportAnswers}>
+                  {(isLoading) 
+                   ? 'Carregando...'
+                   : 'Exportar'}
+                </CSVLink>
+              </div>
             </div>
             <br/><br/>
             <div>
-              <AnswerGroupsContainer title="Lista de Participantes" onSearch={filterGroupsList}>
+              <AnswerGroupsContainer title="Lista de Participantes">
               {
                 answerGroups.length > 0 ? answerGroups.map((aG) => {
                   return (<AnswerGroupsCard key={aG.group_id}
