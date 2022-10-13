@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {ToastContainer, toast} from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { CSVLink } from 'react-csv';
 
@@ -11,6 +12,8 @@ import Api from "../../services/Api";
 
 function ExpDetails() {
 
+  const ref = React.useRef(null)
+
   const params = useParams();
 
   const [experiment, setExperiment] = useState(null);
@@ -19,9 +22,14 @@ function ExpDetails() {
   const [isLoading, setIsLoading] = useState(false);
   const [fileName, setFileName] = useState('');
 
+  const [groups, setGroups] = useState([0,1,2,3,4]);
+  const [group, setGroup] = useState(0);
+  const [form, setForm] = useState('I');
+  const [textForm, setTextForm] = useState('Inicial');
+
+
   useEffect(() => {
     getExperimentById();
-    getAnswers(1);
   }, [])
 
   const getExperimentById = async () => {
@@ -37,31 +45,51 @@ function ExpDetails() {
     }
   }
 
-  const getAnswers = selected => {
-    try{
-      Api.get(`/expDetails/${params.id}/${selected}`).then((expResponse) => {
-        setGroupExport(expResponse.data.data);
-        setFileName(`Respostas_Grupo_${selected}.csv`);
-      })
-    }catch (e) {
-
-    }
-  }
-
-  const exportAnswers = (event, done) => {
-    if(!isLoading){
+  const getAnswers = async () => {
+    if (!isLoading) {
       setIsLoading(true);
       try{
+        await Api.get(`/expDetails/${params.id}/${form}/${group}`).then((expResponse) => {
+          setGroupExport(expResponse.data.data);
+          setFileName(`${experiment.txt_experiment_name}_Quest ${textForm}.csv`);
+          if(expResponse.data.notFound){
+            toast.error('Não há dados para os filtros selecionados.')
+            return;
+          }
+          ref.current.link.click();
+        })
         setIsLoading(false);
-        done(true);
-      } catch (e) {
+      }catch (e) {
+        toast.error('Algo deu errado na recuperação dos dados para exportação.')
         setIsLoading(false);
-        done(false);
       }
     }
   }
 
+  const setExpGroups = sel => {
+    setForm(sel)
+    if (sel === 'I' || sel === 'F') {
+      setGroups([0,1,2,3,4])
+      setGroup(0)
+      if(sel === 'I') {
+        setTextForm('Inicial')
+      } else {
+        setTextForm('Final')
+      }
+    } else if (sel === 'G') {
+      setGroups([0,2,4])
+      setGroup(0)
+      setTextForm('Jogo')
+    } else {
+      setGroups([1])
+      setGroup(1)
+      setTextForm('Especifico')
+    }
+  }
+
   return (
+    <>
+      <ToastContainer />
       <PageFormat menuSelected={'dashboard'}>
         <div className="dashboard-container">
         {experiment && (
@@ -79,22 +107,34 @@ function ExpDetails() {
                 <span><strong>Total de participantes:</strong> {experiment.partTotal}</span>
               </div>
               <div className={'exp-export'}>
-                <select id={'export-select'} className={'export-select'} onChange={e => {getAnswers(e.target.value)}}>
-                  <option value={1}>Grupo 1</option>
-                  <option value={2}>Grupo 2</option>
-                  <option value={3}>Grupo 3</option>
-                  <option value={4}>Grupo 4</option>
+                <div>
+                  <strong>Questionário:&nbsp;</strong>
+                  <select id={'export-select'} className={'export-select'} onChange={e => {setExpGroups(e.target.value)}}>
+                    <option value={'I'}>Inicial</option>
+                    {(experiment.has_game_form === 'S') ? <option value={'G'}>sobre o Jogo</option> : ''}
+                    <option value={'E'}>Específico</option>
+                    <option value={'F'}>Final</option>
+                  </select>
+                </div>
+                <select id={'export-select'} className={'export-select'} onChange={e => {setGroup(e.target.value)}}>
+                  {groups.map(g => {
+                    return(
+                      <option value={g}>{(g === 0) ? 'Todos' : 'Grupo ' + g}</option>
+                    )
+                  })}
                 </select>
-                <CSVLink className={'export-button'}
-                         data={groupExport}
-                         filename={fileName}
-                         asyncOnClick={true}
-                         onClick={exportAnswers}>
+              </div>
+              <button className={'export-button'}
+                       onClick={getAnswers}>
                   {(isLoading) 
                    ? 'Carregando...'
                    : 'Exportar'}
-                </CSVLink>
-              </div>
+              </button>
+              <CSVLink className={'export-csvlink'}
+                       data={groupExport}
+                       filename={fileName}
+                       ref={ref}
+                       target='_blank'/>
             </div>
             <br/><br/>
             <div>
@@ -114,6 +154,7 @@ function ExpDetails() {
         )}
         </div>
       </PageFormat>
+    </>
   ) 
 }
 

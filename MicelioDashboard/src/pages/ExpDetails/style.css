@@ -31,7 +31,7 @@
     justify-content: flex-end;
 
 }
-.expinfo strong {
+strong {
     color: #264653;
 }
 .expinfo span {
@@ -44,25 +44,32 @@
 .expinfo-container .exp-export {
     margin-left: 50px;
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    align-items: end;
+    justify-content: flex-end;
 }
 
 select.export-select {
     padding: 3px 10px;
     font-size: 14px;
+    margin-top: 8px;
 }
 
 .export-button {
     background-color: #264653;
     color: white;
 
-    font-weight: 500;
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+
+    font-weight: 600;
     font-size: 16px;
     cursor: pointer;
 
     margin-left: 10px;
     border-radius: 8px;
-    padding: 3px 20px;
+    padding: 4px 20px;
 
     transition: all .2s;
     outline: none;
@@ -73,4 +80,8 @@ select.export-select {
     color: #e5e5e5;
 
     transform: scale(1.02, 1.02);
+}
+
+.export-csvlink {
+    display: none;
 }

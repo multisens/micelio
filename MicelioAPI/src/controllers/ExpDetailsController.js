@@ -11,9 +11,10 @@ class ExpDetailsController {
         const user_id = decodedToken.sub;
     
         const expDetails = await knex('Experiment as e')
-          .select('e.txt_experiment_name', 'hep.user_id', 'mu.username', 'hep.has_exp_permission_id')
+          .select('e.txt_experiment_name', 'hep.user_id', 'mu.username', 'hep.has_exp_permission_id', 'g.has_game_form')
           .innerJoin('HasExpPermission as hep', 'hep.experiment_id', 'e.experiment_id')
           .innerJoin("MicelioUser as mu", 'mu.user_id', 'hep.user_id')
+          .innerJoin('GameStageTwo as g', 'g.experiment_id', 'e.experiment_id')
           .where('e.experiment_id', experiment_id)
           .andWhere('hep.user_id', user_id).first();
 
@@ -40,7 +41,7 @@ class ExpDetailsController {
         const group1 = [], group2 = [], group3 = [], group4 = []
         let count = [0,0,0,0]
 
-        if (partList) {
+        if (partListAux.length > 0) {
           for (let i=0;i<countTotal;i++) {
             if (partListAux[i].group_id === '1'){
               group1.push({ participant_id: partListAux[i].participant_id
@@ -95,21 +96,101 @@ class ExpDetailsController {
 
     async export (request, response) {
       
-      const {experiment_id, group_id} = request.params
+      const {experiment_id, form, group_id} = request.params
 
-      const array = []
-
-      if (group_id === '1') {
-        array.push({nome: 'Pedro', sobrenome: '1'})
-      } else if (group_id === '2') {
-        array.push({nome: 'Pedro', sobrenome: '2'})
-      } else if (group_id === '3') {
-        array.push({nome: 'Pedro', sobrenome: '3'})
+      let groupAux = []
+      if (group_id === '0') {
+        if (form === 'I' || form === 'F') {
+          groupAux = ['1','2','3','4']
+        } else {
+          groupAux = ['2','4']
+        }
       } else {
-        array.push({nome: 'Pedro', sobrenome: '4'})
+        groupAux = [group_id]
       }
 
-      return response.json({ok: true, data: array});
+      const questions = await knex('Questions as q')
+                       .innerJoin('Form as f', 'f.form_id', 'q.form_id')
+                       .select('q.question_id', 'q.txt_question')
+                       .where('f.experiment_id', experiment_id)
+                       .andWhere('f.ind_stage', form)
+                       .orderBy(['q.ind_order']);
+
+      const questionsAux = JSON.parse(JSON.stringify(questions));
+
+      const answers = await knex('Participant as p')
+                     .innerJoin('Answers as a', 'a.participant_id', 'p.participant_id')
+                     .innerJoin('Questions as q', 'q.question_id', 'a.question_id')
+                     .innerJoin('Form as f', 'f.form_id', 'q.form_id')
+                     .select('p.participant_id', 'a.question_id', 'a.txt_answer', 'p.group_id')
+                     .where('p.experiment_id', experiment_id)
+                     .whereIn('p.group_id', groupAux)
+                     .andWhere('f.ind_stage', form)
+                     .orderBy(['p.group_id', 'p.participant_id', 'q.ind_order']);
+      
+      const answersAux = JSON.parse(JSON.stringify(answers));
+
+      if (answersAux.length <= 0) {
+        return response.json({notFound: true, data: []});
+      }
+
+      const final = []
+      const header = ['Participantes', 'Grupo']
+
+      const details = []
+      let detailsAux = []
+
+      let questAdded = false
+      let firstQuest = true
+
+      let partIdAux = answersAux[0].participant_id
+      if (questionsAux.length > 0){
+        questionsAux.forEach(q => {
+          header.push(q.txt_question)
+
+          if (answersAux.length > 0) {
+            answersAux.forEach(a => {
+
+              if (a.participant_id !== partIdAux) {
+                if (!questAdded) {
+                  detailsAux.push('')
+                }
+                questAdded = false
+                partIdAux = a.participant_id
+              }
+
+              if (firstQuest) {
+                detailsAux = []
+                detailsAux.push(a.participant_id)
+                detailsAux.push(a.group_id)
+              } else {
+                details.forEach(d => {
+                  if (d[0] === a.participant_id) {
+                    detailsAux = d
+                  }
+                })
+              }
+
+              if (q.question_id === a.question_id) {
+                detailsAux.push(a.txt_answer)
+                questAdded = true
+              } else {
+                return;
+              }
+
+              if (firstQuest) {
+                details.push(detailsAux)
+              }
+            })
+          }
+          firstQuest = false
+        })
+      }
+
+      final.push(header)
+      details.forEach(d => {final.push(d)})
+
+      return response.json({ok: true, data: final});
     }
 }
 
