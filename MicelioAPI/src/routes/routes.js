@@ -18,7 +18,7 @@ Router.use("/user", LogMiddleware, UserRoutes)
 Router.use("/game", LogMiddleware, GameRoutes)
 Router.use('/visualization', LogMiddleware, VisualizacaoRoutes);
 Router.use("/device", LogMiddleware, TokenMiddleware, DeviceRoutes)
-Router.use("/session", LogMiddleware, TokenMiddleware, SessionRoutes)
+Router.use("/session", LogMiddleware, SessionRoutes)
 Router.use("/activity", LogMiddleware, ActivityRoutes)
 Router.use("/group", LogMiddleware, GroupRoutes)
 Router.use("/about", AboutRoutes)

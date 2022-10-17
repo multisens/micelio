@@ -29,7 +29,6 @@ export default function GamePage(props) {
       <>
         <Box h={'100vh'}>
           <Header/>
-
           <Container maxW={'container.xl'} mt={10}>
             <Link href={'/home'}>
               <Text display={'flex'} alignItems={'center'} cursor={'pointer'} fontSize={16}>
@@ -82,7 +81,7 @@ export default function GamePage(props) {
                     <GroupTab gameId={gameId} groups={groups}/>
                   </TabPanel>
                   <TabPanel mt={5}>
-                    <VisualizationTab />
+                    <VisualizationTab gameId={gameId}/>
                   </TabPanel>
                   <TabPanel mt={5}>
                     <VisualizationGroupTab />

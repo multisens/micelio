@@ -6,6 +6,8 @@ const DeviceIDMiddleware = require('../middleware/DeviceIDMiddleware');
 const Router = express.Router();
 const sessionController = new SessionController;
 
+Router.get('/:game_id', sessionController.get)
+
 Router.post('/', DeviceIDMiddleware, sessionController.create);
 Router.post('/test', DeviceIDMiddleware, sessionController.create);
 
