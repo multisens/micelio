@@ -1,35 +1,34 @@
 import {
-  Box,
   Button,
-  Flex, Grid, GridItem, Input,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent, ModalFooter,
-  ModalHeader,
-  ModalOverlay,
+  Flex, Grid, GridItem,
   Text
 } from '@chakra-ui/react';
 import {AiOutlineGroup} from 'react-icons/ai'
 import {useEffect, useState} from "react";
 import {ToastContainer, toast} from "react-toastify";
-import Api from "../../../services/Api";
 import GroupCard from "../../GroupCard";
+import CreateGroupModal from "../../_modals/CreateGroupModal";
 
 export default function GroupTab({gameId, groups}) {
   const [isGroupModalOpen, setIsGroupModalOpen] = useState(false)
+  const [groupList, setGroupList] = useState(groups)
 
   return (
       <>
-        <NewGroupModal isOpen={isGroupModalOpen} onClose={() => setIsGroupModalOpen(false)} gameId={gameId}/>
+        <CreateGroupModal isOpen={isGroupModalOpen} onClose={() => setIsGroupModalOpen(false)} gameId={gameId} onCreateGroup={({id, name}) => {
+          setGroupList([...groupList, {
+            session_group_id: id,
+            name
+          }])
+        }}/>
         <ToastContainer/>
         <Flex justifyContent={'end'}>
           <Button variant={'primary'} onClick={() => setIsGroupModalOpen(true)}>Criar grupo</Button>
         </Flex>
         <Flex>
           <Grid templateColumns={'1fr 1fr'} gap={5}>
-            {groups && groups.map(group => (
-                <GridItem>
+            {groupList && groupList.map(group => (
+                <GridItem key={group.session_group_id}>
                   <GroupCard id={group.session_group_id} name={group.name} />
                 </GridItem>
             ))}
@@ -41,46 +40,4 @@ export default function GroupTab({gameId, groups}) {
         </Flex>
       </>
   );
-}
-
-const NewGroupModal = ({gameId, isOpen, onClose}) => {
-  const [newGroupName, setNewGroupName] = useState()
-
-  const doCreateGroup = async () => {
-    try {
-      const response = await Api.post("/group", {game_id: gameId, name: newGroupName})
-
-      const group_id = response.data.group_id
-      setGroupCreated(group_id)
-
-      toast.success(`Grupo ${group_id} criado com sucesso`)
-    } catch (e) {
-      toast.error('Erro ao criar grupo. Por favor, tente novamente.')
-      console.error(e)
-    }
-
-  }
-
-  return (
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay/>
-        <ModalContent>
-          <ModalHeader>Criar grupo</ModalHeader>
-          <ModalCloseButton/>
-          <ModalBody>
-            <Input placeholder={'Nome do grupo'} w={'100%'} value={newGroupName}
-                   onChange={e => setNewGroupName(e.target.value)}/>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button variant='ghost' onClick={onClose}>Cancelar</Button>
-            <Button variant={'primary'} ms={3} onClick={doCreateGroup}>
-              Criar grupo
-            </Button>
-
-            <br/>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-  )
 }

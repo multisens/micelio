@@ -10,8 +10,10 @@ import {FaShareAlt} from 'react-icons/fa';
 import GroupTab from '../../components/GameTabs/GroupTab';
 import VisualizationTab from "../../components/GameTabs/VisualizationTab";
 import VisualizationGroupTab from "../../components/GameTabs/VisualizationGroupTab";
+import ShareModal from "../../components/_modals/ShareModal";
 
 export default function GamePage(props) {
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [currentGame, setCurrentGame] = useState(null);
   const [groups, setGroups] = useState()
   const router = useRouter();
@@ -27,6 +29,7 @@ export default function GamePage(props) {
 
   return (
       <>
+        <ShareModal gameId={gameId} isOpen={isShareModalOpen} onClose={() => setIsShareModalOpen(false)} />
         <Box h={'100vh'}>
           <Header/>
           <Container maxW={'container.xl'} mt={10}>
@@ -62,7 +65,7 @@ export default function GamePage(props) {
                     <strong>Criador:</strong> {currentGame?.username}
                   </Text>
                 </Box>
-                <Button mt={8} fontWeight={'bold'}>
+                <Button mt={8} fontWeight={'bold'} onClick={() => setIsShareModalOpen(!isShareModalOpen)}>
                   <FaShareAlt style={{marginRight: 4}}/>
                   Compartilhar
                 </Button>

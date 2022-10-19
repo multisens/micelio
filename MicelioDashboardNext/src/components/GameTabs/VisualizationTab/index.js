@@ -3,12 +3,15 @@ import {AiOutlineAreaChart} from 'react-icons/ai'
 import Api from "../../../services/Api";
 import {useEffect, useState} from "react";
 import {BsPencilSquare} from "react-icons/bs";
+import CreateVisualizationModal from "../../_modals/CreateVisualizationModal";
 
 export default function VisualizationTab({gameId}) {
   const [visualizations, setVisualizations] = useState([])
   const [currentVisualization, setCurrentVisualization] = useState({})
   const [sessionList, setSessionList] = useState([])
   const [currentSession, setCurrentSession] = useState({})
+
+  const [isVisualizationModalOpen, setIsVisualizationModalOpen] = useState(false)
 
   useEffect(() => {
     getVisualizations()
@@ -36,8 +39,9 @@ export default function VisualizationTab({gameId}) {
 
   return (
       <>
+        <CreateVisualizationModal isOpen={isVisualizationModalOpen} gameId={gameId} onClose={() => {setIsVisualizationModalOpen(false)}}/>
         <Flex justifyContent={'end'}>
-          <Button variant={'primary'}>Criar visualização</Button>
+          <Button variant={'primary'} onClick={()=>setIsVisualizationModalOpen(true)}>Criar visualização</Button>
         </Flex>
         <Flex w={'100%'} flexDirection={'column'} mt={5}>
           <Box display={currentVisualization?.id ? 'none' : 'block'}>

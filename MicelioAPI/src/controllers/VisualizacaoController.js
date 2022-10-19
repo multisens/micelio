@@ -96,6 +96,7 @@ class VisualizacaoController {
 
     }
     catch(e){
+      console.log(e.message)
       return response.status(400).json({error: 'Cannot connect to database, try again later'});
     }
   }

@@ -35,30 +35,6 @@ export default function HomePage() {
   }, [])
 
 
-  // useEffect(() => {
-  //   const loadPage = async () => {
-  //     if (!user) {
-  //       await router.push('/login');
-  //     }
-  //
-  //     if (gameList.length === 0) {
-  //       try {
-  //         console.log('Request')
-  //         const response = await Api.get('/game')
-  //         setGameList(response.data.data)
-  //
-  //       } catch (e) {
-  //         const msg = e.response ? e.response.data.error : 'Houve um erro ao entrar. Por favor, tente novamente.';
-  //         toast.error(msg);
-  //       }
-  //     }
-  //   }
-  //
-  //   loadPage()
-  //
-  // }, [user]);
-
-
   return (
       <>
         <ToastContainer/>
