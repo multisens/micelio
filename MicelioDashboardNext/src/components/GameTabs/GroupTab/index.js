@@ -11,15 +11,14 @@ import CreateGroupModal from "../../_modals/CreateGroupModal";
 
 export default function GroupTab({gameId, groups}) {
   const [isGroupModalOpen, setIsGroupModalOpen] = useState(false)
-  const [groupList, setGroupList] = useState(groups)
 
   return (
       <>
         <CreateGroupModal isOpen={isGroupModalOpen} onClose={() => setIsGroupModalOpen(false)} gameId={gameId} onCreateGroup={({id, name}) => {
-          setGroupList([...groupList, {
+          groups.push({
             session_group_id: id,
             name
-          }])
+          })
         }}/>
         <ToastContainer/>
         <Flex justifyContent={'end'}>
@@ -27,7 +26,7 @@ export default function GroupTab({gameId, groups}) {
         </Flex>
         <Flex>
           <Grid templateColumns={'1fr 1fr'} gap={5}>
-            {groupList && groupList.map(group => (
+            {groups && groups.map(group => (
                 <GridItem key={group.session_group_id}>
                   <GroupCard id={group.session_group_id} name={group.name} />
                 </GridItem>

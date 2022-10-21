@@ -34,10 +34,10 @@ export default function GamePage(props) {
           <Header/>
           <Container maxW={'container.xl'} mt={10}>
             <Link href={'/home'}>
-              <Text display={'flex'} alignItems={'center'} cursor={'pointer'} fontSize={16}>
+              <Flex display={'flex'} alignItems={'center'} cursor={'pointer'} fontSize={16}>
                 <FiArrowLeft style={{marginRight: 5}} size={18}/>
                 <Text>Voltar</Text>
-              </Text>
+              </Flex>
             </Link>
             <Flex mt={5}>
               <Flex
