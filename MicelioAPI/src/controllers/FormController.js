@@ -18,7 +18,7 @@ class FormController {
 	async create(request, response) {
 
         const {experiment_id} = request.params
-        const {username, email} = request.body;
+        const {username, email, sessionGroup} = request.body;
 
         if(!experiment_id){
             return response.status(400).json({error: "Missing experiment id"});
@@ -26,6 +26,17 @@ class FormController {
 
         if(!username || !email){
             return response.status(400).json({error: "Missing username or email"});
+        }
+
+        if (sessionGroup) {
+            const sessionGroupId = await knex('SessionGroupExp as s')
+              .select('s.session_group_id as sessionGroupId')
+              .where('s.session_group_id', sessionGroup)
+              .andWhere('s.experiment_id', experiment_id);
+        
+            if (sessionGroupId.length <= 0) {
+                return response.status(201).json({error: "session_group_empty"});
+            }
         }
 
         const part_id = await knex('Participant')
@@ -56,7 +67,8 @@ class FormController {
                 txt_email: email,
                 group_id,
                 experiment_id,
-                has_ended_exp: 'N'
+                has_ended_exp: 'N',
+                session_group_id: sessionGroup
             }
 
 			const userInsert = await trx('Participant').insert(userData);

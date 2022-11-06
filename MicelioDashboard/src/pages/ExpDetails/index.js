@@ -27,6 +27,8 @@ function ExpDetails() {
   const [form, setForm] = useState('I');
   const [textForm, setTextForm] = useState('Inicial');
 
+  const [sessionGroupExp, setSessionGroupExp] = useState('0');
+
 
   useEffect(() => {
     getExperimentById();
@@ -49,7 +51,7 @@ function ExpDetails() {
     if (!isLoading) {
       setIsLoading(true);
       try{
-        await Api.get(`/expDetails/${params.id}/${form}/${group}`).then((expResponse) => {
+        await Api.get(`/expDetails/${params.id}/${form}/${group}/${sessionGroupExp}`).then((expResponse) => {
           setGroupExport(expResponse.data.data);
           setFileName(`${experiment.txt_experiment_name}_Quest ${textForm}.csv`);
           if(expResponse.data.notFound){
@@ -116,13 +118,26 @@ function ExpDetails() {
                     <option value={'F'}>Final</option>
                   </select>
                 </div>
-                <select id={'export-select'} className={'export-select'} onChange={e => {setGroup(e.target.value)}}>
-                  {groups.map(g => {
-                    return(
-                      <option value={g}>{(g === 0) ? 'Todos' : 'Grupo ' + g}</option>
-                    )
-                  })}
-                </select>
+                <div>
+                  <strong>Grupo:&nbsp;</strong>
+                  <select id={'export-select'} className={'export-select'} onChange={e => {setGroup(e.target.value)}}>
+                    {groups.map(g => {
+                      return(
+                        <option value={g}>{(g === 0) ? 'Todos' : g}</option>
+                      )
+                    })}
+                  </select>
+                </div>
+                <div>
+                  <strong>Grupo de sessão:&nbsp;</strong>
+                  <select id={'export-select'} className={'export-select'} onChange={e => {setSessionGroupExp(e.target.value)}}>
+                    {experiment.sessionGroups.map(e => {
+                      return(
+                        <option value={e}>{(e === '0') ? '' : e}</option>
+                      )
+                    })}
+                  </select>
+                </div>
               </div>
               <button className={'export-button'}
                        onClick={getAnswers}>

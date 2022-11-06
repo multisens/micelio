@@ -31,6 +31,10 @@ function Experiment() {
   const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
   const [shareLink, setShareLink] = useState('');
 
+  const [isGroupPopupOpen, setIsGroupPopupOpen] = useState(false);
+  const [sessionGroup, setSessionGroup] = useState();
+  const [sessionGroupExp, setSessionGroupExp] = useState();
+  
   const location = useLocation();
 
   useEffect(() => {
@@ -88,13 +92,46 @@ function Experiment() {
   }
 
   const openSharePopup = experiment_id => {
-    setShareLink(`https://cursa.eic.cefet-rj.br/micelio/form/${experiment_id}`); // link está cravado, desculpa por isso
+    const link = window.location.href.replace('experiment', 'form')
+    setShareLink(`${link}/${experiment_id}`);
     setIsSharePopupOpen(true);
   }
 
   const copyLink = () => {
     navigator.clipboard.writeText(shareLink);
     toast.success('Link copiado com sucesso.', {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}});
+  }
+
+  const addSessionGroup = exp => {
+    setSessionGroupExp(exp);
+    setIsGroupPopupOpen(true);
+  }
+
+  const doAddSessionGroup = async event => {
+    event.preventDefault()
+
+    try {
+      const response = await Api.post(`/experiment/${sessionGroupExp}`, {
+        session_group_id: sessionGroup
+      })
+      
+      if(response.data.error === 'no_data_found'){
+        return toast.error(`Grupo de sessão ${sessionGroup} não cadastrado.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+      } else if (response.data.error === 'already_registered') {
+        return toast.error(`Grupo de sessão ${sessionGroup} já cadastrado para esse experimento.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+      }
+
+      setIsGroupPopupOpen(false)
+      setSessionGroup('')
+
+      toast.success('Cadastrado com sucesso', {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+
+      updateExperimentList()
+
+    }catch (e) {
+      console.log(e.response.data)
+      toast.error(`Não foi possível efetuar cadastro. Por favor, tente novamente.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+    }
   }
 
   const filterExperimentList = (keyboardEvent) => {
@@ -143,6 +180,15 @@ function Experiment() {
         </div>
       </Popup>
 
+      <Popup isOpen={isGroupPopupOpen} onClose={() => {setIsGroupPopupOpen(false)}}>
+        <h2>Adicione um grupo de sessão</h2>
+        <form onSubmit={doAddSessionGroup}>
+          <input required type="text" className="primary" placeholder={'Digite o código do grupo...'} value={sessionGroup}
+                 onChange={e => setSessionGroup(e.target.value)}/>
+          <button className="primary">Adicionar</button>
+        </form>
+      </Popup>
+
       <Popup isOpen={isPopupOpen} onClose={() => {setIsPopupOpen(false)}}>
         <h2>Cadastre um novo experimento</h2>
         <form onSubmit={doCreateExperiment}>
@@ -164,8 +210,10 @@ function Experiment() {
                                         id={exp.experiment_id}
                                         name={exp.txt_experiment_name}
                                         game={exp.gameName}
+                                        groups={exp.groups}
                                         isOwner={1}
-                                        onShare={() => {openSharePopup(exp.experiment_id)}} />);
+                                        onShare={() => {openSharePopup(exp.experiment_id)}} 
+                                        addGroup={() => {addSessionGroup(exp.experiment_id)}} />);
               }) : (<span>Não há experimentos cadastrados</span>)
             }
           </ExperimentCards>

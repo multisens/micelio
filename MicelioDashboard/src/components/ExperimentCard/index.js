@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import {AiOutlineForm, AiOutlineShareAlt, AiOutlineCrown} from 'react-icons/ai'
+import {AiOutlineForm, AiOutlineShareAlt, AiOutlineCrown, AiOutlineFolderAdd} from 'react-icons/ai'
 
 
 const Hr = () => {
@@ -29,8 +29,14 @@ function ExperimentCard(props) {
       <Hr/>
       <div className={'card-content'}>
         <p><b>Jogo vinculado: </b>{props.game}</p>
+        {props.groups.length > 0 ? 
+          <p><b>Grupo(s) de Sessão vinculado(s): </b><br/>{props.groups}</p>
+          : ''}
       </div>
       <div className={'card-options'}>
+        <div className={'card-option'} onClick={props.addGroup}>
+          <AiOutlineFolderAdd size={26}/>
+        </div>
         <div className={'card-option'} onClick={() => {history.push(`/consentTerm/${props.id}`)}}>
           <AiOutlineForm size={25}/>
         </div>

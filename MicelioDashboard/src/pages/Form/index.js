@@ -17,6 +17,7 @@ function Form () {
 
     const [username, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [sessionGroup, setSessionGroup] = useState('');
     const [confirm, setConfirm] = useState('');
     const [consentTerm, setConsentTerm] = useState('');
 
@@ -38,8 +39,11 @@ function Form () {
         event.preventDefault();
         
         try {
-            const userResponse = await Api.post(`/form/${params.id}`, {username, email});
+            const userResponse = await Api.post(`/form/${params.id}`, {username, email, sessionGroup});
 
+            if (userResponse.data.error === 'session_group_empty') {
+                return toast.error(`Grupo de sessão não existe ou não cadastrado para este experimento.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+            }
             if(!userResponse.data.ok){
                 toast.error(`E-mail já cadastrado no experimento.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
             }
@@ -74,6 +78,10 @@ function Form () {
                                     <input required className={'primary'} type="email" name={'email'} placeholder={'Seu e-mail'} value={email}
                                         onChange={e => {
                                             setEmail(e.target.value)
+                                        }}/>
+                                    <input required className={'primary'} type="text" name={'sessionGroup'} placeholder={'Seu grupo de sessão, deixe vazio se não foi informado'} value={sessionGroup}
+                                        onChange={e => {
+                                            setSessionGroup(e.target.value)
                                         }}/>
                                 </div><br/><br/>
                                 <div className={'confirm-button'} id={'parent'}>

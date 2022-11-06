@@ -31,7 +31,7 @@ function AnswerGroupsCard(props) {
             return(
               <tr>
                 <td className='text-content'>
-                  {list.participant_id}
+                  {list.participant_id.slice(-12)}
                 </td>
                 <td className='text-ended'>
                   {(list.has_ended_exp === 'S')

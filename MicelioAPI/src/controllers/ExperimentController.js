@@ -17,9 +17,73 @@ class ExperimentController {
           .innerJoin('MicelioUser as mu', 'mu.user_id', 'hep.user_id')
           .innerJoin('Game as g', 'g.game_id', 'e.game_id')
           .where('mu.user_id', user_id);
-    
-        response.json({ok: true, data: userExperiments});
+
+        const userExpAux = JSON.parse(JSON.stringify(userExperiments));
+
+        for (let i=0;i<userExpAux.length;i++) {
+            const sessionGroupExp = await knex('SessionGroupExp as s')
+              .select('s.session_group_id')
+              .where('s.experiment_id', userExpAux[i].experiment_id);
+
+            const sessionGrupoExpAux = JSON.parse(JSON.stringify(sessionGroupExp));
+            const sGrpAux = sessionGrupoExpAux.map(s => {return s.session_group_id})
+
+            let str = ''
+            for (let j=0; j<sGrpAux.length;j++) {
+                if (str !== '') {
+                    str += ', '
+                }
+                str += sGrpAux[j]
+            }
+            userExpAux[i]['groups'] = str
+        }
+
+        response.json({ok: true, data: userExpAux});
 	}
+
+    async index(request, response) {
+        const {experiment_id} = request.params;
+        const {session_group_id} = request.body;
+
+        const sessionGroupId = await knex('SessionGroup as s')
+          .select('s.session_group_id as sessionGroupId')
+          .where('s.session_group_id', session_group_id);
+
+        if (sessionGroupId.length <= 0) {
+            return response.status(201).json({ok: false, error: 'no_data_found'});
+        }
+
+        const sessionGroupExpId = await knex('SessionGroupExp as s')
+          .select('s.session_group_id as sessionGroupExpId')
+          .where('s.session_group_id', session_group_id)
+          .andWhere('s.experiment_id', experiment_id);
+
+        if (sessionGroupExpId.length > 0) {
+            return response.status(201).json({ok: false, error: 'already_registered'});
+        }
+
+        const trx = await knex.transaction();
+
+        try{
+            const groupData = {
+                session_group_id,
+                experiment_id
+            }
+
+            const groupInsert = await trx('SessionGroupExp').insert(groupData);
+
+            if(!groupInsert){
+                await trx.rollback();
+                return response.status(400).json({error: 'Cannot insert the group, something went wrong'});
+            } else {
+                await trx.commit();
+                return response.status(201).json({ok: true});
+            }
+        } catch {
+            await trx.rollback();
+            return response.status(400).json({error: 'Cannot insert the experiment, try again later'});
+        }
+    }
 
 	async create(request, response) {
 

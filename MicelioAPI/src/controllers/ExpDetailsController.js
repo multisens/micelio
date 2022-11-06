@@ -36,6 +36,17 @@ class ExpDetailsController {
 
         const partListAux = JSON.parse(JSON.stringify(partList));
 
+        const sessionGroupExp = await knex('SessionGroupExp as s')
+                                     .select('s.session_group_id')
+                                     .where('s.experiment_id', experiment_id);
+                                    
+        const sGrpExp = JSON.parse(JSON.stringify(sessionGroupExp));
+
+        const sGrpExpAux = ['0']
+        sGrpExpAux.push(sGrpExp.map(s => {return s.session_group_id}))
+
+        expDetails.sessionGroups = sGrpExpAux
+
         const countTotal = partListAux.length
 
         const group1 = [], group2 = [], group3 = [], group4 = []
@@ -96,7 +107,7 @@ class ExpDetailsController {
 
     async export (request, response) {
       
-      const {experiment_id, form, group_id} = request.params
+      const {experiment_id, form, group_id, session_id} = request.params
 
       let groupAux = []
       if (group_id === '0') {
@@ -107,6 +118,11 @@ class ExpDetailsController {
         }
       } else {
         groupAux = [group_id]
+      }
+
+      let sessionAux = null
+      if (session_id > 0) {
+        sessionAux = session_id
       }
 
       const questions = await knex('Questions as q')
@@ -126,6 +142,7 @@ class ExpDetailsController {
                      .where('p.experiment_id', experiment_id)
                      .whereIn('p.group_id', groupAux)
                      .andWhere('f.ind_stage', form)
+                     .andWhere('p.session_group_id', sessionAux)
                      .orderBy(['p.group_id', 'p.participant_id', 'q.ind_order']);
       
       const answersAux = JSON.parse(JSON.stringify(answers));
