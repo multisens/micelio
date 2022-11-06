@@ -53,7 +53,11 @@ function ExpDetails() {
       try{
         await Api.get(`/expDetails/${params.id}/${form}/${group}/${sessionGroupExp}`).then((expResponse) => {
           setGroupExport(expResponse.data.data);
-          setFileName(`${experiment.txt_experiment_name}_Quest ${textForm}.csv`);
+          if (sessionGroupExp === '0') {
+            setFileName(`${experiment.txt_experiment_name}_Quest ${textForm}.csv`);
+          } else {
+            setFileName(`${experiment.txt_experiment_name}_Sessao ${sessionGroupExp}_Quest ${textForm}.csv`);
+          }
           if(expResponse.data.notFound){
             toast.error('Não há dados para os filtros selecionados.')
             return;
