@@ -54,7 +54,7 @@ const CreateGroupModal = ({gameId, isOpen, onClose, onCreateGroup}) => {
           <ModalFooter>
             <Button variant='ghost' onClick={() => {
               onClose()
-              setNewGroupName('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+              setNewGroupName('')
             }}>Cancelar</Button>
             <Button variant={'primary'} ms={3} onClick={doCreateGroup}>
               Criar grupo

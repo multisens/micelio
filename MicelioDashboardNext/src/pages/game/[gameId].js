@@ -1,100 +1,100 @@
 import styled from 'styled-components';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import Header from '../../components/Header';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Api from '../../services/Api';
-import {Box, Button, Container, Flex, Heading, Tab, TabList, TabPanel, TabPanels, Tabs, Text} from '@chakra-ui/react';
+import { Box, Button, Container, Flex, Heading, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react';
 import Link from 'next/link';
-import {FiArrowLeft} from 'react-icons/fi';
-import {FaShareAlt} from 'react-icons/fa';
+import { FiArrowLeft } from 'react-icons/fi';
+import { FaShareAlt } from 'react-icons/fa';
 import GroupTab from '../../components/GameTabs/GroupTab';
-import VisualizationTab from "../../components/GameTabs/VisualizationTab";
-import VisualizationGroupTab from "../../components/GameTabs/VisualizationGroupTab";
-import ShareModal from "../../components/_modals/ShareModal";
+import VisualizationTab from '../../components/GameTabs/VisualizationTab';
+import VisualizationGroupTab from '../../components/GameTabs/VisualizationGroupTab';
+import ShareModal from '../../components/_modals/ShareModal';
 
 export default function GamePage(props) {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [currentGame, setCurrentGame] = useState(null);
-  const [groups, setGroups] = useState()
+  const [groups, setGroups] = useState();
   const router = useRouter();
-  const {gameId} = router.query;
+  const { gameId } = router.query;
 
   useEffect(() => {
     Api.get(`/game/${gameId}`).then((response) => {
       console.log(response.data);
       setCurrentGame(response.data.game);
-      setGroups(response.data.groups)
+      setGroups(response.data.groups);
     });
   }, [gameId]);
 
   return (
-      <>
-        <ShareModal gameId={gameId} isOpen={isShareModalOpen} onClose={() => setIsShareModalOpen(false)} />
-        <Box h={'100vh'}>
-          <Header/>
-          <Container maxW={'container.xl'} mt={10}>
-            <Link href={'/home'}>
-              <Flex display={'flex'} alignItems={'center'} cursor={'pointer'} fontSize={16}>
-                <FiArrowLeft style={{marginRight: 5}} size={18}/>
-                <Text>Voltar</Text>
-              </Flex>
-            </Link>
-            <Flex mt={5}>
-              <Flex
-                  flexDir={'column'}
-                  flex={2}
-                  alignItems={'center'}
-                  boxShadow={'0 0 10px #cdcdcd'}
-                  bg={'white'}
-                  borderRadius={8}
-                  p={10}
-                  pb={5}
-                  maxW={'300px'}>
-                <GameImage>
-                  <Text>JT</Text>
-                </GameImage>
-                <Box mt={4}>
-                  <Heading>{currentGame?.name}</Heading>
-                  <hr style={{marginTop: 15, marginBottom: 15}}/>
-                </Box>
-                <Box bg={'gray.200'} w={'100%'} borderRadius={8} p={2}>
-                  <Text>
-                    <strong>Versão:</strong> {currentGame?.version}
-                  </Text>
-                  <Text>
-                    <strong>Criador:</strong> {currentGame?.username}
-                  </Text>
-                </Box>
-                <Button mt={8} fontWeight={'bold'} onClick={() => setIsShareModalOpen(!isShareModalOpen)}>
-                  <FaShareAlt style={{marginRight: 4}}/>
-                  Compartilhar
-                </Button>
-                <Button bg={'red'} color={'white'} mt={2} fontWeight={'bold'}>
-                  Deletar jogo
-                </Button>
-              </Flex>
-              <Tabs flex={1} variant="soft-rounded" colorScheme="facebook" ms={10} w={'100%'}>
-                <TabList>
-                  <Tab>Grupos</Tab>
-                  <Tab>Visualizações</Tab>
-                  <Tab>Grupos de visualização</Tab>
-                </TabList>
-                <TabPanels>
-                  <TabPanel mt={5}>
-                    <GroupTab gameId={gameId} groups={groups}/>
-                  </TabPanel>
-                  <TabPanel mt={5}>
-                    <VisualizationTab gameId={gameId}/>
-                  </TabPanel>
-                  <TabPanel mt={5}>
-                    <VisualizationGroupTab />
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
+    <>
+      <ShareModal gameId={gameId} isOpen={isShareModalOpen} onClose={() => setIsShareModalOpen(false)} />
+      <Box h={'100vh'}>
+        <Header />
+        <Container maxW={'container.xl'} mt={10}>
+          <Link href={'/home'}>
+            <Flex display={'flex'} alignItems={'center'} cursor={'pointer'} fontSize={16}>
+              <FiArrowLeft style={{ marginRight: 5 }} size={18} />
+              <Text>Voltar</Text>
             </Flex>
-          </Container>
-        </Box>
-      </>
+          </Link>
+          <Flex mt={5}>
+            <Flex
+              flexDir={'column'}
+              flex={2}
+              alignItems={'center'}
+              boxShadow={'0 0 10px #cdcdcd'}
+              bg={'white'}
+              borderRadius={8}
+              p={10}
+              pb={5}
+              maxW={'300px'}>
+              <GameImage>
+                <Text>JT</Text>
+              </GameImage>
+              <Box mt={4}>
+                <Heading>{currentGame?.name}</Heading>
+                <hr style={{ marginTop: 15, marginBottom: 15 }} />
+              </Box>
+              <Box bg={'gray.200'} w={'100%'} borderRadius={8} p={2}>
+                <Text>
+                  <strong>Versão:</strong> {currentGame?.version}
+                </Text>
+                <Text>
+                  <strong>Criador:</strong> {currentGame?.username}
+                </Text>
+              </Box>
+              <Button mt={8} fontWeight={'bold'} onClick={() => setIsShareModalOpen(!isShareModalOpen)}>
+                <FaShareAlt style={{ marginRight: 4 }} />
+                Compartilhar
+              </Button>
+              <Button bg={'red'} color={'white'} mt={2} fontWeight={'bold'}>
+                Deletar jogo
+              </Button>
+            </Flex>
+            <Tabs flex={1} variant="soft-rounded" colorScheme="facebook" ms={10} w={'100%'}>
+              <TabList>
+                <Tab>Grupos</Tab>
+                <Tab>Visualizações</Tab>
+                <Tab>Grupos de visualização</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel mt={5}>
+                  <GroupTab gameId={gameId} groups={groups} />
+                </TabPanel>
+                <TabPanel mt={5}>
+                  <VisualizationTab gameId={gameId} />
+                </TabPanel>
+                <TabPanel mt={5}>
+                  <VisualizationGroupTab />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Flex>
+        </Container>
+      </Box>
+    </>
   );
 }
 
