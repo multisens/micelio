@@ -15,11 +15,17 @@ export default function VisualizationTab({ gameId }) {
   const [isVisualizationModalOpen, setIsVisualizationModalOpen] = useState(false);
 
   useEffect(() => {
-    getVisualizations();
+    getVisualizationList();
     getSessionList();
   }, []);
 
-  const getVisualizations = async () => {
+  useEffect(() => {
+    console.log('VIS', currentVisualization);
+  }, [currentVisualization]);
+
+  useEffect(() => {}, [currentSession]);
+
+  const getVisualizationList = async () => {
     try {
       const response = await Api.get(`/visualization/${gameId}`);
       setVisualizations(response.data);
@@ -31,11 +37,8 @@ export default function VisualizationTab({ gameId }) {
   const getSessionList = async () => {
     try {
       const response = await Api.get(`/session/${gameId}`);
-      console.log(response.data);
       setSessionList(response.data);
-    } catch (e) {
-      console.error(e.response);
-    }
+    } catch (e) {}
   };
 
   const doDrawVisualization = () => {};
@@ -55,19 +58,17 @@ export default function VisualizationTab({ gameId }) {
         </Button>
       </Flex>
       <Flex w={'100%'} flexDirection={'column'} mt={5}>
-        <Box display={currentVisualization?.id ? 'none' : 'block'}>
+        <Box display={currentVisualization?.visualization_id ? 'none' : 'block'}>
           <Heading size={'md'} mb={3}>
             Escolha uma visualização
           </Heading>
           <Select
             maxW={'400px'}
-            onChange={(e) =>
-              setCurrentVisualization({
-                id: e.target.value,
-                name: e.target.options[e.target.selectedIndex].textContent,
-              })
-            }
-            value={currentVisualization.id}>
+            onChange={(e) => {
+              const currentVis = visualizations.find((v) => v.visualization_id === e.target.value);
+              setCurrentVisualization(currentVis);
+            }}
+            value={currentVisualization.visualization_id}>
             <option value={''}>Selecione</option>
             {visualizations.map((v) => (
               <option key={v.visualization_id} value={v.visualization_id}>
@@ -76,7 +77,7 @@ export default function VisualizationTab({ gameId }) {
             ))}
           </Select>
         </Box>
-        <Box display={currentVisualization?.id ? 'block' : 'none'}>
+        <Box display={currentVisualization?.visualization_id ? 'block' : 'none'}>
           <Heading size={'md'} display={'inline'}>
             Visualização:
           </Heading>
@@ -84,11 +85,11 @@ export default function VisualizationTab({ gameId }) {
             {currentVisualization.name}
           </Text>
           <BsPencilSquare size={18} style={{ display: 'inline', marginLeft: 10 }} />
-          <Link ms={1} onClick={() => setCurrentVisualization({ id: '' })}>
+          <Link ms={1} onClick={() => setCurrentVisualization({ visualization_id: '' })}>
             Alterar
           </Link>
         </Box>
-        <Box mt={5} display={currentVisualization?.id && !currentSession.session_id ? 'block' : 'none'}>
+        <Box mt={5} display={currentVisualization?.visualization_id && !currentSession.session_id ? 'block' : 'none'}>
           <Heading size={'md'} mb={3}>
             Escolha uma sessão
           </Heading>

@@ -32,8 +32,10 @@ export default function Header({ pageName = 'home' }) {
                 </Link>
                 <Link href={'/profile'}>
                   <HeaderMenuItem className={pageName === 'profile' && 'selected'}>
-                    <AiOutlineUser color={'white'} />
-                    Perfil
+                    <Flex alignItems={'center'}>
+                      <AiOutlineUser color={'white'} />
+                      Perfil
+                    </Flex>
                   </HeaderMenuItem>
                 </Link>
               </HeaderMenu>
