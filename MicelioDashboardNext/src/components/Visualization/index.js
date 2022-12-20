@@ -177,7 +177,6 @@ const getPopulation = (session, agentsNameList, entitiesNameList, activitiesMap)
 };
 
 const Visualization = ({ gameData, config }) => {
-  const [t, setT] = useState();
   useEffect(() => {
     if (!config || !config.graphs || !gameData) return;
 
@@ -185,15 +184,13 @@ const Visualization = ({ gameData, config }) => {
     const activitiesHeatMapList = config.graphs[3].activities;
     const agents = config.graphs[4].agents;
     const entities = config.graphs[4].entities;
+
     const activitiesMap = {
       insert: config.graphs[4].insert,
       remove: config.graphs[4].remove,
     };
 
-    const specialWidth = config.screen_width;
     const CircleBins = config.graphs[0].circle_bins;
-
-    const width = 800;
 
     var populationData = getPopulation(gameData, agents, entities, activitiesMap);
 
@@ -204,7 +201,7 @@ const Visualization = ({ gameData, config }) => {
       if (activitiesHeatMapList.includes(a.name)) return a;
     });
 
-    const graphFactory = new GraphFactory();
+    const graphFactory = new GraphFactory(config);
 
     //crição dos gráficos
     const timeLine = graphFactory.GetTimeline(data);
@@ -212,7 +209,6 @@ const Visualization = ({ gameData, config }) => {
     const heatMap = graphFactory.GetHeatMap(heatMapData);
     const population = graphFactory.GetPopulation(populationData);
 
-    //returna o concatenado dos gráficos
     const visualization = vl.vconcat(timeLine, heatMap, activitiesCircle, population);
     embed('#teste', JSON.parse(visualization));
   }, [gameData, config]);

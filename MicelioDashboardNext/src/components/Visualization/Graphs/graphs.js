@@ -1,12 +1,14 @@
 import * as vl from 'vega-lite-api';
 
-const specialWidth = 400;
-
 export class GraphFactory {
   brush = vl.selectInterval('abc').encodings('x');
   selectActivityName = vl.selectMulti().fields('name');
 
-  constructor() {}
+  visualizationConfig = null;
+
+  constructor(visualizationConfig) {
+    this.visualizationConfig = visualizationConfig;
+  }
   GetTimeline(data, { xTitle = 'Tempo de jogo', legendTitle = 'Atividades', mainTitle = 'Linha do Tempo' } = {}) {
     return vl
       .markArea()
@@ -19,7 +21,7 @@ export class GraphFactory {
       .title(mainTitle)
       .select(this.brush, this.selectActivityName)
       .height(40)
-      .width(specialWidth);
+      .width(this.visualizationConfig.screen_width);
   }
 
   GetActivitiesCircle(
@@ -45,7 +47,7 @@ export class GraphFactory {
       .title(mainTitle)
       .transform([vl.filter(this.selectActivityName), vl.filter(this.brush)])
       .height(400)
-      .width(specialWidth);
+      .width(this.visualizationConfig.screen_width);
   }
 
   GetHeatMap(data, { mainTitle = 'Heat Map' } = {}) {
@@ -92,6 +94,6 @@ export class GraphFactory {
       )
       .title(mainTitle)
       .transform(vl.filter(this.brush))
-      .width(specialWidth);
+      .width(this.visualizationConfig.screen_width);
   }
 }

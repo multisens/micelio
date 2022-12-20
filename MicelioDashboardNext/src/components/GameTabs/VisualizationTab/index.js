@@ -31,6 +31,9 @@ export default function VisualizationTab({ gameId }) {
 
   useEffect(() => {
     console.log('VISUALIZACAO', currentVisualization);
+    if (currentVisualization.config) {
+      console.log('CONFIG', JSON.parse(currentVisualization.config));
+    }
   }, [currentVisualization]);
 
   const getVisualizationList = async () => {
