@@ -14,16 +14,19 @@ export default function VisualizationTab({ gameId }) {
 
   const [isVisualizationModalOpen, setIsVisualizationModalOpen] = useState(false);
 
+  const [gameData, setGameData] = useState({});
+
   useEffect(() => {
     getVisualizationList();
     getSessionList();
   }, []);
 
   useEffect(() => {
-    console.log('VIS', currentVisualization);
-  }, [currentVisualization]);
-
-  useEffect(() => {}, [currentSession]);
+    console.log(currentSession);
+    Api.get(`/visualization/session/${currentSession.session_id}`).then((response) => {
+      setGameData(response.data);
+    });
+  }, [currentSession]);
 
   const getVisualizationList = async () => {
     try {
@@ -103,7 +106,7 @@ export default function VisualizationTab({ gameId }) {
             }>
             <option value={''}>Selecione</option>
             {sessionList.map((session) => (
-              <option id={session.session_id}>{session.name}</option>
+              <option value={session.session_id}>{session.name}</option>
             ))}
           </Select>
         </Box>
@@ -120,7 +123,10 @@ export default function VisualizationTab({ gameId }) {
           </Link>
         </Box>
       </Flex>
-      <Visualization />
+      {currentVisualization && currentVisualization.config && (
+        <Visualization gameData={gameData} config={JSON.parse(currentVisualization.config)} />
+      )}
+
       {visualizations.length === 0 && (
         <Flex w={'100%'} justifyContent={'center'} alignItems={'center'} flexDirection={'column'} mt={20}>
           <AiOutlineAreaChart size={64} color={'#cdcdcd'} />

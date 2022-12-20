@@ -4,6 +4,8 @@ const VisualizacaoController = require("./../controllers/VisualizacaoController"
 const Router = express.Router();
 const visualizacaoController = new VisualizacaoController();
 
+Router.get("/session/:session_id", visualizacaoController.get);
+
 Router.get("/:game_id", visualizacaoController.index);
 Router.post("/:game_id", visualizacaoController.create);
 
