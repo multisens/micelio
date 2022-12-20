@@ -2,7 +2,7 @@ import * as vl from 'vega-lite-api';
 import embed from 'vega-embed';
 import { useEffect, useState } from 'react';
 import { Flex } from '@chakra-ui/react';
-import { GetActivitiesCircle, GetHeatMap, GetPopulation, GetTimeline } from './Graphs/graphs';
+import { GetActivitiesCircle, GetHeatMap, GetPopulation, GetTimeline, GraphFactory } from './Graphs/graphs';
 
 const getPopulation = (session, agentsNameList, entitiesNameList, activitiesMap) => {
   var clone = (obj) => {
@@ -204,16 +204,13 @@ const Visualization = ({ gameData, config }) => {
       if (activitiesHeatMapList.includes(a.name)) return a;
     });
 
-    //criação dos filtros
-    const brush = vl.selectInterval('abc').encodings('x');
-
-    const selectActivityName = vl.selectMulti().fields('name');
+    const graphFactory = new GraphFactory();
 
     //crição dos gráficos
-    const timeLine = GetTimeline(data, brush, selectActivityName);
-    const activitiesCircle = GetActivitiesCircle(data, brush, selectActivityName, CircleBins, activitiesList);
-    const heatMap = GetHeatMap(heatMapData, brush);
-    const population = GetPopulation(populationData, brush);
+    const timeLine = graphFactory.GetTimeline(data);
+    const activitiesCircle = graphFactory.GetActivitiesCircle(data, CircleBins, activitiesList);
+    const heatMap = graphFactory.GetHeatMap(heatMapData);
+    const population = graphFactory.GetPopulation(populationData);
 
     //returna o concatenado dos gráficos
     const visualization = vl.vconcat(timeLine, heatMap, activitiesCircle, population);

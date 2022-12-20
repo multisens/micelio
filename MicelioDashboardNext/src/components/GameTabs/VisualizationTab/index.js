@@ -22,11 +22,16 @@ export default function VisualizationTab({ gameId }) {
   }, []);
 
   useEffect(() => {
-    console.log(currentSession);
-    Api.get(`/visualization/session/${currentSession.session_id}`).then((response) => {
-      setGameData(response.data);
-    });
+    if (currentVisualization && currentSession) {
+      Api.get(`/visualization/session/${currentSession.session_id}`).then((response) => {
+        setGameData(response.data);
+      });
+    }
   }, [currentSession]);
+
+  useEffect(() => {
+    console.log('VISUALIZACAO', currentVisualization);
+  }, [currentVisualization]);
 
   const getVisualizationList = async () => {
     try {
