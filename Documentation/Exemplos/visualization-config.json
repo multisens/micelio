@@ -15,17 +15,6 @@
             ],
             "type": "Timeline"
         },
-
-        {
-            "id": "card_1",
-            "type": "Card",
-            "title": "Pontuação",
-            "object_name": "ranking",
-            "object_type": "entity",
-            "object_prop": "points",
-            "value_type": "total|percentage|average|final"
-        },
-
         {
             "id": "Atividades",
             "type": "ActivityList",
@@ -41,7 +30,6 @@
             "circle_bins": 40,
             "filter_by": "Linha do Tempo"
         },
-
         {
             "id": "Heat Map",
             "type": "HeatMap",
@@ -53,7 +41,6 @@
             ],
             "filter_by": "Linha do Tempo"
         },
-
         {
             "id": "Gráfico de População",
             "type": "Population",
@@ -79,7 +66,6 @@
               { "name": "remover predador" },
               { "name": "morte" }
             ],
-
             "filter_by": "Linha do Tempo"
         }
 

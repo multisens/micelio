@@ -132,7 +132,7 @@ export default function VisualizationTab({ gameId }) {
         </Box>
       </Flex>
       {currentVisualization && currentVisualization.config && (
-        <Visualization gameData={gameData} config={JSON.parse(currentVisualization.config)} />
+        <Visualization activities={gameData.activities} config={JSON.parse(currentVisualization.config)} />
       )}
 
       {visualizations.length === 0 && (
