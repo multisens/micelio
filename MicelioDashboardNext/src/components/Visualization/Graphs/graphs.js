@@ -1,6 +1,7 @@
 import * as vl from 'vega-lite-api';
 
 const getPopulation = (session, agentsNameList, entitiesNameList, activitiesMap) => {
+  debugger;
   var clone = (obj) => {
     return JSON.parse(JSON.stringify(obj));
   };
@@ -272,7 +273,7 @@ export class GraphFactory {
       remove,
     };
 
-    const populationData = getPopulation(activities, agents, entities, activitiesMap);
+    const populationData = getPopulation({ activities }, agents, entities, activitiesMap);
 
     return vl
       .markLine({ interpolate: 'step', clip: true })

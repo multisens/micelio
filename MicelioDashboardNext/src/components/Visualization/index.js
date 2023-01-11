@@ -1,8 +1,8 @@
 import * as vl from 'vega-lite-api';
 import embed from 'vega-embed';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Flex } from '@chakra-ui/react';
-import { GetActivitiesCircle, GetHeatMap, GetPopulation, GetTimeline, GraphFactory } from './Graphs/graphs';
+import { GraphFactory } from './Graphs/graphs';
 import GraphicStrategy from '../../strategies/GraphicStrategy';
 
 const Visualization = ({ activities, config }) => {
