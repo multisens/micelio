@@ -10,7 +10,7 @@ export default function VisualizationTab({ gameId }) {
   const [visualizations, setVisualizations] = useState([]);
   const [currentVisualization, setCurrentVisualization] = useState({});
   const [sessionList, setSessionList] = useState([]);
-  const [currentSession, setCurrentSession] = useState({});
+  const [currentSession, setCurrentSession] = useState(null);
 
   const [isVisualizationModalOpen, setIsVisualizationModalOpen] = useState(false);
 
@@ -23,11 +23,12 @@ export default function VisualizationTab({ gameId }) {
 
   useEffect(() => {
     if (currentVisualization && currentSession) {
+      console.log(currentVisualization, currentSession, 'AQUI');
       Api.get(`/visualization/session/${currentSession.session_id}`).then((response) => {
         setGameData(response.data);
       });
     }
-  }, [currentSession]);
+  }, [currentVisualization, currentSession]);
 
   useEffect(() => {
     console.log('VISUALIZACAO', currentVisualization);
@@ -100,7 +101,7 @@ export default function VisualizationTab({ gameId }) {
             Alterar
           </Link>
         </Box>
-        <Box mt={5} display={currentVisualization?.visualization_id && !currentSession.session_id ? 'block' : 'none'}>
+        <Box mt={5} display={currentVisualization?.visualization_id && !currentSession?.session_id ? 'block' : 'none'}>
           <Heading size={'md'} mb={3}>
             Escolha uma sessão
           </Heading>
@@ -123,7 +124,7 @@ export default function VisualizationTab({ gameId }) {
             Sessão:
           </Heading>
           <Text display={'inline'} ms={2}>
-            {currentSession.name}
+            {currentSession?.name}
           </Text>
           <BsPencilSquare size={18} style={{ display: 'inline', marginLeft: 10 }} />
           <Link ms={1} onClick={() => setCurrentSession({ id: '' })}>

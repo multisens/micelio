@@ -1,7 +1,6 @@
 import * as vl from 'vega-lite-api';
 
 const getPopulation = (session, agentsNameList, entitiesNameList, activitiesMap) => {
-  debugger;
   var clone = (obj) => {
     return JSON.parse(JSON.stringify(obj));
   };
