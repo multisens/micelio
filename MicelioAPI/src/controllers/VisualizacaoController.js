@@ -1,5 +1,5 @@
 const knex = require("../database/connection");
-const jinq = require("jinq");
+const Jinq = require("jinq");
 const idGenerator = require("../utils/generators/idGenerator");
 const {
   decodeUserSession,
@@ -29,7 +29,7 @@ class VisualizacaoController {
         "gamechar.position_x as agent_position_x",
         "gamechar.position_y as agent_position_y",
         "act_ent.properties as entity_properties",
-        "act_ent.role as entity_properties",
+        "act_ent.role as entity_role",
         "agent.agent_id",
         "agent.name as agent_name",
         "agent.type as agent_type",
@@ -66,28 +66,113 @@ class VisualizacaoController {
       )
       .where({ "session.session_id": session_id });
 
-    const activityList = [];
+    const finalSession = {};
 
-    const result = new jinq()
-      .from(completeSession)
-      .groupBy("session_id")
-      .groupBy("activity_id")
-      .select([{ field: "session_id" }]);
-    console.log("result", result);
-    return response.json(result);
+    const extractAgent = (session) => {
+      if (!session.agent_id) return null;
 
-    const finalSession = {
-      session_id: completeSession.session_id,
-      name: completeSession.name,
-      language: completeSession.language,
-      game_stage: completeSession.game_stage,
-      date: completeSession.date,
-      session_group_id: completeSession.session_group_id,
-      start_time: completeSession.start_time,
-      "end-time": completeSession.end_time,
+      return {
+        agent_id: session.agent_id,
+        name: session.agent_name,
+        type: session.agent_type,
+        position_x: session.agent_position_x,
+        position_y: session.agent_position_y,
+        properties: JSON.parse(session.agent_properties),
+        role: session.agent_role,
+      };
     };
 
-    return response.status(200).json(finalSession);
+    const extractEntity = (session) => {
+      if (!session.entity_id) return null;
+
+      return {
+        entity_id: session.entity_id,
+        name: session.entity_name,
+        position_x: session.entity_position_x,
+        position_y: session.entity_position_y,
+        properties: JSON.parse(session.entity_properties),
+        role: session.entity_role,
+      };
+    };
+
+    const extractActivity = (session) => {
+      if (!session.activity_id) return null;
+
+      const currentEntity = extractEntity(session);
+      const currentAgent = extractAgent(session);
+
+      if (finalSession[session.session_id]) {
+        const registeredActivityIndex = finalSession[
+          session.session_id
+        ].activities.findIndex(
+          (act) => act?.activity_id === session.activity_id
+        );
+
+        if (registeredActivityIndex >= 0) {
+          if (currentEntity) {
+            finalSession[session.session_id].activities[
+              registeredActivityIndex
+            ].entities.push(currentEntity);
+          }
+
+          if (currentAgent) {
+            finalSession[session.session_id].activities[
+              registeredActivityIndex
+            ].agents.push(currentAgent);
+          }
+
+          return;
+        }
+      }
+
+      const entitiesList = currentEntity ? [currentEntity] : [];
+      const agentsList = currentAgent ? [currentAgent] : [];
+
+      return {
+        activity_id: session.activity_id,
+        name: session.activity_name,
+        time: session.activity_time,
+        influenced_by: session.influenced_by,
+        position_x: session.activity_position_x,
+        position_y: session.activity_position_y,
+        entities: entitiesList,
+        agents: agentsList,
+        properties: JSON.parse(session.activity_properties),
+      };
+    };
+
+    const extractSession = (session) => {
+      if (!session.session_id) return {};
+      const currentActivity = extractActivity(session);
+      const activityList = currentActivity ? [currentActivity] : [];
+
+      return {
+        name: session.name,
+        language: session.language,
+        game_stage: session.game_stage,
+        session_id: session.session_id,
+        date: session.date,
+        session_group_id: session.session_group_id,
+        start_time: session.start_time,
+        end_time: session.end_time,
+        activities: activityList,
+      };
+    };
+
+    for (const session of completeSession) {
+      const currentActivity = extractActivity(session);
+
+      if (!finalSession[session.session_id]) {
+        finalSession[session.session_id] = extractSession(session);
+        continue;
+      }
+
+      if (currentActivity) {
+        finalSession[session.session_id].activities.push(currentActivity);
+      }
+    }
+
+    return response.json(Object.values(finalSession)[0]);
   }
 
   async index(request, response) {
