@@ -7,3 +7,6 @@ CREATE TABLE SessionGroupExp(
 
 alter table Participant
       add session_group_id varchar(40);
+
+alter table Options
+      add ind_order        INT;

@@ -79,7 +79,7 @@ function Form () {
                                         onChange={e => {
                                             setEmail(e.target.value)
                                         }}/>
-                                    <input required className={'primary'} type="text" name={'sessionGroup'} placeholder={'Seu grupo de sessão, deixe vazio se não foi informado'} value={sessionGroup}
+                                    <input className={'primary'} type="text" name={'sessionGroup'} placeholder={'Seu grupo de sessão, deixe vazio se não foi informado'} value={sessionGroup}
                                         onChange={e => {
                                             setSessionGroup(e.target.value)
                                         }}/>

@@ -2,6 +2,8 @@ const e = require('express');
 const knex = require('../database/connection');
 const idGenerator = require('../utils/generators/idGenerator');
 
+// ESSE CONTROLLER TANTO QUANTO OS OUTROS FORMCONTROLLERS PODEM MIGRAR PARA 1 SÓ,
+// NÃO FIZ PORQUE IA DAR TRABALHO E MEU TEMPO ACABOU, FOI MAL
 class InitialFormController {
 
     async get(request, response) {

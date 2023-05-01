@@ -22,13 +22,15 @@ function InitialQuest () {
 
     const [questionList, setQuestionList] = useState([]);
 
+    let hasOption = false;
+
     useEffect(() => {
         Api.get(`/initialQuest/${params.id}`).then(response => {
             const questions = response.data;
             if (questions.length < 1) {
-                setQuestionList(['']);
+                setQuestionList([{txt_question: '', ind_type: 'D', options: ['']}]);
             } else {
-                setQuestionList(response.data);
+                setQuestionList(response.data.questions);
             }
         });
     }, [params.id])
@@ -39,13 +41,15 @@ function InitialQuest () {
         try {
             for (let i=0;i<questionList.length;i++) {
                 if (questionList[i] === '') {
-                    toast.error(`Questão ${i+1} em branco. Por favor, delete ou insira dados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
+                    toast.error(`Questão ${i+1} em branco. Por favor, delete ou insira dados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}});
                     return false;
                 }
                 const response = await Api.post(`/initialQuest/${params.id}`, {
-                    question: questionList[i],
+                    question: questionList[i].txt_question,
                     order: i,
-                    length: questionList.length
+                    length: questionList.length,
+                    hasOption: questionList[i].ind_type,
+                    options: questionList[i].options
                 })
 
                 if(!response.data.ok){
@@ -64,17 +68,17 @@ function InitialQuest () {
         }
     }
 
-    const addQuestion = async () => {
-        setQuestionList([...questionList, '']);
+    const addQuestion = () => {
+        setQuestionList([...questionList, {txt_question: '', ind_type: 'D', options: ['']}]);
     }
 
     const changeQuestion = (value, index) => {   
         let newArrayQuestion = questionList;
-        newArrayQuestion[index] = value;
+        newArrayQuestion[index].txt_question = value;
         setQuestionList(newArrayQuestion);
     }
 
-    const removeQuestion = (index) => {
+    const removeQuestion = index => {
         if (questionList.length === 1) {
             setQuestionList(['']);
         } else {
@@ -83,8 +87,40 @@ function InitialQuest () {
             for (let i=0;i<questionList.length;i++) {
                 newArrayQuestion[i] = questionList[i];
             }
-            setQuestionList(newArrayQuestion);
+            setQuestionList(newArrayQuestion); 
         }
+    }
+
+    const includeOptions = index => {
+        let newArrayQuestion = questionList;
+        if(newArrayQuestion[index].ind_type === 'D') {
+            newArrayQuestion[index].ind_type = 'O';
+        } else {
+            newArrayQuestion[index].ind_type = 'D';
+        }
+        setQuestionList(newArrayQuestion);
+    }
+
+    const addOption = index => {
+        let newArrayQuestion = questionList;
+        newArrayQuestion[index].options.push('');
+        setQuestionList(newArrayQuestion);
+    }
+
+    const changeOption = (value, questIndex, optionIndex) => {
+        let newArrayQuestion = questionList;
+        newArrayQuestion[questIndex].options[optionIndex] = value;
+        setQuestionList(newArrayQuestion);
+    }
+
+    const removeOption = (questIndex, optionIndex) => {
+        let newArrayQuestion = questionList;
+        if (newArrayQuestion[questIndex].options.length > 1) {
+            newArrayQuestion[questIndex].options.splice(optionIndex, 1);
+        } else {
+            newArrayQuestion[questIndex].options = [''];
+        }
+        setQuestionList(newArrayQuestion);
     }
 
     return (
@@ -101,12 +137,23 @@ function InitialQuest () {
                             <form name={'form01'} onSubmit={saveContent}>
                                 <div>
                                     {questionList.map((question, index) => {
+                                        if (question.ind_type === 'O') {
+                                            hasOption = true;
+                                        } else {
+                                            hasOption = false;
+                                        }
                                         return (
                                             <CreateQuestion key={index+questionList[index]}
                                                             index={index}
-                                                            text={question}
+                                                            text={question.txt_question}
+                                                            hasOption={hasOption}
+                                                            optionsList={question.options}
                                                             onChangeFunction={changeQuestion}
+                                                            onChangeFuncOpt={changeOption}
                                                             onClickFunction={removeQuestion}
+                                                            onClickFuncOpt={includeOptions}
+                                                            onClickAddOpt={addOption}
+                                                            onClickRemoveOpt={removeOption}
                                             />
                                         );
                                     })}
