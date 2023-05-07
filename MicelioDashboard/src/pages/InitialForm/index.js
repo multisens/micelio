@@ -97,7 +97,9 @@ function InitialForm () {
                                         return (
                                             <BuildQuestion key={index+questionList[index]}
                                                             index={index}
-                                                            question={question}
+                                                            question={question.txt_question}
+                                                            hasOption={question.ind_type}
+                                                            options={question.options}
                                                             text={answerList[index]}
                                                             onChangeFunction={changeAnswer}
                                             />
