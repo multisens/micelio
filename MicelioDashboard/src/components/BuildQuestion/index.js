@@ -8,7 +8,6 @@ function BuildQuestion(props) {
   const [selected, setSelected] = useState([]);
 
   const selectedUpdate = (value, index) => {
-    alert(props.text)
     setSelected(value);
     props.onChangeFunction(value, index);
   }

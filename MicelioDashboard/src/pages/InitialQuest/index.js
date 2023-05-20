@@ -88,19 +88,29 @@ function InitialQuest () {
     }
 
     const includeOptions = index => {
-        let newArrayQuestion = questionList;
-        if(newArrayQuestion[index].ind_type === 'D') {
-            newArrayQuestion[index].ind_type = 'O';
+        let newArrayQuestion = questionList[index];
+        if(newArrayQuestion.ind_type === 'D') {
+            newArrayQuestion.ind_type = 'O';
         } else {
-            newArrayQuestion[index].ind_type = 'D';
+            newArrayQuestion.ind_type = 'D';
         }
-        setQuestionList(newArrayQuestion);
+        questionList.splice(index,1,newArrayQuestion);
+        const questionAuxList = [];
+        for (let i=0;i<questionList.length;i++) {
+            questionAuxList[i] = questionList[i];
+        }
+        setQuestionList(questionAuxList);
     }
 
     const addOption = index => {
-        let newArrayQuestion = questionList;
-        newArrayQuestion[index].options.push('');
-        setQuestionList(newArrayQuestion);
+        let newArrayQuestion = questionList[index];
+        newArrayQuestion.options.push('');
+        questionList.splice(index,1,newArrayQuestion);
+        const questionAuxList = [];
+        for (let i=0;i<questionList.length;i++) {
+            questionAuxList[i] = questionList[i];
+        }
+        setQuestionList(questionAuxList);
     }
 
     const changeOption = (value, questIndex, optionIndex) => {
@@ -110,13 +120,18 @@ function InitialQuest () {
     }
 
     const removeOption = (questIndex, optionIndex) => {
-        let newArrayQuestion = questionList;
-        if (newArrayQuestion[questIndex].options.length > 1) {
-            newArrayQuestion[questIndex].options.splice(optionIndex, 1);
+        let newArrayQuestion = questionList[questIndex];
+        if (newArrayQuestion.options.length > 1) {
+            newArrayQuestion.options.splice(optionIndex, 1);
         } else {
-            newArrayQuestion[questIndex].options = [''];
+            newArrayQuestion.options = [''];
         }
-        setQuestionList(newArrayQuestion);
+        questionList.splice(questIndex,1,newArrayQuestion);
+        const questionAuxList = [];
+        for (let i=0;i<questionList.length;i++) {
+            questionAuxList[i] = questionList[i];
+        }
+        setQuestionList(questionAuxList);
     }
 
     return (
