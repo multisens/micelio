@@ -24,7 +24,7 @@ class SpecFormController {
         const form_id = form.form_id;
 
         const questions = await knex('Questions as q')
-                                 .select('q.txt_question', 'q.question_id')
+                                 .select('q.txt_question', 'q.question_id', 'q.ind_type')
                                  .where('q.form_id', form_id)
                                  .orderBy('q.ind_order')
 
@@ -35,7 +35,20 @@ class SpecFormController {
 
         if (questions) {
             for (let i=0;i<questionsAux.length;i++) {
-                questionsArray.push(questionsAux[i].txt_question)
+                const options = await knex('Options as o')
+                                     .select('o.txt_option')
+                                     .where('o.question_id', questionsAux[i].question_id)
+                                     .orderBy('o.ind_order');
+                
+                const optionsAux = JSON.parse(JSON.stringify(options));
+
+                const questionObj = { txt_question: questionsAux[i].txt_question
+                                    , ind_type: questionsAux[i].ind_type
+                                    , options: optionsAux.map(o => o.txt_option)}
+
+                console.log(questionObj)
+
+                questionsArray.push(questionObj)
 
                 const answers = await knex('Answers as a')
                                      .select('a.txt_answer')

@@ -12,39 +12,45 @@ class SpecQuestController {
         }
 
         const form = await knex('Form as f')
-                             .select('f.form_id')
-                             .where('f.ind_stage', 'E')
-                             .andWhere('f.experiment_id', experiment_id)
-                             .first();
+                          .select('f.form_id')
+                          .where('f.ind_stage', 'E')
+                          .andWhere('f.experiment_id', experiment_id)
+                          .first();
 
         if (!form) {
             return response.json([]);
         }
-
-        const form_id = form.form_id
+        
+        const form_id = form.form_id;
 
         const questions = await knex('Questions as q')
-                                 .select('q.txt_question')
+                                 .select('q.question_id', 'q.txt_question', 'q.ind_type')
                                  .where('q.form_id', form_id)
                                  .orderBy('q.ind_order')
 
         const questionsAux = JSON.parse(JSON.stringify(questions));
 
-        let questionsArray = [];
+        for (let i=0;i<questionsAux.length;i++) {
+            const options = await knex('Options as o')
+                                 .select('o.txt_option')
+                                 .where('o.question_id', questionsAux[i].question_id);
+            
+            if (options.length > 0) {
+                const optionsAux = JSON.parse(JSON.stringify(options));
 
-        if (questions) {
-            for (let i=0;i<questionsAux.length;i++) {
-                questionsArray.push(questionsAux[i].txt_question)
+                questionsAux[i].options = optionsAux.map(o => o.txt_option);
+            } else {
+                questionsAux[i].options = [''];
             }
         }
 
-        response.json(questionsArray);
-	}
+        response.json({questions: questionsAux});
+    }
 
     async update(request, response) {
 
         const {experiment_id} = request.params;
-        const {question, order, length} = request.body;
+        const {question, order, length, hasOption, options} = request.body;
         const selected = 'E';
 
         if(!experiment_id){
@@ -105,48 +111,160 @@ class SpecQuestController {
                 const questionData = {
                     question_id,
                     txt_question: question,
-                    ind_type: 'D',
+                    ind_type: hasOption,
                     ind_order: order,
                     form_id
                 };
 
                 const questionInsert = await trx('Questions').insert(questionData);
-
+                
                 if(questionInsert){
                     await trx.commit();
                 }
                 else{
                     await trx.rollback();
-                    return response.status(400).json({error: `Cannot insert the question ${order}`});
+                    return response.status(400).json({error: `Cannot insert the question ${order+1}`});
                 }
+
+                if (options.length > 0 && hasOption === 'O') {
+                    for (let i=0; i<options.length; i++) {
+
+                        const trx2 = await knex.transaction();
+                        
+                        const options_id = await idGenerator('Options', 'options');
+
+                        const optionsData = {
+                            options_id,
+                            txt_option: options[i],
+                            ind_order: i,
+                            question_id
+                        }
+
+                        await trx2('Options').insert(optionsData);
+                        if(questionInsert){
+                            await trx2.commit();
+                        }
+                        else{
+                            await trx2.rollback();
+                            return response.status(400).json({error: `Cannot insert the option ${i+1} from the question ${order+1}`});
+                        }
+                    }
+                }
+
             } else
             if (questionAuxList[order].ind_order === order) {
 
+                const {question_id} = await knex('Questions as q')
+                                       .select('q.question_id')
+                                       .where('q.ind_order', order)
+                                       .andWhere('q.form_id', form_id)
+                                       .first();
+
+                console.log(question_id)
+
+                const optionsQi = await knex('Options as o')
+                                       .select('o.question_id as optionsQi')
+                                       .where('o.question_id', question_id);
+
+                console.log(optionsQi)
+
+                if (optionsQi.length > 0) {
+                    const trx = await knex.transaction();
+
+                    const optionsDelete = await trx('Options').delete().where('question_id', question_id);
+
+                    if (optionsDelete) {
+                        await trx.commit();
+                    } else {
+                        await trx.rollback();
+                        return response.status(400).json({error: `Cannot delete the options in the question ${order+1}`});
+                    }
+                }
+                if (options.length > 0 && hasOption === 'O') {
+                    for (let i=0; i<options.length; i++) {
+
+                        const trx = await knex.transaction();
+                        
+                        const options_id = await idGenerator('Options', 'options');
+
+                        const optionsData = {
+                            options_id,
+                            txt_option: options[i],
+                            ind_order: i,
+                            question_id
+                        }
+
+                        const optionsInsert = await trx('Options').insert(optionsData);
+
+                        if (optionsInsert) {
+                            await trx.commit();
+                        }
+                        else{
+                            await trx.rollback();
+                            return response.status(400).json({error: `Cannot insert the option ${i+1} in the question ${order+1}`});
+                        }
+                    }
+                }
                 const trx = await knex.transaction();
 
-                const questionUpdate = await trx('Questions as q').where('q.ind_order', order).andWhere('q.form_id', form_id).update('q.txt_question', question);
+                const questionUpdate = await trx('Questions as q').where('q.question_id', question_id)
+                                            .update({txt_question: question, ind_type: hasOption});
 
                 if(questionUpdate){
                     await trx.commit();
                 }
                 else{
                     await trx.rollback();
-                    return response.status(400).json({error: `Cannot update the question ${order}`});
+                    return response.status(400).json({error: `Cannot update the question ${order+1}`});
                 }
             }
 
-            // Excluir questoes deletadas da tela
             if (questionAuxList.length > length && order === length-1) {
+
+                const questions = await knex('Questions as q')
+                                           .select('q.question_id')
+                                           .where('q.ind_order', '>=', length)
+                                           .andWhere('q.form_id', form_id);
+
+                const questionsAux = JSON.parse(JSON.stringify(questions));
+
+                const qA = questionsAux.map(q => q.question_id)
+
+                const options = await knex('Options as o')
+                                     .select('o.question_id')
+                                     .whereIn('question_id', qA);
+
+                const optionsAux = JSON.parse(JSON.stringify(options));
+
+                const oA = optionsAux.map(o => o.question_id)
+                
+                if(oA.length > 0){
+                    const trx = await knex.transaction();
+
+                    const optionsDelete = await trx('Options').delete().whereIn('question_id', oA);
+
+                    console.log(oA)
+                    if(optionsDelete){
+                        await trx.commit();
+                    }
+                    else {
+                        await trx.rollback();
+                        return response.status(400).json({error: `Cannot delete the options ${order+1}`});
+                    }
+                }
+
+                console.log(qA)
+                
                 const trx = await knex.transaction();
 
-                const questionsDelete = await trx('Questions').delete().where('ind_order', '>=', length).andWhere('form_id', form_id);
+                const questionsDelete = await trx('Questions').delete().whereIn('question_id', qA);
 
                 if(questionsDelete){
                     await trx.commit();
                 }
                 else{
                     await trx.rollback();
-                    return response.status(400).json({error: `Cannot update the question ${order}`});
+                    return response.status(400).json({error: `Cannot delete the questions`});
                 }
             }
             return response.status(201).json({ok: true});

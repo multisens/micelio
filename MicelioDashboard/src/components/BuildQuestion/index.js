@@ -12,9 +12,13 @@ function BuildQuestion(props) {
     props.onChangeFunction(value, index);
   }
 
+  useEffect(() => {
+    setSelected(props.text);
+  })
+
   return (
     <div>
-      <p><ReactMarkdown>{props.question}</ReactMarkdown></p><br/>
+      <p className={'question-text'}><ReactMarkdown>{props.question}</ReactMarkdown></p><br/>
       <div>
         {props.hasOption === 'D' ? 
           <input type={'text'}
@@ -29,7 +33,7 @@ function BuildQuestion(props) {
               <input type={'radio'}
                      className={'option-text'}
                      value={option}
-                     checked={selected === props.text}
+                     checked={selected === option}
                      onClick={(event)=>selectedUpdate(event.target.value, props.index)}
               />{option}
             </div>

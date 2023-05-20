@@ -11,6 +11,10 @@
     font-weight: bold;
 }
 
+.question-text {
+    font-size: 20px;
+}
+
 #parent {
     width: 10%;
     white-space: nowrap;

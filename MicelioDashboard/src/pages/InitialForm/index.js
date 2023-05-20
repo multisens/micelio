@@ -78,9 +78,13 @@ function InitialForm () {
     }
 
     const changeAnswer = (value, index) => {   
-        let newArrayAnswer = answerList;
-        newArrayAnswer[index] = value;
-        setAnswerList(newArrayAnswer);
+        const newArrayAnswer = value;
+        answerList.splice(index,1,newArrayAnswer);
+        const answerAuxList = [];
+        for (let i=0;i<answerList.length;i++) {
+            answerAuxList[i] = answerList[i];
+        }
+        setAnswerList(answerAuxList);
     }
 
     return (

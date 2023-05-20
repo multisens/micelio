@@ -1,4 +1,3 @@
-const e = require('express');
 const knex = require('../database/connection');
 const idGenerator = require('../utils/generators/idGenerator');
 

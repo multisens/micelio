@@ -22,13 +22,15 @@ function FinalQuest () {
 
     const [questionList, setQuestionList] = useState([]);
 
+    let hasOption = false;
+
     useEffect(() => {
         Api.get(`/finalQuest/${params.id}`).then(response => {
             const questions = response.data;
             if (questions.length < 1) {
-                setQuestionList(['']);
+                setQuestionList([{txt_question: '', ind_type: 'D', options: ['']}]);
             } else {
-                setQuestionList(response.data);
+                setQuestionList(response.data.questions);
             }
         });
     }, [params.id])
@@ -38,14 +40,12 @@ function FinalQuest () {
 
         try {
             for (let i=0;i<questionList.length;i++) {
-                if (questionList[i] === '') {
-                    toast.error(`Questão ${i+1} em branco. Por favor, delete ou insira dados.`, {style: {boxShadow: '1px 1px 5px rgba(0,0,0,.4)'}})
-                    return false;
-                }
                 const response = await Api.post(`/finalQuest/${params.id}`, {
-                    question: questionList[i],
+                    question: questionList[i].txt_question,
                     order: i,
-                    length: questionList.length
+                    length: questionList.length,
+                    hasOption: questionList[i].ind_type,
+                    options: questionList[i].options
                 })
 
                 if(!response.data.ok){
@@ -64,22 +64,74 @@ function FinalQuest () {
         }
     }
 
-    const addQuestion = async () => {
-        setQuestionList([...questionList, '']);
+    const addQuestion = () => {
+        setQuestionList([...questionList, {txt_question: '', ind_type: 'D', options: ['']}]);
     }
 
     const changeQuestion = (value, index) => {   
         let newArrayQuestion = questionList;
-        newArrayQuestion[index] = value;
+        newArrayQuestion[index].txt_question = value;
         setQuestionList(newArrayQuestion);
     }
 
-    const removeQuestion = (index) => {
+    const removeQuestion = index => {
         if (questionList.length === 1) {
             setQuestionList(['']);
         } else {
-            setQuestionList(questionList.slice(index, 1));
+            let newArrayQuestion = [];
+            questionList.splice(index, 1);
+            for (let i=0;i<questionList.length;i++) {
+                newArrayQuestion[i] = questionList[i];
+            }
+            setQuestionList(newArrayQuestion); 
         }
+    }
+
+    const includeOptions = index => {
+        let newArrayQuestion = questionList[index];
+        if(newArrayQuestion.ind_type === 'D') {
+            newArrayQuestion.ind_type = 'O';
+        } else {
+            newArrayQuestion.ind_type = 'D';
+        }
+        questionList.splice(index,1,newArrayQuestion);
+        const questionAuxList = [];
+        for (let i=0;i<questionList.length;i++) {
+            questionAuxList[i] = questionList[i];
+        }
+        setQuestionList(questionAuxList);
+    }
+
+    const addOption = index => {
+        let newArrayQuestion = questionList[index];
+        newArrayQuestion.options.push('');
+        questionList.splice(index,1,newArrayQuestion);
+        const questionAuxList = [];
+        for (let i=0;i<questionList.length;i++) {
+            questionAuxList[i] = questionList[i];
+        }
+        setQuestionList(questionAuxList);
+    }
+
+    const changeOption = (value, questIndex, optionIndex) => {
+        let newArrayQuestion = questionList;
+        newArrayQuestion[questIndex].options[optionIndex] = value;
+        setQuestionList(newArrayQuestion);
+    }
+
+    const removeOption = (questIndex, optionIndex) => {
+        let newArrayQuestion = questionList[questIndex];
+        if (newArrayQuestion.options.length > 1) {
+            newArrayQuestion.options.splice(optionIndex, 1);
+        } else {
+            newArrayQuestion.options = [''];
+        }
+        questionList.splice(questIndex,1,newArrayQuestion);
+        const questionAuxList = [];
+        for (let i=0;i<questionList.length;i++) {
+            questionAuxList[i] = questionList[i];
+        }
+        setQuestionList(questionAuxList);
     }
 
     return (
@@ -96,12 +148,23 @@ function FinalQuest () {
                             <form name={'form01'} onSubmit={saveContent}>
                                 <div>
                                     {questionList.map((question, index) => {
+                                        if (question.ind_type === 'O') {
+                                            hasOption = true;
+                                        } else {
+                                            hasOption = false;
+                                        }
                                         return (
                                             <CreateQuestion key={index+questionList[index]}
                                                             index={index}
-                                                            text={question}
+                                                            text={question.txt_question}
+                                                            hasOption={hasOption}
+                                                            optionsList={question.options}
                                                             onChangeFunction={changeQuestion}
+                                                            onChangeFuncOpt={changeOption}
                                                             onClickFunction={removeQuestion}
+                                                            onClickFuncOpt={includeOptions}
+                                                            onClickAddOpt={addOption}
+                                                            onClickRemoveOpt={removeOption}
                                             />
                                         );
                                     })}

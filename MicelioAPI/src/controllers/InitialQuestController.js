@@ -47,7 +47,7 @@ class InitialQuestController {
         }
 
         response.json({questions: questionsAux});
-	}
+    }
 
     async update(request, response) {
 
