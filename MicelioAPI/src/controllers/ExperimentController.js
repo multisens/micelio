@@ -39,6 +39,8 @@ class ExperimentController {
                         str += sGrpAux[j]
                     }
                     userExpAux[i]['groups'] = str
+                } else {
+                    userExpAux[i]['groups'] = ''
                 }
             }
         }
