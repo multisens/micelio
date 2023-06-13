@@ -20,22 +20,27 @@ class ExperimentController {
 
         const userExpAux = JSON.parse(JSON.stringify(userExperiments));
 
-        for (let i=0;i<userExpAux.length;i++) {
-            const sessionGroupExp = await knex('SessionGroupExp as s')
-              .select('s.session_group_id')
-              .where('s.experiment_id', userExpAux[i].experiment_id);
+        if(userExpAux) {
+            for (let i=0;i<userExpAux.length;i++) {
+                const sessionGroupExp = await knex('SessionGroupExp as s')
+                .select('s.session_group_id')
+                .where('s.experiment_id', userExpAux[i].experiment_id);
 
-            const sessionGrupoExpAux = JSON.parse(JSON.stringify(sessionGroupExp));
-            const sGrpAux = sessionGrupoExpAux.map(s => {return s.session_group_id})
+                const sessionGrupoExpAux = JSON.parse(JSON.stringify(sessionGroupExp));
 
-            let str = ''
-            for (let j=0; j<sGrpAux.length;j++) {
-                if (str !== '') {
-                    str += ', '
+                if (sessionGrupoExpAux) {
+                    const sGrpAux = sessionGrupoExpAux.map(s => {return s.session_group_id})
+
+                    let str = ''
+                    for (let j=0; j<sGrpAux.length;j++) {
+                        if (str !== '') {
+                            str += ', '
+                        }
+                        str += sGrpAux[j]
+                    }
+                    userExpAux[i]['groups'] = str
                 }
-                str += sGrpAux[j]
             }
-            userExpAux[i]['groups'] = str
         }
 
         response.json({ok: true, data: userExpAux});
