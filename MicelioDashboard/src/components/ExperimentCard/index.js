@@ -29,9 +29,9 @@ function ExperimentCard(props) {
       <Hr/>
       <div className={'card-content'}>
         <p><b>Jogo vinculado: </b>{props.game}</p>
-        {props.groups.length > 0 ? 
+        {props.groups ? props.groups.length > 0 ? 
           <p><b>Grupo(s) de Sessão vinculado(s): </b><br/>{props.groups}</p>
-          : ''}
+          : '' : ''}
       </div>
       <div className={'card-options'}>
         <div className={'card-option'} onClick={props.addGroup}>
