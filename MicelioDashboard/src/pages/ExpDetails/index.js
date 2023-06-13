@@ -122,6 +122,7 @@ function ExpDetails() {
                     <option value={'F'}>Final</option>
                   </select>
                 </div>
+                { groups ?
                 <div>
                   <strong>Grupo:&nbsp;</strong>
                   <select id={'export-select'} className={'export-select'} onChange={e => {setGroup(e.target.value)}}>
@@ -131,7 +132,7 @@ function ExpDetails() {
                       )
                     })}
                   </select>
-                </div>
+                </div> : '' }
                 <div>
                   <strong>Grupo de sessão:&nbsp;</strong>
                   <select id={'export-select'} className={'export-select'} onChange={e => {setSessionGroupExp(e.target.value)}}>
