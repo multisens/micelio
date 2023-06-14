@@ -132,7 +132,7 @@ function ExpDetails() {
                     })}
                   </select>
                 </div>
-                { experiment.sessionGroups ?
+                { experiment.sessionGroups ? experiment.sessionGroups.length > 1 ?
                 <div>
                   <strong>Grupo de sessão:&nbsp;</strong>
                   <select id={'export-select'} className={'export-select'} onChange={e => {setSessionGroupExp(e.target.value)}}>
@@ -143,7 +143,7 @@ function ExpDetails() {
                     })}
                   </select>
                 </div>
-                : ''}
+                : '' : ''}
               </div>
               <button className={'export-button'}
                        onClick={getAnswers}>

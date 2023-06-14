@@ -14,7 +14,7 @@ class ExpDetailsController {
           .select('e.txt_experiment_name', 'hep.user_id', 'mu.username', 'hep.has_exp_permission_id', 'g.has_game_form')
           .innerJoin('HasExpPermission as hep', 'hep.experiment_id', 'e.experiment_id')
           .innerJoin("MicelioUser as mu", 'mu.user_id', 'hep.user_id')
-          .innerJoin('GameStageTwo as g', 'g.experiment_id', 'e.experiment_id')
+          .leftJoin('GameStageTwo as g', 'g.experiment_id', 'e.experiment_id')
           .where('e.experiment_id', experiment_id)
           .andWhere('hep.user_id', user_id).first();
 
@@ -43,7 +43,7 @@ class ExpDetailsController {
         const sGrpExp = JSON.parse(JSON.stringify(sessionGroupExp));
 
         const sGrpExpAux = ['0']
-        sGrpExpAux.push(sGrpExp.map(s => {return s.session_group_id}))
+        sGrpExp.map(s => {sGrpExpAux.push(s)})
 
         expDetails.sessionGroups = sGrpExpAux
 
