@@ -41,7 +41,7 @@ function ExpDetails() {
       const {expDetails: expData} = expResponse.data;
       const {groupsArray: groupData} = expResponse.data;
       setExperiment(expData);
-      setAnswerGroups(groupData);
+      setAnswerGroups(groupData ? groupData : []);
     }catch (e) {
       // todo: jogo não encontrado
     }
