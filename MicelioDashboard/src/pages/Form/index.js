@@ -79,10 +79,6 @@ function Form () {
                                         onChange={e => {
                                             setEmail(e.target.value)
                                         }}/>
-                                    <input className={'primary'} type="text" name={'sessionGroup'} placeholder={'Seu grupo de sessão, deixe vazio se não foi informado'} value={sessionGroup}
-                                        onChange={e => {
-                                            setSessionGroup(e.target.value)
-                                        }}/>
                                 </div><br/><br/>
                                 <div className={'confirm-button'} id={'parent'}>
                                         <input required type="checkbox" name={'confirm'} value={confirm} onChange={e => {setConfirm(e.target.value)}}/>
