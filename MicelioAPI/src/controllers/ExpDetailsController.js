@@ -21,6 +21,10 @@ class ExpDetailsController {
         if(!expDetails){
           return response.status(400).json({error: "Experiment not found"});
         }
+
+        const expDetailsAux = JSON.parse(JSON.stringify(expDetails));
+
+        console.log(expDetailsAux)
     
         const expOwner = await knex('Experiment as e')
           .select('user.username')
@@ -36,6 +40,8 @@ class ExpDetailsController {
 
         const partListAux = JSON.parse(JSON.stringify(partList));
 
+        console.log(partListAux)
+
         const sessionGroupExp = await knex('SessionGroupExp as s')
                                      .select('s.session_group_id')
                                      .where('s.experiment_id', experiment_id);
@@ -44,6 +50,8 @@ class ExpDetailsController {
 
         const sGrpExpAux = ['0']
         sGrpExp.map(s => {sGrpExpAux.push(s)})
+
+        console.log(sGrpExpAux)
 
         expDetails.sessionGroups = sGrpExpAux
 
@@ -84,6 +92,8 @@ class ExpDetailsController {
         const groupsArray = []
 
         let totalEnded = 0
+
+        console.log(groupsAux)
 
         if (groups) {
           for (let i=0;i<groupsAux.length;i++) {
