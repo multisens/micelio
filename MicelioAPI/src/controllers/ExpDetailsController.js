@@ -10,7 +10,7 @@ class ExpDetailsController {
     
         const user_id = decodedToken.sub;
     
-        const expDetails = await knex('Experiment as e')
+        const expDetailsAux = await knex('Experiment as e')
           .select('e.txt_experiment_name', 'hep.user_id', 'mu.username', 'hep.has_exp_permission_id', 'g.has_game_form')
           .innerJoin('HasExpPermission as hep', 'hep.experiment_id', 'e.experiment_id')
           .innerJoin("MicelioUser as mu", 'mu.user_id', 'hep.user_id')
@@ -18,20 +18,20 @@ class ExpDetailsController {
           .where('e.experiment_id', experiment_id)
           .andWhere('hep.user_id', user_id).first();
 
-        if(!expDetails){
+        if(!expDetailsAux){
           return response.status(400).json({error: "Experiment not found"});
         }
 
-        const expDetailsAux = JSON.parse(JSON.stringify(expDetails));
+        const expDetails = JSON.parse(JSON.stringify(expDetailsAux));
 
-        console.log(expDetailsAux)
+        console.log(expDetails)
     
         const expOwner = await knex('Experiment as e')
           .select('user.username')
           .innerJoin('MicelioUser as user', 'e.user_id', 'user.user_id')
           .where('e.experiment_id', experiment_id).first();
 
-        expDetailsAux.username = expOwner.username;
+        expDetails.username = expOwner.username;
 
         const partList = await knex('Participant as p')
                               .select('p.participant_id', 'p.group_id', 'p.has_ended_exp')
@@ -53,7 +53,7 @@ class ExpDetailsController {
 
         console.log(sGrpExpAux)
 
-        expDetailsAux.sessionGroups = sGrpExpAux
+        expDetails.sessionGroups = sGrpExpAux
 
         const countTotal = partListAux.length
 
@@ -109,10 +109,10 @@ class ExpDetailsController {
         groupsArray[2].partList = group3
         groupsArray[3].partList = group4
 
-        expDetailsAux.partEnded = totalEnded
-        expDetailsAux.partTotal = countTotal
+        expDetails.partEnded = totalEnded
+        expDetails.partTotal = countTotal
 
-        return response.json({expDetailsAux, groupsArray});
+        return response.json({expDetails, groupsArray});
     }
 
     async export (request, response) {
