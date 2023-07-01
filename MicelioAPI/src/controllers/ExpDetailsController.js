@@ -31,7 +31,7 @@ class ExpDetailsController {
           .innerJoin('MicelioUser as user', 'e.user_id', 'user.user_id')
           .where('e.experiment_id', experiment_id).first();
 
-        expDetails.username = expOwner.username;
+        expDetailsAux.username = expOwner.username;
 
         const partList = await knex('Participant as p')
                               .select('p.participant_id', 'p.group_id', 'p.has_ended_exp')
@@ -53,7 +53,7 @@ class ExpDetailsController {
 
         console.log(sGrpExpAux)
 
-        expDetails.sessionGroups = sGrpExpAux
+        expDetailsAux.sessionGroups = sGrpExpAux
 
         const countTotal = partListAux.length
 
@@ -109,10 +109,10 @@ class ExpDetailsController {
         groupsArray[2].partList = group3
         groupsArray[3].partList = group4
 
-        expDetails.partEnded = totalEnded
-        expDetails.partTotal = countTotal
+        expDetailsAux.partEnded = totalEnded
+        expDetailsAux.partTotal = countTotal
 
-        return response.json({expDetails, groupsArray});
+        return response.json({expDetailsAux, groupsArray});
     }
 
     async export (request, response) {
