@@ -123,9 +123,11 @@ class ExperimentController {
                 return response.status(400).json({error: "This experiment already exists"});
             }
 
-            const {game_id} = await trx('Game')
+            const {game_id} = await trx('Game as g')
+                                .innerJoin('HasPermission as hp', 'hp.game_id', 'g.game_id')
                                 .where('name', nameGame)
-                                .select('game_id')
+                                .andWhere('user_id', user_id)
+                                .select('g.game_id')
                                 .first();
 
             if(!game_id){

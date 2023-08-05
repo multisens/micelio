@@ -30,7 +30,7 @@ function ExperimentCard(props) {
       <div className={'card-content'}>
         <p><b>Jogo vinculado: </b>{props.game}</p>
         {props.groups ? props.groups.length > 0 ? 
-          <p><b>Grupo(s) de Sessão vinculado(s): </b><br/>{props.groups}</p>
+          <p><b>Grupo de Sessão vinculado: </b>{props.groups}</p>
           : '' : ''}
       </div>
       <div className={'card-options'}>

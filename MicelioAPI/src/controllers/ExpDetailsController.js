@@ -152,7 +152,6 @@ class ExpDetailsController {
                      .where('p.experiment_id', experiment_id)
                      .whereIn('p.group_id', groupAux)
                      .andWhere('f.ind_stage', form)
-                     .andWhere('p.session_group_id', sessionAux)
                      .orderBy(['p.group_id', 'p.participant_id', 'q.ind_order']);
       
       const answersAux = JSON.parse(JSON.stringify(answers));
