@@ -1,15 +1,17 @@
 const express = require('express');
 const SessionController = require('../controllers/SessionController.js');
-
+const TokenMiddleware = require("../middleware/TokenMiddleware")
 const DeviceIDMiddleware = require('../middleware/DeviceIDMiddleware');
 
 const Router = express.Router();
 const sessionController = new SessionController;
 
-Router.post('/', DeviceIDMiddleware, sessionController.create);
-Router.post('/test', DeviceIDMiddleware, sessionController.create);
+Router.get("/:game_id", sessionController.index);
 
-Router.put('/', DeviceIDMiddleware, sessionController.update);
-Router.put('/test', DeviceIDMiddleware, sessionController.update);
+Router.post('/', TokenMiddleware, DeviceIDMiddleware, sessionController.create);
+Router.post('/test', TokenMiddleware, DeviceIDMiddleware, sessionController.create);
+
+Router.put('/', TokenMiddleware, DeviceIDMiddleware, sessionController.update);
+Router.put('/test', TokenMiddleware, DeviceIDMiddleware, sessionController.update);
 
 module.exports = Router;

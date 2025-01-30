@@ -14,6 +14,10 @@ Router.post(
   activityController.create
 )
 
-Router.get("/", activityController.index)
+Router.get("/by-session/:session", activityController.getActivityBySession)
+Router.get("/by-group-session/:session", activityController.getActivityByGroupSession)
+Router.get("/by-game-id/:game_id", activityController.getActivityByGameID)
+
+
 
 module.exports = Router

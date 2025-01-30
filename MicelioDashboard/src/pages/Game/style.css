@@ -81,3 +81,31 @@ button.drop-button:hover {
 .visualization-button-container button{
   padding: 10px 5px !important;
 }
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 10px; 
+}
+
+.scrollable {
+  max-height: 300px; 
+  overflow-y: auto; 
+  width: 100%; 
+  box-sizing: border-box; 
+}
+
+fieldset {
+  width: 100%; 
+  border: 1px solid #ccc; 
+  padding: 10px;
+}
+
+legend {
+  font-size: 1.2rem; 
+  margin-bottom: 10px;
+}
+.checkbox-grid label {
+  word-break: break-word; 
+  max-width: 100%; 
+}

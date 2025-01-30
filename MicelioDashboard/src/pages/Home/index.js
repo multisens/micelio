@@ -85,7 +85,7 @@ function Home() {
 
       updateGameList()
     } catch (e) {
-      console.log(e.response.data)
+
       toast.error(
         `Não foi possível efetuar cadastro. Por favor, tente novamente.`,
         { style: { boxShadow: "1px 1px 5px rgba(0,0,0,.4)" } }
@@ -105,19 +105,20 @@ function Home() {
 
   const doCreateGroup = async () => {
     const game_id = newGroupGame
-
+    try {
     const response = await Api.post("/group", { game_id, name: newGroupName })
     const group_id = response.data.group_id
 
-    setNewGroupId(group_id)
-    setNewGroupName("")
-
     toast.success("Grupo criado com sucesso")
 
-    // desculpa v
-    updateGroupList()
-    updateGameList()
-    // sério, perdão ^
+    setGroupList((prevGroupList) => [
+      ...prevGroupList,
+      { id: group_id, name: newGroupName, game_id: newGroupGame },
+    ]);
+    }
+    catch(e){
+      toast.error(e.response.data.error)
+    }
   }
 
   const doShareGame = async (formEvent) => {
