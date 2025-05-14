@@ -88,36 +88,36 @@ const Visualization = ({ props, component_id, currentSession, currentGroupSessio
       .height(400)
       .width(specialWidth)
 
-    const heatMap = vl
-      .markRect({ clip: true })
-      .data(heatMapData)
-      .encode(
-        vl
-          .x()
-          .fieldQ("position_x")
-          .bin({ maxbins: 20 })
-          .axis({ grid: true, gridColor: "#FFFFFF" })
-          .title("")
-          .scale({ domainMin: 0 }),
-        vl
-          .y()
-          .fieldQ("position_y")
-          .bin({ maxbins: 20 })
-          .axis({ grid: true, gridColor: "#FFFFFF" })
-          .title("")
-          .scale({ domainMin: 0 })
-          .sort("descending"),
-        vl
-          .color()
-          .count()
-          .scale({ scheme: "reds" })
-          .legend({ orient: "bottom", padding: 10 }),
-        vl.tooltip(["name", "time"])
-      )
-      .title("Heat Map")
-      .transform([vl.filter(brush)])
-      .width(width / 2)
-      .height(width / 3)
+    // const heatMap = vl
+    //   .markRect({ clip: true })
+    //   .data(heatMapData)
+    //   .encode(
+    //     vl
+    //       .x()
+    //       .fieldQ("position_x")
+    //       .bin({ maxbins: 20 })
+    //       .axis({ grid: true, gridColor: "#FFFFFF" })
+    //       .title("")
+    //       .scale({ domainMin: 0 }),
+    //     vl
+    //       .y()
+    //       .fieldQ("position_y")
+    //       .bin({ maxbins: 20 })
+    //       .axis({ grid: true, gridColor: "#FFFFFF" })
+    //       .title("")
+    //       .scale({ domainMin: 0 })
+    //       .sort("descending"),
+    //     vl
+    //       .color()
+    //       .count()
+    //       .scale({ scheme: "reds" })
+    //       .legend({ orient: "bottom", padding: 10 }),
+    //     vl.tooltip(["name", "time"])
+    //   )
+    //   .title("Heat Map")
+    //   .transform([vl.filter(brush)])
+    //   .width(width / 2)
+    //   .height(width / 3)
 
     const population = vl
       .markLine({ interpolate: "step", clip: true })

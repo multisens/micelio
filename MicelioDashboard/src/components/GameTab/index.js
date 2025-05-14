@@ -1,104 +1,101 @@
 import { useEffect, useState } from "react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Select, Box } from "@chakra-ui/react"
-
+import './style.css';
 import Api from "../../services/Api";
 import SessionGroupList from "../../components/SessionGroupList";
+import VisualizationsList from "../VisualizationList"; // novo componente
 import Visualization from "../Visualization";
+import SessionList from "../SessionList";
 
-const tabSelectedStyle = { bg: '#2A9D8F', color: 'white', border: '2px solid #bfbfbf' }
-
-const GameTab = ({ groupList, gameToken, visualizations, onAddGroup, onSelectGroup, gameId, visualizationSingleSessionName }) => {
+const GameTab = ({
+  groupList,
+  gameToken,
+  visualizations,
+  onAddGroup,
+  onSelectGroup,
+  onSelectSession,
+  gameId,
+  visualizationSingleSessionName,
+  onAddVisualization // 👈 nova prop
+}) => {
   const [visualizationConfig, setVisualizationConfig] = useState({});
-  const [currentVisualization, setCurrentVisualization] = useState('')
-  const [sessions, setSessions] = useState([])
-  const [currentSession, setCurrentSession] = useState('')
+  const [currentVisualization, setCurrentVisualization] = useState('');
+  const [sessions, setSessions] = useState([]);
+  const [currentSession, setCurrentSession] = useState('');
+  const [selectedTab, setSelectedTab] = useState("grupos");
 
   useEffect(() => {
-    getSessions()
+    getSessions();
   }, []);
 
   const getSessions = async () => {
     try {
       const response = await Api.get(`/session/${gameId}`);
-      setSessions(response.data)
+      setSessions(response.data);
     } catch (e) {
-      console.error(e.response)
-    }
-  }
-
-  const drawCurrentVisualization = (e) => {
-    const currentVisualizationId = e.target.value
-    setCurrentVisualization(currentVisualizationId)
-
-    const visualization = visualizations.filter(visualization => {
-      return visualization.visualization_id == currentVisualizationId
-    })
-
-    if (!visualization.length) {
-      setVisualizationConfig({})
-      return
-    }
-
-    setVisualizationConfig(JSON.parse(visualization[0].config))
-  }
-
-  const resetStatesByTab = (index) => {
-    switch (index) {
-      case 1:
-        setCurrentSession('');
-        break;
-      default:
-        break;
+      console.error(e.response);
     }
   };
 
   return (
-    <Tabs variant='enclosed' colorScheme={"green"} onChange={resetStatesByTab}>
-      <TabList>
-        <Tab _selected={tabSelectedStyle}>Grupos criados</Tab>
-        <Tab _selected={tabSelectedStyle}>Visualizações</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>
-          <SessionGroupList groups={groupList} onAddGroup={() => { onAddGroup() }} onSelectGroup={onSelectGroup} />
-        </TabPanel>
+    <div>
+      {/* Botões de navegação entre abas */}
+      <div className="game-button-container">
+        <button
+          className={`primary ${selectedTab === "grupos" ? "active-tab" : ""}`}
+          onClick={() => setSelectedTab("grupos")}
+        >
+          Grupos
+        </button>
 
-        <TabPanel >
-          <Select bg={'white'} maxWidth={450} onChange={drawCurrentVisualization} value={currentVisualization}>
-            <option value=''>Escolha uma visualização:</option>
-            {
-              visualizations.map(v => (
-                <option key={v.visualization_id} value={v.visualization_id}>{v.name}</option>
-              ))
-            }
-          </Select>
-          {
-            currentVisualization && (
-              <Select mt={2} bg={'white'} maxWidth={450} value={currentSession} onChange={e => { setCurrentSession(e.target.value) }}>
-                <option value=''>Escolha uma sessão:</option>
-                {
-                  sessions.map(s => (
-                    <option key={s.session_id} value={s.session_id}>{s.formattedDate} {s.end_time} - {s.name}</option>
-                  ))
-                }
-              </Select>
-            )
-          }
+        <button
+          className={`primary ${selectedTab === "sessoes" ? "active-tab" : ""}`}
+          onClick={() => setSelectedTab("sessoes")}
+        >
+          Sessões
+        </button>
 
-          {
-            (currentSession && visualizationConfig && visualizationConfig?.graphs !== undefined) &&
-            <Box mt={10}>
-              <Visualization
-                props={visualizationConfig}
-                component_id="single"
-                currentSession={currentSession}
-              />
-            </Box>
-          }
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
-  )
-}
+        <button
+          className={`primary ${selectedTab === "visualizacoes" ? "active-tab" : ""}`}
+          onClick={() => setSelectedTab("visualizacoes")}
+        >
+          Visualizações
+        </button>
+      </div>
 
-export default GameTab
+
+      {/* Aba Grupos */}
+      {selectedTab === "grupos" && (
+        <SessionGroupList
+          groups={groupList}
+          onAddGroup={onAddGroup}
+          onSelectGroup={onSelectGroup}
+        />
+      )}
+      {/* Aba Sessões */}
+      {selectedTab === "sessoes" && (
+        <SessionList
+          sessions={sessions}
+          onSelectSession={onSelectSession}
+        />
+      )}
+
+
+      {/* Aba Visualizações */}
+      {selectedTab === "visualizacoes" && (
+        <>
+          <VisualizationsList
+            visualizations={visualizations}
+            onAddVisualization={onAddVisualization}
+            onSelectVisualization={(vis) => {
+              setCurrentVisualization(vis.visualization_id);
+              setVisualizationConfig(JSON.parse(vis.config));
+            }}
+          />
+
+        </>
+      )}
+    </div>
+  );
+};
+
+export default GameTab;

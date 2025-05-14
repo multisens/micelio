@@ -84,12 +84,11 @@ button.drop-button:hover {
 
 .checkbox-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(6, 1fr); 
   gap: 10px; 
 }
 
 .scrollable {
-  max-height: 300px; 
   overflow-y: auto; 
   width: 100%; 
   box-sizing: border-box; 
@@ -100,6 +99,17 @@ fieldset {
   border: 1px solid #ccc; 
   padding: 10px;
 }
+
+input.primary {
+  width: 70%;
+  padding: 10px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
 
 legend {
   font-size: 1.2rem; 

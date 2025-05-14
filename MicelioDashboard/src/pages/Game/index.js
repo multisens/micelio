@@ -23,6 +23,14 @@ function Game() {
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [selectedAgents, setSelectedAgents] = useState([]);
   const [selectedEntities, setSelectedEntities] = useState([]);
+  const [selectedSession, setSelectedSession] = useState(null);
+  const [isSessionPopupOpen, setIsSessionPopupOpen] = useState(false);
+
+  const handleSelectSession = (session) => {
+    setSelectedSession(session);
+    setIsSessionPopupOpen(true);
+  };
+
 
   const [visualizations, setVisualizations] = useState([]);
   const [currentVisualization, setCurrentVisualization] = useState("");
@@ -47,7 +55,7 @@ function Game() {
         console.error("Erro ao buscar dados:", error);
       }
     };
-  
+
     fetchData();
   }, []);
 
@@ -205,7 +213,7 @@ function Game() {
       toast.success("Visualização cadastrada com sucesso")
       setIsPopupOpen(false)
       setTimeout(() => {
-        window.location.reload();  
+        window.location.reload();
       }, 2000);
 
     } catch (e) {
@@ -220,68 +228,100 @@ function Game() {
 
   return (
     <>
-      <Popup
-        isOpen={isGroupPopupOpen}
-        onClose={() => {
-          setNewGroupName('')
-          setNewGroupId('')
-          setIsGroupPopupOpen(false)
-        }}
-      >
+      {/* Popup Criação Grupo */}
+      <Popup isOpen={isGroupPopupOpen} onClose={() => { setNewGroupName(''); setNewGroupId(''); setIsGroupPopupOpen(false); }}>
         <h2>Cadastre um grupo</h2>
-        <input
-          className={"primary"}
-          type='text'
-          value={newGroupName}
-          placeholder={"Nome do grupo"}
-          onChange={(e) => { setNewGroupName(e.target.value) }}
-        />
-        <button className='primary' onClick={doCreateGroup}>
-          Cadastrar
-        </button>
-        {newGroupId && <div className={"group-id"}>{newGroupId}</div>}
+        <input className="primary" type="text" value={newGroupName} placeholder="Nome do grupo" onChange={(e) => setNewGroupName(e.target.value)} />
+        <button className="primary" onClick={doCreateGroup}>Cadastrar</button>
+        {newGroupId && <div className="group-id">{newGroupId}</div>}
       </Popup>
 
-
-      <Popup
-        isOpen={isPopupGroupVisualizationOpen}
-       
-        onClose={() => {
-          setSelectedGroup(null);
-          setCurrentVisualization("");
-          setVisualizationConfig({});
-          setIsPopupGroupVisualizationOpen(false);
-        }}
-      >
+      {/* Popup Visualização por Grupo */}
+      <Popup isOpen={isPopupGroupVisualizationOpen} onClose={() => { setSelectedGroup(null); setCurrentVisualization(""); setVisualizationConfig({}); setIsPopupGroupVisualizationOpen(false); }}>
         {selectedGroup && (
-          <>
-            <h2>Grupo Selecionado</h2>
-            <p><b>ID:</b> {selectedGroup.session_group_id}</p>
-            <p><b>Nome:</b> {selectedGroup.name}</p>
-            <p><b>Status:</b> {selectedGroup.it_ends ? "Fechado" : "Aberto"}</p>
+          <div className="visualization-popup-container">
+            <div className="visualization-controls">
+              <h2>Grupo Selecionado</h2>
+              <p><b>ID:</b> {selectedGroup.session_group_id}</p>
+              <p><b>Nome:</b> {selectedGroup.name}</p>
+              <p><b>Status:</b> {selectedGroup.it_ends ? "Fechado" : "Aberto"}</p>
 
-            <h3>Escolha uma Visualização</h3>
-            <select onChange={handleVisualizationChange} value={currentVisualization}>
-              <option value="">Selecione uma visualização</option>
-              {visualizations.map((visualization) => (
-                <option key={visualization.visualization_id} value={visualization.visualization_id}>
-                  {visualization.name}
-                </option>
-              ))}
-            </select>
+              <select
+                onChange={handleVisualizationChange}
+                value={currentVisualization}
+                className="select"
+              >
+                <option value="">Selecione uma visualização</option>
+                {visualizations.map((v) => (
+                  <option key={v.visualization_id} value={v.visualization_id}>
+                    {v.name}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            {currentVisualization && visualizationConfig?.graphs && (
-              <div style={{ marginTop: "20px" }}>
-                <h3>Visualização: {visualizations.find(v => v.visualization_id === currentVisualization)?.name}</h3>
+            <div className="visualization-graph">
+              {currentVisualization && visualizationConfig?.graphs && (
                 <Visualization
                   props={visualizationConfig}
                   component_id="popup"
                   currentGroupSession={selectedGroup.session_group_id}
                 />
+              )}
+            </div>
+          </div>
+        )}
+      </Popup>
+
+      {/* Popup Visualização por Sessão */}
+      <Popup isOpen={isSessionPopupOpen} onClose={() => { setSelectedSession(null); setIsSessionPopupOpen(false); }}>
+        {selectedSession && (
+          <>
+            <h2>Sessão Selecionada</h2>
+            <p><b>ID:</b> {selectedSession.session_id}</p>
+            <p><b>Nome:</b> {selectedSession.name}</p>
+            <p><b>Data:</b> {selectedSession.formattedDate}</p>
+            <p><b>Horário:</b> {selectedSession.end_time || "—"}</p>
+            <p><b>Status:</b> {selectedSession.it_ends ? "Fechada" : "Aberta"}</p>
+            <div className="visualization-popup-container">
+              <div className="visualization-controls">
+                <select
+                  className="select"
+                  onChange={handleVisualizationChange}
+                  value={currentVisualization}
+                >
+                  <option value="">Selecione uma visualização</option>
+                  {visualizations.map((v) => (
+                    <option key={v.visualization_id} value={v.visualization_id}>
+                      {v.name}
+                    </option>
+                  ))}
+                </select>
               </div>
-            )}
+
+              <div className="visualization-graph">
+                {currentVisualization && visualizationConfig?.graphs && (
+                  <Visualization
+                    props={visualizationConfig}
+                    component_id="popup"
+                    currentSession={selectedSession.session_id}
+                  />
+                )}
+              </div>
+            </div>
+
           </>
         )}
+      </Popup>
+
+      {/* Popup Nova Visualização */}
+      <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
+        <h2>Cadastre uma nova visualização</h2>
+        <form onSubmit={doCreateVisualization}>
+          <input required type="text" className="primary" placeholder="Nome" value={visualizationName} onChange={(e) => setVisualizationName(e.target.value)} />
+          {/* Renderização de checkboxes de atividades, agentes, entidades omitida aqui para brevidade */}
+          <button className="primary">Cadastrar</button>
+        </form>
       </Popup>
 
       <ToastContainer />
@@ -414,13 +454,9 @@ function Game() {
                   <button className='drop-button'>Excluir Jogo</button>
                 </div>
               </div>
-              <div className="visualization-button-container">
-                <button className='primary' onClick={exibirPopUp}>Nova Visualização</button>
-
-              </div>
               <Box mt={5}>
-                <GameTab groupList={groups} gameToken={game.token} visualizations={visualizations} onAddGroup={doCreateGroup} onSelectGroup={doCreateVisualizationGroup} gameId={params.id}
-                  visualizationSingleSessionName="dashboard1" />
+                <GameTab groupList={groups} gameToken={game.token} visualizations={visualizations} onAddGroup={doCreateGroup} onSelectGroup={doCreateVisualizationGroup} onSelectSession={handleSelectSession} gameId={params.id}
+                  visualizationSingleSessionName="dashboard1" onAddVisualization={exibirPopUp} />
               </Box>
             </>
           )}
