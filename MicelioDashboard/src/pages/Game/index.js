@@ -12,6 +12,7 @@ import Api from "../../services/Api"
 import GameTab from "../../components/GameTab"
 import Popup from "../../components/Popup";
 import Visualization from "../../components/Visualization";
+import useExpandableList from "../../hooks/useExpandableList";
 
 function Game() {
   const params = useParams()
@@ -44,6 +45,25 @@ function Game() {
   const [newGroupName, setNewGroupName] = useState('')
   const [newGroupId, setNewGroupId] = useState('')
   const [isGroupPopupOpen, setIsGroupPopupOpen] = useState(false)
+
+  const {
+    visibleItems: visibleActivities,
+    hasMore: hasMoreActivities,
+    showMore: showMoreActivities
+  } = useExpandableList(visualizationConfiguration.activities || [], 4, 1);
+
+  const {
+    visibleItems: visibleAgents,
+    hasMore: hasMoreAgents,
+    showMore: showMoreAgents
+  } = useExpandableList(visualizationConfiguration.agents || [], 4, 1);
+
+  const {
+    visibleItems: visibleEntities,
+    hasMore: hasMoreEntities,
+    showMore: showMoreEntities
+  } = useExpandableList(visualizationConfiguration.entities || [], 4, 1);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -229,7 +249,7 @@ function Game() {
   return (
     <>
       {/* Popup Criação Grupo */}
-      <Popup isOpen={isGroupPopupOpen} onClose={() => { setNewGroupName(''); setNewGroupId(''); setIsGroupPopupOpen(false); }}>
+      <Popup isOpen={isGroupPopupOpen} onClose={() => { setNewGroupName(''); setNewGroupId(''); setIsGroupPopupOpen(false); }} customStyle={{ width: "600px", height: "207px", overflowY: "hidden" }}>
         <h2>Cadastre um grupo</h2>
         <input className="primary" type="text" value={newGroupName} placeholder="Nome do grupo" onChange={(e) => setNewGroupName(e.target.value)} />
         <button className="primary" onClick={doCreateGroup}>Cadastrar</button>
@@ -242,22 +262,29 @@ function Game() {
           <div className="visualization-popup-container">
             <div className="visualization-controls">
               <h2>Grupo Selecionado</h2>
-              <p><b>ID:</b> {selectedGroup.session_group_id}</p>
-              <p><b>Nome:</b> {selectedGroup.name}</p>
-              <p><b>Status:</b> {selectedGroup.it_ends ? "Fechado" : "Aberto"}</p>
-
-              <select
-                onChange={handleVisualizationChange}
-                value={currentVisualization}
-                className="select"
-              >
-                <option value="">Selecione uma visualização</option>
-                {visualizations.map((v) => (
-                  <option key={v.visualization_id} value={v.visualization_id}>
-                    {v.name}
-                  </option>
-                ))}
-              </select>
+              <div className="visualization-popup-container">
+                <div className="visualization-popup-container-data">
+                  <p><b>ID:</b> {selectedGroup.session_group_id}</p>
+                  <p><b>Nome:</b> {selectedGroup.name}</p>
+                  <p><b>Status:</b> {selectedGroup.it_ends ? "Fechado" : "Aberto"}</p>
+                </div>
+              </div>
+              <div className="visualization-select">
+                <label htmlFor="select-visualization">Selecione uma visualização:</label>
+                <select
+                  id="select-visualization"
+                  className="styled-select"
+                  onChange={handleVisualizationChange}
+                  value={currentVisualization}
+                >
+                  <option value="">Selecione uma visualização</option>
+                  {visualizations.map((v) => (
+                    <option key={v.visualization_id} value={v.visualization_id}>
+                      {v.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             <div className="visualization-graph">
@@ -278,15 +305,21 @@ function Game() {
         {selectedSession && (
           <>
             <h2>Sessão Selecionada</h2>
-            <p><b>ID:</b> {selectedSession.session_id}</p>
-            <p><b>Nome:</b> {selectedSession.name}</p>
-            <p><b>Data:</b> {selectedSession.formattedDate}</p>
-            <p><b>Horário:</b> {selectedSession.end_time || "—"}</p>
-            <p><b>Status:</b> {selectedSession.it_ends ? "Fechada" : "Aberta"}</p>
             <div className="visualization-popup-container">
-              <div className="visualization-controls">
+ <div className="visualization-popup-container">
+                <div className="visualization-popup-container-data">
+                <p><b>ID:</b> {selectedSession.session_id}</p>
+                <p><b>Nome:</b> {selectedSession.name}</p>
+                <p><b>Data:</b> {selectedSession.formattedDate}</p>
+                <p><b>Horário:</b> {selectedSession.end_time || "—"}</p>
+                <p><b>Status:</b> {selectedSession.end_time ? "Fechada" : "Aberta"}</p>
+                </div>
+              </div>
+              <div className="visualization-select">
+                <label htmlFor="select-visualization">Selecione uma visualização:</label>
                 <select
-                  className="select"
+                  id="select-visualization"
+                  className="styled-select"
                   onChange={handleVisualizationChange}
                   value={currentVisualization}
                 >
@@ -298,7 +331,6 @@ function Game() {
                   ))}
                 </select>
               </div>
-
               <div className="visualization-graph">
                 {currentVisualization && visualizationConfig?.graphs && (
                   <Visualization
@@ -308,14 +340,13 @@ function Game() {
                   />
                 )}
               </div>
-            </div>
-
+               </div>
           </>
         )}
       </Popup>
 
       {/* Popup Nova Visualização */}
-      <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
+      <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} customStyle={{ width: "60%" }}>
         <h2>Cadastre uma nova visualização</h2>
         <form onSubmit={doCreateVisualization}>
           <input required type="text" className="primary" placeholder="Nome" value={visualizationName} onChange={(e) => setVisualizationName(e.target.value)} />
@@ -331,6 +362,7 @@ function Game() {
         onClose={() => {
           setIsPopupOpen(false)
         }}
+        customStyle={{ width: "60%" }}
       >
         <h2>Cadastre uma nova visualização</h2>
         <form onSubmit={doCreateVisualization}>
@@ -348,7 +380,7 @@ function Game() {
           {visualizationConfiguration.activities && (
             <fieldset className="checkbox-grid scrollable">
               <legend>Atividades</legend>
-              {visualizationConfiguration.activities.map((activity, index) => (
+              {visibleActivities.map((activity, index) => (
                 <label key={`activity-${index}`}>
                   <input
                     type="checkbox"
@@ -361,13 +393,18 @@ function Game() {
                   {activity.name}
                 </label>
               ))}
+              {hasMoreActivities && (
+                <button type="button" className="ver-mais-btn" onClick={showMoreActivities}>
+                  Ver mais
+                </button>
+              )}
             </fieldset>
           )}
 
           {visualizationConfiguration.agents && (
             <fieldset className="checkbox-grid scrollable">
               <legend>Agentes</legend>
-              {visualizationConfiguration.agents.map((agent, index) => (
+              {visibleAgents.map((agent, index) => (
                 <label key={`agent-${index}`}>
                   <input
                     type="checkbox"
@@ -380,13 +417,18 @@ function Game() {
                   {agent.name}
                 </label>
               ))}
+              {hasMoreAgents && (
+                <button type="button" className="ver-mais-btn" onClick={showMoreAgents}>
+                  Ver mais
+                </button>
+              )}
             </fieldset>
           )}
 
           {visualizationConfiguration.entities && (
             <fieldset className="checkbox-grid scrollable">
               <legend>Entidades</legend>
-              {visualizationConfiguration.entities.map((entity, index) => (
+              {visibleEntities.map((entity, index) => (
                 <label key={`entity-${index}`}>
                   <input
                     type="checkbox"
@@ -399,8 +441,14 @@ function Game() {
                   {entity.name}
                 </label>
               ))}
+              {hasMoreEntities && (
+                <button type="button" className="ver-mais-btn" onClick={showMoreEntities}>
+                  Ver mais
+                </button>
+              )}
             </fieldset>
           )}
+
 
           <button className='primary'>Cadastrar</button>
         </form>

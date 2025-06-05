@@ -46,6 +46,10 @@ function SessionsList({ sessions, onSelectSession }) {
     });
   };
 
+
+  const sessoesFinalizadas = sessions.filter(session => session.end_time).length;
+
+
   return (
     <>
       <div className="grouplist">
@@ -57,6 +61,17 @@ function SessionsList({ sessions, onSelectSession }) {
               placeholder="Busque sessões"
               onKeyUp={filterSessions}
             />
+          </div>
+        </div>
+        <div className="sessions">
+          <div className="sessions-count">
+            <span>Total de sessões: {sessions.length} {sessions.length === 1 ? "sessão" : "sessões"}</span>
+          </div>
+          <div className="sessions-count">
+            <span>Sessões ativas: {sessions.length - sessoesFinalizadas}</span>
+          </div>
+          <div className="sessions-count">
+            <span>Sessões finalizadas: {sessoesFinalizadas}</span>
           </div>
         </div>
         <ul>
@@ -81,11 +96,12 @@ function SessionsList({ sessions, onSelectSession }) {
                 <b>Horário:</b> {session.end_time || "—"}
               </p>
               <p>
-                <b>Status:</b> {session.it_ends ? "Fechada" : "Aberta"}
+                <b>Device ID:</b> {session.device_id ?? "Não informado"}
               </p>
             </li>
           ))}
         </ul>
+
       </div>
 
       {sessions.length > 4 && !isSearching && (

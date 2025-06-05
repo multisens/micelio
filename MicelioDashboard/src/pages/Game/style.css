@@ -29,20 +29,23 @@
   flex-direction: column;
   justify-content: flex-end;
 }
+
 .gameinfo strong {
   color: #264653;
 }
-.gameinfo > span {
+
+.gameinfo>span {
   max-width: 600px;
   display: block;
   word-break: break-all;
   margin-top: 8px;
 }
 
-.drop-button-container{
-  width: 100%;
-
-  position: relative;
+.drop-button-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  margin-left: 25px;
 }
 
 button.drop-button {
@@ -61,7 +64,6 @@ button.drop-button {
   transition: all .2s;
   outline: none;
 
-  position: absolute;
   right: 10px;
 }
 
@@ -72,36 +74,96 @@ button.drop-button:hover {
   transform: scale(1.02, 1.02);
 }
 
-.visualization-button-container{
-  
+.visualization-button-container {
+
   margin-top: 20px;
   max-width: 200px;
 }
 
-.visualization-button-container button{
+.visualization-button-container button {
   padding: 10px 5px !important;
 }
 
 .checkbox-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); 
-  gap: 10px; 
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 0 auto;
+  justify-content: center;
 }
 
+.ver-mais-btn {
+  margin-top: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  grid-column: span 4;
+  text-align: CENTER;
+  margin: 0 auto;
+}
+
+.ver-mais-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.visualization-popup-container {
+  margin: auto;
+  width: 50%;
+}
+
+.visualization-popup-container-data {
+  background: #FAFAFB;
+  border-radius: 8px;
+  padding:5px;
+}
+
+
+.visualization-select {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.visualization-select label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.styled-select {
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  background-color: white;
+  outline: none;
+  transition: border 0.2s ease-in-out;
+}
+
+.styled-select:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
+}
+
+
 .scrollable {
-  overflow-y: auto; 
-  width: 100%; 
-  box-sizing: border-box; 
+  overflow-y: auto;
+  width: 50%;
+  box-sizing: border-box;
 }
 
 fieldset {
-  width: 100%; 
-  border: 1px solid #ccc; 
+  width: 100%;
+  border: 1px solid #ccc;
   padding: 10px;
 }
 
 input.primary {
-  width: 70%;
+  width: 100%;
   padding: 10px;
   margin-bottom: 16px;
   font-size: 1rem;
@@ -112,10 +174,11 @@ input.primary {
 
 
 legend {
-  font-size: 1.2rem; 
+  font-size: 1.2rem;
   margin-bottom: 10px;
 }
+
 .checkbox-grid label {
-  word-break: break-word; 
-  max-width: 100%; 
+  word-break: break-word;
+  max-width: 100%;
 }
