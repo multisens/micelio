@@ -16,7 +16,7 @@ export class PopulationGraph {
     ) {
         this.title = title;
         this.mark = new Mark(markType, null, null, interpolate, clip);
-        this.data = new Data(dataValues, true); // ✅ Indica que é uma URL e não um array
+        this.data = new Data(dataValues, true);
         this.encoding = new Encoding(xField, yField, null, colorField);
         this.transform = filterSelection;
         this.width = width;

@@ -42,6 +42,14 @@ function VisualizationsList({ visualizations, onAddVisualization, onSelectVisual
       }
     });
   };
+  const parseConfigSemImagem = (raw) => {
+    try {
+      const limpo = raw.replace(/"image"\s*:\s*"(.*?)"(,?)/, '"image":"[removido]"$2');
+      return JSON.parse(limpo);
+    } catch (e) {
+      return null;
+    }
+  };
 
   return (
     <>
@@ -72,12 +80,18 @@ function VisualizationsList({ visualizations, onAddVisualization, onSelectVisual
                 <i>ID: {v.visualization_id}</i>
               </span>
               <Hr />
-                            <p>
+              <p>
                 <b>Nome:</b> {v.name}
               </p>
               <p>
-                <b>Gráficos:</b> {JSON.parse(v.config).graphs?.length ?? 0}
+                <b>Gráficos:</b>{" "}
+                {(() => {
+                  const parsed = parseConfigSemImagem(v.config);
+                  return parsed?.graphs?.length ?? "Inválido";
+                })()}
               </p>
+
+
             </li>
           ))}
         </ul>

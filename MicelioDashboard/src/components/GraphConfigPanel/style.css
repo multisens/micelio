@@ -1,0 +1,11 @@
+.image-config-fieldset {
+    max-width: 500px;
+    width: 90%;
+    margin: 2rem auto;
+    border: 1px solid #ccc;
+    padding: 1rem;
+}
+
+input:disabled {
+  cursor: not-allowed;
+}

@@ -13,6 +13,8 @@ import GameTab from "../../components/GameTab"
 import Popup from "../../components/Popup";
 import Visualization from "../../components/Visualization";
 import useExpandableList from "../../hooks/useExpandableList";
+import GraphConfigPanel from "../../components/GraphConfigPanel/GraphConfigPanel"
+
 
 function Game() {
   const params = useParams()
@@ -63,6 +65,29 @@ function Game() {
     hasMore: hasMoreEntities,
     showMore: showMoreEntities
   } = useExpandableList(visualizationConfiguration.entities || [], 4, 1);
+
+  const [graphStates, setGraphStates] = useState({
+    timeline: false,
+    activityList: false,
+    heatmap: false,
+    population: false
+  });
+
+  const typeMap = {
+    timeline: "Timeline",
+    activityList: "ActivityList",
+    heatmap: "HeatMap",
+    population: "Population"
+  };
+
+  const [graphSelections, setGraphSelections] = useState({});
+
+  const mapaNomePorKey = {
+    timeline: "Linha do Tempo",
+    activityList: "Atividades",
+    heatmap: "Mapa de Calor",
+    population: "Gráfico de População"
+  };
 
 
   useEffect(() => {
@@ -165,82 +190,66 @@ function Game() {
   }
 
   const doCreateVisualization = async (formEvent) => {
-    formEvent.preventDefault()
+    formEvent.preventDefault();
 
-    const agentsString = JSON.stringify(selectedAgents);
-    const activitiesString = JSON.stringify(selectedActivities);
-    const entitiesString = JSON.stringify(selectedEntities);
+    const graphs = Object.entries(graphStates)
+      .filter(([_, enabled]) => enabled)
+      .map(([key]) => {
+        const sel = graphSelections[key] || {};
+        const activitiesJson = sel.activities || [];
+        const agentsJson = sel.agents || [];
+        const entitiesJson = sel.entities || [];
 
-    const agentsJson = JSON.parse(agentsString);
-    const activitiesJson = JSON.parse(activitiesString);
-    const entitiesJson = JSON.parse(entitiesString);
+        const formattedInsertActivitiesJson = activitiesJson.map((a) => ({ name: a }));
 
-    const formattedInsertActivities = selectedActivities.map(activity => {
-      return { name: activity };
-    });
-    const formattedInsertActivitiesString = JSON.stringify(formattedInsertActivities);
-    const formattedInsertActivitiesJson = JSON.parse(formattedInsertActivitiesString);
+        const graph = {
+          id: mapaNomePorKey[key],
+          type: typeMap[key],
+          activities: activitiesJson,
+          agents: agentsJson,
+          entities: entitiesJson,
+          filter_by: "Linha do Tempo"
+        };
+
+        if (key === "activityList") graph.circle_bins = 40;
+
+        if (key === "population") {
+          graph.checbox_filter = "true";
+          graph.insert = formattedInsertActivitiesJson;
+          graph.remove = [
+            { name: "Predacao", role: ["presa"] },
+            { name: "remover predador" },
+            { name: "morte" }
+          ];
+        }
+
+        if (key === "heatmap" && sel.image) {
+          graph.image = sel.image;
+        }
+
+        return graph;
+      });
 
     const configurationData = {
-      "screen_width": 824,
-      "type": "session",
-      "graphs": [
-        {
-          "id": "Linha do Tempo",
-          "activities": activitiesJson,
-          "type": "Timeline"
-        },
-        {
-          "id": "Atividades",
-          "type": "ActivityList",
-          "activities": activitiesJson,
-          "circle_bins": 40,
-          "filter_by": "Linha do Tempo"
-        },
-
-        {
-          "id": "Heat Map",
-          "type": "HeatMap",
-          "activities": activitiesJson,
-          "filter_by": "Linha do Tempo"
-        },
-
-        {
-          "id": "Gráfico de População",
-          "type": "Population",
-          "agents": agentsJson,
-          "entities": entitiesJson,
-          "checbox_filter": "true",
-          "insert": formattedInsertActivitiesJson,
-          "remove": [
-            { "name": "Predacao", "role": ["presa"] },
-            { "name": "remover predador" },
-            { "name": "morte" }
-          ],
-          "filter_by": "Linha do Tempo"
-        }
-      ]
+      screen_width: 824,
+      type: "session",
+      graphs
     };
-    //precisa ajustar o remove do grafico de população
-    const jsonConfigurationData = JSON.stringify(configurationData);
 
     try {
       await Api.post(`/visualization/${params.id}`, {
         name: visualizationName,
-        config: jsonConfigurationData,
-      })
+        config: JSON.stringify(configurationData)
+      });
 
-      toast.success("Visualização cadastrada com sucesso")
-      setIsPopupOpen(false)
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-
+      toast.success("Visualização cadastrada com sucesso");
+      setIsPopupOpen(false);
+      setTimeout(() => window.location.reload(), 2000);
     } catch (e) {
-      toast.error(e.response.data.error)
+      toast.error(e.response?.data?.error || "Erro ao cadastrar");
     }
+  };
 
-  }
 
   const exibirPopUp = () => {
     setIsPopupOpen(true)
@@ -306,13 +315,13 @@ function Game() {
           <>
             <h2>Sessão Selecionada</h2>
             <div className="visualization-popup-container">
- <div className="visualization-popup-container">
+              <div className="visualization-popup-container">
                 <div className="visualization-popup-container-data">
-                <p><b>ID:</b> {selectedSession.session_id}</p>
-                <p><b>Nome:</b> {selectedSession.name}</p>
-                <p><b>Data:</b> {selectedSession.formattedDate}</p>
-                <p><b>Horário:</b> {selectedSession.end_time || "—"}</p>
-                <p><b>Status:</b> {selectedSession.end_time ? "Fechada" : "Aberta"}</p>
+                  <p><b>ID:</b> {selectedSession.session_id}</p>
+                  <p><b>Nome:</b> {selectedSession.name}</p>
+                  <p><b>Data:</b> {selectedSession.formattedDate}</p>
+                  <p><b>Horário:</b> {selectedSession.end_time || "—"}</p>
+                  <p><b>Status:</b> {selectedSession.end_time ? "Fechada" : "Aberta"}</p>
                 </div>
               </div>
               <div className="visualization-select">
@@ -340,30 +349,14 @@ function Game() {
                   />
                 )}
               </div>
-               </div>
+            </div>
           </>
         )}
       </Popup>
 
-      {/* Popup Nova Visualização */}
-      <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} customStyle={{ width: "60%" }}>
-        <h2>Cadastre uma nova visualização</h2>
-        <form onSubmit={doCreateVisualization}>
-          <input required type="text" className="primary" placeholder="Nome" value={visualizationName} onChange={(e) => setVisualizationName(e.target.value)} />
-          {/* Renderização de checkboxes de atividades, agentes, entidades omitida aqui para brevidade */}
-          <button className="primary">Cadastrar</button>
-        </form>
-      </Popup>
-
       <ToastContainer />
 
-      <Popup
-        isOpen={isPopupOpen}
-        onClose={() => {
-          setIsPopupOpen(false)
-        }}
-        customStyle={{ width: "60%" }}
-      >
+      <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} customStyle={{ width: "60%" }}>
         <h2>Cadastre uma nova visualização</h2>
         <form onSubmit={doCreateVisualization}>
           <input
@@ -375,84 +368,43 @@ function Game() {
             onChange={(e) => setVisualizationName(e.target.value)}
           />
 
-          <p>Selecione as atividades, agentes e entidades que deseja ter nos gráficos de análise:</p>
+          <p>Escolha os gráficos que deseja incluir e configure os dados:</p>
 
-          {visualizationConfiguration.activities && (
-            <fieldset className="checkbox-grid scrollable">
-              <legend>Atividades</legend>
-              {visibleActivities.map((activity, index) => (
-                <label key={`activity-${index}`}>
-                  <input
-                    type="checkbox"
-                    value={activity.name}
-                    checked={selectedActivities.includes(activity.name)}
-                    onChange={(e) =>
-                      handleCheckboxChange(e, setSelectedActivities, selectedActivities)
-                    }
-                  />
-                  {activity.name}
-                </label>
-              ))}
-              {hasMoreActivities && (
-                <button type="button" className="ver-mais-btn" onClick={showMoreActivities}>
-                  Ver mais
-                </button>
+          {Object.entries(graphStates).map(([key, enabled]) => (
+            <div key={key} style={{ marginBottom: "1rem" }}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={enabled}
+                  onChange={() =>
+                    setGraphStates((prev) => ({ ...prev, [key]: !prev[key] }))
+                  }
+                />
+                {mapaNomePorKey[key]}
+              </label>
+
+              {enabled && (
+                <GraphConfigPanel
+                  graphKey={key}
+                  availableData={visualizationConfiguration}
+                  selectedItems={graphSelections}
+                  setSelectedItems={setGraphSelections}
+                  handleCheckboxChange={(e, currentList, setNewList) => {
+                    const { value, checked } = e.target;
+                    const updated = checked
+                      ? [...currentList, value]
+                      : currentList.filter((item) => item !== value);
+                    setNewList(updated);
+                  }}
+                />
               )}
-            </fieldset>
-          )}
-
-          {visualizationConfiguration.agents && (
-            <fieldset className="checkbox-grid scrollable">
-              <legend>Agentes</legend>
-              {visibleAgents.map((agent, index) => (
-                <label key={`agent-${index}`}>
-                  <input
-                    type="checkbox"
-                    value={agent.name}
-                    checked={selectedAgents.includes(agent.name)}
-                    onChange={(e) =>
-                      handleCheckboxChange(e, setSelectedAgents, selectedAgents)
-                    }
-                  />
-                  {agent.name}
-                </label>
-              ))}
-              {hasMoreAgents && (
-                <button type="button" className="ver-mais-btn" onClick={showMoreAgents}>
-                  Ver mais
-                </button>
-              )}
-            </fieldset>
-          )}
-
-          {visualizationConfiguration.entities && (
-            <fieldset className="checkbox-grid scrollable">
-              <legend>Entidades</legend>
-              {visibleEntities.map((entity, index) => (
-                <label key={`entity-${index}`}>
-                  <input
-                    type="checkbox"
-                    value={entity.name}
-                    checked={selectedEntities.includes(entity.name)}
-                    onChange={(e) =>
-                      handleCheckboxChange(e, setSelectedEntities, selectedEntities)
-                    }
-                  />
-                  {entity.name}
-                </label>
-              ))}
-              {hasMoreEntities && (
-                <button type="button" className="ver-mais-btn" onClick={showMoreEntities}>
-                  Ver mais
-                </button>
-              )}
-            </fieldset>
-          )}
-
+            </div>
+          ))}
 
           <button className='primary'>Cadastrar</button>
         </form>
       </Popup>
+
 
       <PageFormat menuSelected={"dashboard"}>
         <div className='dashboard-container'>
