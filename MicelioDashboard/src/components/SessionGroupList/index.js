@@ -22,6 +22,10 @@ function SessionGroupList({ groups, onAddGroup, onSelectGroup }) {
   const [groupsLimit, setGroupsLimit] = useState(4)
   const [isSearchingGroup, setIsSearchingGroup] = useState(false)
 
+  const gruposFinalizados = groups.filter(g => g.it_ends).length;
+  const gruposAbertos     = groups.length - gruposFinalizados;
+
+
   useEffect(() => {
     if (isGroupsExpanded || isSearchingGroup) {
       setGroupsLimit(Infinity)
@@ -42,23 +46,23 @@ function SessionGroupList({ groups, onAddGroup, onSelectGroup }) {
 
     groups.forEach((group) => {
       console.log(group);
-    
-      const groupName = group.name.toLowerCase().replace(" ", ""); 
-      const groupId = String(group.session_group_id); 
+
+      const groupName = group.name.toLowerCase().replace(" ", "");
+      const groupId = String(group.session_group_id);
       const $groupCard = document.getElementById(group.session_group_id);
-    
+
       if (!$groupCard) {
         return;
       }
-    
+
       if (
-        groupName.indexOf(filterText.toLowerCase()) === -1 && 
-        groupId.indexOf(filterText) === -1 
+        groupName.indexOf(filterText.toLowerCase()) === -1 &&
+        groupId.indexOf(filterText) === -1
       ) {
         $groupCard.style.display = "none";
         return;
       }
-    
+
       $groupCard.style.display = "block";
     });
   }
@@ -72,7 +76,7 @@ function SessionGroupList({ groups, onAddGroup, onSelectGroup }) {
       <div className={"grouplist"}>
         <div className={"grouplist-header"}>
           <div>
-            <button className='primary' onClick={() => {onAddGroup()}}>Criar grupo</button>
+            <button className='primary' onClick={() => { onAddGroup() }}>Criar grupo</button>
             {/* todo: adicionar icone*/}
           </div>
           <div>
@@ -82,6 +86,17 @@ function SessionGroupList({ groups, onAddGroup, onSelectGroup }) {
               placeholder={"Busque grupos"}
               onKeyUp={filterGroupList}
             />
+          </div>
+        </div>
+        <div className="sessions"> {}
+          <div className="sessions-count">
+            <span>Total de grupos: {groups.length} {groups.length === 1 ? "grupo" : "grupos"}</span>
+          </div>
+          <div className="sessions-count">
+            <span>Grupos abertos: {gruposAbertos}</span>
+          </div>
+          <div className="sessions-count">
+            <span>Grupos finalizados: {gruposFinalizados}</span>
           </div>
         </div>
         <ul>

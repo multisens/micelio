@@ -3,9 +3,7 @@ import { ToastContainer, toast } from "react-toastify"
 import { AiOutlineCopy } from "react-icons/ai"
 import { useParams } from "react-router-dom"
 import { Box, Textarea } from "@chakra-ui/react"
-
 import "./style.css"
-
 import ClipboardHelper from "../../helper/ClipboardHelper"
 import PageFormat from "../../components/PageFormat"
 import Api from "../../services/Api"
@@ -13,8 +11,11 @@ import GameTab from "../../components/GameTab"
 import Popup from "../../components/Popup";
 import Visualization from "../../components/Visualization";
 import useExpandableList from "../../hooks/useExpandableList";
+import { HeatMapGraph } from "../../graphs/HeatMapGraph";
+import { TimelineGraph } from "../../graphs/TimelineGraph";
+import { PopulationGraph } from "../../graphs/PopulationGraph";
+import { ActivitiesCircleGraph } from "../../graphs/ActivitiesCircleGraph";
 import GraphConfigPanel from "../../components/GraphConfigPanel/GraphConfigPanel"
-
 
 function Game() {
   const params = useParams()
@@ -23,9 +24,6 @@ function Game() {
   const [visualizationConfig, setVisualizationConfig] = useState({});
 
   const [visualizationConfiguration, setVisualizationConfigurationJson] = useState({})
-  const [selectedActivities, setSelectedActivities] = useState([]);
-  const [selectedAgents, setSelectedAgents] = useState([]);
-  const [selectedEntities, setSelectedEntities] = useState([]);
   const [selectedSession, setSelectedSession] = useState(null);
   const [isSessionPopupOpen, setIsSessionPopupOpen] = useState(false);
 
@@ -82,13 +80,19 @@ function Game() {
 
   const [graphSelections, setGraphSelections] = useState({});
 
-  const mapaNomePorKey = {
+  const mapNameByKey = {
     timeline: "Linha do Tempo",
     activityList: "Atividades",
     heatmap: "Mapa de Calor",
     population: "Gráfico de População"
   };
 
+  const graphClassByKey = {
+    timeline: TimelineGraph,
+    activityList: ActivitiesCircleGraph,
+    heatmap: HeatMapGraph,
+    population: PopulationGraph
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -196,36 +200,41 @@ function Game() {
       .filter(([_, enabled]) => enabled)
       .map(([key]) => {
         const sel = graphSelections[key] || {};
-        const activitiesJson = sel.activities || [];
-        const agentsJson = sel.agents || [];
-        const entitiesJson = sel.entities || [];
+        console.log(sel)
+        // const activitiesJson = sel.activities || [];
+        // const agentsJson = sel.agents || [];
+        // const entitiesJson = sel.entities || [];
+        // console.log(sel)
+        // const formattedInsertActivitiesJson = activitiesJson.map((a) => ({ name: a }));
 
-        const formattedInsertActivitiesJson = activitiesJson.map((a) => ({ name: a }));
+        // const graph = {
+        //   id: mapNameByKey[key],
+        //   type: typeMap[key],
+        //   activities: activitiesJson,
+        //   agents: agentsJson,
+        //   entities: entitiesJson,
+        //   image : sel.image,
+        //   filter_by: "Linha do Tempo"
+        // };
+
+        // if (key === "activityList") graph.circle_bins = 40;
+
+        // if (key === "population") {
+        //   graph.checbox_filter = "true";
+        //   graph.insert = formattedInsertActivitiesJson;
+        //   graph.remove = [
+        //     { name: "Predacao", role: ["presa"] },
+        //     { name: "remover predador" },
+        //     { name: "morte" }
+        //   ];
+        // }
 
         const graph = {
-          id: mapaNomePorKey[key],
+          ...sel,
+          id: mapNameByKey[key],
           type: typeMap[key],
-          activities: activitiesJson,
-          agents: agentsJson,
-          entities: entitiesJson,
           filter_by: "Linha do Tempo"
         };
-
-        if (key === "activityList") graph.circle_bins = 40;
-
-        if (key === "population") {
-          graph.checbox_filter = "true";
-          graph.insert = formattedInsertActivitiesJson;
-          graph.remove = [
-            { name: "Predacao", role: ["presa"] },
-            { name: "remover predador" },
-            { name: "morte" }
-          ];
-        }
-
-        if (key === "heatmap" && sel.image) {
-          graph.image = sel.image;
-        }
 
         return graph;
       });
@@ -380,21 +389,22 @@ function Game() {
                     setGraphStates((prev) => ({ ...prev, [key]: !prev[key] }))
                   }
                 />
-                {mapaNomePorKey[key]}
+                {mapNameByKey[key]}
               </label>
 
               {enabled && (
+
                 <GraphConfigPanel
                   graphKey={key}
+                  config={{ requirements: graphClassByKey[key]?.requirements || {} }}
                   availableData={visualizationConfiguration}
                   selectedItems={graphSelections}
                   setSelectedItems={setGraphSelections}
-                  handleCheckboxChange={(e, currentList, setNewList) => {
-                    const { value, checked } = e.target;
-                    const updated = checked
-                      ? [...currentList, value]
-                      : currentList.filter((item) => item !== value);
-                    setNewList(updated);
+                  handleCheckboxChange={(e, currentList, updateFn) => {
+                    const newList = e.target.checked
+                      ? [...currentList, e.target.value]
+                      : currentList.filter(item => item !== e.target.value);
+                    updateFn(newList);
                   }}
                 />
               )}

@@ -2,6 +2,19 @@
 import { Field, ValueField, Mark, Data, Encoding, Transform, Autosize, Resolve, Layer } from "./BaseGraphComponents.js";
 
 export class HeatMapGraph {
+    static get requirements() {
+        return {
+            inputs: {
+                activities: true,
+                agents: false,
+                entities: false,
+                image: true
+            },
+            parameters: {
+                circleBins: { type: "number", default: 20, label: "Quantidade de bins (horizontal/vertical)" }
+            }
+        };
+    }
     constructor(
         width,
         height,
@@ -69,7 +82,7 @@ export class HeatMapGraph {
                 colorField, // <-- usa diretamente o objeto corretamente instanciado
                 tooltipFields
             ),
-                this.transform = filterSelection,
+            this.transform = filterSelection,
             "Heat Map"
         );
 

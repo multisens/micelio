@@ -1,6 +1,5 @@
 import { useEffect } from "react"
-
-import Api from "../../services/Api"
+import Api from "../../services/Api";
 import { getPopulation } from "../../helper/Visualization"
 
 import {
@@ -68,6 +67,9 @@ const Visualization = ({ props, component_id, currentSession, currentGroupSessio
       const selectionNamesHeatMap = selectionNames.filter(sel => sel === "sel1");
       transformNamesHeatMap = new Transform(selectionNamesHeatMap);
 
+      const width = timeline?.parameters?.width ?? 824;
+      const height = timeline?.parameters?.height ?? 40;
+
       const data = filterActivities(timeline.activities || []);
       var timeLineGraph = new TimelineGraph(
         "Linha do Tempo",
@@ -77,8 +79,8 @@ const Visualization = ({ props, component_id, currentSession, currentGroupSessio
         new Field(null, "quantitative", "count"),
         new Field("name", "nominal", null, new Scale("paired"), null, null, null, "Atividades", new Legend("right")),
         selection,
-        40,
-        824
+        height,
+        width
       );
       specs.push(timeLineGraph)
       console.log(timeLineGraph)
@@ -87,22 +89,37 @@ const Visualization = ({ props, component_id, currentSession, currentGroupSessio
     if (heatmap) {
       const data = filterActivities(heatmap.activities || []);
 
-      const image = heatmap.image || { type: "url", source: "" };
+      const originalUrl = heatmap.image?.source || '';
+
+      const imageUrl = originalUrl ? await `${Api.defaults.baseURL}proxy/image?url=${encodeURIComponent(originalUrl)}` : '';
+
+      await Api.get(`/activity/by-session/${currentSession}`)
+
+      const img = new Image();
+      img.crossOrigin = 'Anonymous'; // habilita CORS, se preciso
+      img.src = imageUrl;
+
+      await img.decode(); // espera carregar plenamente
+
+      const imageWidth = img.naturalWidth;
+      const imageHeight = img.naturalHeight;
+
+      const circleBins = heatmap?.parameters?.circleBins ?? 20;
 
       var heatmapGraph = new HeatMapGraph(
-        400,
-        266.66,
+        imageWidth,
+        imageHeight,
         "none",
         "padding",
-        image.source,
-        400,
-        266.66,
-        200,
-        133.33,
+        imageUrl,
+        imageWidth,
+        imageHeight,
+        (imageWidth) / 2,
+        (imageHeight) / 2,
         "url",
         data,
-        new Field("position_x", "quantitative", "", null, new Axis(true, "#FFFFFF"), new Bin(20), null, ""),
-        new Field("position_y", "quantitative", "", null, new Axis(true, "#FFFFFF"), new Bin(20), "descending", ""),
+        new Field("position_x", "quantitative", "", null, new Axis(true, "#FFFFFF"), new Bin(circleBins), null, ""),
+        new Field("position_y", "quantitative", "", null, new Axis(true, "#FFFFFF"), new Bin(circleBins), "descending", ""),
         new Field(null, "quantitative", "count", new Scale("reds"), null, null, null, null, new Legend("bottom", 10)),
         [
           new Field("name", "nominal"),
@@ -117,8 +134,9 @@ const Visualization = ({ props, component_id, currentSession, currentGroupSessio
 
     if (activityList) {
       const data = filterActivities(activityList.activities || []);
-      console.log(data)
-      console.log(activityList)
+
+      const width = activityList?.parameters?.width ?? 824;
+      const height = activityList?.parameters?.height ?? 400;
 
       var activitiesGraph = new ActivitiesCircleGraph(
         "Atividades",
@@ -132,17 +150,26 @@ const Visualization = ({ props, component_id, currentSession, currentGroupSessio
           new Field("name", "nominal")
         ),
         timeline ? transform : new Transform([]),
-        824,
-        400
+        width,
+        height
       );
       specs.push(activitiesGraph)
     }
 
     if (population) {
-      const populationData = getPopulation(response.data, population.agents, population.entities, {
-        insert: population.insert,
-        remove: population.remove
-      });
+      const data = filterActivities(population.activities || []);
+
+      const populationData = getPopulation(
+        data,
+        population.agents || [],   // lista de agentes a rastrear
+        population.entities || []    // lista de entidades a rastrear
+      );
+      console.log(data)
+
+      console.log(populationData)
+
+      const width = population?.parameters?.width ?? 824;
+      const height = population?.parameters?.height ?? 400;
 
       var populationGraph = new PopulationGraph(
         "Gráfico de População",
@@ -154,7 +181,8 @@ const Visualization = ({ props, component_id, currentSession, currentGroupSessio
         new Field("quantity", "quantitative", null, new Scale(null, 0)),
         new Field("agent", "nominal", "População", null, null, null, null, null, new Legend("bottom")),
         timeline ? transformNamesHeatMap : new Transform([]),
-        824
+        height,
+        width
       );
       specs.push(populationGraph)
     }
@@ -163,7 +191,7 @@ const Visualization = ({ props, component_id, currentSession, currentGroupSessio
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
       "vconcat": specs.map((g) => JSON.parse(JSON.stringify(g)))
     };
-    console.log(finalSpec)
+    // console.log(finalSpec)
     window.vegaEmbed(`#${component_id}`, finalSpec);
   })
 

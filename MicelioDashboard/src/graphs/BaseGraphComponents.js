@@ -6,13 +6,12 @@ export class Field {
         this.type = type;
         if (aggregate) this.aggregate = aggregate;
         if (scale) this.scale = scale;
-        if (axis) this.axis = { ...axis }; // garante que axis seja objeto próprio
+        if (axis) this.axis = { ...axis };
         if (bin) this.bin = bin;
         if (sort) this.sort = sort;
         if (title !== null) this.title = title;
         if (legend !== null) this.legend = legend;
 
-        // adiciona orient dentro de axis
         if (orient) {
             if (!this.axis) this.axis = {};
             this.axis.orient = orient;
