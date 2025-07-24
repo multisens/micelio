@@ -71,27 +71,29 @@ function Game() {
     population: false
   });
 
-  const typeMap = {
-    timeline: "Timeline",
-    activityList: "ActivityList",
-    heatmap: "HeatMap",
-    population: "Population"
-  };
-
   const [graphSelections, setGraphSelections] = useState({});
 
-  const mapNameByKey = {
-    timeline: "Linha do Tempo",
-    activityList: "Atividades",
-    heatmap: "Mapa de Calor",
-    population: "Gráfico de População"
-  };
-
-  const graphClassByKey = {
-    timeline: TimelineGraph,
-    activityList: ActivitiesCircleGraph,
-    heatmap: HeatMapGraph,
-    population: PopulationGraph
+  const graphConfig = {
+    timeline: {
+      id: "Linha do Tempo",
+      type: "Timeline",
+      class: TimelineGraph
+    },
+    activityList: {
+      id: "Atividades",
+      type: "ActivityList",
+      class: ActivitiesCircleGraph
+    },
+    heatmap: {
+      id: "Mapa de Calor",
+      type: "HeatMap",
+      class: HeatMapGraph
+    },
+    population: {
+      id: "Gráfico de População",
+      type: "Population",
+      class: PopulationGraph
+    }
   };
 
   useEffect(() => {
@@ -200,39 +202,10 @@ function Game() {
       .filter(([_, enabled]) => enabled)
       .map(([key]) => {
         const sel = graphSelections[key] || {};
-        console.log(sel)
-        // const activitiesJson = sel.activities || [];
-        // const agentsJson = sel.agents || [];
-        // const entitiesJson = sel.entities || [];
-        // console.log(sel)
-        // const formattedInsertActivitiesJson = activitiesJson.map((a) => ({ name: a }));
-
-        // const graph = {
-        //   id: mapNameByKey[key],
-        //   type: typeMap[key],
-        //   activities: activitiesJson,
-        //   agents: agentsJson,
-        //   entities: entitiesJson,
-        //   image : sel.image,
-        //   filter_by: "Linha do Tempo"
-        // };
-
-        // if (key === "activityList") graph.circle_bins = 40;
-
-        // if (key === "population") {
-        //   graph.checbox_filter = "true";
-        //   graph.insert = formattedInsertActivitiesJson;
-        //   graph.remove = [
-        //     { name: "Predacao", role: ["presa"] },
-        //     { name: "remover predador" },
-        //     { name: "morte" }
-        //   ];
-        // }
 
         const graph = {
           ...sel,
-          id: mapNameByKey[key],
-          type: typeMap[key],
+          ...graphConfig[key],
           filter_by: "Linha do Tempo"
         };
 
@@ -389,14 +362,14 @@ function Game() {
                     setGraphStates((prev) => ({ ...prev, [key]: !prev[key] }))
                   }
                 />
-                {mapNameByKey[key]}
+                {graphConfig[key].id}
               </label>
 
               {enabled && (
 
                 <GraphConfigPanel
                   graphKey={key}
-                  config={{ requirements: graphClassByKey[key]?.requirements || {} }}
+                  config={{ requirements: graphConfig[key]?.class?.requirements || {} }}
                   availableData={visualizationConfiguration}
                   selectedItems={graphSelections}
                   setSelectedItems={setGraphSelections}

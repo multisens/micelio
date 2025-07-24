@@ -1,4 +1,3 @@
-// HeatMapGraph.js - com uso de classes base reutilizáveis
 import { Field, ValueField, Mark, Data, Encoding, Transform, Autosize, Resolve, Layer } from "./BaseGraphComponents.js";
 
 export class HeatMapGraph {

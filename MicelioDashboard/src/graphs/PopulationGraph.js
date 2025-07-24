@@ -1,4 +1,3 @@
-// PopulationGraph.js - com uso de classes base reutilizáveis
 import { Field, Mark, Data, Encoding, Transform } from "./BaseGraphComponents.js";
 
 export class PopulationGraph {

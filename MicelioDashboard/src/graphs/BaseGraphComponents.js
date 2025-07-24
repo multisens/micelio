@@ -1,5 +1,3 @@
-// BaseGraphComponents.js - Componentes reutilizáveis para gráficos Vega-Lite estilo .NET
-
 export class Field {
     constructor(field, type, aggregate = null, scale = null, axis = null, bin = null, sort = null, title = null, legend = null, orient = null) {
         this.field = field;
