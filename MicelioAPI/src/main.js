@@ -23,13 +23,14 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({credentials: true, origin: true}));
+app.set('trust proxy', 1);
 
 const baseDir = path.join(__dirname, '..', '..', 'MicelioDashboard', 'build')
 app.use(express.static(`${baseDir}`))
 app.use('/api', Routes);
 app.get('*', (req,res) => res.sendFile('index.html' , { root : baseDir }))
 
-app.listen(process.env.HTTP_PORT, '200.9.149.182');
+app.listen(process.env.HTTP_PORT, '0.0.0.0');
 
 
 //app.listen(process.env.HTTP_PORT);
