@@ -29,7 +29,7 @@ app.use(express.static(`${baseDir}`))
 app.use('/api', Routes);
 app.get('*', (req,res) => res.sendFile('index.html' , { root : baseDir }))
 
-app.listen(process.env.HTTP_PORT, '0.0.0.0');
+app.listen(process.env.HTTP_PORT, '200.9.149.182');
 
 
 //app.listen(process.env.HTTP_PORT);
