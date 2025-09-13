@@ -3,7 +3,7 @@ from provenance.Device import Device
 
 class Micelio:
 
-	def __init__(self, device, token, default_url = 'http://localhost:3001/api', is_test = False):
+	def __init__(self, device, token, default_url = 'http://localhost:3002/api', is_test = False):
 		self.default_url = default_url	
 		self.is_test = is_test
 		self.token = token

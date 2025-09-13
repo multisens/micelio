@@ -1,5 +1,6 @@
 version: "3.9"
-
+# Para rodar o arquivo, utilize o comando "docker compose up"
+# Para rodar no servidor do cefet, é necessaria a implementação de proxy reverso
 services:
   frontend:
     container_name: MicelioDashboard
@@ -12,7 +13,8 @@ services:
       - ./MicelioDashboard:/MicelioDashboard
       - /MicelioDashboard/node_modules
     environment:
-      REACT_APP_API_BASE_URL: "/api/"
+      REACT_APP_API_BASE_URL: "http://localhost:3002/api/" # Para rodar localmente
+      # REACT_APP_API_BASE_URL: "/api/" - Para rodar no servidor do cefet
       NODE_OPTIONS: "--openssl-legacy-provider"
     networks:
       - micelio_network
@@ -27,11 +29,11 @@ services:
       - "3002:3002"     
     volumes:
       - ./MicelioAPI:/MicelioAPI
-    environment: # dados do banco de dados do backend deverão ser modificados aqui de acordo com o banco
+    environment: # Dados do banco de dados do backend deverão ser modificados aqui de acordo com o banco
       ENV: development
       HTTP_PORT: "3002"
       JWT_SECRET: ""
-      DATABASE_HOST: "host.docker.internal"
+      DATABASE_HOST: "host.docker.internal" # Caso o mysql rode localmente na máquina.
       DATABASE_PASSWORD: ""
       DATABASE_USER: ""
       DATABASE_CLIENT: "mysql"
