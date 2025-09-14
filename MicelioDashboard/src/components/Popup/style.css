@@ -12,10 +12,9 @@
 
 .popup .popup-content {
     position: relative;
-    width: 100%;
-    max-width: 600px;
-    max-height: 400px;
-
+    width: 80%;
+    height:80%;
+    overflow-y: auto;
     background-color: white;
     border-radius: 8px;
     padding: 35px 20px;
@@ -42,7 +41,6 @@
 
 .popup .popup-content form {
     height: 100%;
-    max-width: 350px;
     text-align: center;
     justify-content: center;
     margin: 34px auto 0;
@@ -50,4 +48,6 @@
 
 .popup .popup-content form button {
     margin-top: 20px;
+    margin-bottom:40px;
+    width:30%;
 }

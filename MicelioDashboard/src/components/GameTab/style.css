@@ -1,0 +1,8 @@
+.game-button-container {
+    display: flex;
+    gap: 12px;
+}
+
+.game-button-container button {
+    max-width: 300px;
+}

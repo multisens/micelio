@@ -6,6 +6,15 @@
   color: #7c7c7c;
   font-size: 15px;
 }
+
+.sessions{
+  margin-bottom: 20px;
+}
+
+.sessions-count{
+  font-weight: bold;
+}
+
 .grouplist {
   margin-top: 10px;
 }

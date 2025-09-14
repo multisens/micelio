@@ -28,7 +28,7 @@ function Profile() {
     event.preventDefault();
 
     Api.patch('/user', {username, email}).then(response => {
-      console.log(response)
+
       toast.success("Atualizado com sucesso", {
         style: { boxShadow: "1px 1px 5px rgba(0,0,0,.4)" },
         autoClose: 1200,
@@ -50,7 +50,7 @@ function Profile() {
     }
 
     Api.post('/user/update-password', {currentPassword, password}).then(response => {
-      console.log(response)
+
       toast.success("Atualizado com sucesso", {
         style: { boxShadow: "1px 1px 5px rgba(0,0,0,.4)" },
         autoClose: 1200,

@@ -1,7 +1,42 @@
 const knex = require('../database/connection');
 const idGenerator = require('../utils/generators/idGenerator');
+const { decodeUserSession } = require('../utils/generators/userSessionGenerator')
 
 class SessionController{
+
+    async index(request, response){
+
+        const { miceliotoken } = request.cookies;
+        if(!miceliotoken) {
+                return response.status(401).send();
+            }
+    
+        const { sub: user_id } = decodeUserSession(miceliotoken)
+        const {game_id} = request.params;
+
+        try{
+          const session = await knex('Session')
+          .select("*")
+          .where('game_id',game_id);
+
+          const formattedSessions = session.map(s => {
+            return {
+              ...s,
+              formattedDate: new Date(s.date).toLocaleDateString('pt-BR') 
+            };
+          });
+
+          if(!session){
+            return response.status(400).json({error: 'Cannot get session, try again later'});
+          }else{
+            return response.status(200).json(formattedSessions);
+          }
+    
+        }catch(e){
+          return response.status(400).json({error: e});
+        }
+    
+      }
 
 	async create(request, response){
         

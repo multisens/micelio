@@ -21,8 +21,24 @@ class GroupController {
       .groupBy('sg.session_group_id')
       .where('hp.user_id', user_id)
     
-    console.log(groups)
     response.status(200).json({ok: true, data: groups});
+  }
+
+  async getIds(request, response) {
+    const {miceliotoken: userToken} = request.cookies
+    const decodedToken = decodeUserSession(userToken)
+    
+    const user_id = decodedToken.sub;
+
+    const {game_id} = request.params;
+
+    const groups = await knex('SessionInGroup as sg')
+      .select('sg.session_group_id','sg.session_id')
+      .innerJoin('Session as s','s.session_id','sg.session_id')
+      .groupBy('sg.session_group_id')
+      .where('s.game_id',game_id)
+    
+    response.status(200).json(groups);
   }
 
   async create(request, response) {
