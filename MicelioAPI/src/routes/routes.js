@@ -21,9 +21,7 @@ const VideoLinkRoutes = require('./videoLink.route');
 const GameQuestRoutes = require('./gameQuest.route');
 const GameFormRoutes = require('./gameForm.route');
 
-const TokenMiddleware = require('../middleware/TokenMiddleware');
-const DeviceIDMiddleware = require('../middleware/DeviceIDMiddleware');
-const LogMiddleware = require('../middleware/LogMiddleware');
+const DeviceIDMiddleware = require("../middleware/DeviceIDMiddleware");
 
 const AboutRoutes = require("./about.route")
 const VisualizacaoRoutes = require("./visualizacao.route");
