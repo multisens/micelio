@@ -1,0 +1,23 @@
+.container {
+    padding: 100px 40px;
+    display: flex;
+    flex:1;
+    align-items: center;
+    justify-content: center;
+}
+
+.b-continue {
+    width: 60%;
+}
+
+#parent {
+    width: 10%;
+    white-space: nowrap;
+    overflow-x: visible;
+}
+
+.child{
+    width: 90%;
+    vertical-align: 10px;
+    display:inline-block;
+}

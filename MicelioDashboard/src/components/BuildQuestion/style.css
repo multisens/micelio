@@ -1,0 +1,10 @@
+.option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.option-text {
+    width: 20px;
+    margin-right: 10px;
+}

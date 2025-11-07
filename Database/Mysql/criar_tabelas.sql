@@ -166,3 +166,114 @@ CREATE TABLE ActivityEntities(
 	FOREIGN KEY(entity_id) REFERENCES Entity(entity_id),
 	FOREIGN KEY(activity_id) REFERENCES Activity(activity_id)
 );
+
+create table Experiment
+( experiment_id       VARCHAR(40)   PRIMARY KEY
+, txt_experiment_name VARCHAR(200)
+, txt_consent_term    VARCHAR(4000)
+, game_id             VARCHAR(40)
+, user_id             VARCHAR(40)
+, FOREIGN KEY(game_id)
+    REFERENCES Game(game_id)
+);
+
+CREATE TABLE SessionGroupExp
+( session_group_id varchar(40) NOT NULL
+, experiment_id    VARCHAR(40) NOT NULL
+, PRIMARY KEY(session_group_id, experiment_id)
+);
+
+create table HasExpPermission
+( has_exp_permission_id VARCHAR(40) PRIMARY KEY
+, user_id               VARCHAR(40)
+, experiment_id         VARCHAR(40)
+, FOREIGN KEY(user_id) 
+    REFERENCES MicelioUser(user_id)
+, FOREIGN KEY(experiment_id) 
+    REFERENCES Experiment(experiment_id)
+);
+
+create table ExpGroup
+( group_id       VARCHAR(40)
+, num_part_total INT
+, experiment_id  VARCHAR(40)
+, PRIMARY KEY(group_id, experiment_id)
+, FOREIGN KEY(experiment_id) 
+    REFERENCES Experiment(experiment_id)
+);
+
+create table Participant
+( participant_id   VARCHAR(40)  PRIMARY KEY
+, txt_name         VARCHAR(300) 
+, txt_email        varchar(400)
+, has_ended_exp    char(1)
+, group_id         VARCHAR(40)
+, session_group_id varchar(40)
+, experiment_id    VARCHAR(40)
+, FOREIGN KEY(group_id, experiment_id) 
+	  REFERENCES ExpGroup(group_id, experiment_id)
+);
+
+create table GameStagetwo
+( game_page_id  VARCHAR(40)
+, txt_game_link VARCHAR(4000)
+, txt_game_page VARCHAR(4000)
+, experiment_id VARCHAR(40)
+, has_game_form char(1)
+, PRIMARY KEY(game_page_id, experiment_id)
+, FOREIGN KEY(experiment_id) 
+    REFERENCES Experiment(experiment_id)
+);
+
+create table VideoStagetwo
+( video_page_id  VARCHAR(40)
+, txt_video_link VARCHAR(4000)
+, txt_video_page VARCHAR(4000)
+, experiment_id  VARCHAR(40)
+, PRIMARY KEY(video_page_id, experiment_id)
+, FOREIGN KEY(experiment_id) 
+    REFERENCES Experiment(experiment_id)
+);
+
+create table Form
+( form_id       VARCHAR(40) PRIMARY KEY
+, ind_stage     CHAR(1)
+, experiment_id VARCHAR(40)
+, FOREIGN KEY(experiment_id)
+	REFERENCES Experiment(experiment_id)
+);
+
+create table Questions
+( question_id  VARCHAR(40)
+, txt_question VARCHAR(4000)
+, ind_type     CHAR(1)
+, ind_order    INT
+, form_id      VARCHAR(40)
+, PRIMARY KEY(question_id)
+, FOREIGN KEY(form_id)
+    REFERENCES Form(form_id)
+);
+
+create table Options
+( options_id  VARCHAR(40)
+, ind_option  CHAR(1)
+, txt_option  VARCHAR(4000)
+, ind_order   INT
+, question_id VARCHAR(40)
+, PRIMARY KEY(options_id)
+, FOREIGN KEY(question_id)
+	REFERENCES Questions(question_id)
+);
+
+create table Answers
+( answer_id      VARCHAR(40)
+, txt_answer     VARCHAR(4000)
+, ind_option     CHAR(1)
+, question_id    VARCHAR(40)
+, participant_id VARCHAR(40)
+, PRIMARY KEY (answer_id, question_id)
+, FOREIGN KEY (question_id)
+	REFERENCES Questions(question_id)
+, FOREIGN KEY(participant_id) 
+    REFERENCES Participant(participant_id)
+);

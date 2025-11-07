@@ -1,0 +1,25 @@
+/* Gamelist */
+.experimentlist-container {
+    width: 100%;
+    padding: 20px;
+    background-color: #f6f6f6;
+}
+
+.experimentlist-container .more-experiments {
+    text-align: center;
+}
+
+.experimentlist-container .more-experiments button {
+    max-width: 200px;
+}
+
+#parent {
+    width: 90%;
+    white-space: nowrap;
+    overflow-x: visible;
+}
+
+.child{
+    width: 10%;
+    display:inline-block;
+}

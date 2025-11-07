@@ -1,11 +1,28 @@
 const express = require("express")
 
-const GameRoutes = require("./game.route")
-const DeviceRoutes = require("./device.route")
-const SessionRoutes = require("./session.route")
-const ActivityRoutes = require("./activity.route")
-const UserRoutes = require("./user.route")
-const GroupRoutes = require("./group.route")
+const GameRoutes = require('./game.route');
+const DeviceRoutes = require('./device.route');
+const SessionRoutes = require('./session.route');
+const ActivityRoutes = require('./activity.route');
+const UserRoutes = require('./user.route');
+const GroupRoutes = require('./group.route');
+const ExperimentRoutes = require('./experiment.route');
+const ExpDetailsRoutes = require('./expDetails.route');
+const ConsentTermRoutes = require('./consentTerm.route');
+const InitialQuestRoutes = require('./initialQuest.route');
+const SpecQuestRoutes = require('./specQuest.route');
+const FinalQuestRoutes = require('./finalQuest.route');
+const FormRoutes = require('./form.route');
+const InitialFormRoutes = require('./initialForm.route');
+const SpecFormRoutes = require('./specForm.route');
+const FinalFormRoutes = require('./finalForm.route');
+const GameLinkRoutes = require('./gameLink.route');
+const VideoLinkRoutes = require('./videoLink.route');
+const GameQuestRoutes = require('./gameQuest.route');
+const GameFormRoutes = require('./gameForm.route');
+
+const DeviceIDMiddleware = require("../middleware/DeviceIDMiddleware");
+
 const AboutRoutes = require("./about.route")
 const VisualizacaoRoutes = require("./visualizacao.route");
 const ProxyRoutes = require("./proxy.route");
@@ -15,9 +32,23 @@ const LogMiddleware = require("../middleware/LogMiddleware")
 
 const Router = express.Router()
 
+Router.use("/experiment", LogMiddleware, ExperimentRoutes);
+Router.use("/expDetails", LogMiddleware, ExpDetailsRoutes);
+Router.use("/consentTerm", LogMiddleware, ConsentTermRoutes);
+Router.use("/initialQuest", LogMiddleware, InitialQuestRoutes);
+Router.use("/specQuest", LogMiddleware, SpecQuestRoutes);
+Router.use("/finalQuest", LogMiddleware, FinalQuestRoutes);
+Router.use("/form", LogMiddleware, FormRoutes);
+Router.use("/initialForm", LogMiddleware, InitialFormRoutes);
+Router.use("/specForm", LogMiddleware, SpecFormRoutes);
+Router.use("/finalForm", LogMiddleware, FinalFormRoutes);
+Router.use("/gameLink", LogMiddleware, GameLinkRoutes);
+Router.use("/videoLink", LogMiddleware, VideoLinkRoutes);
+Router.use("/gameQuest", LogMiddleware, GameQuestRoutes);
+Router.use("/gameForm", LogMiddleware, GameFormRoutes);
 Router.use("/user", LogMiddleware, UserRoutes)
 Router.use("/game", LogMiddleware, GameRoutes)
-Router.use('/visualization', LogMiddleware, VisualizacaoRoutes);
+Router.use("/visualization", LogMiddleware, VisualizacaoRoutes);
 Router.use("/device", LogMiddleware, TokenMiddleware, DeviceRoutes)
 Router.use("/session", LogMiddleware, SessionRoutes)
 Router.use("/activity", LogMiddleware, ActivityRoutes)
