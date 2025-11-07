@@ -1,0 +1,38 @@
+.container {
+    padding: 100px 40px;
+    display: flex;
+    flex:1;
+    align-items: center;
+    justify-content: center;
+}
+
+.questions-begin {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#parent {
+    width: 10%;
+    white-space: nowrap;
+    overflow-x: visible;
+}
+
+.buttons {
+    width: 50px;
+    margin: 0 auto;
+}
+
+.child-add {
+    width: 50px;
+    margin: 0 auto;
+}
+
+.child-remove {
+    width: 50px;
+    margin: 0 auto;
+    color: rgb(150, 0, 0);
+}
+
+.b-continue {
+    width: 60%;
+}

@@ -1,0 +1,87 @@
+.dashboard-container {
+    padding: 20px;
+    width: 100%;
+}
+
+.expinfo-container {
+    display: flex;
+}
+
+.expinfo-container .expinfo-avatar {
+    width: 120px;
+    height: 120px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #bfbfbf;
+
+    margin-right: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.expinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: flex-end;
+
+}
+strong {
+    color: #264653;
+}
+.expinfo span {
+    max-width: 600px;
+    display: block;
+    word-break: break-all;
+    margin-top: 8px;
+}
+
+.expinfo-container .exp-export {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: flex-end;
+}
+
+select.export-select {
+    padding: 3px 10px;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.export-button {
+    background-color: #264653;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+
+    margin-left: 10px;
+    border-radius: 8px;
+    padding: 4px 20px;
+
+    transition: all .2s;
+    outline: none;
+}
+
+.export-button:hover {
+    background-color: #1a313a;
+    color: #e5e5e5;
+
+    transform: scale(1.02, 1.02);
+}
+
+.export-csvlink {
+    display: none;
+}

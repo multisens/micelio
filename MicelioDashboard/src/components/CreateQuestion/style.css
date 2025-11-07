@@ -1,0 +1,18 @@
+.question {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#question {
+    margin: 0px 10px 0px 0px;
+}
+
+.remove-question {
+    color: rgb(150, 0, 0);
+    font-size: 30px;
+}
+
+.include-options {
+    font-size: 30px;
+}

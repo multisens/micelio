@@ -1,11 +1,29 @@
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-
+import { BrowserRouter, Route, Redirect, Switch, NavLink } from 'react-router-dom';
 
 import Index from './pages/Index';
 import Sign from './pages/Sign';
 import Home from './pages/Home';
 import About from './pages/About';
 import Game from './pages/Game';
+// experiment logged in micelio
+import Experiment from './pages/Experiment';
+import ExpDetails from './pages/ExpDetails';
+import ConsentTerm from './pages/ConsentTerm';
+import GameLink from './pages/GameLink';
+import GameQuest from './pages/GameQuest';
+import GameForm from './pages/GameForm';
+import VideoLink from './pages/VideoLink';
+import InitialQuest from './pages/InitialQuest';
+import SpecQuest from './pages/SpecQuest';
+import FinalQuest from './pages/FinalQuest';
+// experiment not logged in micelio
+import Form from './pages/Form';
+import InitialForm from './pages/InitialForm';
+import SpecForm from './pages/SpecForm';
+import FinalForm from './pages/FinalForm';
+import GameExp from './pages/GameExp';
+import VideoExp from './pages/VideoExp';
+import Thanks from './pages/Thanks';
 
 import {useAuth} from "./context/AuthContext";
 import Profile from "./pages/Profile";
@@ -27,7 +45,24 @@ const Routes = () => {
           <Route path={'/sobre'} component={About}/>
           <Route path={'/profile'} component={Profile}/>
           <Route path={'/game/:id'} component={Game}/>
-          <Redirect to={'/home'}/>
+          <Route path={'/experiment'} component={Experiment}/>
+          <Route path={'/expDetails/:id'} component={ExpDetails}/>
+          <Route path={'/consentTerm/:id'} component={ConsentTerm}/>
+          <Route path={'/gameLink/:id'} component={GameLink}/>
+          <Route path={'/gameQuest/:id'} component={GameQuest}/>
+          <Route path={'/gameForm/:id'} component={GameForm}/>
+          <Route path={'/videoLink/:id'} component={VideoLink}/>
+          <Route path={'/initialQuest/:id'} component={InitialQuest}/>
+          <Route path={'/specQuest/:id'} component={SpecQuest}/>
+          <Route path={'/finalQuest/:id'} component={FinalQuest}/>
+          <Route path={'/form/:id'} component={Form}/>
+          <Route path={'/initialForm/:id'} component={InitialForm}/>
+          <Route path={'/specForm/:id'} component={SpecForm}/>
+          <Route path={'/finalForm/:id'} component={FinalForm}/>
+          <Route path={'/gameExp/:id'} component={GameExp}/>
+          <Route path={'/videoExp/:id'} component={VideoExp}/>
+          <Route path={'/thanks'} component={Thanks}/>
+          <Redirect to={'/home'} />
         </Switch>
       </BrowserRouter>
     )
@@ -38,12 +73,18 @@ const Routes = () => {
       <Switch>
         <Route path={'/'} component={Index} exact/>
         <Route path={'/sign'} component={Sign}/>
+        <Route path={'/form/:id'} component={Form}/>
+        <Route path={'/initialForm/:id'} component={InitialForm}/>
+        <Route path={'/specForm/:id'} component={SpecForm}/>
+        <Route path={'/finalForm/:id'} component={FinalForm}/>
+        <Route path={'/gameExp/:id'} component={GameExp}/>
+        <Route path={'/gameForm/:id'} component={GameForm}/>
+        <Route path={'/videoExp/:id'} component={VideoExp}/>
+        <Route path={'/thanks'} component={Thanks}/>
         <Redirect to={'/'} />
       </Switch>
     </BrowserRouter>
   )
-
-
 
 }
 
