@@ -1,0 +1,3650 @@
+{
+    "session_id": 194,
+    "name": "exported by script in 09/08/2021",
+    "language": "N/A",
+    "game_stage": "1",
+    "date": "2021-08-09",
+    "session_group_id": null,
+    "start_time": "02:02:46",
+    "end-time": null,
+    "activities": [
+        {
+            "activity_id": 21898,
+            "name": "plantar",
+            "time": "3",
+            "influenced_by": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": 252,
+                    "name": "grama",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21899,
+            "name": "plantar",
+            "time": "5",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": 254,
+                    "name": "grama",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21900,
+            "name": "plantar",
+            "time": "7",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 256,
+                    "name": "grama",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21901,
+            "name": "desenvolvimento",
+            "time": "10",
+            "influenced_by": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": 264,
+                    "name": "grama",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21902,
+            "name": "plantar",
+            "time": "9",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 258,
+                    "name": "grama",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21903,
+            "name": "desenvolvimento",
+            "time": "12",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": 267,
+                    "name": "grama",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21904,
+            "name": "colher",
+            "time": "13",
+            "influenced_by": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "grama",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21905,
+            "name": "desenvolvimento",
+            "time": "14",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 269,
+                    "name": "grama",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21906,
+            "name": "colher",
+            "time": "15",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "grama",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21907,
+            "name": "desenvolvimento",
+            "time": "16",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 270,
+                    "name": "grama",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21908,
+            "name": "colher",
+            "time": "17",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "grama",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21909,
+            "name": "colher",
+            "time": "19",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "grama",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21910,
+            "name": "plantar",
+            "time": "21",
+            "influenced_by": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": 264,
+                    "name": "couve",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21911,
+            "name": "plantar",
+            "time": "22",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": 267,
+                    "name": "couve",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21912,
+            "name": "plantar",
+            "time": "24",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 269,
+                    "name": "couve",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21913,
+            "name": "plantar",
+            "time": "25",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 270,
+                    "name": "couve",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21914,
+            "name": "desenvolvimento",
+            "time": "30",
+            "influenced_by": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": 284,
+                    "name": "couve",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21915,
+            "name": "plantar",
+            "time": "27",
+            "influenced_by": null,
+            "position_x": 425,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 272,
+                    "name": "couve",
+                    "position_x": 425,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21916,
+            "name": "colher",
+            "time": "31",
+            "influenced_by": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "couve",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21917,
+            "name": "desenvolvimento",
+            "time": "31",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": 286,
+                    "name": "couve",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21918,
+            "name": "migracao",
+            "time": "32",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "10": 4,
+                "tipo_de_praga": "lagarta"
+            }
+        },
+        {
+            "activity_id": 21919,
+            "name": "Novo inseto",
+            "time": "32",
+            "influenced_by": null,
+            "position_x": 25,
+            "position_y": 119,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 25,
+                    "position_y": 119,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21920,
+            "name": "Novo inseto",
+            "time": "32",
+            "influenced_by": null,
+            "position_x": 25,
+            "position_y": 331,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 25,
+                    "position_y": 331,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21921,
+            "name": "Novo inseto",
+            "time": "32",
+            "influenced_by": null,
+            "position_x": 25,
+            "position_y": 294,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 25,
+                    "position_y": 294,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21922,
+            "name": "Novo inseto",
+            "time": "32",
+            "influenced_by": null,
+            "position_x": 25,
+            "position_y": 259,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 277,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 25,
+                    "position_y": 259,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21923,
+            "name": "colher",
+            "time": "32",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "couve",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21924,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "32",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 277,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "1040",
+                    "position_y": "0294",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "1040",
+                    "position_y": "0294",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "1040",
+            "position_y": "0294",
+            "properties": {}
+        },
+        {
+            "activity_id": 21925,
+            "name": "desenvolvimento",
+            "time": "33",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 287,
+                    "name": "couve",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21926,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "34",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 278,
+                    "name": "couve",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 325,
+            "position_y": 326,
+            "properties": {}
+        },
+        {
+            "activity_id": 21927,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "34",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "2780",
+                    "position_y": "0354",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "2780",
+                    "position_y": "0354",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "2780",
+            "position_y": "0354",
+            "properties": {}
+        },
+        {
+            "activity_id": 21928,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "34",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 278,
+                    "name": "couve",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 325,
+            "position_y": 326,
+            "properties": {}
+        },
+        {
+            "activity_id": 21929,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "34",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 270,
+                    "name": "couve",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 375,
+            "position_y": 326,
+            "properties": {}
+        },
+        {
+            "activity_id": 21930,
+            "name": "colher",
+            "time": "34",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "couve",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21931,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "34",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 270,
+                    "name": "couve",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 375,
+            "position_y": 326,
+            "properties": {}
+        },
+        {
+            "activity_id": 21932,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "34",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 272,
+                    "name": "couve",
+                    "position_x": 425,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 425,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 425,
+            "position_y": 326,
+            "properties": {}
+        },
+        {
+            "activity_id": 21933,
+            "name": "desenvolvimento",
+            "time": "34",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 288,
+                    "name": "couve",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21934,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "34",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 279,
+                    "name": "couve",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 375,
+            "position_y": 326,
+            "properties": {}
+        },
+        {
+            "activity_id": 21935,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "35",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 277,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "4400",
+                    "position_y": "0127",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "4400",
+                    "position_y": "0127",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "4400",
+            "position_y": "0127",
+            "properties": {}
+        },
+        {
+            "activity_id": 21936,
+            "name": "colher",
+            "time": "35",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "couve",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21937,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "35",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "4990",
+                    "position_y": "0139",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "4990",
+                    "position_y": "0139",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "4990",
+            "position_y": "0139",
+            "properties": {}
+        },
+        {
+            "activity_id": 21938,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "35",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 277,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "5030",
+                    "position_y": "0180",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "5030",
+                    "position_y": "0180",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "5030",
+            "position_y": "0180",
+            "properties": {}
+        },
+        {
+            "activity_id": 21939,
+            "name": "desenvolvimento",
+            "time": "36",
+            "influenced_by": null,
+            "position_x": 425,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "couve",
+                    "position_x": 425,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21940,
+            "name": "colher",
+            "time": "37",
+            "influenced_by": null,
+            "position_x": 425,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "couve",
+                    "position_x": 425,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21941,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "38",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 277,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "7740",
+                    "position_y": "0064",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "7740",
+                    "position_y": "0064",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "7740",
+            "position_y": "0064",
+            "properties": {}
+        },
+        {
+            "activity_id": 21942,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "38",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "8220",
+                    "position_y": "0055",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "8220",
+                    "position_y": "0055",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "8220",
+            "position_y": "0055",
+            "properties": {}
+        },
+        {
+            "activity_id": 21943,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "39",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6510",
+                    "position_y": "0061",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6510",
+                    "position_y": "0061",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "6510",
+            "position_y": "0061",
+            "properties": {}
+        },
+        {
+            "activity_id": 21944,
+            "name": "plantar",
+            "time": "38",
+            "influenced_by": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": 284,
+                    "name": "milho",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21945,
+            "name": "plantar",
+            "time": "39",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": 286,
+                    "name": "milho",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21946,
+            "name": "plantar",
+            "time": "40",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 287,
+                    "name": "milho",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21947,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "45",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "920",
+                    "position_y": "313",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "920",
+                    "position_y": "313",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "920",
+            "position_y": "313",
+            "properties": {}
+        },
+        {
+            "activity_id": 21948,
+            "name": "plantar",
+            "time": "42",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 288,
+                    "name": "milho",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21949,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "46",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "500",
+                    "position_y": "347",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "500",
+                    "position_y": "347",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "500",
+            "position_y": "347",
+            "properties": {}
+        },
+        {
+            "activity_id": 21950,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "46",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 284,
+                    "name": "milho",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 225,
+            "position_y": 325,
+            "properties": {}
+        },
+        {
+            "activity_id": 21951,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "46",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 286,
+                    "name": "milho",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 275,
+            "position_y": 327,
+            "properties": {}
+        },
+        {
+            "activity_id": 21952,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "47",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 287,
+                    "name": "milho",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 325,
+            "position_y": 326,
+            "properties": {}
+        },
+        {
+            "activity_id": 21953,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "47",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 288,
+                    "name": "milho",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 375,
+            "position_y": 326,
+            "properties": {}
+        },
+        {
+            "activity_id": 21954,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "47",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 284,
+                    "name": "milho",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 225,
+            "position_y": 325,
+            "properties": {}
+        },
+        {
+            "activity_id": 21955,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "48",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 287,
+                    "name": "milho",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 325,
+            "position_y": 326,
+            "properties": {}
+        },
+        {
+            "activity_id": 21956,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "48",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 288,
+                    "name": "milho",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 375,
+            "position_y": 326,
+            "properties": {}
+        },
+        {
+            "activity_id": 21957,
+            "name": "desenvolvimento",
+            "time": "49",
+            "influenced_by": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": 296,
+                    "name": "milho",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21958,
+            "name": "colher",
+            "time": "49",
+            "influenced_by": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "milho",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21959,
+            "name": "desenvolvimento",
+            "time": "50",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": 298,
+                    "name": "milho",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21960,
+            "name": "colher",
+            "time": "51",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "milho",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21961,
+            "name": "desenvolvimento",
+            "time": "51",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 299,
+                    "name": "milho",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21962,
+            "name": "colher",
+            "time": "52",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "milho",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21963,
+            "name": "desenvolvimento",
+            "time": "53",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 301,
+                    "name": "milho",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21964,
+            "name": "colher",
+            "time": "53",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "milho",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21965,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "53",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "7590",
+                    "position_y": "0221",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "7590",
+                    "position_y": "0221",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "7590",
+            "position_y": "0221",
+            "properties": {}
+        },
+        {
+            "activity_id": 21966,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "55",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 277,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "7570",
+                    "position_y": "0302",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "7570",
+                    "position_y": "0302",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "7570",
+            "position_y": "0302",
+            "properties": {}
+        },
+        {
+            "activity_id": 21967,
+            "name": "plantar",
+            "time": "54",
+            "influenced_by": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": 296,
+                    "name": "tomate",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21968,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "58",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 277,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "7040",
+                    "position_y": "0233",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "7040",
+                    "position_y": "0233",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "7040",
+            "position_y": "0233",
+            "properties": {}
+        },
+        {
+            "activity_id": 21969,
+            "name": "plantar",
+            "time": "55",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": 298,
+                    "name": "tomate",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21970,
+            "name": "Reproducao",
+            "time": "59",
+            "influenced_by": null,
+            "position_x": "6900",
+            "position_y": "0168",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6900",
+                    "position_y": "0168",
+                    "properties": {},
+                    "role": "inseto_1"
+                },
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6900",
+                    "position_y": "0168",
+                    "properties": {},
+                    "role": "inseto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21971,
+            "name": "Reproducao",
+            "time": "59",
+            "influenced_by": null,
+            "position_x": "6950",
+            "position_y": "0134",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6950",
+                    "position_y": "0134",
+                    "properties": {},
+                    "role": "inseto_1"
+                },
+                {
+                    "agent_id": 277,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6950",
+                    "position_y": "0134",
+                    "properties": {},
+                    "role": "inseto_2"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21972,
+            "name": "plantar",
+            "time": "56",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 299,
+                    "name": "tomate",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21973,
+            "name": "Novo inseto",
+            "time": "60",
+            "influenced_by": null,
+            "position_x": 645,
+            "position_y": 115,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 300,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 645,
+                    "position_y": 115,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21974,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "60",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 300,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6730",
+                    "position_y": "0124",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6730",
+                    "position_y": "0124",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "6730",
+            "position_y": "0124",
+            "properties": {}
+        },
+        {
+            "activity_id": 21975,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "60",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 300,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6450",
+                    "position_y": "0115",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6450",
+                    "position_y": "0115",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "6450",
+            "position_y": "0115",
+            "properties": {}
+        },
+        {
+            "activity_id": 21976,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "60",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 300,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6630",
+                    "position_y": "0125",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 277,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6630",
+                    "position_y": "0125",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "6630",
+            "position_y": "0125",
+            "properties": {}
+        },
+        {
+            "activity_id": 21977,
+            "name": "plantar",
+            "time": "58",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": 301,
+                    "name": "tomate",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21978,
+            "name": "Novo inseto",
+            "time": "61",
+            "influenced_by": null,
+            "position_x": 671,
+            "position_y": 123,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 671,
+                    "position_y": 123,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21979,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "61",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6710",
+                    "position_y": "0123",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6710",
+                    "position_y": "0123",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "6710",
+            "position_y": "0123",
+            "properties": {}
+        },
+        {
+            "activity_id": 21980,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "61",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6600",
+                    "position_y": "0108",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 277,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6600",
+                    "position_y": "0108",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "6600",
+            "position_y": "0108",
+            "properties": {}
+        },
+        {
+            "activity_id": 21981,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "61",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "7090",
+                    "position_y": "0115",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 300,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "7090",
+                    "position_y": "0115",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "7090",
+            "position_y": "0115",
+            "properties": {}
+        },
+        {
+            "activity_id": 21982,
+            "name": "morte",
+            "time": "62",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 276,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": null,
+                    "position_y": null,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21983,
+            "name": "migracao",
+            "time": "62",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "10": 3,
+                "tipo_de_praga": "pulgao"
+            }
+        },
+        {
+            "activity_id": 21984,
+            "name": "Novo inseto",
+            "time": "62",
+            "influenced_by": null,
+            "position_x": 754,
+            "position_y": 151,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 303,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 754,
+                    "position_y": 151,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21985,
+            "name": "Novo inseto",
+            "time": "62",
+            "influenced_by": null,
+            "position_x": 754,
+            "position_y": 241,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 304,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 754,
+                    "position_y": 241,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21986,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "62",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 305,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "7540",
+                    "position_y": "0151",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 303,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "7540",
+                    "position_y": "0151",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "7540",
+            "position_y": "0151",
+            "properties": {}
+        },
+        {
+            "activity_id": 21987,
+            "name": "Novo inseto",
+            "time": "62",
+            "influenced_by": null,
+            "position_x": 754,
+            "position_y": 143,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 305,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 754,
+                    "position_y": 143,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 21988,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "62",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "7270",
+                    "position_y": "0041",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 300,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "7270",
+                    "position_y": "0041",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "7270",
+            "position_y": "0041",
+            "properties": {}
+        },
+        {
+            "activity_id": 21989,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "63",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6540",
+                    "position_y": "0031",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 277,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "6540",
+                    "position_y": "0031",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "6540",
+            "position_y": "0031",
+            "properties": {}
+        },
+        {
+            "activity_id": 21990,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "64",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "5790",
+                    "position_y": "0126",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "5790",
+                    "position_y": "0126",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "5790",
+            "position_y": "0126",
+            "properties": {}
+        },
+        {
+            "activity_id": 21991,
+            "name": "desenvolvimento",
+            "time": "65",
+            "influenced_by": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "tomate",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21992,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "65",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 301,
+                    "name": "tomate",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 304,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 375,
+            "position_y": 326,
+            "properties": {}
+        },
+        {
+            "activity_id": 21993,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "66",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 305,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "3830",
+                    "position_y": "0131",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 303,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "3830",
+                    "position_y": "0131",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "3830",
+            "position_y": "0131",
+            "properties": {}
+        },
+        {
+            "activity_id": 21994,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "66",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 299,
+                    "name": "tomate",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 304,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 325,
+            "position_y": 326,
+            "properties": {}
+        },
+        {
+            "activity_id": 21995,
+            "name": "colher",
+            "time": "66",
+            "influenced_by": null,
+            "position_x": 225,
+            "position_y": 325,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "tomate",
+                    "position_x": 225,
+                    "position_y": 325,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21996,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "66",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 298,
+                    "name": "tomate",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 304,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 275,
+            "position_y": 327,
+            "properties": {}
+        },
+        {
+            "activity_id": 21997,
+            "name": "desenvolvimento",
+            "time": "66",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "tomate",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 21998,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "66",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 307,
+                    "name": "tomate",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 304,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 275,
+            "position_y": 327,
+            "properties": {}
+        },
+        {
+            "activity_id": 21999,
+            "name": "colher",
+            "time": "67",
+            "influenced_by": null,
+            "position_x": 275,
+            "position_y": 327,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "tomate",
+                    "position_x": 275,
+                    "position_y": 327,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 22000,
+            "name": "desenvolvimento",
+            "time": "67",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "tomate",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 22001,
+            "name": "colher",
+            "time": "68",
+            "influenced_by": null,
+            "position_x": 325,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "tomate",
+                    "position_x": 325,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 22002,
+            "name": "desenvolvimento",
+            "time": "69",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "tomate",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 22003,
+            "name": "morte",
+            "time": "70",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 274,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": null,
+                    "position_y": null,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 22004,
+            "name": "colher",
+            "time": "70",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 326,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "tomate",
+                    "position_x": 375,
+                    "position_y": 326,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 22005,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "70",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "3730",
+                    "position_y": "0288",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 300,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "3730",
+                    "position_y": "0288",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "3730",
+            "position_y": "0288",
+            "properties": {}
+        },
+        {
+            "activity_id": 22006,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "71",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 305,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "2730",
+                    "position_y": "0248",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 304,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "2730",
+                    "position_y": "0248",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "2730",
+            "position_y": "0248",
+            "properties": {}
+        },
+        {
+            "activity_id": 22007,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "74",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 304,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "5840",
+                    "position_y": "0112",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 303,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "5840",
+                    "position_y": "0112",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "5840",
+            "position_y": "0112",
+            "properties": {}
+        },
+        {
+            "activity_id": 22008,
+            "name": "morte",
+            "time": "75",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 277,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": null,
+                    "position_y": null,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 22009,
+            "name": "inserir predador",
+            "time": "76",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "tipo_predador": "joaninha"
+            }
+        },
+        {
+            "activity_id": 22010,
+            "name": "Novo inseto",
+            "time": "76",
+            "influenced_by": null,
+            "position_x": 622,
+            "position_y": 357,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 311,
+                    "name": "joaninha",
+                    "type": "CPU",
+                    "position_x": 622,
+                    "position_y": 357,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 22011,
+            "name": "plantar",
+            "time": "73",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 276,
+            "entities": [
+                {
+                    "entity_id": 312,
+                    "name": "tomate",
+                    "position_x": 375,
+                    "position_y": 276,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 22012,
+            "name": "inserir predador",
+            "time": "77",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "tipo_predador": "besouro"
+            }
+        },
+        {
+            "activity_id": 22013,
+            "name": "Novo inseto",
+            "time": "77",
+            "influenced_by": null,
+            "position_x": 599,
+            "position_y": 353,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 313,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": 599,
+                    "position_y": 353,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 22014,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "77",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 312,
+                    "name": "tomate",
+                    "position_x": 375,
+                    "position_y": 276,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 375,
+                    "position_y": 276,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 375,
+            "position_y": 276,
+            "properties": {}
+        },
+        {
+            "activity_id": 22015,
+            "name": "Colisão sem resultado (Predação Inseto/Inseto)",
+            "time": "80",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 622,
+                    "position_y": 286,
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 311,
+                    "name": "joaninha",
+                    "type": "CPU",
+                    "position_x": 622,
+                    "position_y": 286,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 622,
+            "position_y": 286,
+            "properties": {}
+        },
+        {
+            "activity_id": 22016,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "80",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 300,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "3330",
+                    "position_y": "0079",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": "3330",
+                    "position_y": "0079",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "3330",
+            "position_y": "0079",
+            "properties": {}
+        },
+        {
+            "activity_id": 22017,
+            "name": "morte",
+            "time": "82",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 275,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": null,
+                    "position_y": null,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 22018,
+            "name": "desenvolvimento",
+            "time": "84",
+            "influenced_by": null,
+            "position_x": 375,
+            "position_y": 276,
+            "entities": [
+                {
+                    "entity_id": -1,
+                    "name": "tomate",
+                    "position_x": 375,
+                    "position_y": 276,
+                    "properties": {},
+                    "role": "planta"
+                }
+            ],
+            "agents": [],
+            "properties": {}
+        },
+        {
+            "activity_id": 22019,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "87",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 314,
+                    "name": "tomate",
+                    "position_x": 375,
+                    "position_y": 276,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 311,
+                    "name": "joaninha",
+                    "type": "CPU",
+                    "position_x": 375,
+                    "position_y": 276,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 375,
+            "position_y": 276,
+            "properties": {}
+        },
+        {
+            "activity_id": 22020,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "88",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 305,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "4790",
+                    "position_y": "0051",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 304,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "4790",
+                    "position_y": "0051",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "4790",
+            "position_y": "0051",
+            "properties": {}
+        },
+        {
+            "activity_id": 22021,
+            "name": "Colisão sem resultado (Predação Inseto/Inseto)",
+            "time": "88",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 436,
+                    "position_y": 307,
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 311,
+                    "name": "joaninha",
+                    "type": "CPU",
+                    "position_x": 436,
+                    "position_y": 307,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 436,
+            "position_y": 307,
+            "properties": {}
+        },
+        {
+            "activity_id": 22022,
+            "name": "Predacao",
+            "time": "89",
+            "influenced_by": null,
+            "position_x": "3750",
+            "position_y": "0276",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 314,
+                    "name": "tomate",
+                    "type": "CPU",
+                    "position_x": "3750",
+                    "position_y": "0276",
+                    "properties": {},
+                    "role": "presa"
+                },
+                {
+                    "agent_id": 303,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "3750",
+                    "position_y": "0276",
+                    "properties": {},
+                    "role": "predador"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 22023,
+            "name": "Colisão sem resultado (Predação Inseto/Planta)",
+            "time": "89",
+            "influenced_by": null,
+            "entities": [
+                {
+                    "entity_id": 314,
+                    "name": "tomate",
+                    "position_x": 375,
+                    "position_y": 276,
+                    "properties": {},
+                    "role": "objeto_2"
+                }
+            ],
+            "agents": [
+                {
+                    "agent_id": 303,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": 375,
+                    "position_y": 276,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 375,
+            "position_y": 276,
+            "properties": {}
+        },
+        {
+            "activity_id": 22024,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "91",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 305,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "4370",
+                    "position_y": "0225",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 304,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "4370",
+                    "position_y": "0225",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "4370",
+            "position_y": "0225",
+            "properties": {}
+        },
+        {
+            "activity_id": 22025,
+            "name": "migracao",
+            "time": "92",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {
+                "10": 4,
+                "tipo_de_praga": "cigarrinha"
+            }
+        },
+        {
+            "activity_id": 22026,
+            "name": "Novo inseto",
+            "time": "92",
+            "influenced_by": null,
+            "position_x": 754,
+            "position_y": 463,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 316,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 754,
+                    "position_y": 463,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 22027,
+            "name": "Novo inseto",
+            "time": "92",
+            "influenced_by": null,
+            "position_x": 754,
+            "position_y": 374,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 315,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 754,
+                    "position_y": 374,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 22028,
+            "name": "Novo inseto",
+            "time": "92",
+            "influenced_by": null,
+            "position_x": 754,
+            "position_y": 335,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 317,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 754,
+                    "position_y": 335,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 22029,
+            "name": "Novo inseto",
+            "time": "92",
+            "influenced_by": null,
+            "position_x": 754,
+            "position_y": 114,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 318,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": 754,
+                    "position_y": 114,
+                    "properties": {},
+                    "role": "inseto"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 22030,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "92",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 316,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "7740",
+                    "position_y": "0356",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 315,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "7740",
+                    "position_y": "0356",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "7740",
+            "position_y": "0356",
+            "properties": {}
+        },
+        {
+            "activity_id": 22031,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "92",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 317,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "7740",
+                    "position_y": "0356",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 315,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "7740",
+                    "position_y": "0356",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "7740",
+            "position_y": "0356",
+            "properties": {}
+        },
+        {
+            "activity_id": 22032,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "92",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 317,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "7540",
+                    "position_y": "0368",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 316,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "7540",
+                    "position_y": "0368",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "7540",
+            "position_y": "0368",
+            "properties": {}
+        },
+        {
+            "activity_id": 22033,
+            "name": "Colisão sem resultado (Predação Inseto/Inseto)",
+            "time": "93",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 235,
+                    "position_y": 204,
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 311,
+                    "name": "joaninha",
+                    "type": "CPU",
+                    "position_x": 235,
+                    "position_y": 204,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 235,
+            "position_y": 204,
+            "properties": {}
+        },
+        {
+            "activity_id": 22034,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "94",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 317,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "6390",
+                    "position_y": "0251",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 315,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "6390",
+                    "position_y": "0251",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "6390",
+            "position_y": "0251",
+            "properties": {}
+        },
+        {
+            "activity_id": 22035,
+            "name": "Predacao",
+            "time": "94",
+            "influenced_by": null,
+            "position_x": "5900",
+            "position_y": "0119",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 303,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "5900",
+                    "position_y": "0119",
+                    "properties": {},
+                    "role": "presa"
+                },
+                {
+                    "agent_id": 313,
+                    "name": "besouro",
+                    "type": "CPU",
+                    "position_x": "5900",
+                    "position_y": "0119",
+                    "properties": {},
+                    "role": "predador"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 22036,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "94",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 305,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "5700",
+                    "position_y": "0345",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 304,
+                    "name": "pulgao",
+                    "type": "CPU",
+                    "position_x": "5700",
+                    "position_y": "0345",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "5700",
+            "position_y": "0345",
+            "properties": {}
+        },
+        {
+            "activity_id": 22037,
+            "name": "Colisão sem resultado (Predação Inseto/Inseto)",
+            "time": "96",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 302,
+                    "name": "lagarta",
+                    "type": "CPU",
+                    "position_x": 92,
+                    "position_y": 78,
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 311,
+                    "name": "joaninha",
+                    "type": "CPU",
+                    "position_x": 92,
+                    "position_y": 78,
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": 92,
+            "position_y": 78,
+            "properties": {}
+        },
+        {
+            "activity_id": 22038,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "96",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 318,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "2720",
+                    "position_y": "0040",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 316,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "2720",
+                    "position_y": "0040",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "2720",
+            "position_y": "0040",
+            "properties": {}
+        },
+        {
+            "activity_id": 22039,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "97",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 316,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "2440",
+                    "position_y": "0140",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 315,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "2440",
+                    "position_y": "0140",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "2440",
+            "position_y": "0140",
+            "properties": {}
+        },
+        {
+            "activity_id": 22040,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "97",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 318,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "2140",
+                    "position_y": "0125",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 315,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "2140",
+                    "position_y": "0125",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "2140",
+            "position_y": "0125",
+            "properties": {}
+        },
+        {
+            "activity_id": 22041,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "99",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 318,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "1250",
+                    "position_y": "0228",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 317,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "1250",
+                    "position_y": "0228",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "1250",
+            "position_y": "0228",
+            "properties": {}
+        },
+        {
+            "activity_id": 22042,
+            "name": "Predacao",
+            "time": "100",
+            "influenced_by": null,
+            "position_x": "1030",
+            "position_y": "0286",
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 317,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "1030",
+                    "position_y": "0286",
+                    "properties": {},
+                    "role": "presa"
+                },
+                {
+                    "agent_id": 311,
+                    "name": "joaninha",
+                    "type": "CPU",
+                    "position_x": "1030",
+                    "position_y": "0286",
+                    "properties": {},
+                    "role": "predador"
+                }
+            ],
+            "properties": {}
+        },
+        {
+            "activity_id": 22043,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "100",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 318,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "1590",
+                    "position_y": "0187",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 315,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "1590",
+                    "position_y": "0187",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "1590",
+            "position_y": "0187",
+            "properties": {}
+        },
+        {
+            "activity_id": 22044,
+            "name": "Colisão sem resultado (Reprodução)",
+            "time": "100",
+            "influenced_by": null,
+            "entities": [],
+            "agents": [
+                {
+                    "agent_id": 318,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "2800",
+                    "position_y": "0163",
+                    "properties": {},
+                    "role": "objeto_2"
+                },
+                {
+                    "agent_id": 316,
+                    "name": "cigarrinha",
+                    "type": "CPU",
+                    "position_x": "2800",
+                    "position_y": "0163",
+                    "properties": {},
+                    "role": "obeto_1"
+                }
+            ],
+            "position_x": "2800",
+            "position_y": "0163",
+            "properties": {}
+        },
+        {
+            "activity_id": 22045,
+            "name": "jogo finalizado",
+            "time": "101",
+            "influenced_by": null,
+            "position_x": null,
+            "position_y": null,
+            "entities": [],
+            "agents": [],
+            "properties": {}
+        }
+    ]
+}
